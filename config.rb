@@ -1,5 +1,5 @@
 # Markdown
-set :markdown_engine, :redcarpet
+set :markdown_engine, :kramdown
 set :markdown,
     fenced_code_blocks: true,
     smartypants: true,
@@ -7,7 +7,10 @@ set :markdown,
     prettify: true,
     tables: true,
     with_toc_data: true,
-    no_intra_emphasis: true
+    no_intra_emphasis: true,
+    transliterated_header_ids: true,
+    hard_wrap: true,
+    input: 'GFM'
 
 # Assets
 set :css_dir, 'stylesheets'
