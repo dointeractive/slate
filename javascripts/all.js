@@ -89,7 +89,7 @@ e.stopWordFilter=function(t){return-1===e.stopWordFilter.stopWords.indexOf(t)?t:
    * lunr.trimmer
    * Copyright (C) 2014 Oliver Nightingale
    */
-e.trimmer=function(e){return e.replace(/^\W+/,"").replace(/\W+$/,"")},e.Pipeline.registerFunction(e.trimmer,"trimmer"),/*!
+e.trimmer=function(e){return e.replace(/^([A-Za-z0-9_\u0430-\u044f\u0410-\u042f\u0451\u0401])/,"").replace(/([A-Za-z0-9_\u0430-\u044f\u0410-\u042f\u0451\u0401])$/,"")},e.Pipeline.registerFunction(e.trimmer,"trimmer"),/*!
    * lunr.stemmer
    * Copyright (C) 2014 Oliver Nightingale
    * Includes code from - http://tartarus.org/~martin/PorterStemmer/js.txt
