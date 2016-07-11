@@ -3,7 +3,7 @@
 ## Получить список продуктов
 
 ```shell
-curl "http://api.instamart.ru/v1/products?rid=1"
+curl "http://api.instamart.ru/v1/products?rid=1" \
   -H "Authorization: Basic <% key %>"
 ```
 
@@ -37,9 +37,9 @@ curl "http://api.instamart.ru/v1/products?rid=1"
 
 ### HTTP запрос
 
-`GET http://api.instamart.ru/v1/products?rid=1`
+`GET http://api.instamart.ru/v1/products`
 
-### Query параметры
+### Параметры запроса
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------

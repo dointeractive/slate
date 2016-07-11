@@ -3,7 +3,7 @@
 ## Получить список ритейлеров
 
 ```shell
-curl "http://api.instamart.ru/v1/retailers"
+curl "http://api.instamart.ru/v1/retailers" \
   -H "Authorization: Basic <% key %>"
 ```
 
