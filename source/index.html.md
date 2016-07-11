@@ -8,6 +8,7 @@ toc_footers:
   - <a href='#'>Получить секретный ключ</a>
 
 includes:
+  - retailers
   - errors
 
 search: true
