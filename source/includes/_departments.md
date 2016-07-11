@@ -1,0 +1,103 @@
+# Каталог
+
+## Выдача для главной страницы
+
+> Пример команды
+
+```shell
+curl 'http://api.instamart.ru/v1/departments?rid=1' \
+  -H 'Authorization: Basic <TOKEN>'
+```
+> Ответ будет содержать следующие данные
+
+```json
+[
+  {
+    "id": 1,
+    "name": "Чай и кофе",
+    "products_count": 668,
+    "products": [
+      {
+        "id": 1,
+        "name": "Чай Lipton Yellow Label",
+        "price": 42,
+        "original_price": 70,
+        "discount": 28,
+        "weight": "10 пак x 6",
+        "items_per_pack": 2,
+        "images": [
+          {
+            "mini_url": "/file.png?1370533476",
+            "small_url": "/file.png?1370533476",
+            "product_url": "/file.png?1370533476"
+          }
+        ]
+      }
+    ]
+  }
+]
+```
+
+Получить выдачу для главной страницы можно, выполнив следующий запрос:
+
+`GET http://api.instamart.ru/v1/departments`
+
+### Параметры запроса
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+rid | Да | ID ритейлера для которого необходимо получить список товаров.
+
+## Выдача страницы категории
+
+> Пример команды
+
+```shell
+curl 'http://api.instamart.ru/v1/departments/1?rid=1' \
+  -H 'Authorization: Basic <TOKEN>'
+```
+> Ответ будет содержать следующие данные
+
+```json
+{
+  "id": 1,
+  "name": "Чай и кофе",
+  "products_count": 668,
+  "aisles": [
+    {
+      "name": "Чай",
+      "product_counts": 327,
+      "taxon_id": 267,
+      "products": [
+        {
+          "id": 1,
+          "name": "Чай Lipton Yellow Label",
+          "price": 42,
+          "original_price": 70,
+          "discount": 28,
+          "weight": "10 пак x 6",
+          "items_per_pack": 2,
+          "images": [
+            {
+              "mini_url": "/file.png?1370533476",
+              "small_url": "/file.png?1370533476",
+              "product_url": "/file.png?1370533476"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+Получить выдачу страницы каталога можно, выполнив следующий запрос:
+
+`GET http://api.instamart.ru/v1/departments/<DEPARTMENT_ID>`
+
+### Параметры запроса
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+rid | Да | ID ритейлера для которого необходимо получить список товаров.
+DEPARTMENT_ID | Да | id категории
