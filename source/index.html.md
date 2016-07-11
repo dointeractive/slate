@@ -9,6 +9,7 @@ toc_footers:
 
 includes:
   - retailers
+  - products
   - errors
 
 search: true
