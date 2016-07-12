@@ -11,6 +11,7 @@ includes:
   - retailers
   - departments
   - products
+  - orders
   - errors
 
 search: true
