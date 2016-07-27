@@ -285,10 +285,12 @@
   <p>Пример кода для аутентификации пользователя через vkontakte</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v1/XXX'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v1/vkontakte_auth/sessions'</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
-  -d <span class="nv">uid</span><span class="o">=</span>&lt;UID&gt; <span class="se">\</span>
-  -d <span class="nv">provider</span><span class="o">=</span>vkontakte
+  -d <span class="nv">uid</span><span class="o">=</span>0
+  -d <span class="nv">first_name</span><span class="o">=</span>fname
+  -d <span class="nv">last_name</span><span class="o">=</span>lname
+  -d <span class="nv">email</span><span class="o">=</span>mail@example.com
 </code></pre>
 <blockquote>
   <p>Ответ будет содержать следующие данные</p>
@@ -300,7 +302,7 @@
 </span></code></pre>
 
 <p>Получить токен можно, выполнив запрос:<br />
-<code>POST http://api.instamart.ru/v1/XXX</code></p>
+<code>POST http://api.instamart.ru/v1/&lt;PROVIDER_ID&gt;_auth/sessions</code></p>
 
 <h3 id="paramietry-zaprosa-1">Параметры запроса</h3>
 
@@ -314,28 +316,28 @@
   </thead>
   <tbody>
     <tr>
+      <td>provider_id</td>
+      <td>Да</td>
+      <td>Название социальной сети (vkontakte / facebook)</td>
+    </tr>
+    <tr>
       <td>uid</td>
       <td>Да</td>
       <td>Идентификатор пользователя в социальной сети</td>
     </tr>
     <tr>
-      <td>provider</td>
-      <td>Да</td>
-      <td>Название социальной сети (vkontakte / facebook)</td>
-    </tr>
-    <tr>
       <td>first_name</td>
-      <td>Да</td>
+      <td>Да (в первый раз)</td>
       <td>Имя пользователя</td>
     </tr>
     <tr>
       <td>last_name</td>
-      <td>Да</td>
+      <td>Да (в первый раз)</td>
       <td>Фамилия пользователя</td>
     </tr>
     <tr>
       <td>email</td>
-      <td>-</td>
+      <td>Да (в первый раз)</td>
       <td>Емейл пользователя</td>
     </tr>
   </tbody>
