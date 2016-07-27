@@ -40,10 +40,12 @@ password | Да | Пароль пользователя
 > Пример кода для аутентификации пользователя через vkontakte 
 
 ```shell
-curl 'http://api.instamart.ru/v1/XXX' \
+curl 'http://api.instamart.ru/v1/vkontakte_auth/sessions' \
   -X POST \
-  -d uid=<UID> \
-  -d provider=vkontakte
+  -d uid=0
+  -d first_name=fname
+  -d last_name=lname
+  -d email=mail@example.com
 ```
 > Ответ будет содержать следующие данные
 
@@ -54,14 +56,14 @@ curl 'http://api.instamart.ru/v1/XXX' \
 ```
 
 Получить токен можно, выполнив запрос:
-`POST http://api.instamart.ru/v1/XXX`
+`POST http://api.instamart.ru/v1/<PROVIDER_ID>_auth/sessions`
 
 ### Параметры запроса
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
+provider_id | Да | Название социальной сети (vkontakte / facebook)
 uid | Да | Идентификатор пользователя в социальной сети
-provider | Да | Название социальной сети (vkontakte / facebook)
-first_name | Да | Имя пользователя
-last_name | Да | Фамилия пользователя
-email | - | Емейл пользователя
+first_name | Да (в первый раз) | Имя пользователя
+last_name | Да (в первый раз) | Фамилия пользователя
+email | Да (в первый раз) | Емейл пользователя
