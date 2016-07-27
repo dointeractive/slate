@@ -134,29 +134,22 @@
 
           <h1 id="polzovatieli">Пользователи</h1>
 
-<h2 id="poluchieniie-dannykh-polzovatielia">Получение данных пользователя</h2>
+<h2 id="rieghistratsiia-novogho-polzovatielia">Регистрация нового пользователя</h2>
 
 <blockquote>
-  <p>Пример кода для получения данных пользователя</p>
+  <p>Пример кода для регистрации нового пользователя:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v1/users/test@test.com'</span>
+<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v1/users/registrations'</span> <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -d <span class="nv">password</span><span class="o">=</span>&lt;PASSWORD&gt; <span class="se">\</span>
+  -d <span class="nv">first_name</span><span class="o">=</span>&lt;FIRSTNAME&gt; <span class="se">\</span>
+  -d <span class="nv">last_name</span><span class="o">=</span>&lt;LASTNAME&gt;
 </code></pre>
-<blockquote>
-  <p>Если пользователь существует, ответ будет содержать следующие данные</p>
-</blockquote>
 
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test@test.com"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<p>Зарегистрировать нового пользователя можно, выполнив запрос:</p>
 
-<blockquote>
-  <p>Если пользователя не существует, сервер вернет ответ с кодом 404</p>
-</blockquote>
-
-<p>Получить данные пользователя можно, выполнив запрос:<br />
-<code>GET http://api.instamart.ru/v1/users/&lt;EMAIL&gt;</code></p>
+<p><code>POST http://api.instamart.ru/v1/users/registrations</code></p>
 
 <h3 id="paramietry-zaprosa">Параметры запроса</h3>
 
@@ -174,37 +167,6 @@
       <td>Да</td>
       <td>Емейл пользователя</td>
     </tr>
-  </tbody>
-</table>
-
-<h2 id="rieghistratsiia-novogho-polzovatielia">Регистрация нового пользователя</h2>
-
-<blockquote>
-  <p>Пример кода для регистрации нового пользователя</p>
-</blockquote>
-
-<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v1/users/registrations'</span> <span class="se">\</span>
-  -X POST <span class="se">\</span>
-  -d <span class="nv">password</span><span class="o">=</span>&lt;PASSWORD&gt; <span class="se">\</span>
-  -d <span class="nv">first_name</span><span class="o">=</span>&lt;FIRSTNAME&gt; <span class="se">\</span>
-  -d <span class="nv">last_name</span><span class="o">=</span>&lt;LASTNAME&gt;
-</code></pre>
-
-<p>Зарегистрировать нового пользователя можно, выполнив запрос:</p>
-
-<p><code>POST http://api.instamart.ru/v1/users/registrations</code></p>
-
-<h3 id="paramietry-zaprosa-1">Параметры запроса</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Параметр</th>
-      <th>Обязательный</th>
-      <th>Описание</th>
-    </tr>
-  </thead>
-  <tbody>
     <tr>
       <td>password</td>
       <td>Да</td>
@@ -219,6 +181,115 @@
       <td>last_name</td>
       <td>Да</td>
       <td>Фамилия пользователя</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="izmienieniie-dannykh-polzovatielia">Изменение данных пользователя</h2>
+
+<blockquote>
+  <p>Пример кода для изменения, местоположения пользователя:</p>
+</blockquote>
+
+<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v1/users/test@test.com'</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Basic &lt;TOKEN&gt;'</span> <span class="se">\</span>
+  -X PATCH <span class="se">\</span>
+  -d <span class="nv">location</span><span class="o">=</span>Perm
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test@test.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ivan"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Petrov"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Perm"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Изменить данные пользоватeля можно, выполнив следующий запрос:</p>
+
+<p><code>PUT http://api.instamart.ru/v1/users/&lt;EMAIL&gt;</code></p>
+
+<h3 id="paramietry-zaprosa-1">Параметры запроса</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>first_name</td>
+      <td>-</td>
+      <td>Имя пользователя</td>
+    </tr>
+    <tr>
+      <td>last_name</td>
+      <td>-</td>
+      <td>Фамилия пользователя</td>
+    </tr>
+    <tr>
+      <td>location</td>
+      <td>-</td>
+      <td>Местоположение пользователя</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="poluchieniie-dannykh-polzovatielia">Получение данных пользователя</h2>
+
+<blockquote>
+  <p>Пример кода, чтобы определить зарегистрирован пользователь или нет:</p>
+</blockquote>
+
+<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v1/users/test@test.com'</span>
+</code></pre>
+<blockquote>
+  <p>Если пользователь существует, ответ будет содержать следующие данные:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test@test.com"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+  <p>Если пользователя не существует, сервер вернет ответ с кодом 404.<br />Если в запросе указать заголовок Authorization, то ответ будет содержать дополнительные данные:</p>
+</blockquote>
+
+<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v1/users/test@test.com'</span>
+  -H <span class="s1">'Authorization: Basic &lt;TOKEN&gt;'</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test@test.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ivan"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Petrov"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Moscow"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Получить данные пользователя можно, выполнив запрос:<br />
+<code>GET http://api.instamart.ru/v1/users/&lt;EMAIL&gt;</code></p>
+
+<p>Запрос к этому ресурсу можно выполнять как с указанием токена аутентификации так и без. Без указания токена сервер вернет ограниченное количество информации.</p>
+
+<h3 id="paramietry-zaprosa-2">Параметры запроса</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>email</td>
+      <td>Да</td>
+      <td>Емейл пользователя</td>
     </tr>
   </tbody>
 </table>
@@ -461,6 +532,58 @@
 <h3 id="http-zapros">HTTP запрос</h3>
 
 <p><code>GET http://api.instamart.ru/v1/retailers</code></p>
+
+          <h1 id="katieghorii">Категории</h1>
+
+<blockquote>
+  <p>Пример кода для получения списка всех категорий</p>
+</blockquote>
+
+<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v1/taxons?rid=1'</span>
+</code></pre>
+<blockquote>
+  <p>Ответ будет содержать следующие данные</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Продукты питания"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"parent_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"taxons"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Чай и кофе"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"parent_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>Получить список всех категорий можно, выполнив запрос:</p>
+
+<p><code>GET http://api.instamart.ru/v1/taxons</code></p>
+
+<h3 id="paramietry-zaprosa">Параметры запроса</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>rid</code></td>
+      <td>Да</td>
+      <td>ID ритейлера для которого необходимо получить список категорий.</td>
+    </tr>
+  </tbody>
+</table>
 
           <h1 id="katalogh">Каталог</h1>
 
