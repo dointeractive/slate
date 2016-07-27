@@ -8,6 +8,7 @@ toc_footers:
   - <a href='#'></a>
 
 includes:
+  - users
   - authentication
   - retailers
   - departments
