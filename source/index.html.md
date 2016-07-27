@@ -12,6 +12,7 @@ includes:
   - authentication
   - passwords
   - retailers
+  - taxons
   - departments
   - products
   - orders
