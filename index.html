@@ -110,7 +110,7 @@
       <div id="toc">
       </div>
         <ul class="toc-footer">
-            <li><a href='#'>Получить секретный ключ</a></li>
+            <li><a href='#'></a></li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -131,22 +131,302 @@
 
 <p>Чтобы облегчить изучение API пользователю предоставляется тестовый API ключ.</p>
 
-<h1 id="autientifikatsiia">Аутентификация</h1>
+
+          <h1 id="polzovatieli">Пользователи</h1>
+
+<h2 id="poluchieniie-dannykh-polzovatielia">Получение данных пользователя</h2>
 
 <blockquote>
-  <p>Для авторизации используйте код:</p>
+  <p>Пример кода для получения данных пользователя</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v1/sessions'</span>
+<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v1/users/test@test.com'</span>
+</code></pre>
+<blockquote>
+  <p>Если пользователь существует, ответ будет содержать следующие данные</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test@test.com"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+  <p>Если пользователя не существует, сервер вернет ответ с кодом 404</p>
+</blockquote>
+
+<p>Получить данные пользователя можно, выполнив запрос:<br />
+<code>GET http://api.instamart.ru/v1/users/&lt;EMAIL&gt;</code></p>
+
+<h3 id="paramietry-zaprosa">Параметры запроса</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>email</td>
+      <td>Да</td>
+      <td>Емейл пользователя</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="rieghistratsiia-novogho-polzovatielia">Регистрация нового пользователя</h2>
+
+<blockquote>
+  <p>Пример кода для регистрации нового пользователя</p>
+</blockquote>
+
+<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v1/users/registrations'</span> <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -d <span class="nv">password</span><span class="o">=</span>&lt;PASSWORD&gt; <span class="se">\</span>
+  -d <span class="nv">first_name</span><span class="o">=</span>&lt;FIRSTNAME&gt; <span class="se">\</span>
+  -d <span class="nv">last_name</span><span class="o">=</span>&lt;LASTNAME&gt;
+</code></pre>
+
+<p>Зарегистрировать нового пользователя можно, выполнив запрос:</p>
+
+<p><code>POST http://api.instamart.ru/v1/users/registrations</code></p>
+
+<h3 id="paramietry-zaprosa-1">Параметры запроса</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>password</td>
+      <td>Да</td>
+      <td>Пароль</td>
+    </tr>
+    <tr>
+      <td>first_name</td>
+      <td>Да</td>
+      <td>Имя пользователя</td>
+    </tr>
+    <tr>
+      <td>last_name</td>
+      <td>Да</td>
+      <td>Фамилия пользователя</td>
+    </tr>
+  </tbody>
+</table>
+
+          <h1 id="autientifikatsiia">Аутентификация</h1>
+
+<p>Для доступа к API Instamart пользователь должен пройти процедуру аутентификации и получить токен доступа.</p>
+
+<h2 id="autientifikatsiia-chieriez-iemieil-i-parol">Аутентификация через емейл и пароль</h2>
+
+<blockquote>
+  <p>Пример кода для аутентификации пользователя с учетными данными “test@test.ru”, “qwer”:</p>
+</blockquote>
+
+<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v1/sessions'</span> <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -H <span class="s1">'Authorization: Basic dGVzdEB0ZXN0LnJ1OnF3ZXIK'</span>
+</code></pre>
+<blockquote>
+  <p>Ответ будет содержать следующие данные</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FWtn0HAjBD6rNxWwEV0Cj7JXSEPGJQ"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Аутентификация осуществляется методом <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">HTTP Basic Auth</a>.</p>
+
+<p>Получить токен можно, выполнив запрос:<br />
+<code>POST http://api.instamart.ru/v1/sessions</code></p>
+
+<p>Учетные данные пользователя (емейл и пароль) передаются в заголовке запроса вида:<br />
+<code>Authorization: Basic &lt;DIGEST&gt;</code><br />
+где <code>&lt;DIGEST&gt;</code> формируется следующим способом: <code>base64(email + ':' + password)</code></p>
+
+<h3 id="paramietry-zaprosa">Параметры запроса</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>email</td>
+      <td>Да</td>
+      <td>Емейл пользователя</td>
+    </tr>
+    <tr>
+      <td>password</td>
+      <td>Да</td>
+      <td>Пароль пользователя</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="autientifikatsiia-chieriez-sotsialnyie-sieti">Аутентификация через социальные сети</h2>
+
+<blockquote>
+  <p>Пример кода для аутентификации пользователя через vkontakte</p>
+</blockquote>
+
+<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v1/XXX'</span> <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -d <span class="nv">uid</span><span class="o">=</span>&lt;UID&gt; <span class="se">\</span>
+  -d <span class="nv">provider</span><span class="o">=</span>vkontakte
+</code></pre>
+<blockquote>
+  <p>Ответ будет содержать следующие данные</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FWtn0HAjBD6rNxWwEV0Cj7JXSEPGJQ"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Получить токен можно, выполнив запрос:<br />
+<code>POST http://api.instamart.ru/v1/XXX</code></p>
+
+<h3 id="paramietry-zaprosa-1">Параметры запроса</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>uid</td>
+      <td>Да</td>
+      <td>Идентификатор пользователя в социальной сети</td>
+    </tr>
+    <tr>
+      <td>provider</td>
+      <td>Да</td>
+      <td>Название социальной сети (vkontakte / facebook)</td>
+    </tr>
+    <tr>
+      <td>first_name</td>
+      <td>Да</td>
+      <td>Имя пользователя</td>
+    </tr>
+    <tr>
+      <td>last_name</td>
+      <td>Да</td>
+      <td>Фамилия пользователя</td>
+    </tr>
+    <tr>
+      <td>email</td>
+      <td>-</td>
+      <td>Емейл пользователя</td>
+    </tr>
+  </tbody>
+</table>
+
+          <h1 id="vosstanovlieniie-parolia">Восстановление пароля</h1>
+
+<h2 id="zapros-na-vosstanovlieniie-parolia">Запрос на восстановление пароля</h2>
+
+<blockquote>
+  <p>Пример кода c запросом на “восстановление пароля”</p>
+</blockquote>
+
+<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v1/passwords/reset'</span> <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -d <span class="nv">email</span><span class="o">=</span>&lt;EMAIL&gt;
 </code></pre>
 
 <blockquote>
-  <p>Убедитесь, что вы заменили <code>APIKEY</code> своим ключем.</p>
+  <p>Если пользователя не существует, то сервер вернет ответ с кодом 404</p>
 </blockquote>
 
-<aside class="notice">
-Замените <code>APIKEY</code> на ваш персональный ключ API.
-</aside>
+<p>Отправить пользователю письмо с инструкцией “восстановления пароля” можно, выполнив запрос:<br />
+<code>POST http://api.instamart.ru/v1/passwords/reset</code></p>
+
+<p>Письмо будет содержать ссылку на приложение с параметром <code>reset_password_token</code></p>
+
+<h3 id="paramietry-zaprosa">Параметры запроса</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>email</td>
+      <td>Да</td>
+      <td>Емейл пользователя</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="sbros-parolia">Сброс пароля</h2>
+
+<blockquote>
+  <p>Пример кода c запросом сброса пароля</p>
+</blockquote>
+
+<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v1/passwords'</span> <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -d <span class="nv">reset_password_token</span><span class="o">=</span>&lt;TOKEN&gt;
+  -d <span class="nv">password</span><span class="o">=</span>&lt;PASSWORD&gt;
+  -d <span class="nv">password_confirmation</span><span class="o">=</span>&lt;PASSWORD_CONFIRMATION&gt;
+</code></pre>
+
+<p>Сбросить пароль пользователя можно, выполнив запрос:<br />
+<code>POST http://api.instamart.ru/v1/passwords</code></p>
+
+<h3 id="paramietry-zaprosa-1">Параметры запроса</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>reset_password_token</td>
+      <td>Да</td>
+      <td>Токен для сброса пароля</td>
+    </tr>
+    <tr>
+      <td>password</td>
+      <td>Да</td>
+      <td>Пароль</td>
+    </tr>
+    <tr>
+      <td>password_confirmation</td>
+      <td>Да</td>
+      <td>Подтверждение пароля</td>
+    </tr>
+  </tbody>
+</table>
+
 
           <h1 id="ritieiliery">Ритейлеры</h1>
 
