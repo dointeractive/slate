@@ -10,6 +10,7 @@ toc_footers:
 includes:
   - users
   - authentication
+  - passwords
   - retailers
   - departments
   - products
