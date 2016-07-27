@@ -34,9 +34,9 @@ email | Да | Емейл пользователя
 ```shell
 curl 'http://api.instamart.ru/v1/users/registrations' \
   -X POST \
-  -d passwrod \
-  -d first_name=test \
-  -d last_name=test
+  -d password=<PASSWORD> \
+  -d first_name=<FIRSTNAME> \
+  -d last_name=<LASTNAME>
 ```
 
 Зарегистрировать нового пользователя можно, выполнив запрос:
