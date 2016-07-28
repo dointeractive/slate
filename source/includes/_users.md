@@ -5,7 +5,7 @@
 > Пример кода для регистрации нового пользователя:
 
 ```shell
-curl 'http://api.instamart.ru/v1/users/registrations' \
+curl 'https://api.instamart.ru/v1/users/registrations' \
   -X POST \
   -d password=<PASSWORD> \
   -d first_name=<FIRSTNAME> \
@@ -14,7 +14,7 @@ curl 'http://api.instamart.ru/v1/users/registrations' \
 
 Зарегистрировать нового пользователя можно, выполнив запрос:
 
-`POST http://api.instamart.ru/v1/users/registrations`
+`POST https://api.instamart.ru/v1/users/registrations`
 
 ### Параметры запроса
 
@@ -30,7 +30,7 @@ last_name | Да | Фамилия пользователя
 > Пример кода для изменения, местоположения пользователя:
 
 ```shell
-curl 'http://api.instamart.ru/v1/users/test@test.com' \
+curl 'https://api.instamart.ru/v1/users/test@test.com' \
   -H 'Authorization: Basic <TOKEN>' \
   -X PATCH \
   -d location=Perm
@@ -46,7 +46,7 @@ curl 'http://api.instamart.ru/v1/users/test@test.com' \
 
 Изменить данные пользоватeля можно, выполнив следующий запрос:
 
-`PUT http://api.instamart.ru/v1/users/<EMAIL>`
+`PUT https://api.instamart.ru/v1/users/<EMAIL>`
 
 ### Параметры запроса
 
@@ -61,7 +61,7 @@ location | - | Местоположение пользователя
 > Пример кода, чтобы определить зарегистрирован пользователь или нет:
 
 ```shell
-curl 'http://api.instamart.ru/v1/users/test@test.com'
+curl 'https://api.instamart.ru/v1/users/test@test.com'
 ```
 > Если пользователь существует, ответ будет содержать следующие данные:
 
@@ -74,7 +74,7 @@ curl 'http://api.instamart.ru/v1/users/test@test.com'
 > Если пользователя не существует, сервер вернет ответ с кодом 404.<br>Если в запросе указать заголовок Authorization, то ответ будет содержать дополнительные данные:
 
 ```shell
-curl 'http://api.instamart.ru/v1/users/test@test.com'
+curl 'https://api.instamart.ru/v1/users/test@test.com'
   -H 'Authorization: Basic <TOKEN>'
 ```
 
@@ -88,7 +88,7 @@ curl 'http://api.instamart.ru/v1/users/test@test.com'
 ```
 
 Получить данные пользователя можно, выполнив запрос:
-`GET http://api.instamart.ru/v1/users/<EMAIL>`
+`GET https://api.instamart.ru/v1/users/<EMAIL>`
 
 Запрос к этому ресурсу можно выполнять как с указанием токена аутентификации так и без. Без указания токена сервер вернет ограниченное количество информации.
 

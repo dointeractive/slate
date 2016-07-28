@@ -5,7 +5,7 @@
 > Пример команды
 
 ```shell
-curl 'http://api.instamart.ru/v1/orders' \
+curl 'https://api.instamart.ru/v1/orders' \
   -H 'Authorization: Basic <TOKEN>' \
   -X POST
 ```
@@ -39,12 +39,12 @@ curl 'http://api.instamart.ru/v1/orders' \
 
 Создать новый заказ можно, выполнив следующий запрос:
 
-`POST http://api.instamart.ru/v1/orders`
+`POST https://api.instamart.ru/v1/orders`
 
 ## Добавление позиции заказа
 
 ```shell
-curl 'http://api.instamart.ru/v1/line_items' \
+curl 'https://api.instamart.ru/v1/line_items' \
   -H 'Authorization: Basic <TOKEN>' \
   -d line_item[product_id]=1 \
   -d line_item[quantity]=5
@@ -83,7 +83,7 @@ curl 'http://api.instamart.ru/v1/line_items' \
 
 Добавить позицию к заказу, можно выполнив запрос:
 
-`POST http://api.instamart.ru/v1/line_items`
+`POST https://api.instamart.ru/v1/line_items`
 
 ### Параметры запроса
 
@@ -95,7 +95,7 @@ line_item[quantity] | Да | количество добавляемых поз�
 ## Редактирование позиции заказа
 
 ```shell
-curl 'http://api.instamart.ru/v1/line_items/1' \
+curl 'https://api.instamart.ru/v1/line_items/1' \
   -H 'Authorization: Basic <TOKEN>' \
   -d quantity=3 \
   -X PATCH 
@@ -134,7 +134,7 @@ curl 'http://api.instamart.ru/v1/line_items/1' \
 
 Чтобы, например, изменить количество единиц товара, необходимо выполнить запрос:
 
-`PATCH http://api.instamart.ru/v1/line_items/<ID>`
+`PATCH https://api.instamart.ru/v1/line_items/<ID>`
 
 ### Параметры запроса
 
@@ -148,7 +148,7 @@ quantity | Нет | Количество единиц товара
 ## Удаление позиции заказа
 
 ```shell
-curl 'http://api.instamart.ru/v1/line_items/1' \
+curl 'https://api.instamart.ru/v1/line_items/1' \
   -H 'Authorization: Basic <TOKEN>' \
   -X DELETE 
 ```
@@ -156,7 +156,7 @@ curl 'http://api.instamart.ru/v1/line_items/1' \
 
 Чтобы удалить позицию заказа, необходимо выполнить запрос:
 
-`DELETE http://api.instamart.ru/v1/line_items/<ID>`
+`DELETE https://api.instamart.ru/v1/line_items/<ID>`
 
 ### Параметры запроса
 
@@ -167,7 +167,7 @@ ID | Да | ID позиции заказа
 ## Заполнение адреса заказа
 
 ```shell
-curl 'http://api.instamart.ru/v1/checkouts/<NUMBER>' \
+curl 'https://api.instamart.ru/v1/checkouts/<NUMBER>' \
   -H 'Authorization: Basic <TOKEN>' \
   -d order[ship_address_attributes][city]="Москва" \
   -d order[ship_address_attributes][full_address]="Старая Басманная 3" \
@@ -206,7 +206,7 @@ curl 'http://api.instamart.ru/v1/checkouts/<NUMBER>' \
 
 Добавить адрес к заказу, можно выполнив следующий запрос:
 
-`PATCH http://api.instamart.ru/v1/checkouts/<NUMBER>`
+`PATCH https://api.instamart.ru/v1/checkouts/<NUMBER>`
 
 ### Параметры запроса
 

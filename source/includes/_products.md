@@ -3,7 +3,7 @@
 ## Получить список продуктов
 
 ```shell
-curl "http://api.instamart.ru/v1/products?rid=1" \
+curl "https://api.instamart.ru/v1/products?rid=1" \
   -H "Authorization: Basic <% key %>"
 ```
 
@@ -22,9 +22,9 @@ curl "http://api.instamart.ru/v1/products?rid=1" \
     "properties": [],
     "images": [
       {
-        "mini_url": "http://s3.instamart.ru/products/1/mini/file.png",
-        "small_url": "http://s3.instamart.ru/products/1/small/file.png",
-        "product_url": "http://s3.instamart.ru/products/1/product/file.png"
+        "mini_url": "http://instamart.ru/products/1/mini/file.png",
+        "small_url": "http://instamart.ru/products/1/small/file.png",
+        "product_url": "http://instamart.ru/products/1/product/file.png"
       }
     ],
     "similar_products": []
@@ -37,7 +37,7 @@ curl "http://api.instamart.ru/v1/products?rid=1" \
 
 ### HTTP запрос
 
-`GET http://api.instamart.ru/v1/products`
+`GET https://api.instamart.ru/v1/products`
 
 ### Параметры запроса
 

@@ -3,7 +3,7 @@
 ## Получить список ритейлеров
 
 ```shell
-curl "http://api.instamart.ru/v1/retailers" \
+curl "https://api.instamart.ru/v1/retailers" \
   -H "Authorization: Basic <% key %>"
 ```
 
@@ -14,12 +14,12 @@ curl "http://api.instamart.ru/v1/retailers" \
   {
     "id": 1,
     "name": "Metro",
-    "logo": "http://s3.instamart.ru/retailers/metro.png"
+    "logo": "http://instamart.ru/retailers/metro.png"
   },
   {
     "id": 2,
     "name": "Ашан",
-    "logo": "http://s3.instamart.ru/retailers/auchan.png"
+    "logo": "http://instamart.ru/retailers/auchan.png"
   }
 ]
 ```
@@ -28,4 +28,4 @@ curl "http://api.instamart.ru/v1/retailers" \
 
 ### HTTP запрос
 
-`GET http://api.instamart.ru/v1/retailers`
+`GET https://api.instamart.ru/v1/retailers`

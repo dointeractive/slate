@@ -7,7 +7,7 @@
 > Пример кода для аутентификации пользователя с учетными данными "test@test.ru", "qwer":
 
 ```shell
-curl 'http://api.instamart.ru/v1/sessions' \
+curl 'https://api.instamart.ru/v1/sessions' \
   -X POST \
   -H 'Authorization: Basic dGVzdEB0ZXN0LnJ1OnF3ZXIK'
 ```
@@ -22,7 +22,7 @@ curl 'http://api.instamart.ru/v1/sessions' \
 Аутентификация осуществляется методом [HTTP Basic Auth](https://en.wikipedia.org/wiki/Basic_access_authentication).
 
 Получить токен можно, выполнив запрос:
-`POST http://api.instamart.ru/v1/sessions`
+`POST https://api.instamart.ru/v1/sessions`
 
 Учетные данные пользователя (емейл и пароль) передаются в заголовке запроса вида:
 `Authorization: Basic <DIGEST>`
@@ -40,7 +40,7 @@ password | Да | Пароль пользователя
 > Пример кода для аутентификации пользователя через vkontakte 
 
 ```shell
-curl 'http://api.instamart.ru/v1/vkontakte_auth/sessions' \
+curl 'https://api.instamart.ru/v1/vkontakte_auth/sessions' \
   -X POST \
   -d uid=0
   -d first_name=fname
@@ -56,7 +56,7 @@ curl 'http://api.instamart.ru/v1/vkontakte_auth/sessions' \
 ```
 
 Получить токен можно, выполнив запрос:
-`POST http://api.instamart.ru/v1/<PROVIDER_ID>_auth/sessions`
+`POST https://api.instamart.ru/v1/<PROVIDER_ID>_auth/sessions`
 
 ### Параметры запроса
 

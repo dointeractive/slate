@@ -5,7 +5,7 @@
 > Пример команды
 
 ```shell
-curl 'http://api.instamart.ru/v1/departments?rid=1' \
+curl 'https://api.instamart.ru/v1/departments?rid=1' \
   -H 'Authorization: Basic <TOKEN>'
 ```
 > Ответ будет содержать следующие данные
@@ -40,7 +40,7 @@ curl 'http://api.instamart.ru/v1/departments?rid=1' \
 
 Получить выдачу для главной страницы можно, выполнив следующий запрос:
 
-`GET http://api.instamart.ru/v1/departments`
+`GET https://api.instamart.ru/v1/departments`
 
 ### Параметры запроса
 
@@ -53,7 +53,7 @@ curl 'http://api.instamart.ru/v1/departments?rid=1' \
 > Пример команды
 
 ```shell
-curl 'http://api.instamart.ru/v1/departments/1?rid=1' \
+curl 'https://api.instamart.ru/v1/departments/1?rid=1' \
   -H 'Authorization: Basic <TOKEN>'
 ```
 > Ответ будет содержать следующие данные
@@ -93,7 +93,7 @@ curl 'http://api.instamart.ru/v1/departments/1?rid=1' \
 
 Получить выдачу страницы каталога можно, выполнив следующий запрос:
 
-`GET http://api.instamart.ru/v1/departments/<DEPARTMENT_ID>`
+`GET https://api.instamart.ru/v1/departments/<DEPARTMENT_ID>`
 
 ### Параметры запроса
 
