@@ -41,6 +41,46 @@ curl 'https://api.instamart.ru/v1/orders' \
 
 `POST https://api.instamart.ru/v1/orders`
 
+## Получить текущий заказ
+
+> Пример команды
+
+```shell
+curl 'https://api.instamart.ru/v1/orders/current' \
+  -H 'Authorization: Basic <TOKEN>' \
+```
+
+> Ответ будет содержать следующие данные
+
+```json
+{
+  "number": "R307128032",
+  "item_total": "0.0",
+  "total": "0.0",
+  "ship_total": "0.0",
+  "state": "cart",
+  "adjustment_total": "0.0",
+  "user_id": 1,
+  "created_at": "2014-07-06T18:52:33.724Z",
+  "updated_at": "2014-07-06T18:52:33.752Z",
+  "completed_at": null,
+  "payment_total": "0.0",
+  "shipment_state": null,
+  "payment_state": null,
+  "email": "spree@example.com",
+  "special_instructions": null,
+  "total_quantity": 0,
+  "ship_address": null,
+  "line_items": [],
+  "payments": [],
+  "shipments": [],
+  "adjustments": []
+}
+```
+
+Получить текущий заказ пользователя можно, выполнив запрос:
+`GET https://api.instamart.ru/v1/orders/current`
+
 ## Добавление позиции заказа
 
 ```shell
