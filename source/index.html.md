@@ -16,6 +16,7 @@ includes:
   - departments
   - products
   - orders
+  - flags
   - errors
 
 search: true
