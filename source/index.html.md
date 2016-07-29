@@ -15,6 +15,7 @@ includes:
   - taxons
   - departments
   - products
+  - search
   - orders
   - flags
   - errors

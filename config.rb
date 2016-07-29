@@ -1,3 +1,5 @@
+set :host, 'https://instamart.ru/v1'
+
 # Markdown
 set :markdown_engine, :kramdown
 set :markdown,

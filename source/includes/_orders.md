@@ -146,7 +146,7 @@ curl 'https://api.instamart.ru/v1/line_items' \
   "description": "Nihil et itaque adipisci sed ea dolorum.",
   "product_id": 1,
   "total": "200.00",
-  "weight": "0.0",
+  "weight": "500.0",
   "adjustments": [],
   "product": {
     "id": 1,
@@ -154,7 +154,8 @@ curl 'https://api.instamart.ru/v1/line_items' \
     "price": 42,
     "original_price": 70,
     "discount": 28,
-    "weight": "10 пак x 6",
+    "weight": "100.0"
+    "human_volume": "10 пак x 6",
     "items_per_pack": 2,
     "options_text": "",
     "images": [
@@ -196,8 +197,8 @@ curl 'https://api.instamart.ru/v1/line_items/1' \
   "price": "40.00",
   "description": "Nihil et itaque adipisci sed ea dolorum.",
   "product_id": 1,
-  "total": "120.00",
-  "weight": "0.0",
+  "total": "120.0",
+  "weight": "300.0",
   "adjustments": [],
   "product": {
     "id": 1,
@@ -205,7 +206,8 @@ curl 'https://api.instamart.ru/v1/line_items/1' \
     "price": 42,
     "original_price": 70,
     "discount": 28,
-    "weight": "10 пак x 6",
+    "weight": "100.0",
+    "human_volume": "10 пак x 6",
     "items_per_pack": 2,
     "options_text": "",
     "images": [
