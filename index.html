@@ -140,7 +140,7 @@
   <p>Пример кода для регистрации нового пользователя:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v1/users/registrations'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v1/users/registrations'</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
   -d <span class="nv">password</span><span class="o">=</span>&lt;PASSWORD&gt; <span class="se">\</span>
   -d <span class="nv">first_name</span><span class="o">=</span>&lt;FIRSTNAME&gt; <span class="se">\</span>
@@ -149,7 +149,7 @@
 
 <p>Зарегистрировать нового пользователя можно, выполнив запрос:</p>
 
-<p><code>POST http://api.instamart.ru/v1/users/registrations</code></p>
+<p><code>POST https://api.instamart.ru/v1/users/registrations</code></p>
 
 <h3 id="paramietry-zaprosa">Параметры запроса</h3>
 
@@ -191,8 +191,8 @@
   <p>Пример кода для изменения, местоположения пользователя:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v1/users/test@test.com'</span> <span class="se">\</span>
-  -H <span class="s1">'Authorization: Basic &lt;TOKEN&gt;'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v1/users/test@test.com'</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Token token=&lt;TOKEN&gt;'</span> <span class="se">\</span>
   -X PATCH <span class="se">\</span>
   -d <span class="nv">location</span><span class="o">=</span>Perm
 </code></pre>
@@ -206,7 +206,7 @@
 
 <p>Изменить данные пользоватeля можно, выполнив следующий запрос:</p>
 
-<p><code>PUT http://api.instamart.ru/v1/users/&lt;EMAIL&gt;</code></p>
+<p><code>PUT https://api.instamart.ru/v1/users/&lt;EMAIL&gt;</code></p>
 
 <h3 id="paramietry-zaprosa-1">Параметры запроса</h3>
 
@@ -243,7 +243,7 @@
   <p>Пример кода, чтобы определить зарегистрирован пользователь или нет:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v1/users/test@test.com'</span>
+<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v1/users/test@test.com'</span>
 </code></pre>
 <blockquote>
   <p>Если пользователь существует, ответ будет содержать следующие данные:</p>
@@ -258,8 +258,8 @@
   <p>Если пользователя не существует, сервер вернет ответ с кодом 404.<br />Если в запросе указать заголовок Authorization, то ответ будет содержать дополнительные данные:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v1/users/test@test.com'</span>
-  -H <span class="s1">'Authorization: Basic &lt;TOKEN&gt;'</span>
+<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v1/users/test@test.com'</span>
+  -H <span class="s1">'Authorization: Token token=&lt;TOKEN&gt;'</span>
 </code></pre>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -271,7 +271,7 @@
 </span></code></pre>
 
 <p>Получить данные пользователя можно, выполнив запрос:<br />
-<code>GET http://api.instamart.ru/v1/users/&lt;EMAIL&gt;</code></p>
+<code>GET https://api.instamart.ru/v1/users/&lt;EMAIL&gt;</code></p>
 
 <p>Запрос к этому ресурсу можно выполнять как с указанием токена аутентификации так и без. Без указания токена сервер вернет ограниченное количество информации.</p>
 
@@ -304,7 +304,7 @@
   <p>Пример кода для аутентификации пользователя с учетными данными “test@test.ru”, “qwer”:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v1/sessions'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v1/sessions'</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
   -H <span class="s1">'Authorization: Basic dGVzdEB0ZXN0LnJ1OnF3ZXIK'</span>
 </code></pre>
@@ -320,7 +320,7 @@
 <p>Аутентификация осуществляется методом <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">HTTP Basic Auth</a>.</p>
 
 <p>Получить токен можно, выполнив запрос:<br />
-<code>POST http://api.instamart.ru/v1/sessions</code></p>
+<code>POST https://api.instamart.ru/v1/sessions</code></p>
 
 <p>Учетные данные пользователя (емейл и пароль) передаются в заголовке запроса вида:<br />
 <code>Authorization: Basic &lt;DIGEST&gt;</code><br />
@@ -356,7 +356,7 @@
   <p>Пример кода для аутентификации пользователя через vkontakte</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v1/vkontakte_auth/sessions'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v1/auth_providers/vkontakte/sessions'</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
   -d <span class="nv">uid</span><span class="o">=</span>0
   -d <span class="nv">first_name</span><span class="o">=</span>fname
@@ -373,7 +373,7 @@
 </span></code></pre>
 
 <p>Получить токен можно, выполнив запрос:<br />
-<code>POST http://api.instamart.ru/v1/&lt;PROVIDER_ID&gt;_auth/sessions</code></p>
+<code>POST https://api.instamart.ru/v1/auth_providers/&lt;PROVIDER_ID&gt;/sessions</code></p>
 
 <h3 id="paramietry-zaprosa-1">Параметры запроса</h3>
 
@@ -422,7 +422,7 @@
   <p>Пример кода c запросом на “восстановление пароля”</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v1/passwords/reset'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v1/passwords/reset'</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
   -d <span class="nv">email</span><span class="o">=</span>&lt;EMAIL&gt;
 </code></pre>
@@ -432,7 +432,7 @@
 </blockquote>
 
 <p>Отправить пользователю письмо с инструкцией “восстановления пароля” можно, выполнив запрос:<br />
-<code>POST http://api.instamart.ru/v1/passwords/reset</code></p>
+<code>POST https://api.instamart.ru/v1/passwords/reset</code></p>
 
 <p>Письмо будет содержать ссылку на приложение с параметром <code>reset_password_token</code></p>
 
@@ -461,7 +461,7 @@
   <p>Пример кода c запросом сброса пароля</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v1/passwords'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v1/passwords'</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
   -d <span class="nv">reset_password_token</span><span class="o">=</span>&lt;TOKEN&gt;
   -d <span class="nv">password</span><span class="o">=</span>&lt;PASSWORD&gt;
@@ -469,7 +469,7 @@
 </code></pre>
 
 <p>Сбросить пароль пользователя можно, выполнив запрос:<br />
-<code>POST http://api.instamart.ru/v1/passwords</code></p>
+<code>POST https://api.instamart.ru/v1/passwords</code></p>
 
 <h3 id="paramietry-zaprosa-1">Параметры запроса</h3>
 
@@ -505,8 +505,7 @@
 
 <h2 id="poluchit-spisok-ritieilierov">Получить список ритейлеров</h2>
 
-<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v1/retailers"</span> <span class="se">\</span>
-  -H <span class="s2">"Authorization: Basic &lt;% key %&gt;"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v1/retailers"</span> <span class="se">\</span>
 </code></pre>
 
 <blockquote>
@@ -517,12 +516,12 @@
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Metro"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://s3.instamart.ru/retailers/metro.png"</span><span class="w">
+    </span><span class="nt">"logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/retailers/metro.png"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
     </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ашан"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://s3.instamart.ru/retailers/auchan.png"</span><span class="w">
+    </span><span class="nt">"logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/retailers/auchan.png"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
@@ -531,7 +530,7 @@
 
 <h3 id="http-zapros">HTTP запрос</h3>
 
-<p><code>GET http://api.instamart.ru/v1/retailers</code></p>
+<p><code>GET https://api.instamart.ru/v1/retailers</code></p>
 
           <h1 id="katieghorii">Категории</h1>
 
@@ -539,7 +538,7 @@
   <p>Пример кода для получения списка всех категорий</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v1/taxons?rid=1'</span>
+<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v1/taxons?rid=1'</span>
 </code></pre>
 <blockquote>
   <p>Ответ будет содержать следующие данные</p>
@@ -564,7 +563,7 @@
 </span></code></pre>
 <p>Получить список всех категорий можно, выполнив запрос:</p>
 
-<p><code>GET http://api.instamart.ru/v1/taxons</code></p>
+<p><code>GET https://api.instamart.ru/v1/taxons</code></p>
 
 <h3 id="paramietry-zaprosa">Параметры запроса</h3>
 
@@ -593,8 +592,7 @@
   <p>Пример команды</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v1/departments?rid=1'</span> <span class="se">\</span>
-  -H <span class="s1">'Authorization: Basic &lt;TOKEN&gt;'</span>
+<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v1/departments?rid=1'</span> <span class="se">\</span>
 </code></pre>
 <blockquote>
   <p>Ответ будет содержать следующие данные</p>
@@ -629,7 +627,7 @@
 
 <p>Получить выдачу для главной страницы можно, выполнив следующий запрос:</p>
 
-<p><code>GET http://api.instamart.ru/v1/departments</code></p>
+<p><code>GET https://api.instamart.ru/v1/departments</code></p>
 
 <h3 id="paramietry-zaprosa">Параметры запроса</h3>
 
@@ -656,8 +654,7 @@
   <p>Пример команды</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v1/departments/1?rid=1'</span> <span class="se">\</span>
-  -H <span class="s1">'Authorization: Basic &lt;TOKEN&gt;'</span>
+<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v1/departments/1?rid=1'</span> <span class="se">\</span>
 </code></pre>
 <blockquote>
   <p>Ответ будет содержать следующие данные</p>
@@ -697,7 +694,7 @@
 
 <p>Получить выдачу страницы каталога можно, выполнив следующий запрос:</p>
 
-<p><code>GET http://api.instamart.ru/v1/departments/&lt;DEPARTMENT_ID&gt;</code></p>
+<p><code>GET https://api.instamart.ru/v1/departments/&lt;DEPARTMENT_ID&gt;</code></p>
 
 <h3 id="paramietry-zaprosa-1">Параметры запроса</h3>
 
@@ -725,10 +722,9 @@
 
           <h1 id="produkty">Продукты</h1>
 
-<h2 id="poluchit-spisok-produktov">Получить список продуктов</h2>
+<h2 id="spisok-produktov">Список продуктов</h2>
 
-<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v1/products?rid=1"</span> <span class="se">\</span>
-  -H <span class="s2">"Authorization: Basic &lt;% key %&gt;"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v1/products?rid=1"</span> 
 </code></pre>
 
 <blockquote>
@@ -739,20 +735,18 @@
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Бананы"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.79</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"original_price"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.99</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.20</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">54.79</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"original_price"</span><span class="p">:</span><span class="w"> </span><span class="mf">55.79</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
     </span><span class="nt">"weight"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
     </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Бананы желтые из Эквадора"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
     </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"mini_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://s3.instamart.ru/products/1/mini/file.png"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"small_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://s3.instamart.ru/products/1/small/file.png"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"product_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://s3.instamart.ru/products/1/product/file.png"</span><span class="w">
+        </span><span class="nt">"mini_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/products/1/mini/file.png"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"small_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/products/1/small/file.png"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"product_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/products/1/product/file.png"</span><span class="w">
       </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="nt">"similar_products"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">]</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
@@ -762,7 +756,7 @@
 
 <h3 id="http-zapros">HTTP запрос</h3>
 
-<p><code>GET http://api.instamart.ru/v1/products</code></p>
+<p><code>GET https://api.instamart.ru/v1/products</code></p>
 
 <h3 id="paramietry-zaprosa">Параметры запроса</h3>
 
@@ -792,6 +786,78 @@
 Не забудьте указать обязательный параметр идентификатор ритейлера
 </aside>
 
+<h2 id="kartochka-produkta">Карточка продукта</h2>
+
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v1/products/1"</span>
+</code></pre>
+
+<blockquote>
+  <p>Команда выше возвращает JSON:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Бананы"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">54.79</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"original_price"</span><span class="p">:</span><span class="w"> </span><span class="mf">55.79</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"weight"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Бананы желтые из Эквадора"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Калорийность"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"96"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"mini_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/products/1/mini/file.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"small_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/products/1/small/file.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"product_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/products/1/product/file.png"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"similar_products"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Бананы мини"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.79</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"original_price"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.99</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.20</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"weight"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Бананы мини"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">],</span><span class="w">
+      </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Получить данные для карточки продукта, можно выполнив запрос</p>
+
+<h3 id="http-zapros-1">HTTP запрос</h3>
+
+<p><code>GET https://api.instamart.ru/v1/products/&lt;PRODUCT_ID&gt;</code></p>
+
+<h3 id="paramietry-zaprosa-1">Параметры запроса</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>product_id</td>
+      <td>Да</td>
+      <td>ID продукта</td>
+    </tr>
+  </tbody>
+</table>
+
+
           <h1 id="zakazy">Заказы</h1>
 
 <h2 id="sozdaniie-novogho-zakaza">Создание нового заказа</h2>
@@ -800,8 +866,8 @@
   <p>Пример команды</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v1/orders'</span> <span class="se">\</span>
-  -H <span class="s1">'Authorization: Basic &lt;TOKEN&gt;'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v1/orders'</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Token token=&lt;TOKEN&gt;'</span> <span class="se">\</span>
   -X POST
 </code></pre>
 <blockquote>
@@ -822,7 +888,7 @@
   </span><span class="nt">"payment_total"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"shipment_state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="nt">"payment_state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"spree@example.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test@example.com"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"special_instructions"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="nt">"total_quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nt">"ship_address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -835,12 +901,102 @@
 
 <p>Создать новый заказ можно, выполнив следующий запрос:</p>
 
-<p><code>POST http://api.instamart.ru/v1/orders</code></p>
+<p><code>POST https://api.instamart.ru/v1/orders</code></p>
+
+<h2 id="poluchit-tiekushchii-zakaz">Получить текущий заказ</h2>
+
+<blockquote>
+  <p>Пример команды</p>
+</blockquote>
+
+<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v1/orders/current'</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Token token=&lt;TOKEN&gt;'</span> 
+</code></pre>
+
+<blockquote>
+  <p>Ответ будет содержать следующие данные</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"R307128032"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"item_total"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"ship_total"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cart"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"adjustment_total"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-06T18:52:33.724Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-06T18:52:33.752Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"completed_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"payment_total"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"shipment_state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"payment_state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test@example.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"special_instructions"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"total_quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"ship_address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"line_items"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"payments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"shipments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"adjustments"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Получить текущий заказ пользователя можно, выполнив запрос:<br />
+<code>GET https://api.instamart.ru/v1/orders/current</code></p>
+
+<h2 id="poluchit-spisok-vsiekh-zakazov">Получить список всех заказов</h2>
+
+<blockquote>
+  <p>Пример команды</p>
+</blockquote>
+
+<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v1/orders'</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Token token=&lt;TOKEN&gt;'</span> 
+</code></pre>
+
+<blockquote>
+  <p>Ответ будет содержать следующие данные</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"orders"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"R335381310"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"item_total"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100.0"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"display_item_total"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100.00"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100.0"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"display_total"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100.00"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cart"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"adjustment_total"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-12.0"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-10-24T01:02:25Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-10-24T01:02:25Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"completed_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"payment_total"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"shipment_state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"payment_state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"special_instructions"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"total_quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"abcdef123456"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"line_items"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"adjustments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"payments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"shipments"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Получить все заказы пользователя можно, выполнив запрос:<br />
+<code>GET https://api.instamart.ru/v1/orders</code></p>
 
 <h2 id="dobavlieniie-pozitsii-zakaza">Добавление позиции заказа</h2>
 
-<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v1/line_items'</span> <span class="se">\</span>
-  -H <span class="s1">'Authorization: Basic &lt;TOKEN&gt;'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v1/line_items'</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Token token=&lt;TOKEN&gt;'</span> <span class="se">\</span>
   -d line_item[product_id]<span class="o">=</span>1 <span class="se">\</span>
   -d line_item[quantity]<span class="o">=</span>5
 </code></pre>
@@ -879,7 +1035,7 @@
 
 <p>Добавить позицию к заказу, можно выполнив запрос:</p>
 
-<p><code>POST http://api.instamart.ru/v1/line_items</code></p>
+<p><code>POST https://api.instamart.ru/v1/line_items</code></p>
 
 <h3 id="paramietry-zaprosa">Параметры запроса</h3>
 
@@ -907,8 +1063,8 @@
 
 <h2 id="riedaktirovaniie-pozitsii-zakaza">Редактирование позиции заказа</h2>
 
-<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v1/line_items/1'</span> <span class="se">\</span>
-  -H <span class="s1">'Authorization: Basic &lt;TOKEN&gt;'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v1/line_items/1'</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Token token=&lt;TOKEN&gt;'</span> <span class="se">\</span>
   -d <span class="nv">quantity</span><span class="o">=</span>3 <span class="se">\</span>
   -X PATCH 
 </code></pre>
@@ -947,7 +1103,7 @@
 
 <p>Чтобы, например, изменить количество единиц товара, необходимо выполнить запрос:</p>
 
-<p><code>PATCH http://api.instamart.ru/v1/line_items/&lt;ID&gt;</code></p>
+<p><code>PATCH https://api.instamart.ru/v1/line_items/&lt;ID&gt;</code></p>
 
 <h3 id="paramietry-zaprosa-1">Параметры запроса</h3>
 
@@ -975,8 +1131,8 @@
 
 <h2 id="udalieniie-pozitsii-zakaza">Удаление позиции заказа</h2>
 
-<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v1/line_items/1'</span> <span class="se">\</span>
-  -H <span class="s1">'Authorization: Basic &lt;TOKEN&gt;'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v1/line_items/1'</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Token token=&lt;TOKEN&gt;'</span> <span class="se">\</span>
   -X DELETE 
 </code></pre>
 <blockquote>
@@ -985,7 +1141,7 @@
 
 <p>Чтобы удалить позицию заказа, необходимо выполнить запрос:</p>
 
-<p><code>DELETE http://api.instamart.ru/v1/line_items/&lt;ID&gt;</code></p>
+<p><code>DELETE https://api.instamart.ru/v1/line_items/&lt;ID&gt;</code></p>
 
 <h3 id="paramietry-zaprosa-2">Параметры запроса</h3>
 
@@ -1008,8 +1164,8 @@
 
 <h2 id="zapolnieniie-adriesa-zakaza">Заполнение адреса заказа</h2>
 
-<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v1/checkouts/&lt;NUMBER&gt;'</span> <span class="se">\</span>
-  -H <span class="s1">'Authorization: Basic &lt;TOKEN&gt;'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v1/checkouts/&lt;NUMBER&gt;'</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Token token=&lt;TOKEN&gt;'</span> <span class="se">\</span>
   -d order[ship_address_attributes][city]<span class="o">=</span><span class="s2">"Москва"</span> <span class="se">\</span>
   -d order[ship_address_attributes][full_address]<span class="o">=</span><span class="s2">"Старая Басманная 3"</span> <span class="se">\</span>
 </code></pre>
@@ -1031,7 +1187,7 @@
   </span><span class="nt">"payment_total"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"shipment_state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="nt">"payment_state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"spree@example.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test@example.com"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"special_instructions"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="nt">"total_quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nt">"ship_address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1048,7 +1204,7 @@
 
 <p>Добавить адрес к заказу, можно выполнив следующий запрос:</p>
 
-<p><code>PATCH http://api.instamart.ru/v1/checkouts/&lt;NUMBER&gt;</code></p>
+<p><code>PATCH https://api.instamart.ru/v1/checkouts/&lt;NUMBER&gt;</code></p>
 
 <h3 id="paramietry-zaprosa-3">Параметры запроса</h3>
 
@@ -1075,6 +1231,85 @@
       <td>order[ship_address_attributes][full_address]</td>
       <td>Да</td>
       <td>Адрес</td>
+    </tr>
+  </tbody>
+</table>
+
+          <h1 id="zhaloby-na-tovar">Жалобы на товар</h1>
+
+<h2 id="poluchieniie-spiska-standartnykh-zhalob">Получение списка стандартных жалоб</h2>
+
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v1/flags"</span>
+</code></pre>
+<blockquote>
+  <p>Эта комманда возвращает следующий JSON:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Неверное описание"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>Стандартный список ошибок можно загрузить, выполнив запрос:</p>
+
+<p><code>GET https://api.instamart.ru/v1/flags</code></p>
+
+<h2 id="otpravka-zhaloby">Отправка жалобы</h2>
+
+<blockquote>
+  <p>Пример отправки стандартной жалобы из списка:</p>
+</blockquote>
+
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v1/products/1/flags"</span>
+  -H <span class="s2">"Authorization: Token token=&lt;% TOKEN %&gt;"</span>
+  -X POST
+  -d <span class="nv">flag_id</span><span class="o">=</span>1
+</code></pre>
+
+<blockquote>
+  <p>Пример отправки собственной жалобы</p>
+</blockquote>
+
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v1/products/1/flags"</span>
+  -H <span class="s2">"Authorization: Token token=&lt;% TOKEN %&gt;"</span>
+  -X POST
+  -d <span class="s2">"description=Слишком высокая цена"</span>
+</code></pre>
+
+<p>Чтобы отправить жалобу на товар, выполните следующий запрос, указав <code>id</code> жалобы:</p>
+
+<p><code>POST https://api.instamart.ru/v1/products/&lt;PRODUCT_ID&gt;/flags</code></p>
+
+<p>Также, используя этот же адрес, можно отправить свой текст жалобы, указав его в параметре <code>description</code></p>
+
+<h3 id="paramietry-zaprosa">Параметры запроса</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>product_id</td>
+      <td>Да</td>
+      <td>id продукта</td>
+    </tr>
+    <tr>
+      <td>flag_id</td>
+      <td>Да (если не указан <code>description</code>)</td>
+      <td>id жалобы</td>
+    </tr>
+    <tr>
+      <td>description</td>
+      <td>Да (если не указан <code>flag_id</code>)</td>
+      <td>текст жалобы</td>
     </tr>
   </tbody>
 </table>
