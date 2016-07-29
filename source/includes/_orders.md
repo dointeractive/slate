@@ -6,7 +6,7 @@
 
 ```shell
 curl 'https://api.instamart.ru/v1/orders' \
-  -H 'Authorization: Basic <TOKEN>' \
+  -H 'Authorization: Token token=<TOKEN>' \
   -X POST
 ```
 > Ответ будет содержать следующие данные
@@ -26,7 +26,7 @@ curl 'https://api.instamart.ru/v1/orders' \
   "payment_total": "0.0",
   "shipment_state": null,
   "payment_state": null,
-  "email": "spree@example.com",
+  "email": "test@example.com",
   "special_instructions": null,
   "total_quantity": 0,
   "ship_address": null,
@@ -47,7 +47,7 @@ curl 'https://api.instamart.ru/v1/orders' \
 
 ```shell
 curl 'https://api.instamart.ru/v1/orders/current' \
-  -H 'Authorization: Basic <TOKEN>' \
+  -H 'Authorization: Token token=<TOKEN>' 
 ```
 
 > Ответ будет содержать следующие данные
@@ -67,7 +67,7 @@ curl 'https://api.instamart.ru/v1/orders/current' \
   "payment_total": "0.0",
   "shipment_state": null,
   "payment_state": null,
-  "email": "spree@example.com",
+  "email": "test@example.com",
   "special_instructions": null,
   "total_quantity": 0,
   "ship_address": null,
@@ -81,11 +81,58 @@ curl 'https://api.instamart.ru/v1/orders/current' \
 Получить текущий заказ пользователя можно, выполнив запрос:
 `GET https://api.instamart.ru/v1/orders/current`
 
+
+## Получить список всех заказов
+
+> Пример команды
+
+```shell
+curl 'https://api.instamart.ru/v1/orders' \
+  -H 'Authorization: Token token=<TOKEN>' 
+```
+
+> Ответ будет содержать следующие данные
+
+```json
+{
+  "orders": [
+    {
+      "id": 1,
+      "number": "R335381310",
+      "item_total": "100.0",
+      "display_item_total": "100.00",
+      "total": "100.0",
+      "display_total": "100.00",
+      "state": "cart",
+      "adjustment_total": "-12.0",
+      "user_id": null,
+      "created_at": "2012-10-24T01:02:25Z",
+      "updated_at": "2012-10-24T01:02:25Z",
+      "completed_at": null,
+      "payment_total": "0.0",
+      "shipment_state": null,
+      "payment_state": null,
+      "email": null,
+      "special_instructions": null,
+      "total_quantity": 1,
+      "token": "abcdef123456",
+      "line_items": [],
+      "adjustments": [],
+      "payments": [],
+      "shipments": []
+    }
+  ]
+}
+```
+
+Получить все заказы пользователя можно, выполнив запрос:
+`GET https://api.instamart.ru/v1/orders`
+
 ## Добавление позиции заказа
 
 ```shell
 curl 'https://api.instamart.ru/v1/line_items' \
-  -H 'Authorization: Basic <TOKEN>' \
+  -H 'Authorization: Token token=<TOKEN>' \
   -d line_item[product_id]=1 \
   -d line_item[quantity]=5
 ```
@@ -136,7 +183,7 @@ line_item[quantity] | Да | количество добавляемых поз�
 
 ```shell
 curl 'https://api.instamart.ru/v1/line_items/1' \
-  -H 'Authorization: Basic <TOKEN>' \
+  -H 'Authorization: Token token=<TOKEN>' \
   -d quantity=3 \
   -X PATCH 
 ```
@@ -189,7 +236,7 @@ quantity | Нет | Количество единиц товара
 
 ```shell
 curl 'https://api.instamart.ru/v1/line_items/1' \
-  -H 'Authorization: Basic <TOKEN>' \
+  -H 'Authorization: Token token=<TOKEN>' \
   -X DELETE 
 ```
 > Ответ вернет результат с кодом 200
@@ -208,7 +255,7 @@ ID | Да | ID позиции заказа
 
 ```shell
 curl 'https://api.instamart.ru/v1/checkouts/<NUMBER>' \
-  -H 'Authorization: Basic <TOKEN>' \
+  -H 'Authorization: Token token=<TOKEN>' \
   -d order[ship_address_attributes][city]="Москва" \
   -d order[ship_address_attributes][full_address]="Старая Басманная 3" \
 ```
@@ -229,7 +276,7 @@ curl 'https://api.instamart.ru/v1/checkouts/<NUMBER>' \
   "payment_total": "0.0",
   "shipment_state": null,
   "payment_state": null,
-  "email": "spree@example.com",
+  "email": "test@example.com",
   "special_instructions": null,
   "total_quantity": 0,
   "ship_address": {

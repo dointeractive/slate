@@ -31,7 +31,7 @@ last_name | Да | Фамилия пользователя
 
 ```shell
 curl 'https://api.instamart.ru/v1/users/test@test.com' \
-  -H 'Authorization: Basic <TOKEN>' \
+  -H 'Authorization: Token token=<TOKEN>' \
   -X PATCH \
   -d location=Perm
 ```
@@ -75,7 +75,7 @@ curl 'https://api.instamart.ru/v1/users/test@test.com'
 
 ```shell
 curl 'https://api.instamart.ru/v1/users/test@test.com'
-  -H 'Authorization: Basic <TOKEN>'
+  -H 'Authorization: Token token=<TOKEN>'
 ```
 
 ```json

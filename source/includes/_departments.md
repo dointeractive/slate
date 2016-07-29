@@ -6,7 +6,6 @@
 
 ```shell
 curl 'https://api.instamart.ru/v1/departments?rid=1' \
-  -H 'Authorization: Basic <TOKEN>'
 ```
 > Ответ будет содержать следующие данные
 
@@ -54,7 +53,6 @@ curl 'https://api.instamart.ru/v1/departments?rid=1' \
 
 ```shell
 curl 'https://api.instamart.ru/v1/departments/1?rid=1' \
-  -H 'Authorization: Basic <TOKEN>'
 ```
 > Ответ будет содержать следующие данные
 

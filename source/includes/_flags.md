@@ -26,7 +26,7 @@ curl "https://api.instamart.ru/v1/flags"
 
 ```shell
 curl "https://api.instamart.ru/v1/products/1/flags"
-  -H "Authorization: Basic <% key %>"
+  -H "Authorization: Token token=<% TOKEN %>"
   -X POST
   -d flag_id=1
 ```
@@ -35,7 +35,7 @@ curl "https://api.instamart.ru/v1/products/1/flags"
 
 ```shell
 curl "https://api.instamart.ru/v1/products/1/flags"
-  -H "Authorization: Basic <% key %>"
+  -H "Authorization: Token token=<% TOKEN %>"
   -X POST
   -d "description=Слишком высокая цена"
 ```

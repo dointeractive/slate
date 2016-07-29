@@ -4,7 +4,6 @@
 
 ```shell
 curl "https://api.instamart.ru/v1/retailers" \
-  -H "Authorization: Basic <% key %>"
 ```
 
 > Команда выше возвращает JSON:
