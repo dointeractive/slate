@@ -22,7 +22,7 @@ curl 'https://api.instamart.ru/v1/departments?rid=1' \
         "price": 42,
         "original_price": 70,
         "discount": 28,
-        "weight": "150.0",
+        "weight": 150.0,
         "human_volume": "10 пак x 6",
         "items_per_pack": 2,
         "images": [
@@ -74,7 +74,7 @@ curl 'https://api.instamart.ru/v1/departments/1?rid=1' \
           "price": 42,
           "original_price": 70,
           "discount": 28,
-          "weight": "150.0",
+          "weight": 150.0,
           "human_volume": "10 пак x 6",
           "items_per_pack": 2,
           "images": [

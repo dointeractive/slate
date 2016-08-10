@@ -16,7 +16,7 @@ curl "https://api.instamart.ru/v1/products?rid=1"
     "price": 54.79,
     "original_price": 55.79,
     "discount": 1.0,
-    "weight": 500,
+    "weight": 500.0,
     "description": "Бананы желтые из Эквадора",
     "images": [
       {
@@ -63,7 +63,7 @@ curl "https://api.instamart.ru/v1/products/1"
   "price": 54.79,
   "original_price": 55.79,
   "discount": 1.0,
-  "weight": 500,
+  "weight": 500.0,
   "description": "Бананы желтые из Эквадора",
   "properties": [
     {
@@ -85,7 +85,7 @@ curl "https://api.instamart.ru/v1/products/1"
       "price": 1.79,
       "original_price": 1.99,
       "discount": 0.20,
-      "weight": 500,
+      "weight": 500.0,
       "description": "Бананы мини",
       "properties": [...],
       "images": [...]
