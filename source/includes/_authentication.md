@@ -32,8 +32,8 @@ curl 'https://api.instamart.ru/v1/sessions' \
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
-email | Да | Емейл пользователя
-password | Да | Пароль пользователя
+user[email] | Да | Емейл пользователя
+user[password] | Да | Пароль пользователя
 
 ## Аутентификация через социальные сети
 
@@ -43,9 +43,9 @@ password | Да | Пароль пользователя
 curl 'https://api.instamart.ru/v1/auth_providers/vkontakte/sessions' \
   -X POST \
   -d uid=0
-  -d first_name=fname
-  -d last_name=lname
-  -d email=mail@example.com
+  -d user[first_name]=fname
+  -d user[last_name]=lname
+  -d user[email]=mail@example.com
 ```
 > Ответ будет содержать следующие данные
 
@@ -62,8 +62,8 @@ curl 'https://api.instamart.ru/v1/auth_providers/vkontakte/sessions' \
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
-provider_id | Да | Название социальной сети (vkontakte / facebook)
-uid | Да | Идентификатор пользователя в социальной сети
-first_name | Да (в первый раз) | Имя пользователя
-last_name | Да (в первый раз) | Фамилия пользователя
-email | Да (в первый раз) | Емейл пользователя
+user[provider_id] | Да | Название социальной сети (vkontakte / facebook)
+user[uid] | Да | Идентификатор пользователя в социальной сети
+user[first_name] | Да (в первый раз) | Имя пользователя
+user[last_name] | Да (в первый раз) | Фамилия пользователя
+user[email] | Да (в первый раз) | Емейл пользователя

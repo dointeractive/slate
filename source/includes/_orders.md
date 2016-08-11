@@ -134,7 +134,7 @@ curl 'https://api.instamart.ru/v1/line_items' \
   -d line_item[product_id]=1 \
   -d line_item[quantity]=5
 ```
-> Ответ будет содержать следующие данные
+> Ответ вернет созданный `line_item` и будет содержать следующие данные
 
 ```json
 {
