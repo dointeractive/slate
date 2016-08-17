@@ -142,9 +142,10 @@
 
 <pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v1/users/registrations'</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
-  -d user[password]<span class="o">=</span>&lt;PASSWORD&gt; <span class="se">\</span>
+  -d user[email]<span class="o">=</span>&lt;EMAIL&gt; <span class="se">\</span>
   -d user[first_name]<span class="o">=</span>&lt;FIRSTNAME&gt; <span class="se">\</span>
-  -d user[last_name]<span class="o">=</span>&lt;LASTNAME&gt;
+  -d user[last_name]<span class="o">=</span>&lt;LASTNAME&gt; <span class="se">\</span>
+  -d user[password]<span class="o">=</span>&lt;PASSWORD&gt;
 </code></pre>
 
 <p>Зарегистрировать нового пользователя можно, выполнив запрос:</p>
@@ -163,7 +164,7 @@
   </thead>
   <tbody>
     <tr>
-      <td>email</td>
+      <td>user[email]</td>
       <td>Да</td>
       <td>Емейл пользователя</td>
     </tr>
@@ -182,6 +183,11 @@
       <td>Да</td>
       <td>Фамилия пользователя</td>
     </tr>
+    <tr>
+      <td>user[location]</td>
+      <td>Нет</td>
+      <td>Местоположение пользователя</td>
+    </tr>
   </tbody>
 </table>
 
@@ -194,7 +200,7 @@
 <pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v1/users/test@test.com'</span> <span class="se">\</span>
   -H <span class="s1">'Authorization: Token token=&lt;TOKEN&gt;'</span> <span class="se">\</span>
   -X PATCH <span class="se">\</span>
-  -d <span class="nv">location</span><span class="o">=</span>Perm
+  -d user[location]<span class="o">=</span>Perm
 </code></pre>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test@test.com"</span><span class="p">,</span><span class="w">
@@ -338,12 +344,12 @@
   </thead>
   <tbody>
     <tr>
-      <td>user[email]</td>
+      <td>email</td>
       <td>Да</td>
       <td>Емейл пользователя</td>
     </tr>
     <tr>
-      <td>user[password]</td>
+      <td>password</td>
       <td>Да</td>
       <td>Пароль пользователя</td>
     </tr>
@@ -359,9 +365,9 @@
 <pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v1/auth_providers/vkontakte/sessions'</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
   -d <span class="nv">uid</span><span class="o">=</span>0
-  -d user[first_name]<span class="o">=</span>fname
-  -d user[last_name]<span class="o">=</span>lname
-  -d user[email]<span class="o">=</span>mail@example.com
+  -d session[first_name]<span class="o">=</span>fname
+  -d session[last_name]<span class="o">=</span>lname
+  -d session[email]<span class="o">=</span>mail@example.com
 </code></pre>
 <blockquote>
   <p>Ответ будет содержать следующие данные</p>
@@ -387,27 +393,27 @@
   </thead>
   <tbody>
     <tr>
-      <td>user[provider_id]</td>
+      <td>session[provider_id]</td>
       <td>Да</td>
       <td>Название социальной сети (vkontakte / facebook)</td>
     </tr>
     <tr>
-      <td>user[uid]</td>
+      <td>session[uid]</td>
       <td>Да</td>
       <td>Идентификатор пользователя в социальной сети</td>
     </tr>
     <tr>
-      <td>user[first_name]</td>
+      <td>session[first_name]</td>
       <td>Да (в первый раз)</td>
       <td>Имя пользователя</td>
     </tr>
     <tr>
-      <td>user[last_name]</td>
+      <td>session[last_name]</td>
       <td>Да (в первый раз)</td>
       <td>Фамилия пользователя</td>
     </tr>
     <tr>
-      <td>user[email]</td>
+      <td>session[email]</td>
       <td>Да (в первый раз)</td>
       <td>Емейл пользователя</td>
     </tr>
@@ -424,7 +430,7 @@
 
 <pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v1/passwords/reset'</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
-  -d user[email]<span class="o">=</span>&lt;EMAIL&gt;
+  -d password_reset[email]<span class="o">=</span>&lt;EMAIL&gt;
 </code></pre>
 
 <blockquote>
@@ -448,7 +454,7 @@
   </thead>
   <tbody>
     <tr>
-      <td>user[email]</td>
+      <td>password_reset[email]</td>
       <td>Да</td>
       <td>Емейл пользователя</td>
     </tr>
@@ -463,9 +469,9 @@
 
 <pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v1/passwords'</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
-  -d user[reset_password_token]<span class="o">=</span>&lt;TOKEN&gt;
-  -d user[password]<span class="o">=</span>&lt;PASSWORD&gt;
-  -d user[password_confirmation]<span class="o">=</span>&lt;PASSWORD_CONFIRMATION&gt;
+  -d password_reset[reset_password_token]<span class="o">=</span>&lt;TOKEN&gt;
+  -d password_reset[password]<span class="o">=</span>&lt;PASSWORD&gt;
+  -d password_reset[password_confirmation]<span class="o">=</span>&lt;PASSWORD_CONFIRMATION&gt;
 </code></pre>
 
 <p>Сбросить пароль пользователя можно, выполнив запрос:<br />
@@ -483,23 +489,22 @@
   </thead>
   <tbody>
     <tr>
-      <td>user[reset_password_token]</td>
+      <td>password_reset[reset_password_token]</td>
       <td>Да</td>
       <td>Токен для сброса пароля</td>
     </tr>
     <tr>
-      <td>user[password]</td>
+      <td>password_reset[password]</td>
       <td>Да</td>
       <td>Пароль</td>
     </tr>
     <tr>
-      <td>user[password_confirmation]</td>
+      <td>password_reset[password_confirmation]</td>
       <td>Да</td>
       <td>Подтверждение пароля</td>
     </tr>
   </tbody>
 </table>
-
 
           <h1 id="ritieiliery">Ритейлеры</h1>
 
@@ -1202,7 +1207,7 @@
 
 <pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v1/line_items/1'</span> <span class="se">\</span>
   -H <span class="s1">'Authorization: Token token=&lt;TOKEN&gt;'</span> <span class="se">\</span>
-  -d <span class="nv">quantity</span><span class="o">=</span>3 <span class="se">\</span>
+  -d line_item[quantity]<span class="o">=</span>3 <span class="se">\</span>
   -X PATCH 
 </code></pre>
 <blockquote>
@@ -1260,7 +1265,7 @@
       <td>ID позиции заказа</td>
     </tr>
     <tr>
-      <td>quantity</td>
+      <td>line_item[quantity]</td>
       <td>Нет</td>
       <td>Количество единиц товара</td>
     </tr>
@@ -1300,15 +1305,18 @@
   </tbody>
 </table>
 
-<h2 id="zapolnieniie-adriesa-zakaza">Заполнение адреса заказа</h2>
+<h2 id="oformlieniie-zakaza">Оформление заказа</h2>
+
+<blockquote>
+  <p>Выбор адреса доставки</p>
+</blockquote>
 
 <pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v1/checkouts/&lt;NUMBER&gt;'</span> <span class="se">\</span>
   -H <span class="s1">'Authorization: Token token=&lt;TOKEN&gt;'</span> <span class="se">\</span>
-  -d order[ship_address_attributes][city]<span class="o">=</span><span class="s2">"Москва"</span> <span class="se">\</span>
-  -d order[ship_address_attributes][full_address]<span class="o">=</span><span class="s2">"Старая Басманная 3"</span> <span class="se">\</span>
+  -d <span class="s2">"order[ship_address_id]=1"</span>
 </code></pre>
 <blockquote>
-  <p>Если данные были указаны верно, ответ будет содержать следующий json-документ:</p>
+  <p>Если данные были указаны верно, ответ будет содержать json-документ заказа:</p>
 </blockquote>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -1340,11 +1348,98 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>Добавить адрес к заказу, можно выполнив следующий запрос:</p>
+<blockquote>
+  <p>Заполнение комментария к доставке:</p>
+</blockquote>
+
+<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v1/checkouts/&lt;NUMBER&gt;'</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Token token=&lt;TOKEN&gt;'</span> <span class="se">\</span>
+  -d <span class="s2">"order[special_instructions]=Вход со двора"</span>
+</code></pre>
+
+<blockquote>
+  <p>Ответ будет содержать json-документ заказа.</p>
+</blockquote>
+
+<blockquote>
+  <p>Выбор интервала доставки:</p>
+</blockquote>
+
+<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v1/checkouts/&lt;NUMBER&gt;'</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Token token=&lt;TOKEN&gt;'</span> <span class="se">\</span>
+  -d <span class="s2">"order[delivery_date]=2016-08-18"</span>
+  -d <span class="s2">"order[delivery_time]=09:00-12:00"</span>
+</code></pre>
+
+<blockquote>
+  <p>Выбор способа доставки</p>
+</blockquote>
+
+<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v1/checkouts/&lt;NUMBER&gt;'</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Token token=&lt;TOKEN&gt;'</span> <span class="se">\</span>
+  -d <span class="s2">"order[shipments_attributes][shipping_method_id]=1"</span>
+</code></pre>
+
+<blockquote>
+  <p>При выбранном способе доставки, ответ будет включать дополнительные данные:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"R307128032"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"item_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+  </span><span class="err">...</span><span class="w">
+  </span><span class="nt">"shipments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"H123456789"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"cost"</span><span class="p">:</span><span class="w"> </span><span class="s2">"500.0"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"shipped_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"shipping_method"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Доставка"</span><span class="p">,</span><span class="w">
+      </span><span class="err">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+  <p>Выбор метода оплаты</p>
+</blockquote>
+
+<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v1/checkouts/&lt;NUMBER&gt;'</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Token token=&lt;TOKEN&gt;'</span> <span class="se">\</span>
+  -d <span class="s2">"order[payment_attributes][payment_source_id]=1"</span>
+</code></pre>
+
+<blockquote>
+  <p>При выбранном методе оплаты, ответ будет содержать дополнительные поля:<br />
+<code>json
+{
+  "number": "R307128032",
+  "item_total": 0.0,
+  ...
+}
+</code></p>
+</blockquote>
+
+<blockquote>
+  <p>Выбор способа связи</p>
+</blockquote>
+
+<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v1/checkouts/&lt;NUMBER&gt;'</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Token token=&lt;TOKEN&gt;'</span> <span class="se">\</span>
+  -d <span class="s2">"order[notification_attributes][notification_method_id]=1"</span>
+  -d <span class="s2">"order[notification_attributes][phone]=74951112233"</span>
+</code></pre>
+
+<p>Для оформления заказа используется ресурс <code>checkouts</code>. Чтобы заполнить информацию о заказе выполните запрос:</p>
 
 <p><code>PATCH https://api.instamart.ru/v1/checkouts/&lt;NUMBER&gt;</code></p>
 
 <h3 id="paramietry-zaprosa-3">Параметры запроса</h3>
+
+<p>При оформлении заказа следующие параметры не обязательны, но без некоторых из них заказ нельзя будет завершить.</p>
 
 <table>
   <thead>
@@ -1361,14 +1456,49 @@
       <td>Номер заказа</td>
     </tr>
     <tr>
-      <td>order[ship_address_attributes][city]</td>
-      <td>Да</td>
-      <td>Город</td>
+      <td>order[ship_address_id]</td>
+      <td>Да (для завершения)</td>
+      <td>Адрес доставки</td>
     </tr>
     <tr>
-      <td>order[ship_address_attributes][full_address]</td>
-      <td>Да</td>
-      <td>Адрес</td>
+      <td>order[coupon_code]</td>
+      <td>-</td>
+      <td>Промо код</td>
+    </tr>
+    <tr>
+      <td>order[special_instructions][full_address]</td>
+      <td>-</td>
+      <td>Комментарий к заказу</td>
+    </tr>
+    <tr>
+      <td>order[delivery_date]</td>
+      <td>Да (для завершения)</td>
+      <td>Дата доставки</td>
+    </tr>
+    <tr>
+      <td>order[delivery_time]</td>
+      <td>Да (для завершения)</td>
+      <td>Время доставки</td>
+    </tr>
+    <tr>
+      <td>order[shipment_attributes][shipping_method_id]</td>
+      <td>Да (для завершения)</td>
+      <td>Метод доставки</td>
+    </tr>
+    <tr>
+      <td>order[payment_attributes][payment_source_id]</td>
+      <td>Да (для завершения)</td>
+      <td>Источник оплаты</td>
+    </tr>
+    <tr>
+      <td>order[notification_attributes][notification_method_id]</td>
+      <td>Да (для завершения)</td>
+      <td>Способ связи</td>
+    </tr>
+    <tr>
+      <td>order[notification_attributes][phone]</td>
+      <td>Да (для завершения)</td>
+      <td>Телефон для связи</td>
     </tr>
   </tbody>
 </table>
