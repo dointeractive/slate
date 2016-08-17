@@ -7,9 +7,10 @@
 ```shell
 curl 'https://api.instamart.ru/v1/users/registrations' \
   -X POST \
-  -d password=<PASSWORD> \
-  -d first_name=<FIRSTNAME> \
-  -d last_name=<LASTNAME>
+  -d user[email]=<EMAIL> \
+  -d user[first_name]=<FIRSTNAME> \
+  -d user[last_name]=<LASTNAME> \
+  -d user[password]=<PASSWORD>
 ```
 
 Зарегистрировать нового пользователя можно, выполнив запрос:
@@ -20,10 +21,11 @@ curl 'https://api.instamart.ru/v1/users/registrations' \
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
-email | Да | Емейл пользователя
-password | Да | Пароль
-first_name | Да | Имя пользователя
-last_name | Да | Фамилия пользователя
+user[email] | Да | Емейл пользователя
+user[password] | Да | Пароль
+user[first_name] | Да | Имя пользователя
+user[last_name] | Да | Фамилия пользователя
+user[location] | Нет | Местоположение пользователя
 
 ## Изменение данных пользователя
 
@@ -33,7 +35,7 @@ last_name | Да | Фамилия пользователя
 curl 'https://api.instamart.ru/v1/users/test@test.com' \
   -H 'Authorization: Token token=<TOKEN>' \
   -X PATCH \
-  -d location=Perm
+  -d user[location]=Perm
 ```
 ```json
 {
@@ -52,9 +54,9 @@ curl 'https://api.instamart.ru/v1/users/test@test.com' \
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
-first_name | - | Имя пользователя
-last_name | - | Фамилия пользователя
-location | - | Местоположение пользователя
+user[first_name] | - | Имя пользователя
+user[last_name] | - | Фамилия пользователя
+user[location] | - | Местоположение пользователя
 
 ## Получение данных пользователя
 

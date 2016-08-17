@@ -7,7 +7,7 @@
 ```shell
 curl 'https://api.instamart.ru/v1/passwords/reset' \
   -X POST \
-  -d user[email]=<EMAIL>
+  -d password_reset[email]=<EMAIL>
 ```
 
 > Если пользователя не существует, то сервер вернет ответ с кодом 404
@@ -21,8 +21,7 @@ curl 'https://api.instamart.ru/v1/passwords/reset' \
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
-user[email] | Да | Емейл пользователя
-
+password_reset[email] | Да | Емейл пользователя
 
 ## Сброс пароля
 
@@ -31,9 +30,9 @@ user[email] | Да | Емейл пользователя
 ```shell
 curl 'https://api.instamart.ru/v1/passwords' \
   -X POST \
-  -d user[reset_password_token]=<TOKEN>
-  -d user[password]=<PASSWORD>
-  -d user[password_confirmation]=<PASSWORD_CONFIRMATION>
+  -d password_reset[reset_password_token]=<TOKEN>
+  -d password_reset[password]=<PASSWORD>
+  -d password_reset[password_confirmation]=<PASSWORD_CONFIRMATION>
 ```
 
 Сбросить пароль пользователя можно, выполнив запрос:
@@ -43,8 +42,6 @@ curl 'https://api.instamart.ru/v1/passwords' \
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
-user[reset_password_token] | Да | Токен для сброса пароля
-user[password] | Да | Пароль
-user[password_confirmation] | Да | Подтверждение пароля
-
-
+password_reset[reset_password_token] | Да | Токен для сброса пароля
+password_reset[password] | Да | Пароль
+password_reset[password_confirmation] | Да | Подтверждение пароля

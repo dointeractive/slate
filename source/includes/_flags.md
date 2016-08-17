@@ -25,31 +25,31 @@ curl "https://api.instamart.ru/v1/flags"
 > Пример отправки стандартной жалобы из списка:
 
 ```shell
-curl "https://api.instamart.ru/v1/products/1/flags"
-  -H "Authorization: Token token=<% TOKEN %>"
-  -X POST
-  -d flag_id=1
+curl "https://api.instamart.ru/v1/products/1/flags" \
+  -H "Authorization: Token token=<% TOKEN %>" \
+  -X POST \
+  -d product_flag[flag_id]=1
 ```
 
 > Пример отправки собственной жалобы
 
 ```shell
-curl "https://api.instamart.ru/v1/products/1/flags"
-  -H "Authorization: Token token=<% TOKEN %>"
-  -X POST
-  -d "description=Слишком высокая цена"
+curl "https://api.instamart.ru/v1/products/<PRODUCT_ID>/flags" \
+  -H "Authorization: Token token=<% TOKEN %>" \
+  -X POST \
+  -d "product_flag[description]=Слишком высокая цена"
 ```
 
 Чтобы отправить жалобу на товар, выполните следующий запрос, указав `id` жалобы:
 
 `POST https://api.instamart.ru/v1/products/<PRODUCT_ID>/flags`
 
-Также, используя этот же адрес, можно отправить свой текст жалобы, указав его в параметре `description`
+Также, используя этот же URL, можно отправить свой текст жалобы, указав его в параметре `description`
 
 ### Параметры запроса
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
 product_id | Да | id продукта
-flag_id | Да (если не указан `description`) | id жалобы 
-description | Да (если не указан `flag_id`) | текст жалобы
+product_flag[flag_id] | Да (если не указан `description`) | id жалобы 
+product_falg[description] | Да (если не указан `flag_id`) | текст жалобы
