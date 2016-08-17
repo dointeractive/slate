@@ -142,9 +142,9 @@
 
 <pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v1/users/registrations'</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
-  -d <span class="nv">password</span><span class="o">=</span>&lt;PASSWORD&gt; <span class="se">\</span>
-  -d <span class="nv">first_name</span><span class="o">=</span>&lt;FIRSTNAME&gt; <span class="se">\</span>
-  -d <span class="nv">last_name</span><span class="o">=</span>&lt;LASTNAME&gt;
+  -d user[password]<span class="o">=</span>&lt;PASSWORD&gt; <span class="se">\</span>
+  -d user[first_name]<span class="o">=</span>&lt;FIRSTNAME&gt; <span class="se">\</span>
+  -d user[last_name]<span class="o">=</span>&lt;LASTNAME&gt;
 </code></pre>
 
 <p>Зарегистрировать нового пользователя можно, выполнив запрос:</p>
@@ -168,17 +168,17 @@
       <td>Емейл пользователя</td>
     </tr>
     <tr>
-      <td>password</td>
+      <td>user[password]</td>
       <td>Да</td>
       <td>Пароль</td>
     </tr>
     <tr>
-      <td>first_name</td>
+      <td>user[first_name]</td>
       <td>Да</td>
       <td>Имя пользователя</td>
     </tr>
     <tr>
-      <td>last_name</td>
+      <td>user[last_name]</td>
       <td>Да</td>
       <td>Фамилия пользователя</td>
     </tr>
@@ -220,17 +220,17 @@
   </thead>
   <tbody>
     <tr>
-      <td>first_name</td>
+      <td>user[first_name]</td>
       <td>-</td>
       <td>Имя пользователя</td>
     </tr>
     <tr>
-      <td>last_name</td>
+      <td>user[last_name]</td>
       <td>-</td>
       <td>Фамилия пользователя</td>
     </tr>
     <tr>
-      <td>location</td>
+      <td>user[location]</td>
       <td>-</td>
       <td>Местоположение пользователя</td>
     </tr>
@@ -1401,27 +1401,27 @@
   <p>Пример отправки стандартной жалобы из списка:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v1/products/1/flags"</span>
-  -H <span class="s2">"Authorization: Token token=&lt;% TOKEN %&gt;"</span>
-  -X POST
-  -d <span class="nv">flag_id</span><span class="o">=</span>1
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v1/products/1/flags"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=&lt;% TOKEN %&gt;"</span> <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -d product_flag[flag_id]<span class="o">=</span>1
 </code></pre>
 
 <blockquote>
   <p>Пример отправки собственной жалобы</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v1/products/1/flags"</span>
-  -H <span class="s2">"Authorization: Token token=&lt;% TOKEN %&gt;"</span>
-  -X POST
-  -d <span class="s2">"description=Слишком высокая цена"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v1/products/&lt;PRODUCT_ID&gt;/flags"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=&lt;% TOKEN %&gt;"</span> <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -d <span class="s2">"product_flag[description]=Слишком высокая цена"</span>
 </code></pre>
 
 <p>Чтобы отправить жалобу на товар, выполните следующий запрос, указав <code>id</code> жалобы:</p>
 
 <p><code>POST https://api.instamart.ru/v1/products/&lt;PRODUCT_ID&gt;/flags</code></p>
 
-<p>Также, используя этот же адрес, можно отправить свой текст жалобы, указав его в параметре <code>description</code></p>
+<p>Также, используя этот же URL, можно отправить свой текст жалобы, указав его в параметре <code>description</code></p>
 
 <h3 id="paramietry-zaprosa">Параметры запроса</h3>
 
@@ -1440,12 +1440,12 @@
       <td>id продукта</td>
     </tr>
     <tr>
-      <td>flag_id</td>
+      <td>product_flag[flag_id]</td>
       <td>Да (если не указан <code>description</code>)</td>
       <td>id жалобы</td>
     </tr>
     <tr>
-      <td>description</td>
+      <td>product_falg[description]</td>
       <td>Да (если не указан <code>flag_id</code>)</td>
       <td>текст жалобы</td>
     </tr>
