@@ -183,7 +183,7 @@ line_item[quantity] | Да | количество добавляемых поз�
 ```shell
 curl 'https://api.instamart.ru/v1/line_items/1' \
   -H 'Authorization: Token token=<TOKEN>' \
-  -d quantity=3 \
+  -d line_item[quantity]=3 \
   -X PATCH 
 ```
 > Ответ будет содержать следующие данные
@@ -228,7 +228,7 @@ curl 'https://api.instamart.ru/v1/line_items/1' \
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
 ID | Да | ID позиции заказа
-quantity | Нет | Количество единиц товара
+line_item[quantity] | Нет | Количество единиц товара
 
 
 
@@ -251,15 +251,16 @@ curl 'https://api.instamart.ru/v1/line_items/1' \
 --------- | ------- | -----------
 ID | Да | ID позиции заказа
 
-## Заполнение адреса заказа
+## Оформление заказа
+
+> Выбор адреса доставки
 
 ```shell
 curl 'https://api.instamart.ru/v1/checkouts/<NUMBER>' \
   -H 'Authorization: Token token=<TOKEN>' \
-  -d order[ship_address_attributes][city]="Москва" \
-  -d order[ship_address_attributes][full_address]="Старая Басманная 3" \
+  -d "order[ship_address_id]=1"
 ```
-> Если данные были указаны верно, ответ будет содержать следующий json-документ:
+> Если данные были указаны верно, ответ будет содержать json-документ заказа:
 
 ```json
 {
@@ -291,14 +292,99 @@ curl 'https://api.instamart.ru/v1/checkouts/<NUMBER>' \
 }
 ```
 
-Добавить адрес к заказу, можно выполнив следующий запрос:
+> Заполнение комментария к доставке:
+
+```shell
+curl 'https://api.instamart.ru/v1/checkouts/<NUMBER>' \
+  -H 'Authorization: Token token=<TOKEN>' \
+  -d "order[special_instructions]=Вход со двора"
+```
+
+> Ответ будет содержать json-документ заказа.
+
+> Выбор интервала доставки:
+
+```shell
+curl 'https://api.instamart.ru/v1/checkouts/<NUMBER>' \
+  -H 'Authorization: Token token=<TOKEN>' \
+  -d "order[delivery_date]=2016-08-18"
+  -d "order[delivery_time]=09:00-12:00"
+```
+
+> Выбор способа доставки
+
+```shell
+curl 'https://api.instamart.ru/v1/checkouts/<NUMBER>' \
+  -H 'Authorization: Token token=<TOKEN>' \
+  -d "order[shipments_attributes][shipping_method_id]=1"
+```
+
+> При выбранном способе доставки, ответ будет включать дополнительные данные:
+
+```json
+{
+  "number": "R307128032",
+  "item_total": 0.0,
+  ...
+  "shipments": [
+    {
+      "id": 1,
+      "number": "H123456789",
+      "cost": "500.0",
+      "shipped_at": null,
+      "state": "pending",
+      "shipping_method": {
+        "name": "Доставка",
+      }
+    }
+  ]
+}
+```
+
+> Выбор метода оплаты
+
+```shell
+curl 'https://api.instamart.ru/v1/checkouts/<NUMBER>' \
+  -H 'Authorization: Token token=<TOKEN>' \
+  -d "order[payment_attributes][payment_source_id]=1"
+```
+
+> При выбранном методе оплаты, ответ будет содержать дополнительные поля:
+```json
+{
+  "number": "R307128032",
+  "item_total": 0.0,
+  ...
+}
+```
+
+> Выбор способа связи
+
+```shell
+curl 'https://api.instamart.ru/v1/checkouts/<NUMBER>' \
+  -H 'Authorization: Token token=<TOKEN>' \
+  -d "order[notification_attributes][notification_method_id]=1"
+  -d "order[notification_attributes][phone]=74951112233"
+```
+
+
+Для оформления заказа используется ресурс `checkouts`. Чтобы заполнить информацию о заказе выполните запрос: 
 
 `PATCH https://api.instamart.ru/v1/checkouts/<NUMBER>`
 
 ### Параметры запроса
 
+При оформлении заказа следующие параметры не обязательны, но без некоторых из них заказ нельзя будет завершить.
+
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
 NUMBER | Да | Номер заказа
-order[ship_address_attributes][city] | Да | Город
-order[ship_address_attributes][full_address] | Да | Адрес
+order[ship_address_id] | Да (для завершения) | Адрес доставки
+order[coupon_code] | - | Промо код
+order[special_instructions][full_address] | - | Комментарий к заказу
+order[delivery_date] | Да (для завершения) | Дата доставки
+order[delivery_time] | Да (для завершения) | Время доставки
+order[shipment_attributes][shipping_method_id] | Да (для завершения) | Метод доставки
+order[payment_attributes][payment_source_id] | Да (для завершения) | Источник оплаты
+order[notification_attributes][notification_method_id] | Да (для завершения) | Способ связи
+order[notification_attributes][phone] | Да (для завершения) | Телефон для связи
