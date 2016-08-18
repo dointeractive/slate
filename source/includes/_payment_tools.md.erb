@@ -1,0 +1,26 @@
+# Методы оплаты
+
+> Код для получения методов оплаты:
+
+```shell
+curl '<%= config[:host] %>/payment_tools' \
+  -H 'Authorization: Token token=<TOKEN>' \
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+{
+  "payment_tool": [
+    {
+      "id": 1,
+      "name": "Оплата картой",
+      "description": "VISA *8888"
+    }
+  ]
+}
+```
+
+Получить методы оплаты можно, выполнив запрос:
+
+`GET <%= config[:host] %>/payment_tools`

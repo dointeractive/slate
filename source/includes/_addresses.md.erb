@@ -1,0 +1,86 @@
+# Адреса пользователей
+
+## Получить список адресов
+
+```shell
+curl '<%= config[:host] %>/orders' \
+  -H 'Authorization: Token token=<TOKEN>' 
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+{ 
+  "addresses": [
+    {
+      "id": 1,
+      "city": "Москва",
+      "street": "Фридриха Энгельса",
+      "building": 56,
+      "zipcode": "111111"
+    }
+  ]
+}
+
+```
+
+Получить список всех адресов можно, выполнив запрос:
+
+`GET <%= config[:host] %>/orders`
+
+
+## Создание нового адреса
+
+```shell
+curl '<%= config[:host] %>/orders' \
+  -H 'Authorization: Token token=<TOKEN>'
+  -X POST \
+  -d "address[city]=Москва"
+  -d "address[street]=Фридриха Энгельса"
+  -d "address[building]=56"
+  -d "address[zipcode]=111111"
+```
+
+> В случае если данные были указаны верно, сервер вернет ответ:
+
+```json
+{
+  "id": 2,
+  "city": "Москва",
+  "street": "Фридриха Энгельса",
+  "building": 56,
+  "zipcode": "111111"
+}
+```
+
+Добавить новый адрес пользователя можно, выполнив запрос:
+
+`POST <%= config[:host] %>/orders`
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+address[city] | Да | Город
+address[street] | - | Улица
+address[building] | - | Номер дома
+address[zipcode] | - | Почтовый индекс
+
+## Редактирование адреса
+
+```shell
+curl '<%= config[:host] %>/orders/2' \
+  -H 'Authorization: Token token=<TOKEN>'
+  -X PUT \
+  -d "address[building]=53"
+```
+
+Изменить адрес можно, выполнив запрос:
+
+`PUT <%= config[:host] %>/orders/<ID>`
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+ID | Да | id адреса
+address[city] | - | Город
+address[street] | - | Улица
+address[building] | - | Номер дома
+address[zipcode] | - | Почтовый индекс

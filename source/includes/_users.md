@@ -34,7 +34,7 @@ user[location] | Нет | Местоположение пользователя
 ```shell
 curl 'https://api.instamart.ru/v1/users/test@test.com' \
   -H 'Authorization: Token token=<TOKEN>' \
-  -X PATCH \
+  -X PUT \
   -d user[location]=Perm
 ```
 ```json

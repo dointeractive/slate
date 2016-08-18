@@ -9,6 +9,7 @@ toc_footers:
 
 includes:
   - users
+  - addresses
   - authentication
   - passwords
   - retailers
@@ -17,6 +18,7 @@ includes:
   - products
   - search
   - orders
+  - payment_tools
   - flags
   - errors
 
