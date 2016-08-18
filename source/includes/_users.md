@@ -7,10 +7,10 @@
 ```shell
 curl 'https://api.instamart.ru/v1/users/registrations' \
   -X POST \
-  -d user[email]=<EMAIL> \
-  -d user[first_name]=<FIRSTNAME> \
-  -d user[last_name]=<LASTNAME> \
-  -d user[password]=<PASSWORD>
+  -d user[email]=#{EMAIL} \
+  -d user[first_name]=#{FIRSTNAME} \
+  -d user[last_name]=#{LASTNAME} \
+  -d user[password]=#{PASSWORD}
 ```
 
 Зарегистрировать нового пользователя можно, выполнив запрос:
@@ -33,7 +33,7 @@ user[location] | Нет | Местоположение пользователя
 
 ```shell
 curl 'https://api.instamart.ru/v1/users/test@test.com' \
-  -H 'Authorization: Token token=<TOKEN>' \
+  -H 'Authorization: Token token=#{TOKEN}' \
   -X PUT \
   -d user[location]=Perm
 ```
@@ -48,7 +48,7 @@ curl 'https://api.instamart.ru/v1/users/test@test.com' \
 
 Изменить данные пользоватeля можно, выполнив следующий запрос:
 
-`PUT https://api.instamart.ru/v1/users/<EMAIL>`
+`PUT https://api.instamart.ru/v1/users/#{EMAIL}`
 
 ### Параметры запроса
 
@@ -77,7 +77,7 @@ curl 'https://api.instamart.ru/v1/users/test@test.com'
 
 ```shell
 curl 'https://api.instamart.ru/v1/users/test@test.com'
-  -H 'Authorization: Token token=<TOKEN>'
+  -H 'Authorization: Token token=#{TOKEN}'
 ```
 
 ```json
@@ -90,7 +90,7 @@ curl 'https://api.instamart.ru/v1/users/test@test.com'
 ```
 
 Получить данные пользователя можно, выполнив запрос:
-`GET https://api.instamart.ru/v1/users/<EMAIL>`
+`GET https://api.instamart.ru/v1/users/#{EMAIL}`
 
 Запрос к этому ресурсу можно выполнять как с указанием токена аутентификации так и без. Без указания токена сервер вернет ограниченное количество информации.
 

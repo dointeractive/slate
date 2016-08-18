@@ -4,7 +4,7 @@
 
 ```shell
 curl '<%= config[:host] %>/orders' \
-  -H 'Authorization: Token token=<TOKEN>' 
+  -H 'Authorization: Token token=#{TOKEN}' 
 ```
 
 > Ответ будет содержать следующие данные:
@@ -33,7 +33,7 @@ curl '<%= config[:host] %>/orders' \
 
 ```shell
 curl '<%= config[:host] %>/orders' \
-  -H 'Authorization: Token token=<TOKEN>'
+  -H 'Authorization: Token token=#{TOKEN}'
   -X POST \
   -d "address[city]=Москва"
   -d "address[street]=Фридриха Энгельса"
@@ -68,14 +68,14 @@ address[zipcode] | - | Почтовый индекс
 
 ```shell
 curl '<%= config[:host] %>/orders/2' \
-  -H 'Authorization: Token token=<TOKEN>'
+  -H 'Authorization: Token token=#{TOKEN}'
   -X PUT \
   -d "address[building]=53"
 ```
 
 Изменить адрес можно, выполнив запрос:
 
-`PUT <%= config[:host] %>/orders/<ID>`
+`PUT <%= config[:host] %>/orders/#{ID}`
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------

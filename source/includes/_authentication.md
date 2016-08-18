@@ -25,8 +25,8 @@ curl 'https://api.instamart.ru/v1/sessions' \
 `POST https://api.instamart.ru/v1/sessions`
 
 Учетные данные пользователя (емейл и пароль) передаются в заголовке запроса вида:
-`Authorization: Basic <DIGEST>`
-где `<DIGEST>` формируется следующим способом: `base64(email + ':' + password)`
+`Authorization: Basic #{DIGEST}`
+где `#{DIGEST}` формируется следующим способом: `base64(email + ':' + password)`
 
 ### Параметры запроса
 
@@ -56,7 +56,7 @@ curl 'https://api.instamart.ru/v1/auth_providers/vkontakte/sessions' \
 ```
 
 Получить токен можно, выполнив запрос:
-`POST https://api.instamart.ru/v1/auth_providers/<PROVIDER_ID>/sessions`
+`POST https://api.instamart.ru/v1/auth_providers/#{PROVIDER_ID}/sessions`
 
 ### Параметры запроса
 

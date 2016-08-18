@@ -93,7 +93,7 @@ curl 'https://api.instamart.ru/v1/departments/1?rid=1' \
 
 Получить выдачу страницы каталога можно, выполнив следующий запрос:
 
-`GET https://api.instamart.ru/v1/departments/<DEPARTMENT_ID>`
+`GET https://api.instamart.ru/v1/departments/#{DEPARTMENT_ID}`
 
 ### Параметры запроса
 

@@ -98,7 +98,7 @@ curl "https://api.instamart.ru/v1/products/1"
 
 ### HTTP запрос
 
-`GET https://api.instamart.ru/v1/products/<PRODUCT_ID>`
+`GET https://api.instamart.ru/v1/products/#{PRODUCT_ID}`
 
 ### Параметры запроса
 
