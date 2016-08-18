@@ -1,7 +1,5 @@
 # Методы оплаты
 
-> Код для получения методов оплаты:
-
 ```shell
 curl '<%= config[:host] %>/payment_tools' \
   -H 'Authorization: Token token=#{TOKEN}' \
@@ -11,16 +9,21 @@ curl '<%= config[:host] %>/payment_tools' \
 
 ```json
 {
-  "payment_tool": [
+  "payment_tools": [
     {
       "id": 1,
       "name": "Оплата картой",
       "description": "VISA *8888"
+    },
+    {
+      "id": 2,
+      "name": "Наличными",
+      "description": "Оплата курьеру"
     }
   ]
 }
 ```
 
-Получить методы оплаты можно, выполнив запрос:
+Получить список доступных пользователю методов оплаты можно, выполнив запрос:
 
 `GET <%= config[:host] %>/payment_tools`

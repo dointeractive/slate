@@ -142,6 +142,7 @@ curl 'https://api.instamart.ru/v1/line_items' \
   "quantity": 5,
   "price": 40.0,
   "description": "Nihil et itaque adipisci sed ea dolorum.",
+  "retailer_id": 1,
   "product_id": 1,
   "total": 200.00,
   "weight": 500.0,
@@ -167,6 +168,31 @@ curl 'https://api.instamart.ru/v1/line_items' \
 }
 ```
 
+> Добавление позиции к заказу может изменить поле shipments заказа:
+
+```json
+{
+  "number": "R307128032",
+  ...
+  "line_items": [{
+    ...
+  }],
+  "shipments": [
+    {
+      "id": 1,
+      "number": "H123456789",
+      "cost": 0,
+      "shipped_at": null,
+      "retailer_id": 1,
+      "delivery_slot_id": null,
+      "state": "pending",
+      "shipping_method": null
+    }
+  ]
+}
+```
+
+
 Добавить позицию к заказу, можно выполнив запрос:
 
 `POST https://api.instamart.ru/v1/line_items`
@@ -177,6 +203,10 @@ curl 'https://api.instamart.ru/v1/line_items' \
 --------- | ------- | -----------
 line_item[product_id] | Да | ID продукта
 line_item[quantity] | Да | количество добавляемых позиций
+
+<aside class="notice">
+  После добавления новой позиции не забудьте перезагрузить заказ.
+</aside>
 
 ## Редактирование позиции заказа
 
@@ -230,6 +260,9 @@ curl 'https://api.instamart.ru/v1/line_items/1' \
 ID | Да | ID позиции заказа
 line_item[quantity] | Нет | Количество единиц товара
 
+<aside class="notice">
+  После редактирования позиции не забудьте перезагрузить заказ.
+</aside>
 
 ## Удаление позиции заказа
 
@@ -238,7 +271,18 @@ curl 'https://api.instamart.ru/v1/line_items/1' \
   -H 'Authorization: Token token=#{TOKEN}' \
   -X DELETE 
 ```
-> Ответ вернет результат с кодом 200:
+> Ответ вернет результат с кодом 200
+
+> Удаление позиции может изменить shipments заказа:
+
+```json
+{
+  "number": "R307128032",
+  ...
+  "line_items": [],
+  "shipments": []
+}
+```
 
 Чтобы удалить позицию заказа, необходимо выполнить запрос:
 
@@ -249,6 +293,10 @@ curl 'https://api.instamart.ru/v1/line_items/1' \
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
 ID | Да | ID позиции заказа
+
+<aside class="notice">
+  После добавления новой позиции не забудьте перезагрузить заказ.
+</aside>
 
 ## Оформление заказа
 
@@ -299,23 +347,45 @@ curl 'https://api.instamart.ru/v1/checkouts/#{NUMBER}' \
   -d "order[special_instructions]=Вход со двора"
 ```
 
-> Ответ будет содержать json-документ заказа.
-
 > Пример команды выбора интервала доставки:
 
 ```shell
 curl 'https://api.instamart.ru/v1/checkouts/#{NUMBER}' \
   -H 'Authorization: Token token=#{TOKEN}' \
-  -d "order[delivery_date]=2016-08-18"
-  -d "order[delivery_time]=09:00-12:00"
+  -d "order[shipments_attributes][1][delivery_slot_id]=1"
 ```
+
+> Ответ вернет обновленный заказ:
+
+```json
+{
+  "number": "R307128032",
+  ...
+  "line_items": [{
+    ...
+  }],
+  "shipments": [
+    {
+      "id": 1,
+      "number": "H123456789",
+      "cost": 0,
+      "shipped_at": null,
+      "retailer_id": 1,
+      "delivery_slot_id": 1,
+      "state": "pending",
+      "shipping_method": null
+    }
+  ]
+}
+```
+
 
 > Пример команды выбора способа доставки:
 
 ```shell
 curl 'https://api.instamart.ru/v1/checkouts/#{NUMBER}' \
   -H 'Authorization: Token token=#{TOKEN}' \
-  -d "order[shipments_attributes][shipping_method_id]=1"
+  -d "order[shipments_attributes][1][shipping_method_id]=1"
 ```
 
 > При выбранном способе доставки, ответ будет включать дополнительные данные:
@@ -329,18 +399,18 @@ curl 'https://api.instamart.ru/v1/checkouts/#{NUMBER}' \
     {
       "id": 1,
       "number": "H123456789",
-      "cost": "500.0",
+      "cost": 500.0,
       "shipped_at": null,
       "state": "pending",
       "shipping_method": {
-        "name": "Доставка",
+        "name": "Доставка"
       }
     }
   ]
 }
 ```
 
-> Пример запроса выбора метода оплаты:
+> Пример выбора метода оплаты:
 
 ```shell
 curl 'https://api.instamart.ru/v1/checkouts/#{NUMBER}' \
@@ -349,6 +419,7 @@ curl 'https://api.instamart.ru/v1/checkouts/#{NUMBER}' \
 ```
 
 > При выбранном методе оплаты, ответ будет содержать дополнительные поля:
+
 ```json
 {
   "number": "R307128032",
@@ -357,7 +428,7 @@ curl 'https://api.instamart.ru/v1/checkouts/#{NUMBER}' \
 }
 ```
 
-> Пример запрос выбора способа связи:
+> Пример выбора способа связи:
 
 ```shell
 curl 'https://api.instamart.ru/v1/checkouts/#{NUMBER}' \
@@ -377,12 +448,12 @@ curl 'https://api.instamart.ru/v1/checkouts/#{NUMBER}' \
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
 NUMBER | Да | Номер заказа
+SHIPMENT_ID | Да | id доставки
 order[ship_address_id] | Да (для завершения) | Адрес доставки
 order[coupon_code] | - | Промо код
 order[special_instructions] | - | Комментарий к заказу
-order[delivery_date] | Да (для завершения) | Дата доставки
-order[delivery_time] | Да (для завершения) | Время доставки
-order[shipment_attributes][shipping_method_id] | Да (для завершения) | Метод доставки
+order[shipments_attributes][#{SHIPMENT_ID}][delivery_slot_id] | Да (для завершения) | id слота доставки
+order[shipments_attributes][#{SHIPMENT_ID}][shipping_method_id] | Да (для завершения) | Метод доставки
 order[payment_attributes][payment_tool_id] | Да (для завершения) | Источник оплаты
 order[notification_attributes][notification_method_id] | Да (для завершения) | Способ связи
 order[notification_attributes][phone] | Да (для завершения) | Телефон для связи
