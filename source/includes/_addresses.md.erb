@@ -1,6 +1,6 @@
 # Адреса пользователей
 
-## Получить список адресов
+## Получение списка адресов
 
 ```shell
 curl '<%= config[:host] %>/orders' \
@@ -35,9 +35,9 @@ curl '<%= config[:host] %>/orders' \
 curl '<%= config[:host] %>/orders' \
   -H 'Authorization: Token token=#{TOKEN}'
   -X POST \
-  -d "address[city]=Москва"
-  -d "address[street]=Фридриха Энгельса"
-  -d "address[building]=56"
+  -d "address[city]=Москва" \
+  -d "address[street]=Фридриха Энгельса" \
+  -d "address[building]=56" \
   -d "address[zipcode]=111111"
 ```
 
@@ -68,9 +68,21 @@ address[zipcode] | - | Почтовый индекс
 
 ```shell
 curl '<%= config[:host] %>/orders/2' \
-  -H 'Authorization: Token token=#{TOKEN}'
+  -H 'Authorization: Token token=#{TOKEN}' \
   -X PUT \
   -d "address[building]=53"
+```
+
+> В случае если данные были указаны верно, сервер вернет ответ:
+
+```json
+{
+  "id": 2,
+  "city": "Москва",
+  "street": "Фридриха Энгельса",
+  "building": 53,
+  "zipcode": "111111"
+}
 ```
 
 Изменить адрес можно, выполнив запрос:
@@ -84,3 +96,22 @@ address[city] | - | Город
 address[street] | - | Улица
 address[building] | - | Номер дома
 address[zipcode] | - | Почтовый индекс
+
+
+## Удаление адреса
+
+```shell
+curl '<%= config[:host] %>/orders/2' \
+  -H 'Authorization: Token token=#{TOKEN}' \
+  -X DELETE
+```
+
+> В случае успешного удаления сервер вернет пустой ответ с кодом 200
+
+Удалить адрес можно, выполнив запрос:
+
+`DELETE <%= config[:host] %>/orders/#{ID}`
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+ID | Да | id адреса

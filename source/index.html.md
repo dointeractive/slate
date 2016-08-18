@@ -9,9 +9,9 @@ toc_footers:
 
 includes:
   - users
-  - addresses
   - authentication
   - passwords
+  - addresses
   - retailers
   - taxons
   - departments
