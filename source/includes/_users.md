@@ -5,7 +5,7 @@
 > Пример кода для регистрации нового пользователя:
 
 ```shell
-curl 'https://api.instamart.ru/v2/users/registrations' \
+curl 'https://api.instamart.ru/v2/users' \
   -X POST \
   -d user[email]=#{EMAIL} \
   -d user[first_name]=#{FIRSTNAME} \
@@ -15,7 +15,7 @@ curl 'https://api.instamart.ru/v2/users/registrations' \
 
 Зарегистрировать нового пользователя можно, выполнив запрос:
 
-`POST https://api.instamart.ru/v2/users/registrations`
+`POST https://api.instamart.ru/v2/users`
 
 ### Параметры запроса
 
