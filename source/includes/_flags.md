@@ -3,7 +3,7 @@
 ## Получение списка стандартных жалоб
 
 ```shell
-curl "https://api.instamart.ru/v1/flags"
+curl "https://api.instamart.ru/v2/flags"
 ```
 > Эта комманда возвращает следующий JSON:
 
@@ -18,14 +18,14 @@ curl "https://api.instamart.ru/v1/flags"
 
 Стандартный список ошибок можно загрузить, выполнив запрос:
 
-`GET https://api.instamart.ru/v1/flags`
+`GET https://api.instamart.ru/v2/flags`
 
 ## Отправка жалобы
 
 > Пример отправки стандартной жалобы из списка:
 
 ```shell
-curl "https://api.instamart.ru/v1/products/1/flags" \
+curl "https://api.instamart.ru/v2/products/1/flags" \
   -H "Authorization: Token token=<% TOKEN %>" \
   -X POST \
   -d product_flag[flag_id]=1
@@ -34,7 +34,7 @@ curl "https://api.instamart.ru/v1/products/1/flags" \
 > Пример отправки собственной жалобы
 
 ```shell
-curl "https://api.instamart.ru/v1/products/#{PRODUCT_ID}/flags" \
+curl "https://api.instamart.ru/v2/products/#{PRODUCT_ID}/flags" \
   -H "Authorization: Token token=<% TOKEN %>" \
   -X POST \
   -d "product_flag[description]=Слишком высокая цена"
@@ -42,7 +42,7 @@ curl "https://api.instamart.ru/v1/products/#{PRODUCT_ID}/flags" \
 
 Чтобы отправить жалобу на товар, выполните следующий запрос, указав `id` жалобы:
 
-`POST https://api.instamart.ru/v1/products/#{PRODUCT_ID}/flags`
+`POST https://api.instamart.ru/v2/products/#{PRODUCT_ID}/flags`
 
 Также, используя этот же URL, можно отправить свой текст жалобы, указав его в параметре `description`
 

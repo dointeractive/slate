@@ -3,7 +3,7 @@
 > Пример кода для получения списка всех категорий
 
 ```shell
-curl 'https://api.instamart.ru/v1/taxons?rid=1'
+curl 'https://api.instamart.ru/v2/taxons?rid=1'
 ```
 > Ответ будет содержать следующие данные
 
@@ -27,7 +27,7 @@ curl 'https://api.instamart.ru/v1/taxons?rid=1'
 ```
 Получить список всех категорий можно, выполнив запрос:
 
-`GET https://api.instamart.ru/v1/taxons`
+`GET https://api.instamart.ru/v2/taxons`
 
 ### Параметры запроса
 

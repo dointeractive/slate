@@ -5,7 +5,7 @@
 > Пример команды:
 
 ```shell
-curl 'https://api.instamart.ru/v1/orders' \
+curl 'https://api.instamart.ru/v2/orders' \
   -H 'Authorization: Token token=#{TOKEN}' \
   -X POST
 ```
@@ -39,14 +39,14 @@ curl 'https://api.instamart.ru/v1/orders' \
 
 Создать новый заказ можно, выполнив следующий запрос:
 
-`POST https://api.instamart.ru/v1/orders`
+`POST https://api.instamart.ru/v2/orders`
 
 ## Получить текущий заказ
 
 > Пример команды:
 
 ```shell
-curl 'https://api.instamart.ru/v1/orders/current' \
+curl 'https://api.instamart.ru/v2/orders/current' \
   -H 'Authorization: Token token=#{TOKEN}' 
 ```
 
@@ -79,7 +79,7 @@ curl 'https://api.instamart.ru/v1/orders/current' \
 ```
 
 Получить текущий заказ пользователя можно, выполнив запрос:
-`GET https://api.instamart.ru/v1/orders/current`
+`GET https://api.instamart.ru/v2/orders/current`
 
 
 ## Получить список всех заказов
@@ -87,7 +87,7 @@ curl 'https://api.instamart.ru/v1/orders/current' \
 > Пример команды:
 
 ```shell
-curl 'https://api.instamart.ru/v1/orders' \
+curl 'https://api.instamart.ru/v2/orders' \
   -H 'Authorization: Token token=#{TOKEN}' 
 ```
 
@@ -124,12 +124,12 @@ curl 'https://api.instamart.ru/v1/orders' \
 ```
 
 Получить все заказы пользователя можно, выполнив запрос:
-`GET https://api.instamart.ru/v1/orders`
+`GET https://api.instamart.ru/v2/orders`
 
 ## Добавление позиции заказа
 
 ```shell
-curl 'https://api.instamart.ru/v1/line_items' \
+curl 'https://api.instamart.ru/v2/line_items' \
   -H 'Authorization: Token token=#{TOKEN}' \
   -d line_item[product_id]=1 \
   -d line_item[quantity]=5
@@ -195,7 +195,7 @@ curl 'https://api.instamart.ru/v1/line_items' \
 
 Добавить позицию к заказу, можно выполнив запрос:
 
-`POST https://api.instamart.ru/v1/line_items`
+`POST https://api.instamart.ru/v2/line_items`
 
 ### Параметры запроса
 
@@ -211,7 +211,7 @@ line_item[quantity] | Да | количество добавляемых поз�
 ## Редактирование позиции заказа
 
 ```shell
-curl 'https://api.instamart.ru/v1/line_items/1' \
+curl 'https://api.instamart.ru/v2/line_items/1' \
   -H 'Authorization: Token token=#{TOKEN}' \
   -d line_item[quantity]=3 \
   -X PUT 
@@ -251,7 +251,7 @@ curl 'https://api.instamart.ru/v1/line_items/1' \
 
 Чтобы, например, изменить количество единиц товара, необходимо выполнить запрос:
 
-`PUT https://api.instamart.ru/v1/line_items/#{ID}`
+`PUT https://api.instamart.ru/v2/line_items/#{ID}`
 
 ### Параметры запроса
 
@@ -267,7 +267,7 @@ line_item[quantity] | Нет | Количество единиц товара
 ## Удаление позиции заказа
 
 ```shell
-curl 'https://api.instamart.ru/v1/line_items/1' \
+curl 'https://api.instamart.ru/v2/line_items/1' \
   -H 'Authorization: Token token=#{TOKEN}' \
   -X DELETE 
 ```
@@ -286,7 +286,7 @@ curl 'https://api.instamart.ru/v1/line_items/1' \
 
 Чтобы удалить позицию заказа, необходимо выполнить запрос:
 
-`DELETE https://api.instamart.ru/v1/line_items/#{ID}`
+`DELETE https://api.instamart.ru/v2/line_items/#{ID}`
 
 ### Параметры запроса
 
@@ -303,7 +303,7 @@ ID | Да | ID позиции заказа
 > Пример команды для выбора адреса доставки:
 
 ```shell
-curl 'https://api.instamart.ru/v1/checkouts/#{NUMBER}' \
+curl 'https://api.instamart.ru/v2/checkouts/#{NUMBER}' \
   -H 'Authorization: Token token=#{TOKEN}' \
   -d "order[ship_address_id]=1"
 ```
@@ -342,7 +342,7 @@ curl 'https://api.instamart.ru/v1/checkouts/#{NUMBER}' \
 > Пример заполнения комментария к доставке:
 
 ```shell
-curl 'https://api.instamart.ru/v1/checkouts/#{NUMBER}' \
+curl 'https://api.instamart.ru/v2/checkouts/#{NUMBER}' \
   -H 'Authorization: Token token=#{TOKEN}' \
   -d "order[special_instructions]=Вход со двора"
 ```
@@ -350,7 +350,7 @@ curl 'https://api.instamart.ru/v1/checkouts/#{NUMBER}' \
 > Пример команды выбора интервала доставки:
 
 ```shell
-curl 'https://api.instamart.ru/v1/checkouts/#{NUMBER}' \
+curl 'https://api.instamart.ru/v2/checkouts/#{NUMBER}' \
   -H 'Authorization: Token token=#{TOKEN}' \
   -d "order[shipments_attributes][1][delivery_slot_id]=1"
 ```
@@ -383,7 +383,7 @@ curl 'https://api.instamart.ru/v1/checkouts/#{NUMBER}' \
 > Пример команды выбора способа доставки:
 
 ```shell
-curl 'https://api.instamart.ru/v1/checkouts/#{NUMBER}' \
+curl 'https://api.instamart.ru/v2/checkouts/#{NUMBER}' \
   -H 'Authorization: Token token=#{TOKEN}' \
   -d "order[shipments_attributes][1][shipping_method_id]=1"
 ```
@@ -413,7 +413,7 @@ curl 'https://api.instamart.ru/v1/checkouts/#{NUMBER}' \
 > Пример выбора метода оплаты:
 
 ```shell
-curl 'https://api.instamart.ru/v1/checkouts/#{NUMBER}' \
+curl 'https://api.instamart.ru/v2/checkouts/#{NUMBER}' \
   -H 'Authorization: Token token=#{TOKEN}' \
   -d "order[payment_attributes][payment_tool_id]=1"
 ```
@@ -431,7 +431,7 @@ curl 'https://api.instamart.ru/v1/checkouts/#{NUMBER}' \
 > Пример выбора способа связи:
 
 ```shell
-curl 'https://api.instamart.ru/v1/checkouts/#{NUMBER}' \
+curl 'https://api.instamart.ru/v2/checkouts/#{NUMBER}' \
   -H 'Authorization: Token token=#{TOKEN}' \
   -d "order[notification_attributes][notification_method_id]=1"
   -d "order[notification_attributes][phone]=74951112233"
@@ -439,7 +439,7 @@ curl 'https://api.instamart.ru/v1/checkouts/#{NUMBER}' \
 
 Для оформления заказа используется ресурс `checkouts`. Чтобы заполнить информацию о заказе, необходимо выполнить запрос: 
 
-`PUT https://api.instamart.ru/v1/checkouts/#{NUMBER}`
+`PUT https://api.instamart.ru/v2/checkouts/#{NUMBER}`
 
 ### Параметры запроса
 

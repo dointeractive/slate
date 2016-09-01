@@ -3,7 +3,7 @@
 ## Список продуктов
 
 ```shell
-curl "https://api.instamart.ru/v1/products?rid=1" 
+curl "https://api.instamart.ru/v2/products?rid=1" 
 ```
 
 > Команда выше возвращает JSON:
@@ -34,7 +34,7 @@ curl "https://api.instamart.ru/v1/products?rid=1"
 
 ### HTTP запрос
 
-`GET https://api.instamart.ru/v1/products`
+`GET https://api.instamart.ru/v2/products`
 
 ### Параметры запроса
 
@@ -51,7 +51,7 @@ tid | -- | ID категории. Если указан - вернутся то�
 ## Карточка продукта
 
 ```shell
-curl "https://api.instamart.ru/v1/products/1"
+curl "https://api.instamart.ru/v2/products/1"
 ```
 
 > Команда выше возвращает JSON:
@@ -98,7 +98,7 @@ curl "https://api.instamart.ru/v1/products/1"
 
 ### HTTP запрос
 
-`GET https://api.instamart.ru/v1/products/#{PRODUCT_ID}`
+`GET https://api.instamart.ru/v2/products/#{PRODUCT_ID}`
 
 ### Параметры запроса
 

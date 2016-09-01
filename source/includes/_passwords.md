@@ -5,7 +5,7 @@
 > Пример кода c запросом на "восстановление пароля"
 
 ```shell
-curl 'https://api.instamart.ru/v1/passwords/reset' \
+curl 'https://api.instamart.ru/v2/passwords/reset' \
   -X POST \
   -d password_reset[email]=#{EMAIL}
 ```
@@ -13,7 +13,7 @@ curl 'https://api.instamart.ru/v1/passwords/reset' \
 > Если пользователя не существует, то сервер вернет ответ с кодом 404
 
 Отправить пользователю письмо с инструкцией "восстановления пароля" можно, выполнив запрос:
-`POST https://api.instamart.ru/v1/passwords/reset`
+`POST https://api.instamart.ru/v2/passwords/reset`
 
 Письмо будет содержать ссылку на приложение с параметром `reset_password_token`
 
@@ -28,7 +28,7 @@ password_reset[email] | Да | Емейл пользователя
 > Пример кода c запросом сброса пароля
 
 ```shell
-curl 'https://api.instamart.ru/v1/passwords' \
+curl 'https://api.instamart.ru/v2/passwords' \
   -X POST \
   -d password_reset[reset_password_token]=#{TOKEN}
   -d password_reset[password]=#{PASSWORD}
@@ -36,7 +36,7 @@ curl 'https://api.instamart.ru/v1/passwords' \
 ```
 
 Сбросить пароль пользователя можно, выполнив запрос:
-`POST https://api.instamart.ru/v1/passwords`
+`POST https://api.instamart.ru/v2/passwords`
 
 ### Параметры запроса
 

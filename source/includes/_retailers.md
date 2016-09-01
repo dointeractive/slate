@@ -3,7 +3,7 @@
 ## Получение списка ритейлеров
 
 ```shell
-curl "https://api.instamart.ru/v1/retailers" \
+curl "https://api.instamart.ru/v2/retailers" \
 ```
 
 > Команда выше возвращает JSON:
@@ -27,4 +27,4 @@ curl "https://api.instamart.ru/v1/retailers" \
 
 ### HTTP запрос
 
-`GET https://api.instamart.ru/v1/retailers`
+`GET https://api.instamart.ru/v2/retailers`
