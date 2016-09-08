@@ -10,32 +10,34 @@ curl 'https://api.instamart.ru/v2/departments?rid=1' \
 > Ответ будет содержать следующие данные
 
 ```json
-[
-  {
-    "id": 1,
-    "name": "Чай и кофе",
-    "products_count": 668,
-    "products": [
-      {
-        "id": 1,
-        "name": "Чай Lipton Yellow Label",
-        "price": 42,
-        "original_price": 70,
-        "discount": 28,
-        "weight": 150.0,
-        "human_volume": "10 пак x 6",
-        "items_per_pack": 2,
-        "images": [
+{
+  "departments": [
+    {
+      "id": 1,
+        "name": "Чай и кофе",
+        "products_count": 668,
+        "products": [
+        {
+          "id": 1,
+          "name": "Чай Lipton Yellow Label",
+          "price": 42,
+          "original_price": 70,
+          "discount": 28,
+          "weight": 150.0,
+          "human_volume": "10 пак x 6",
+          "items_per_pack": 2,
+          "images": [
           {
-            "mini_url": "/file.png?1370533476",
-            "small_url": "/file.png?1370533476",
-            "product_url": "/file.png?1370533476"
+            "mini_url": "http:://instamart.ru/file.png?1370533476",
+            "small_url": "http::/instamart.ru/file.png?1370533476",
+            "product_url": "http::/instamart.ru/file.png?1370533476"
           }
-        ]
-      }
-    ]
-  }
-]
+          ]
+        }
+      ]
+    }
+  ]
+}
 ```
 
 Получить выдачу для главной страницы можно, выполнив следующий запрос:
@@ -53,41 +55,43 @@ curl 'https://api.instamart.ru/v2/departments?rid=1' \
 > Пример команды
 
 ```shell
-curl 'https://api.instamart.ru/v2/departments/1?rid=1' \
+curl 'https://api.instamart.ru/v2/departments/174?rid=1' \
 ```
 > Ответ будет содержать следующие данные
 
 ```json
-{
-  "id": 1,
-  "name": "Чай и кофе",
-  "products_count": 668,
-  "aisles": [
-    {
-      "name": "Чай",
-      "product_counts": 327,
-      "taxon_id": 267,
-      "products": [
-        {
-          "id": 1,
-          "name": "Чай Lipton Yellow Label",
-          "price": 42,
-          "original_price": 70,
-          "discount": 28,
-          "weight": 150.0,
-          "human_volume": "10 пак x 6",
-          "items_per_pack": 2,
-          "images": [
-            {
-              "mini_url": "/file.png?1370533476",
-              "small_url": "/file.png?1370533476",
-              "product_url": "/file.png?1370533476"
-            }
-          ]
-        }
-      ]
-    }
-  ]
+{ 
+  "department": {
+    "id": 1,
+    "name": "Чай и кофе",
+    "products_count": 668,
+    "aisles": [
+      {
+        "name": "Чай",
+        "product_counts": 327,
+        "taxon_id": 267,
+        "products": [
+          {
+            "id": 1,
+            "name": "Чай Lipton Yellow Label",
+            "price": 42,
+            "original_price": 70,
+            "discount": 28,
+            "weight": 150.0,
+            "human_volume": "10 пак x 6",
+            "items_per_pack": 2,
+            "images": [
+              {
+                "mini_url": "/file.png?1370533476",
+                "small_url": "/file.png?1370533476",
+                "product_url": "/file.png?1370533476"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }
 ```
 
