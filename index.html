@@ -140,7 +140,7 @@
   <p>Пример кода для регистрации нового пользователя:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/users/registrations'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/users'</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
   -d user[email]<span class="o">=</span><span class="c">#{EMAIL} \</span>
   -d user[first_name]<span class="o">=</span><span class="c">#{FIRSTNAME} \</span>
@@ -150,7 +150,7 @@
 
 <p>Зарегистрировать нового пользователя можно, выполнив запрос:</p>
 
-<p><code>POST https://api.instamart.ru/v2/users/registrations</code></p>
+<p><code>POST https://api.instamart.ru/v2/users</code></p>
 
 <h3 id="paramietry-zaprosa">Параметры запроса</h3>
 
@@ -804,9 +804,9 @@
         </span><span class="nt">"items_per_pack"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
         </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"mini_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"file.png?1370533476"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"small_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"file.png?1370533476"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"product_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"file.png?1370533476"</span><span class="w">
+            </span><span class="nt">"mini_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http:://instamart.ru/file.png?1370533476"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"small_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http::/instamart.ru/file.png?1370533476"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"product_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http::/instamart.ru/file.png?1370533476"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">]</span><span class="w">
       </span><span class="p">}</span><span class="w">
