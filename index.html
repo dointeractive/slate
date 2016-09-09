@@ -330,7 +330,9 @@
 </blockquote>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FWtn0HAjBD6rNxWwEV0Cj7JXSEPGJQ"</span><span class="w">
+  </span><span class="nt">"session"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FWtn0HAjBD6rNxWwEV0Cj7JXSEPGJQ"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -375,9 +377,9 @@
 
 <pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/auth_providers/vkontakte/sessions'</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
-  -d <span class="nv">uid</span><span class="o">=</span>0
-  -d session[first_name]<span class="o">=</span>fname
-  -d session[last_name]<span class="o">=</span>lname
+  -d <span class="nv">uid</span><span class="o">=</span>0 <span class="se">\</span>
+  -d session[first_name]<span class="o">=</span>fname <span class="se">\</span>
+  -d session[last_name]<span class="o">=</span>lname <span class="se">\</span>
   -d session[email]<span class="o">=</span>mail@example.com
 </code></pre>
 <blockquote>
@@ -385,7 +387,9 @@
 </blockquote>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FWtn0HAjBD6rNxWwEV0Cj7JXSEPGJQ"</span><span class="w">
+  </span><span class="nt">"session"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FWtn0HAjBD6rNxWwEV0Cj7JXSEPGJQ"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -404,7 +408,7 @@
   </thead>
   <tbody>
     <tr>
-      <td>session[provider_id]</td>
+      <td>provider_id</td>
       <td>Да</td>
       <td>Название социальной сети (vkontakte / facebook)</td>
     </tr>
