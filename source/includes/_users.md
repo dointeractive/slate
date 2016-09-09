@@ -39,10 +39,12 @@ curl 'https://api.instamart.ru/v2/users/test@test.com' \
 ```
 ```json
 {
-  "email": "test@test.com",
-  "first_name": "Ivan",
-  "last_name": "Petrov",
-  "location": "Perm"
+  "user": {
+    "email": "test@test.com",
+    "first_name": "Ivan",
+    "last_name": "Petrov",
+    "location": "Perm"
+  }
 }
 ```
 
@@ -54,6 +56,7 @@ curl 'https://api.instamart.ru/v2/users/test@test.com' \
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
+email | Да | Емейл пользователя
 user[first_name] | - | Имя пользователя
 user[last_name] | - | Фамилия пользователя
 user[location] | - | Местоположение пользователя
@@ -69,7 +72,9 @@ curl 'https://api.instamart.ru/v2/users/test@test.com'
 
 ```json
 {
-  "email": "test@test.com"
+  "user": {
+    "email": "test@test.com"
+  }
 }
 ```
 
@@ -82,10 +87,12 @@ curl 'https://api.instamart.ru/v2/users/test@test.com'
 
 ```json
 {
-  "email": "test@test.com",
-  "first_name": "Ivan",
-  "last_name": "Petrov",
-  "location": "Moscow"
+  "user": {
+    "email": "test@test.com",
+    "first_name": "Ivan",
+    "last_name": "Petrov",
+    "location": "Moscow"
+  }
 }
 ```
 
