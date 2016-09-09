@@ -9,18 +9,16 @@ curl "https://api.instamart.ru/v2/retailers" \
 > Команда выше возвращает JSON:
 
 ```json
-[
-  {
-    "id": 1,
-    "name": "Metro",
-    "logo": "http://instamart.ru/retailers/metro.png"
-  },
-  {
-    "id": 2,
-    "name": "Ашан",
-    "logo": "http://instamart.ru/retailers/auchan.png"
-  }
-]
+{
+  "retailers": [
+    {
+      "id": 1,
+      "name": "Metro",
+      "color": "#003d7a",
+      "logo": "https://www.metrogroup.de/~/assets/mag/images/teasers/metro-logo.png"
+    }
+  ]
+}
 ```
 
 Получить список ритейлеров подключенных к Instamart можно выполнив запрос

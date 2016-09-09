@@ -14,9 +14,9 @@ curl 'https://api.instamart.ru/v2/departments?rid=1' \
   "departments": [
     {
       "id": 1,
-        "name": "Чай и кофе",
-        "products_count": 668,
-        "products": [
+      "name": "Чай и кофе",
+      "products_count": 668,
+      "products": [
         {
           "id": 1,
           "name": "Чай Lipton Yellow Label",
@@ -27,11 +27,11 @@ curl 'https://api.instamart.ru/v2/departments?rid=1' \
           "human_volume": "10 пак x 6",
           "items_per_pack": 2,
           "images": [
-          {
-            "mini_url": "http:://instamart.ru/file.png?1370533476",
-            "small_url": "http::/instamart.ru/file.png?1370533476",
-            "product_url": "http::/instamart.ru/file.png?1370533476"
-          }
+            {
+              "mini_url": "http:://instamart.ru/file.png?1370533476",
+              "small_url": "http::/instamart.ru/file.png?1370533476",
+              "product_url": "http::/instamart.ru/file.png?1370533476"
+            }
           ]
         }
       ]
