@@ -15,7 +15,9 @@ curl 'https://api.instamart.ru/v2/sessions' \
 
 ```json
 {
-  "access_token": "FWtn0HAjBD6rNxWwEV0Cj7JXSEPGJQ"
+  "session": {
+    "access_token": "FWtn0HAjBD6rNxWwEV0Cj7JXSEPGJQ"
+  }
 }
 ```
 
@@ -37,21 +39,23 @@ password | Да | Пароль пользователя
 
 ## Аутентификация через социальные сети
 
-> Пример кода для аутентификации пользователя через vkontakte 
+> Пример кода для аутентификации пользователя через vkontakte
 
 ```shell
 curl 'https://api.instamart.ru/v2/auth_providers/vkontakte/sessions' \
   -X POST \
-  -d uid=0
-  -d session[first_name]=fname
-  -d session[last_name]=lname
+  -d uid=0 \
+  -d session[first_name]=fname \
+  -d session[last_name]=lname \
   -d session[email]=mail@example.com
 ```
 > Ответ будет содержать следующие данные
 
 ```json
 {
-  "access_token": "FWtn0HAjBD6rNxWwEV0Cj7JXSEPGJQ"
+  "session": {
+    "access_token": "FWtn0HAjBD6rNxWwEV0Cj7JXSEPGJQ"
+  }
 }
 ```
 
@@ -62,7 +66,7 @@ curl 'https://api.instamart.ru/v2/auth_providers/vkontakte/sessions' \
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
-session[provider_id] | Да | Название социальной сети (vkontakte / facebook)
+provider_id | Да | Название социальной сети (vkontakte / facebook)
 session[uid] | Да | Идентификатор пользователя в социальной сети
 session[first_name] | Да (в первый раз) | Имя пользователя
 session[last_name] | Да (в первый раз) | Фамилия пользователя
