@@ -25,6 +25,11 @@ curl 'https://api.instamart.ru/v2/taxons?rid=1'
   }
 ]
 ```
+
+<aside class="warning">
+  not implemented
+</aside>
+
 Получить список всех категорий можно, выполнив запрос:
 
 `GET https://api.instamart.ru/v2/taxons`
