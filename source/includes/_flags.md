@@ -44,6 +44,10 @@ curl "https://api.instamart.ru/v2/products/#{PRODUCT_ID}/flags" \
   -d "product_flag[description]=Слишком высокая цена"
 ```
 
+<aside class="warning">
+  not implemented
+</aside>
+
 Чтобы отправить жалобу на товар, выполните следующий запрос, указав `id` жалобы:
 
 `POST https://api.instamart.ru/v2/products/#{PRODUCT_ID}/flags`
