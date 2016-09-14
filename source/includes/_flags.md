@@ -16,6 +16,10 @@ curl "https://api.instamart.ru/v2/flags"
 ]
 ```
 
+<aside class="warning">
+  not implemented
+</aside>
+
 Стандартный список ошибок можно загрузить, выполнив запрос:
 
 `GET https://api.instamart.ru/v2/flags`

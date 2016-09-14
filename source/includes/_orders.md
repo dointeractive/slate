@@ -37,6 +37,10 @@ curl 'https://api.instamart.ru/v2/orders' \
 }
 ```
 
+<aside class="warning">
+  not implemented
+</aside>
+
 Создать новый заказ можно, выполнив следующий запрос:
 
 `POST https://api.instamart.ru/v2/orders`
@@ -78,6 +82,10 @@ curl 'https://api.instamart.ru/v2/orders/current' \
 }
 ```
 
+<aside class="warning">
+  not implemented
+</aside>
+
 Получить текущий заказ пользователя можно, выполнив запрос:
 `GET https://api.instamart.ru/v2/orders/current`
 
@@ -90,6 +98,10 @@ curl 'https://api.instamart.ru/v2/orders/current' \
 curl 'https://api.instamart.ru/v2/orders' \
   -H 'Authorization: Token token=#{TOKEN}' 
 ```
+
+<aside class="warning">
+  not implemented
+</aside>
 
 > Ответ будет содержать следующие данные:
 
@@ -167,6 +179,10 @@ curl 'https://api.instamart.ru/v2/line_items' \
   }
 }
 ```
+
+<aside class="warning">
+  not implemented
+</aside>
 
 > Добавление позиции к заказу может изменить поле shipments заказа:
 
@@ -248,6 +264,9 @@ curl 'https://api.instamart.ru/v2/line_items/1' \
   }
 }
 ```
+<aside class="warning">
+  not implemented
+</aside>
 
 Чтобы, например, изменить количество единиц товара, необходимо выполнить запрос:
 
@@ -283,6 +302,10 @@ curl 'https://api.instamart.ru/v2/line_items/1' \
   "shipments": []
 }
 ```
+
+<aside class="warning">
+  not implemented
+</aside>
 
 Чтобы удалить позицию заказа, необходимо выполнить запрос:
 
@@ -436,6 +459,10 @@ curl 'https://api.instamart.ru/v2/checkouts/#{NUMBER}' \
   -d "order[notification_attributes][notification_method_id]=1"
   -d "order[notification_attributes][phone]=74951112233"
 ```
+
+<aside class="warning">
+  not implemented
+</aside>
 
 Для оформления заказа используется ресурс `checkouts`. Чтобы заполнить информацию о заказе, необходимо выполнить запрос: 
 
