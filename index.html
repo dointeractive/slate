@@ -452,6 +452,10 @@
   <p>Если пользователя не существует, то сервер вернет ответ с кодом 404</p>
 </blockquote>
 
+<aside class="warning">
+  not implemented
+</aside>
+
 <p>Отправить пользователю письмо с инструкцией “восстановления пароля” можно, выполнив запрос:<br />
 <code>POST https://api.instamart.ru/v2/passwords/reset</code></p>
 
@@ -488,6 +492,10 @@
   -d password_reset[password]<span class="o">=</span><span class="c">#{PASSWORD}</span>
   -d password_reset[password_confirmation]<span class="o">=</span><span class="c">#{PASSWORD_CONFIRMATION}</span>
 </code></pre>
+
+<aside class="warning">
+  not implemented
+</aside>
 
 <p>Сбросить пароль пользователя можно, выполнив запрос:<br />
 <code>POST https://api.instamart.ru/v2/passwords</code></p>
@@ -546,6 +554,9 @@
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre>
+<aside class="warning">
+  not implemented
+</aside>
 
 <p>Получить список всех адресов можно, выполнив запрос:</p>
 
@@ -574,6 +585,10 @@
   </span><span class="nt">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"111111"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+
+<aside class="warning">
+  not implemented
+</aside>
 
 <p>Добавить новый адрес пользователя можно, выполнив запрос:</p>
 
@@ -632,6 +647,10 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
+<aside class="warning">
+  not implemented
+</aside>
+
 <p>Изменить адрес можно, выполнив запрос:</p>
 
 <p><code>PUT https://instamart.ru/v1/orders/#{ID}</code></p>
@@ -683,6 +702,10 @@
 <blockquote>
   <p>В случае успешного удаления сервер вернет пустой ответ с кодом 200</p>
 </blockquote>
+
+<aside class="warning">
+  not implemented
+</aside>
 
 <p>Удалить адрес можно, выполнив запрос:</p>
 
@@ -932,32 +955,44 @@
 
 <h2 id="spisok-produktov">Список продуктов</h2>
 
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/products?rid=1"</span> 
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/products?rid=1"</span>
 </code></pre>
 
 <blockquote>
   <p>Команда выше возвращает JSON:</p>
 </blockquote>
 
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Бананы"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">54.79</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"original_price"</span><span class="p">:</span><span class="w"> </span><span class="mf">55.79</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"weight"</span><span class="p">:</span><span class="w"> </span><span class="mf">500.0</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Бананы желтые из Эквадора"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"mini_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/products/1/mini/file.png"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"small_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/products/1/small/file.png"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"product_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/products/1/product/file.png"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Бананы"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">54.79</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"original_price"</span><span class="p">:</span><span class="w"> </span><span class="mf">55.79</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"weight"</span><span class="p">:</span><span class="w"> </span><span class="mf">500.0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"human_volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"500 г."</span><span class="w">
+      </span><span class="s2">"items_per_pack"</span><span class="err">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Бананы желтые из Эквадора"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"mini_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/products/1/mini/file.png"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"small_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/products/1/small/file.png"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"product_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/products/1/product/file.png"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+
+  </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"current_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"next_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total_pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"is_last_page"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 
 <p>Получить список продуктов доступных в текущий момент в Instamart можно выполнив запрос</p>
@@ -965,6 +1000,9 @@
 <h3 id="http-zapros">HTTP запрос</h3>
 
 <p><code>GET https://api.instamart.ru/v2/products</code></p>
+
+<p>API ограничивает максимальное число возвращаемых продуктов 20 объектами. Для доступа к остальным продуктам реализован интерфейс пагинации.<br />
+Каждый запрос к <code>/v2/products</code> помимо самих продуктов также возвращает объект <code>meta</code>, указывающий номер текущей страницы продуктов, номер следующией страницы и общее количество страниц. Получить конкретную страницу с данными можно, указав параметр <code>p</code>.</p>
 
 <h3 id="paramietry-zaprosa">Параметры запроса</h3>
 
@@ -984,8 +1022,13 @@
     </tr>
     <tr>
       <td>tid</td>
+      <td>Да</td>
+      <td>ID категории из которой необходимо вернуть товары.</td>
+    </tr>
+    <tr>
+      <td>p</td>
       <td>–</td>
-      <td>ID категории. Если указан - вернутся только товары из этой категории.</td>
+      <td>Номер страницы</td>
     </tr>
   </tbody>
 </table>
@@ -996,7 +1039,7 @@
 
 <h2 id="kartochka-produkta">Карточка продукта</h2>
 
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/products/1"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/products/6"</span>
 </code></pre>
 
 <blockquote>
@@ -1004,39 +1047,47 @@
 </blockquote>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Бананы"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">54.79</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"original_price"</span><span class="p">:</span><span class="w"> </span><span class="mf">55.79</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"weight"</span><span class="p">:</span><span class="w"> </span><span class="mf">500.0</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Бананы желтые из Эквадора"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Калорийность"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"96"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"mini_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/products/1/mini/file.png"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"small_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/products/1/small/file.png"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"product_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/products/1/product/file.png"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"similar_products"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Бананы мини"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.79</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"original_price"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.99</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.20</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"weight"</span><span class="p">:</span><span class="w"> </span><span class="mf">500.0</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Бананы мини"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">],</span><span class="w">
-      </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">]</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="nt">"product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10001"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Бананы"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">54.79</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"original_price"</span><span class="p">:</span><span class="w"> </span><span class="mf">55.79</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"items_per_pack"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"human_volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"500 г."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"weight"</span><span class="p">:</span><span class="w"> </span><span class="mf">500.0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Бананы желтые из Эквадора"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"energy_value"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"presentation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Калорийность"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"96"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"mini_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/products/6/mini/file.png"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"small_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/products/6/small/file.png"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"product_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/products/6/product/file.png"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"related_products"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Бананы мини"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.79</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"original_price"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.99</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.20</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"weight"</span><span class="p">:</span><span class="w"> </span><span class="mf">500.0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"items_per_pack"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"human_volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"500 г."</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Бананы мини"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">],</span><span class="w">
+        </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -1243,6 +1294,10 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
+<aside class="warning">
+  not implemented
+</aside>
+
 <p>Создать новый заказ можно, выполнив следующий запрос:</p>
 
 <p><code>POST https://api.instamart.ru/v2/orders</code></p>
@@ -1286,6 +1341,10 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
+<aside class="warning">
+  not implemented
+</aside>
+
 <p>Получить текущий заказ пользователя можно, выполнив запрос:<br />
 <code>GET https://api.instamart.ru/v2/orders/current</code></p>
 
@@ -1298,6 +1357,10 @@
 <pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/orders'</span> <span class="se">\</span>
   -H <span class="s1">'Authorization: Token token=#{TOKEN}'</span> 
 </code></pre>
+
+<aside class="warning">
+  not implemented
+</aside>
 
 <blockquote>
   <p>Ответ будет содержать следующие данные:</p>
@@ -1376,6 +1439,10 @@
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+
+<aside class="warning">
+  not implemented
+</aside>
 
 <blockquote>
   <p>Добавление позиции к заказу может изменить поле shipments заказа:</p>
@@ -1474,6 +1541,9 @@
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+<aside class="warning">
+  not implemented
+</aside>
 
 <p>Чтобы, например, изменить количество единиц товара, необходимо выполнить запрос:</p>
 
@@ -1528,6 +1598,10 @@
   </span><span class="nt">"shipments"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+
+<aside class="warning">
+  not implemented
+</aside>
 
 <p>Чтобы удалить позицию заказа, необходимо выполнить запрос:</p>
 
@@ -1704,6 +1778,10 @@
   -d <span class="s2">"order[notification_attributes][phone]=74951112233"</span>
 </code></pre>
 
+<aside class="warning">
+  not implemented
+</aside>
+
 <p>Для оформления заказа используется ресурс <code>checkouts</code>. Чтобы заполнить информацию о заказе, необходимо выполнить запрос:</p>
 
 <p><code>PUT https://api.instamart.ru/v2/checkouts/#{NUMBER}</code></p>
@@ -1799,6 +1877,9 @@
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+<aside class="warning">
+  not implemented
+</aside>
 
 <p>Получить список доступных пользователю методов оплаты можно, выполнив запрос:</p>
 
@@ -1821,6 +1902,10 @@
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
+
+<aside class="warning">
+  not implemented
+</aside>
 
 <p>Стандартный список ошибок можно загрузить, выполнив запрос:</p>
 
