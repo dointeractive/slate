@@ -533,7 +533,7 @@
 
 <h2 id="poluchieniie-spiska-adriesov">Получение списка адресов</h2>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://instamart.ru/v1/orders'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s1">'https://instamart.ru/v2/orders'</span> <span class="se">\</span>
   -H <span class="s1">'Authorization: Token token=#{TOKEN}'</span> 
 </code></pre>
 
@@ -560,11 +560,11 @@
 
 <p>Получить список всех адресов можно, выполнив запрос:</p>
 
-<p><code>GET https://instamart.ru/v1/orders</code></p>
+<p><code>GET https://instamart.ru/v2/orders</code></p>
 
 <h2 id="sozdaniie-novogho-adriesa">Создание нового адреса</h2>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://instamart.ru/v1/orders'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s1">'https://instamart.ru/v2/orders'</span> <span class="se">\</span>
   -H <span class="s1">'Authorization: Token token=#{TOKEN}'</span>
   -X POST <span class="se">\</span>
   -d <span class="s2">"address[city]=Москва"</span> <span class="se">\</span>
@@ -592,7 +592,7 @@
 
 <p>Добавить новый адрес пользователя можно, выполнив запрос:</p>
 
-<p><code>POST https://instamart.ru/v1/orders</code></p>
+<p><code>POST https://instamart.ru/v2/orders</code></p>
 
 <table>
   <thead>
@@ -628,7 +628,7 @@
 
 <h2 id="riedaktirovaniie-adriesa">Редактирование адреса</h2>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://instamart.ru/v1/orders/2'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s1">'https://instamart.ru/v2/orders/2'</span> <span class="se">\</span>
   -H <span class="s1">'Authorization: Token token=#{TOKEN}'</span> <span class="se">\</span>
   -X PUT <span class="se">\</span>
   -d <span class="s2">"address[building]=53"</span>
@@ -653,7 +653,7 @@
 
 <p>Изменить адрес можно, выполнив запрос:</p>
 
-<p><code>PUT https://instamart.ru/v1/orders/#{ID}</code></p>
+<p><code>PUT https://instamart.ru/v2/orders/#{ID}</code></p>
 
 <table>
   <thead>
@@ -694,7 +694,7 @@
 
 <h2 id="udalieniie-adriesa">Удаление адреса</h2>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://instamart.ru/v1/orders/2'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s1">'https://instamart.ru/v2/orders/2'</span> <span class="se">\</span>
   -H <span class="s1">'Authorization: Token token=#{TOKEN}'</span> <span class="se">\</span>
   -X DELETE
 </code></pre>
@@ -709,7 +709,7 @@
 
 <p>Удалить адрес можно, выполнив запрос:</p>
 
-<p><code>DELETE https://instamart.ru/v1/orders/#{ID}</code></p>
+<p><code>DELETE https://instamart.ru/v2/orders/#{ID}</code></p>
 
 <table>
   <thead>
@@ -1007,7 +1007,7 @@
 <p><code>GET https://api.instamart.ru/v2/products</code></p>
 
 <p>API ограничивает максимальное число возвращаемых продуктов 20 объектами. Для доступа к остальным продуктам реализован интерфейс пагинации.<br />
-Каждый запрос к <code>/v2/products</code> помимо самих продуктов также возвращает объект <code>meta</code>, указывающий номер текущей страницы продуктов, номер следующией страницы и общее количество страниц. Получить конкретную страницу с данными можно, указав параметр <code>p</code>.</p>
+Каждый запрос к <code>/v2/products</code> помимо самих продуктов также возвращает объект <code>meta</code>, указывающий номер текущей страницы, номер следующией страницы и общее количество страниц. Получить конкретную страницу с данными можно, указав параметр <code>page</code>.</p>
 
 <h3 id="paramietry-zaprosa">Параметры запроса</h3>
 
@@ -1031,7 +1031,7 @@
       <td>ID категории из которой необходимо вернуть товары.</td>
     </tr>
     <tr>
-      <td>p</td>
+      <td>page</td>
       <td>–</td>
       <td>Номер страницы</td>
     </tr>
@@ -1130,50 +1130,35 @@
   <p>Пример запроса подсказок, для слова “чай”</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://instamart.ru/v1/search/suggestions?rid=1&amp;q=%D1%87%D0%B0%D0%B9'</span>
+<pre class="highlight shell"><code>curl <span class="s1">'https://instamart.ru/v2/searches/suggestions?rid=1&amp;q=%D1%87%D0%B0%D0%B9'</span>
 </code></pre>
 <blockquote>
   <p>Ответ будет содержать следующие данные</p>
 </blockquote>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"taxons"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Чай"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"parent_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Чай Lipton Yellow Label"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"original_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mi">28</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"weight"</span><span class="p">:</span><span class="w"> </span><span class="mf">150.0</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"human_volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10 пак x 6"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"items_per_pack"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"mini_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"file.png?1370533476"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"small_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"file.png?1370533476"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"product_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"file.png?1370533476"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">]</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="nt">"suggestion"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"taxons"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Чай"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Чай Lipton Yellow Label"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"33688"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<aside class="warning">
-  not implemented
-</aside>
-
 <p>Для получения списка подсказок поиска, выполните запрос:</p>
 
-<p><code>GET https://instamart.ru/v1/search/suggestions</code></p>
+<p><code>GET https://instamart.ru/v2/searches/suggestions</code></p>
 
 <h3 id="paramietry-zaprosa">Параметры запроса</h3>
 
@@ -1205,42 +1190,46 @@
   <p>Пример запроса результатов поиска, для слова “чай”</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://instamart.ru/v1/search/results?rid=1&amp;q=%D1%87%D0%B0%D0%B9'</span>
+<pre class="highlight shell"><code>curl <span class="s1">'https://instamart.ru/v2/searches?rid=1&amp;q=%D1%87%D0%B0%D0%B9'</span>
 </code></pre>
 <blockquote>
-  <p>Ответ будет содержать следующие данные</p>
+  <p>Ответ будет содержать продукты, сгруппированные по категориям:</p>
 </blockquote>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Чай Lipton Yellow Label"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"original_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mi">28</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"weight"</span><span class="p">:</span><span class="w"> </span><span class="mf">150.0</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"human_volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10 пак x 6"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"items_per_pack"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"mini_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"file.png?1370533476"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"small_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"file.png?1370533476"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"product_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"file.png?1370533476"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">]</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="nt">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Чай"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"products_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">324</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"taxon_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">187</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">6560</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16563"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Чай черный Greenfield Golden Ceylon цейлонский пакетированный"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">309.34</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"original_price"</span><span class="p">:</span><span class="w"> </span><span class="mf">309.34</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"weight"</span><span class="p">:</span><span class="w"> </span><span class="mf">200.0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"items_per_pack"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"human_volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100 пак."</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="nt">"mini_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/spree/products/8161/mini/16563.jpg?1473242827"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"small_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/spree/products/8161/small/16563.jpg?1473242827"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"product_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/spree/products/8161/product/16563.jpg?1473242827"</span><span class="w">
+      </span><span class="p">}]</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
+  </span><span class="p">}],</span><span class="w">
+  </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> 
+    </span><span class="nt">"current_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"next_page"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total_pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"is_last_page"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<aside class="warning">
-  not implemented
-</aside>
-
 <p>Для получения результатов поиска, выполните запрос:</p>
 
-<p><code>GET https://instamart.ru/v1/search/results</code></p>
+<p><code>GET https://instamart.ru/v2/searches</code></p>
 
 <h3 id="paramietry-zaprosa-1">Параметры запроса</h3>
 
@@ -1262,6 +1251,11 @@
       <td><code>q</code></td>
       <td>Да</td>
       <td>Поисковая фраза</td>
+    </tr>
+    <tr>
+      <td><code>page</code></td>
+      <td>–</td>
+      <td>Номер страницы с группами (по умолчанию 1)</td>
     </tr>
   </tbody>
 </table>
@@ -1867,7 +1861,7 @@
 
           <h1 id="mietody-oplaty">Методы оплаты</h1>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://instamart.ru/v1/payment_tools'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s1">'https://instamart.ru/v2/payment_tools'</span> <span class="se">\</span>
   -H <span class="s1">'Authorization: Token token=#{TOKEN}'</span> <span class="se">\</span>
 </code></pre>
 
@@ -1896,7 +1890,7 @@
 
 <p>Получить список доступных пользователю методов оплаты можно, выполнив запрос:</p>
 
-<p><code>GET https://instamart.ru/v1/payment_tools</code></p>
+<p><code>GET https://instamart.ru/v2/payment_tools</code></p>
 
           <h1 id="zhaloby-na-tovar">Жалобы на товар</h1>
 
