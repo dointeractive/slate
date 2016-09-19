@@ -1,4 +1,4 @@
-set :host, 'https://instamart.ru/v1'
+set :host, 'https://instamart.ru/v2'
 
 # Markdown
 set :markdown_engine, :kramdown
