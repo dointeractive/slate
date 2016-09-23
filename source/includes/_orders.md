@@ -13,95 +13,85 @@ curl 'https://api.instamart.ru/v2/orders' \
 
 ```json
 {
-  "number": "R307128032",
-  "item_total": 0.0,
-  "total": 0.0,
-  "ship_total": 0.0,
-  "state": "cart",
-  "adjustment_total": 0.0,
-  "user_id": 1,
-  "created_at": "2014-07-06T18:52:33.724Z",
-  "updated_at": "2014-07-06T18:52:33.752Z",
-  "completed_at": null,
-  "payment_total": 0.0,
-  "shipment_state": null,
-  "payment_state": null,
-  "email": "test@example.com",
-  "special_instructions": null,
-  "total_quantity": 0,
-  "ship_address": null,
-  "line_items": [],
-  "payments": [],
-  "shipments": [],
-  "adjustments": []
+  "order": {
+    "number": "R314234460",
+    "email": "test@email.ru",
+    "total": 0.0,
+    "item_total": 0.0,
+    "ship_total": 0,
+    "adjustment_total": 0.0,
+    "payment_total": 0.0,
+    "shipment_state": null,
+    "payment_state": null,
+    "special_instructions": null,
+    "created_at": "2016-09-23T16:19:29.284+03:00",
+    "updated_at": "2016-09-23T16:19:29.284+03:00",
+    "completed_at": null,
+    "ship_address": null,
+    "line_items": [],
+    "payments": [],
+    "shipments": [],
+    "adjustments": []
+  }
 }
 ```
-
-<aside class="warning">
-  not implemented
-</aside>
 
 Создать новый заказ можно, выполнив следующий запрос:
 
 `POST https://api.instamart.ru/v2/orders`
 
-## Получить текущий заказ
+В случае, если у пользователя есть незавершенный заказ, данный запрос вернет ошибку с кодом `422`
+
+
+## Получение текущего заказ
 
 > Пример команды:
 
 ```shell
 curl 'https://api.instamart.ru/v2/orders/current' \
-  -H 'Authorization: Token token=#{TOKEN}' 
+  -H 'Authorization: Token token=#{TOKEN}'
 ```
 
 > Ответ будет содержать следующие данные:
 
 ```json
 {
-  "number": "R307128032",
-  "item_total": 0.0,
-  "total": 0.0,
-  "ship_total": 0.0,
-  "state": "cart",
-  "adjustment_total": 0.0,
-  "user_id": 1,
-  "created_at": "2014-07-06T18:52:33.724Z",
-  "updated_at": "2014-07-06T18:52:33.752Z",
-  "completed_at": null,
-  "payment_total": 0.0,
-  "shipment_state": null,
-  "payment_state": null,
-  "email": "test@example.com",
-  "special_instructions": null,
-  "total_quantity": 0,
-  "ship_address": null,
-  "line_items": [],
-  "payments": [],
-  "shipments": [],
-  "adjustments": []
+  "order": {
+    "number": "R314234460",
+    "email": "test@email.ru",
+    "total": 0.0,
+    "item_total": 0.0,
+    "ship_total": 0,
+    "adjustment_total": 0.0,
+    "payment_total": 0.0,
+    "shipment_state": null,
+    "payment_state": null,
+    "special_instructions": null,
+    "created_at": "2016-09-23T16:19:29.284+03:00",
+    "updated_at": "2016-09-23T16:19:29.284+03:00",
+    "completed_at": null,
+    "ship_address": null,
+    "line_items": [],
+    "payments": [],
+    "shipments": [],
+    "adjustments": []
+  }
 }
 ```
-
-<aside class="warning">
-  not implemented
-</aside>
 
 Получить текущий заказ пользователя можно, выполнив запрос:
 `GET https://api.instamart.ru/v2/orders/current`
 
+В случае, если у пользователя нет текущего заказа, данный запрос вернет ошибку с кодом `404`
 
-## Получить список всех заказов
+## Получение списка всех заказов
 
 > Пример команды:
 
 ```shell
 curl 'https://api.instamart.ru/v2/orders' \
-  -H 'Authorization: Token token=#{TOKEN}' 
+  -H 'Authorization: Token token=#{TOKEN}'
 ```
-
-<aside class="warning">
-  not implemented
-</aside>
 
 > Ответ будет содержать следующие данные:
 
@@ -109,29 +99,33 @@ curl 'https://api.instamart.ru/v2/orders' \
 {
   "orders": [
     {
-      "id": 1,
-      "number": "R335381310",
-      "item_total": 100.0,
-      "total": 100.0,
-      "state": "cart",
-      "adjustment_total": -12.0,
-      "user_id": null,
-      "created_at": "2012-10-24T01:02:25Z",
-      "updated_at": "2012-10-24T01:02:25Z",
-      "completed_at": null,
+      "number": "R314234460",
+      "email": "test@email.ru",
+      "total": 0.0,
+      "item_total": 0.0,
+      "ship_total": 0,
+      "adjustment_total": 0.0,
       "payment_total": 0.0,
       "shipment_state": null,
       "payment_state": null,
-      "email": null,
       "special_instructions": null,
-      "total_quantity": 1,
-      "token": "abcdef123456",
+      "created_at": "2016-09-23T16:19:29.284+03:00",
+      "updated_at": "2016-09-23T16:19:29.284+03:00",
+      "completed_at": null,
+      "ship_address": null,
       "line_items": [],
-      "adjustments": [],
       "payments": [],
-      "shipments": []
+      "shipments": [],
+      "adjustments": []
     }
-  ]
+  ],
+
+  "meta":{
+    "current_page": 1,
+    "next_page": null,
+    "total_pages": 1,
+    "per_page": 10
+  }
 }
 ```
 
@@ -230,7 +224,7 @@ line_item[quantity] | Да | количество добавляемых поз�
 curl 'https://api.instamart.ru/v2/line_items/1' \
   -H 'Authorization: Token token=#{TOKEN}' \
   -d line_item[quantity]=3 \
-  -X PUT 
+  -X PUT
 ```
 > Ответ будет содержать следующие данные:
 
@@ -288,7 +282,7 @@ line_item[quantity] | Нет | Количество единиц товара
 ```shell
 curl 'https://api.instamart.ru/v2/line_items/1' \
   -H 'Authorization: Token token=#{TOKEN}' \
-  -X DELETE 
+  -X DELETE
 ```
 > Ответ вернет результат с кодом 200
 
@@ -464,7 +458,7 @@ curl 'https://api.instamart.ru/v2/checkouts/#{NUMBER}' \
   not implemented
 </aside>
 
-Для оформления заказа используется ресурс `checkouts`. Чтобы заполнить информацию о заказе, необходимо выполнить запрос: 
+Для оформления заказа используется ресурс `checkouts`. Чтобы заполнить информацию о заказе, необходимо выполнить запрос:
 
 `PUT https://api.instamart.ru/v2/checkouts/#{NUMBER}`
 
