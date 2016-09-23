@@ -36,8 +36,7 @@ curl "https://api.instamart.ru/v2/products?rid=1"
   "meta": {
     "current_page": 1,
     "next_page": 2,
-    "total_pages": 2,
-    "is_last_page": false
+    "total_pages": 2
   }
 }
 ```
