@@ -321,9 +321,12 @@
   <p>Пример кода для аутентификации пользователя с учетными данными “test@test.ru”, “qwer”:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/sessions'</span> <span class="se">\</span>
+<pre class="highlight shell"><code><span class="nv">email</span><span class="o">=</span><span class="nb">test</span>@test.ru
+<span class="nv">pass</span><span class="o">=</span>qwer
+<span class="nv">credentials</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="nv">$email</span>:<span class="nv">$pass</span> | base64<span class="k">)</span>
+curl <span class="s1">'https://api.instamart.ru/v2/sessions'</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
-  -H <span class="s1">'Authorization: Basic dGVzdEB0ZXN0LnJ1OnF3ZXIK'</span>
+  -H <span class="s1">'Authorization: Basic $credentials'</span>
 </code></pre>
 <blockquote>
   <p>Ответ будет содержать следующие данные</p>
@@ -533,7 +536,7 @@
 
 <h2 id="poluchieniie-spiska-adriesov">Получение списка адресов</h2>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://instamart.ru/v2/orders'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/orders'</span> <span class="se">\</span>
   -H <span class="s1">'Authorization: Token token=#{TOKEN}'</span> 
 </code></pre>
 
@@ -560,11 +563,11 @@
 
 <p>Получить список всех адресов можно, выполнив запрос:</p>
 
-<p><code>GET https://instamart.ru/v2/orders</code></p>
+<p><code>GET https://api.instamart.ru/v2/orders</code></p>
 
 <h2 id="sozdaniie-novogho-adriesa">Создание нового адреса</h2>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://instamart.ru/v2/orders'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/orders'</span> <span class="se">\</span>
   -H <span class="s1">'Authorization: Token token=#{TOKEN}'</span>
   -X POST <span class="se">\</span>
   -d <span class="s2">"address[city]=Москва"</span> <span class="se">\</span>
@@ -592,7 +595,7 @@
 
 <p>Добавить новый адрес пользователя можно, выполнив запрос:</p>
 
-<p><code>POST https://instamart.ru/v2/orders</code></p>
+<p><code>POST https://api.instamart.ru/v2/orders</code></p>
 
 <table>
   <thead>
@@ -628,7 +631,7 @@
 
 <h2 id="riedaktirovaniie-adriesa">Редактирование адреса</h2>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://instamart.ru/v2/orders/2'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/orders/2'</span> <span class="se">\</span>
   -H <span class="s1">'Authorization: Token token=#{TOKEN}'</span> <span class="se">\</span>
   -X PUT <span class="se">\</span>
   -d <span class="s2">"address[building]=53"</span>
@@ -653,7 +656,7 @@
 
 <p>Изменить адрес можно, выполнив запрос:</p>
 
-<p><code>PUT https://instamart.ru/v2/orders/#{ID}</code></p>
+<p><code>PUT https://api.instamart.ru/v2/orders/#{ID}</code></p>
 
 <table>
   <thead>
@@ -694,7 +697,7 @@
 
 <h2 id="udalieniie-adriesa">Удаление адреса</h2>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://instamart.ru/v2/orders/2'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/orders/2'</span> <span class="se">\</span>
   -H <span class="s1">'Authorization: Token token=#{TOKEN}'</span> <span class="se">\</span>
   -X DELETE
 </code></pre>
@@ -709,7 +712,7 @@
 
 <p>Удалить адрес можно, выполнив запрос:</p>
 
-<p><code>DELETE https://instamart.ru/v2/orders/#{ID}</code></p>
+<p><code>DELETE https://api.instamart.ru/v2/orders/#{ID}</code></p>
 
 <table>
   <thead>
@@ -1129,7 +1132,7 @@
   <p>Пример запроса подсказок, для слова “чай”</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://instamart.ru/v2/searches/suggestions?rid=1&amp;q=%D1%87%D0%B0%D0%B9'</span>
+<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/searches/suggestions?rid=1&amp;q=%D1%87%D0%B0%D0%B9'</span>
 </code></pre>
 <blockquote>
   <p>Ответ будет содержать следующие данные</p>
@@ -1157,7 +1160,7 @@
 
 <p>Для получения списка подсказок поиска, выполните запрос:</p>
 
-<p><code>GET https://instamart.ru/v2/searches/suggestions</code></p>
+<p><code>GET https://api.instamart.ru/v2/searches/suggestions</code></p>
 
 <h3 id="paramietry-zaprosa">Параметры запроса</h3>
 
@@ -1189,7 +1192,7 @@
   <p>Пример запроса результатов поиска, для слова “чай”</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://instamart.ru/v2/searches?rid=1&amp;q=%D1%87%D0%B0%D0%B9'</span>
+<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/searches?rid=1&amp;q=%D1%87%D0%B0%D0%B9'</span>
 </code></pre>
 <blockquote>
   <p>Ответ будет содержать продукты, сгруппированные по категориям:</p>
@@ -1227,7 +1230,7 @@
 
 <p>Для получения результатов поиска, выполните запрос:</p>
 
-<p><code>GET https://instamart.ru/v2/searches</code></p>
+<p><code>GET https://api.instamart.ru/v2/searches</code></p>
 
 <h3 id="paramietry-zaprosa-1">Параметры запроса</h3>
 
@@ -1266,8 +1269,8 @@
   <p>Пример команды:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/orders'</span> <span class="se">\</span>
-  -H <span class="s1">'Authorization: Token token=#{TOKEN}'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/orders"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
   -X POST
 </code></pre>
 <blockquote>
@@ -1310,8 +1313,8 @@
   <p>Пример команды:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/orders/current'</span> <span class="se">\</span>
-  -H <span class="s1">'Authorization: Token token=#{TOKEN}'</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/orders/current"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
 </code></pre>
 
 <blockquote>
@@ -1353,8 +1356,8 @@
   <p>Пример команды:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/orders'</span> <span class="se">\</span>
-  -H <span class="s1">'Authorization: Token token=#{TOKEN}'</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/orders"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
 </code></pre>
 
 <blockquote>
@@ -1399,72 +1402,67 @@
 
 <h2 id="dobavlieniie-pozitsii-zakaza">Добавление позиции заказа</h2>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/line_items'</span> <span class="se">\</span>
-  -H <span class="s1">'Authorization: Token token=#{TOKEN}'</span> <span class="se">\</span>
-  -d line_item[product_id]<span class="o">=</span>1 <span class="se">\</span>
-  -d line_item[quantity]<span class="o">=</span>5
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/line_items"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
+  -d line_item[order_number]<span class="o">=</span>R314234460 <span class="se">\</span>
+  -d line_item[product_id]<span class="o">=</span>6 <span class="se">\</span>
+  -d line_item[quantity]<span class="o">=</span>2
 </code></pre>
 <blockquote>
   <p>В ответе вернется созданный <code>line_item</code>:</p>
 </blockquote>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">40.0</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Nihil et itaque adipisci sed ea dolorum."</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"retailer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"product_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mf">200.00</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"weight"</span><span class="p">:</span><span class="w"> </span><span class="mf">500.0</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"adjustments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-  </span><span class="nt">"product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Чай Lipton Yellow Label"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"original_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mi">28</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"weight"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"human_volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10 пак x 6"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"items_per_pack"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"options_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"mini_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https::/instamart.ru/file.png?1370533476"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"small_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https:://instamart.ru/file.png?1370533476"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"product_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://instamart.ru/file.png?1370533476"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
+  </span><span class="nt">"line_item"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">520884</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">35.99</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Пробиотические продукты Активиа содержат уникальные бифидобактерия ActiRegularis, отобранные Данон за жизнеспособность и эффективную помощь организму. Ежедневная потребление Активиа помогает работе кишечника и способствует естественному очищению организма. Научные исследования подтвердили эффективность Активиа уже после 2-х недель ежедневного потребления. Изготовлено без добавления консервантов."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mf">71.98</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10006"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Напиток Danone Aktivia кисломолочный чернослив 2,0%"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">35.99</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"original_price"</span><span class="p">:</span><span class="w"> </span><span class="mf">42.12</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mf">-6.13</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"weight"</span><span class="p">:</span><span class="w"> </span><span class="mf">290.0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"items_per_pack"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"human_volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"290 г."</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="nt">"mini_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/spree/products/5946/mini/10006.jpg?1473242617"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"small_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/spree/products/5946/small/10006.jpg?1473242617"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"product_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/spree/products/5946/product/10006.jpg?1473242617"</span><span class="w">
+      </span><span class="p">}]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-
-<aside class="warning">
-  not implemented
-</aside>
 
 <blockquote>
   <p>Добавление позиции к заказу может изменить поле shipments заказа:</p>
 </blockquote>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"R307128032"</span><span class="p">,</span><span class="w">
-  </span><span class="err">...</span><span class="w">
-  </span><span class="nt">"line_items"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+  </span><span class="nt">"order"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"R314234460"</span><span class="p">,</span><span class="w">
     </span><span class="err">...</span><span class="w">
-  </span><span class="p">}],</span><span class="w">
-  </span><span class="nt">"shipments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"H123456789"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"cost"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"shipped_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"retailer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"delivery_slot_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"shipping_method"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+    </span><span class="nt">"line_items"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+    </span><span class="p">}],</span><span class="w">
+    </span><span class="nt">"shipments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"H123456789"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"cost"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"shipped_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"retailer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delivery_slot_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"shipping_method"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -1484,6 +1482,11 @@
   </thead>
   <tbody>
     <tr>
+      <td>line_item[order_number]</td>
+      <td>Да</td>
+      <td>Номер заказа</td>
+    </tr>
+    <tr>
       <td>line_item[product_id]</td>
       <td>Да</td>
       <td>ID продукта</td>
@@ -1502,9 +1505,9 @@
 
 <h2 id="riedaktirovaniie-pozitsii-zakaza">Редактирование позиции заказа</h2>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/line_items/1'</span> <span class="se">\</span>
-  -H <span class="s1">'Authorization: Token token=#{TOKEN}'</span> <span class="se">\</span>
-  -d line_item[quantity]<span class="o">=</span>3 <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/line_items/520884"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
+  -d line_item[quantity]<span class="o">=</span>10 <span class="se">\</span>
   -X PUT
 </code></pre>
 <blockquote>
@@ -1512,37 +1515,31 @@
 </blockquote>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">40.0</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Nihil et itaque adipisci sed ea dolorum."</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"product_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mf">120.0</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"weight"</span><span class="p">:</span><span class="w"> </span><span class="mf">300.0</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"adjustments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-  </span><span class="nt">"product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Чай Lipton Yellow Label"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"original_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mi">28</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"weight"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"human_volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10 пак x 6"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"items_per_pack"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"options_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"mini_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://instamart.ru/file.png?1370533476"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"small_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://instamart.ru/file.png?1370533476"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"product_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://instamart.ru/file.png?1370533476"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
+  </span><span class="nt">"line_item"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">520884</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">35.99</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Пробиотические продукты Активиа содержат уникальные бифидобактерия ActiRegularis, отобранные Данон за жизнеспособность и эффективную помощь организму. Ежедневная потребление Активиа помогает работе кишечника и способствует естественному очищению организма. Научные исследования подтвердили эффективность Активиа уже после 2-х недель ежедневного потребления. Изготовлено без добавления консервантов."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mf">359.9</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10006"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Напиток Danone Aktivia кисломолочный чернослив 2,0%"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">35.99</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"original_price"</span><span class="p">:</span><span class="w"> </span><span class="mf">42.12</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mf">-6.13</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"weight"</span><span class="p">:</span><span class="w"> </span><span class="mf">290.0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"items_per_pack"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"human_volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"290 г."</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="nt">"mini_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/spree/products/5946/mini/10006.jpg?1473242617"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"small_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/spree/products/5946/small/10006.jpg?1473242617"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"product_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/spree/products/5946/product/10006.jpg?1473242617"</span><span class="w">
+      </span><span class="p">}]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<aside class="warning">
-  not implemented
-</aside>
 
 <p>Чтобы, например, изменить количество единиц товара, необходимо выполнить запрос:</p>
 
@@ -1578,29 +1575,13 @@
 
 <h2 id="udalieniie-pozitsii-zakaza">Удаление позиции заказа</h2>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/line_items/1'</span> <span class="se">\</span>
-  -H <span class="s1">'Authorization: Token token=#{TOKEN}'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/line_items/520884"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
   -X DELETE
 </code></pre>
 <blockquote>
   <p>Ответ вернет результат с кодом 200</p>
 </blockquote>
-
-<blockquote>
-  <p>Удаление позиции может изменить shipments заказа:</p>
-</blockquote>
-
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"R307128032"</span><span class="p">,</span><span class="w">
-  </span><span class="err">...</span><span class="w">
-  </span><span class="nt">"line_items"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-  </span><span class="nt">"shipments"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<aside class="warning">
-  not implemented
-</aside>
 
 <p>Чтобы удалить позицию заказа, необходимо выполнить запрос:</p>
 
@@ -1635,8 +1616,8 @@
   <p>Пример команды для выбора адреса доставки:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/checkouts/#{NUMBER}'</span> <span class="se">\</span>
-  -H <span class="s1">'Authorization: Token token=#{TOKEN}'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/checkouts/#{NUMBER}"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
   -d <span class="s2">"order[ship_address_id]=1"</span>
 </code></pre>
 <blockquote>
@@ -1676,8 +1657,8 @@
   <p>Пример заполнения комментария к доставке:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/checkouts/#{NUMBER}'</span> <span class="se">\</span>
-  -H <span class="s1">'Authorization: Token token=#{TOKEN}'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/checkouts/#{NUMBER}"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
   -d <span class="s2">"order[special_instructions]=Вход со двора"</span>
 </code></pre>
 
@@ -1685,8 +1666,8 @@
   <p>Пример команды выбора интервала доставки:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/checkouts/#{NUMBER}'</span> <span class="se">\</span>
-  -H <span class="s1">'Authorization: Token token=#{TOKEN}'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/checkouts/#{NUMBER}"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
   -d <span class="s2">"order[shipments_attributes][1][delivery_slot_id]=1"</span>
 </code></pre>
 
@@ -1719,8 +1700,8 @@
   <p>Пример команды выбора способа доставки:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/checkouts/#{NUMBER}'</span> <span class="se">\</span>
-  -H <span class="s1">'Authorization: Token token=#{TOKEN}'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/checkouts/#{NUMBER}"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
   -d <span class="s2">"order[shipments_attributes][1][shipping_method_id]=1"</span>
 </code></pre>
 
@@ -1751,8 +1732,8 @@
   <p>Пример выбора метода оплаты:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/checkouts/#{NUMBER}'</span> <span class="se">\</span>
-  -H <span class="s1">'Authorization: Token token=#{TOKEN}'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/checkouts/#{NUMBER}"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
   -d <span class="s2">"order[payment_attributes][payment_tool_id]=1"</span>
 </code></pre>
 
@@ -1771,8 +1752,8 @@
   <p>Пример выбора способа связи:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/checkouts/#{NUMBER}'</span> <span class="se">\</span>
-  -H <span class="s1">'Authorization: Token token=#{TOKEN}'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/checkouts/#{NUMBER}"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
   -d <span class="s2">"order[notification_attributes][notification_method_id]=1"</span>
   -d <span class="s2">"order[notification_attributes][phone]=74951112233"</span>
 </code></pre>
@@ -1853,7 +1834,7 @@
 
           <h1 id="mietody-oplaty">Методы оплаты</h1>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://instamart.ru/v2/payment_tools'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/payment_tools'</span> <span class="se">\</span>
   -H <span class="s1">'Authorization: Token token=#{TOKEN}'</span> <span class="se">\</span>
 </code></pre>
 
@@ -1882,7 +1863,7 @@
 
 <p>Получить список доступных пользователю методов оплаты можно, выполнив запрос:</p>
 
-<p><code>GET https://instamart.ru/v2/payment_tools</code></p>
+<p><code>GET https://api.instamart.ru/v2/payment_tools</code></p>
 
           <h1 id="zhaloby-na-tovar">Жалобы на товар</h1>
 
