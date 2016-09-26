@@ -5,8 +5,8 @@
 > Пример команды:
 
 ```shell
-curl '<%= config[:host] %>/orders' \
-  -H 'Authorization: Token token=#{TOKEN}' \
+curl "<%= config[:host] %>/orders" \
+  -H "Authorization: Token token=#{TOKEN}" \
   -X POST
 ```
 > Ответ будет содержать следующие данные:
@@ -48,8 +48,8 @@ curl '<%= config[:host] %>/orders' \
 > Пример команды:
 
 ```shell
-curl '<%= config[:host] %>/orders/current' \
-  -H 'Authorization: Token token=#{TOKEN}'
+curl "<%= config[:host] %>/orders/current" \
+  -H "Authorization: Token token=#{TOKEN}"
 ```
 
 > Ответ будет содержать следующие данные:
@@ -89,8 +89,8 @@ curl '<%= config[:host] %>/orders/current' \
 > Пример команды:
 
 ```shell
-curl '<%= config[:host] %>/orders' \
-  -H 'Authorization: Token token=#{TOKEN}'
+curl "<%= config[:host] %>/orders" \
+  -H "Authorization: Token token=#{TOKEN}"
 ```
 
 > Ответ будет содержать следующие данные:
@@ -135,70 +135,65 @@ curl '<%= config[:host] %>/orders' \
 ## Добавление позиции заказа
 
 ```shell
-curl '<%= config[:host] %>/line_items' \
-  -H 'Authorization: Token token=#{TOKEN}' \
-  -d line_item[product_id]=1 \
-  -d line_item[quantity]=5
+curl "<%= config[:host] %>/line_items" \
+  -H "Authorization: Token token=#{TOKEN}" \
+  -d line_item[order_number]=R314234460 \
+  -d line_item[product_id]=6 \
+  -d line_item[quantity]=2
 ```
 > В ответе вернется созданный `line_item`:
 
 ```json
 {
-  "id": 1,
-  "quantity": 5,
-  "price": 40.0,
-  "description": "Nihil et itaque adipisci sed ea dolorum.",
-  "retailer_id": 1,
-  "product_id": 1,
-  "total": 200.00,
-  "weight": 500.0,
-  "adjustments": [],
-  "product": {
-    "id": 1,
-    "name": "Чай Lipton Yellow Label",
-    "price": 42,
-    "original_price": 70,
-    "discount": 28,
-    "weight": 100.0,
-    "human_volume": "10 пак x 6",
-    "items_per_pack": 2,
-    "options_text": "",
-    "images": [
-      {
-        "mini_url": "https::/instamart.ru/file.png?1370533476",
-        "small_url": "https:://instamart.ru/file.png?1370533476",
-        "product_url": "https://instamart.ru/file.png?1370533476"
-      }
-    ]
+  "line_item": {
+    "id": 520884,
+    "quantity": 2,
+    "price": 35.99,
+    "description": "Пробиотические продукты Активиа содержат уникальные бифидобактерия ActiRegularis, отобранные Данон за жизнеспособность и эффективную помощь организму. Ежедневная потребление Активиа помогает работе кишечника и способствует естественному очищению организма. Научные исследования подтвердили эффективность Активиа уже после 2-х недель ежедневного потребления. Изготовлено без добавления консервантов.",
+    "total": 71.98,
+    "product": {
+      "id": 6,
+      "sku": "10006",
+      "name": "Напиток Danone Aktivia кисломолочный чернослив 2,0%",
+      "price": 35.99,
+      "original_price": 42.12,
+      "discount": -6.13,
+      "weight": 290.0,
+      "items_per_pack": 1,
+      "human_volume": "290 г.",
+      "images": [{
+        "mini_url": "http://instamart.ru/spree/products/5946/mini/10006.jpg?1473242617",
+        "small_url": "http://instamart.ru/spree/products/5946/small/10006.jpg?1473242617",
+        "product_url": "http://instamart.ru/spree/products/5946/product/10006.jpg?1473242617"
+      }]
+    }
   }
 }
 ```
-
-<aside class="warning">
-  not implemented
-</aside>
 
 > Добавление позиции к заказу может изменить поле shipments заказа:
 
 ```json
 {
-  "number": "R307128032",
-  ...
-  "line_items": [{
+  "order": {
+    "number": "R314234460",
     ...
-  }],
-  "shipments": [
-    {
-      "id": 1,
-      "number": "H123456789",
-      "cost": 0,
-      "shipped_at": null,
-      "retailer_id": 1,
-      "delivery_slot_id": null,
-      "state": "pending",
-      "shipping_method": null
-    }
-  ]
+    "line_items": [{
+      ...
+    }],
+    "shipments": [
+      {
+        "id": 1,
+        "number": "H123456789",
+        "cost": 0,
+        "shipped_at": null,
+        "retailer_id": 1,
+        "delivery_slot_id": null,
+        "state": "pending",
+        "shipping_method": null
+      }
+    ]
+  }
 }
 ```
 
@@ -211,6 +206,7 @@ curl '<%= config[:host] %>/line_items' \
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
+line_item[order_number] | Да | Номер заказа
 line_item[product_id] | Да | ID продукта
 line_item[quantity] | Да | количество добавляемых позиций
 
@@ -221,46 +217,40 @@ line_item[quantity] | Да | количество добавляемых поз�
 ## Редактирование позиции заказа
 
 ```shell
-curl '<%= config[:host] %>/line_items/1' \
-  -H 'Authorization: Token token=#{TOKEN}' \
-  -d line_item[quantity]=3 \
+curl "<%= config[:host] %>/line_items/520884" \
+  -H "Authorization: Token token=#{TOKEN}" \
+  -d line_item[quantity]=10 \
   -X PUT
 ```
 > Ответ будет содержать следующие данные:
 
 ```json
 {
-  "id": 1,
-  "quantity": 3,
-  "price": 40.0,
-  "description": "Nihil et itaque adipisci sed ea dolorum.",
-  "product_id": 1,
-  "total": 120.0,
-  "weight": 300.0,
-  "adjustments": [],
-  "product": {
-    "id": 1,
-    "name": "Чай Lipton Yellow Label",
-    "price": 42,
-    "original_price": 70,
-    "discount": 28,
-    "weight": 100.0,
-    "human_volume": "10 пак x 6",
-    "items_per_pack": 2,
-    "options_text": "",
-    "images": [
-      {
-        "mini_url": "https://instamart.ru/file.png?1370533476",
-        "small_url": "https://instamart.ru/file.png?1370533476",
-        "product_url": "https://instamart.ru/file.png?1370533476"
-      }
-    ]
+  "line_item": {
+    "id": 520884,
+    "quantity": 10,
+    "price": 35.99,
+    "description": "Пробиотические продукты Активиа содержат уникальные бифидобактерия ActiRegularis, отобранные Данон за жизнеспособность и эффективную помощь организму. Ежедневная потребление Активиа помогает работе кишечника и способствует естественному очищению организма. Научные исследования подтвердили эффективность Активиа уже после 2-х недель ежедневного потребления. Изготовлено без добавления консервантов.",
+    "total": 359.9,
+    "product": {
+      "id": 6,
+      "sku": "10006",
+      "name": "Напиток Danone Aktivia кисломолочный чернослив 2,0%",
+      "price": 35.99,
+      "original_price": 42.12,
+      "discount": -6.13,
+      "weight": 290.0,
+      "items_per_pack": 1,
+      "human_volume": "290 г.",
+      "images": [{
+        "mini_url": "http://instamart.ru/spree/products/5946/mini/10006.jpg?1473242617",
+        "small_url": "http://instamart.ru/spree/products/5946/small/10006.jpg?1473242617",
+        "product_url": "http://instamart.ru/spree/products/5946/product/10006.jpg?1473242617"
+      }]
+    }
   }
 }
 ```
-<aside class="warning">
-  not implemented
-</aside>
 
 Чтобы, например, изменить количество единиц товара, необходимо выполнить запрос:
 
@@ -280,26 +270,11 @@ line_item[quantity] | Нет | Количество единиц товара
 ## Удаление позиции заказа
 
 ```shell
-curl '<%= config[:host] %>/line_items/1' \
-  -H 'Authorization: Token token=#{TOKEN}' \
+curl "<%= config[:host] %>/line_items/520884" \
+  -H "Authorization: Token token=#{TOKEN}" \
   -X DELETE
 ```
 > Ответ вернет результат с кодом 200
-
-> Удаление позиции может изменить shipments заказа:
-
-```json
-{
-  "number": "R307128032",
-  ...
-  "line_items": [],
-  "shipments": []
-}
-```
-
-<aside class="warning">
-  not implemented
-</aside>
 
 Чтобы удалить позицию заказа, необходимо выполнить запрос:
 
@@ -320,8 +295,8 @@ ID | Да | ID позиции заказа
 > Пример команды для выбора адреса доставки:
 
 ```shell
-curl '<%= config[:host] %>/checkouts/#{NUMBER}' \
-  -H 'Authorization: Token token=#{TOKEN}' \
+curl "<%= config[:host] %>/checkouts/#{NUMBER}" \
+  -H "Authorization: Token token=#{TOKEN}" \
   -d "order[ship_address_id]=1"
 ```
 > Если данные были указаны верно, ответ будет содержать json-документ заказа:
@@ -359,16 +334,16 @@ curl '<%= config[:host] %>/checkouts/#{NUMBER}' \
 > Пример заполнения комментария к доставке:
 
 ```shell
-curl '<%= config[:host] %>/checkouts/#{NUMBER}' \
-  -H 'Authorization: Token token=#{TOKEN}' \
+curl "<%= config[:host] %>/checkouts/#{NUMBER}" \
+  -H "Authorization: Token token=#{TOKEN}" \
   -d "order[special_instructions]=Вход со двора"
 ```
 
 > Пример команды выбора интервала доставки:
 
 ```shell
-curl '<%= config[:host] %>/checkouts/#{NUMBER}' \
-  -H 'Authorization: Token token=#{TOKEN}' \
+curl "<%= config[:host] %>/checkouts/#{NUMBER}" \
+  -H "Authorization: Token token=#{TOKEN}" \
   -d "order[shipments_attributes][1][delivery_slot_id]=1"
 ```
 
@@ -400,8 +375,8 @@ curl '<%= config[:host] %>/checkouts/#{NUMBER}' \
 > Пример команды выбора способа доставки:
 
 ```shell
-curl '<%= config[:host] %>/checkouts/#{NUMBER}' \
-  -H 'Authorization: Token token=#{TOKEN}' \
+curl "<%= config[:host] %>/checkouts/#{NUMBER}" \
+  -H "Authorization: Token token=#{TOKEN}" \
   -d "order[shipments_attributes][1][shipping_method_id]=1"
 ```
 
@@ -430,8 +405,8 @@ curl '<%= config[:host] %>/checkouts/#{NUMBER}' \
 > Пример выбора метода оплаты:
 
 ```shell
-curl '<%= config[:host] %>/checkouts/#{NUMBER}' \
-  -H 'Authorization: Token token=#{TOKEN}' \
+curl "<%= config[:host] %>/checkouts/#{NUMBER}" \
+  -H "Authorization: Token token=#{TOKEN}" \
   -d "order[payment_attributes][payment_tool_id]=1"
 ```
 
@@ -448,8 +423,8 @@ curl '<%= config[:host] %>/checkouts/#{NUMBER}' \
 > Пример выбора способа связи:
 
 ```shell
-curl '<%= config[:host] %>/checkouts/#{NUMBER}' \
-  -H 'Authorization: Token token=#{TOKEN}' \
+curl "<%= config[:host] %>/checkouts/#{NUMBER}" \
+  -H "Authorization: Token token=#{TOKEN}" \
   -d "order[notification_attributes][notification_method_id]=1"
   -d "order[notification_attributes][phone]=74951112233"
 ```

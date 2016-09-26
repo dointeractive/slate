@@ -32,12 +32,12 @@ activate :relative_assets
 set :relative_links, true
 
 configure :development do
-  set :host, 'http://im.dev/v2'
+  set :host, 'http://api.im.dev/v2'
 end
 
 # Build Configuration
 configure :build do
-  set :host, 'https://instamart.ru/v2'
+  set :host, 'https://api.instamart.ru/v2'
 
   # If you're having trouble with Middleman hanging, commenting
   # out the following two lines has been known to help
