@@ -19,7 +19,7 @@ curl "https://api.instamart.ru/v2/products?rid=1"
       "original_price": 55.79,
       "discount": 1.0,
       "weight": 500.0,
-      "human_volume": "500 г."
+      "human_volume": "500 г.",
       "items_per_pack": 1,
       "description": "Бананы желтые из Эквадора",
       "images": [
