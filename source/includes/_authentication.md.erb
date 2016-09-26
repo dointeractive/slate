@@ -10,7 +10,7 @@
 email=test@test.ru
 pass=qwer
 credentials=$(echo $email:$pass | base64)
-curl 'https://api.instamart.ru/v2/sessions' \
+curl '<%= config[:host] %>/sessions' \
   -X POST \
   -H 'Authorization: Basic $credentials'
 ```
@@ -27,7 +27,7 @@ curl 'https://api.instamart.ru/v2/sessions' \
 Аутентификация осуществляется методом [HTTP Basic Auth](https://en.wikipedia.org/wiki/Basic_access_authentication).
 
 Получить токен можно, выполнив запрос:
-`POST https://api.instamart.ru/v2/sessions`
+`POST <%= config[:host] %>/sessions`
 
 Учетные данные пользователя (емейл и пароль) передаются в заголовке запроса вида:
 `Authorization: Basic #{DIGEST}`
@@ -45,7 +45,7 @@ password | Да | Пароль пользователя
 > Пример кода для аутентификации пользователя через vkontakte
 
 ```shell
-curl 'https://api.instamart.ru/v2/auth_providers/vkontakte/sessions' \
+curl '<%= config[:host] %>/auth_providers/vkontakte/sessions' \
   -X POST \
   -d uid=0 \
   -d session[first_name]=fname \
@@ -63,7 +63,7 @@ curl 'https://api.instamart.ru/v2/auth_providers/vkontakte/sessions' \
 ```
 
 Получить токен можно, выполнив запрос:
-`POST https://api.instamart.ru/v2/auth_providers/#{PROVIDER_ID}/sessions`
+`POST <%= config[:host] %>/auth_providers/#{PROVIDER_ID}/sessions`
 
 ### Параметры запроса
 
