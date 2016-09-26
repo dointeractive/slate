@@ -7,9 +7,12 @@
 > Пример кода для аутентификации пользователя с учетными данными "test@test.ru", "qwer":
 
 ```shell
+email=test@test.ru
+pass=qwer
+credentials=$(echo $email:$pass | base64)
 curl 'https://api.instamart.ru/v2/sessions' \
   -X POST \
-  -H 'Authorization: Basic dGVzdEB0ZXN0LnJ1OnF3ZXIK'
+  -H 'Authorization: Basic $credentials'
 ```
 > Ответ будет содержать следующие данные
 
