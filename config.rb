@@ -1,5 +1,3 @@
-set :host, 'https://instamart.ru/v2'
-
 # Markdown
 set :markdown_engine, :kramdown
 set :markdown,
@@ -33,8 +31,14 @@ end
 activate :relative_assets
 set :relative_links, true
 
+configure :development do
+  set :host, 'http://im.dev/v2'
+end
+
 # Build Configuration
 configure :build do
+  set :host, 'https://instamart.ru/v2'
+
   # If you're having trouble with Middleman hanging, commenting
   # out the following two lines has been known to help
   activate :minify_css
