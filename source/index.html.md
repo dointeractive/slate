@@ -11,6 +11,7 @@ includes:
   - users
   - authentication
   - passwords
+  - operational_zones
   - addresses
   - retailers
   - taxons

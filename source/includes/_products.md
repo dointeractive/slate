@@ -3,7 +3,7 @@
 ## Список продуктов
 
 ```shell
-curl "https://api.instamart.ru/v2/products?rid=1"
+curl "<%= config[:host] %>/products?rid=1"
 ```
 
 > Команда выше возвращает JSON:
@@ -45,9 +45,9 @@ curl "https://api.instamart.ru/v2/products?rid=1"
 
 ### HTTP запрос
 
-`GET https://api.instamart.ru/v2/products`
+`GET <%= config[:host] %>/products`
 
-API ограничивает максимальное число возвращаемых продуктов 20 объектами. Для доступа к остальным продуктам реализован интерфейс пагинации.
+API ограничивает максимальное число возвращаемых продуктов 24 объектами. Для доступа к остальным продуктам реализован интерфейс пагинации.
 Каждый запрос к `/v2/products` помимо самих продуктов также возвращает объект `meta`, указывающий номер текущей страницы, номер следующией страницы и общее количество страниц. Получить конкретную страницу с данными можно, указав параметр `page`.
 
 ### Параметры запроса
@@ -66,7 +66,7 @@ page | -- | Номер страницы
 ## Карточка продукта
 
 ```shell
-curl "https://api.instamart.ru/v2/products/6"
+curl "<%= config[:host] %>/products/6"
 ```
 
 > Команда выше возвращает JSON:
@@ -121,7 +121,7 @@ curl "https://api.instamart.ru/v2/products/6"
 
 ### HTTP запрос
 
-`GET https://api.instamart.ru/v2/products/#{PRODUCT_ID}`
+`GET <%= config[:host] %>/products/#{PRODUCT_ID}`
 
 ### Параметры запроса
 
