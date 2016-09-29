@@ -819,7 +819,33 @@ curl <span class="s1">'https://api.instamart.ru/v2/sessions'</span> <span class=
 
           <h1 id="katalogh">Каталог</h1>
 
-<p>API каталога возвращает данные необходимые для отображения главного экрана и экранов категорий.</p>
+<blockquote>
+  <p>Отдел с дочерними отделами</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Чай и кофе"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"products_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">668</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+  <p>Отдел без дочерних отделов</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"taxon_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Чай"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"products_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">232</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>API каталога возвращает особое представление структуры категорий – “отделы”. Отделы можно использовать для отображения главного экрана и экранов категорий.<br />
+API каталога предоставляет отделы в виде двухуровнего дерева. Запрос списка отделов всегда возвращает отделы “верхнего уровня”. Отдел “верхнего уровня” может иметь дочерние отделы и в этом случае он может быть отображен на экране категорий, для этого в документ включено поле <code>id</code>. Если отдел “верхнего уровня” не имеет дочерних отделов, его не нужно отображать на экране категорий, поэтому в документе у него отсутствует поле <code>id</code>, вместо этого документ содержит поле <code>taxon_id</code>, которое можно использовать для вывода экрана с продуктами из этого отдела.<br />
+Запрос отдела для экрана категории возвращает сам отдел, а также его дочерние отделы (“нижнего уровня”). Отделы “нижнего уровня” всегда имеют только поле <code>taxon_id</code>, и не имеют поля <code>id</code>.</p>
 
 <h2 id="vydacha-dlia-ghlavnogho-ekrana">Выдача для главного экрана</h2>
 
@@ -910,9 +936,11 @@ curl <span class="s1">'https://api.instamart.ru/v2/sessions'</span> <span class=
 </table>
 
 <p>Ответ содержит список документов <code>departments</code> и может содержать документ <code>deals</code>.<br />
-Каждый элемент из списка <code>departments</code> включает поле <code>id</code>, которое можно использовать, чтобы получить расширенные данные для экрана категории.</p>
+Каждый элемент из списка <code>departments</code> должен обязательно включать одно из двух полей: <code>id</code> или <code>taxon_id</code>.<br />
+Если документ содержит поле <code>id</code>, то его можно использовать для получения экрана категории.<br />
+Если документ содержит поле <code>taxon_id</code>, то его можно использовать для получения списка продуктов.</p>
 
-<p>Документ <code>deals</code> содержит данные категории “скидки”.</p>
+<p>Документ <code>deals</code> содержит данные для отображения продуктов из категории “скидки”.</p>
 
 <h2 id="vydacha-ekrana-katieghorii">Выдача экрана категории</h2>
 
@@ -926,7 +954,7 @@ curl <span class="s1">'https://api.instamart.ru/v2/sessions'</span> <span class=
   <p>Ответ будет содержать следующие данные</p>
 </blockquote>
 
-<pre class="highlight json"><code><span class="p">{</span><span class="w"> 
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"department"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Чай и кофе"</span><span class="p">,</span><span class="w">
@@ -988,6 +1016,10 @@ curl <span class="s1">'https://api.instamart.ru/v2/sessions'</span> <span class=
     </tr>
   </tbody>
 </table>
+
+<p>Ответ содержит расширенные данные для данной категории.<br />
+Список подкатегорий лежит в поле <code>aisles</code> документа <code>department</code>.<br />
+Каждый документ из списка <code>aisles</code> по структуре идентичен документу <code>department</code>, но может иметь только поле <code>taxon_id</code>.</p>
 
           <h1 id="produkty">Продукты</h1>
 
