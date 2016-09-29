@@ -532,6 +532,53 @@ curl <span class="s1">'https://api.instamart.ru/v2/sessions'</span> <span class=
   </tbody>
 </table>
 
+          <h1 id="goroda-obsluzhivaniia">Города обслуживания</h1>
+
+<blockquote>
+  <p>Пример проверки доступности Instamart в Москве:</p>
+</blockquote>
+
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/operational_zones?location=Москва"</span>
+</code></pre>
+
+<blockquote>
+  <p>Команда выше возвращает JSON:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"zones"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Москва"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Проверить доступен Instamart в указанном городе или нет можно, выполнив следующий запрос:</p>
+
+<h3 id="http-zapros">HTTP запрос</h3>
+
+<p><code>GET https://api.instamart.ru/v2/operational_zones</code></p>
+
+<h3 id="paramietry-zaprosa">Параметры запроса</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>location</td>
+      <td>Да</td>
+      <td>Город, поселок, населенный пункт пользователя</td>
+    </tr>
+  </tbody>
+</table>
+
           <h1 id="adriesa-polzovatieliei">Адреса пользователей</h1>
 
 <h2 id="poluchieniie-spiska-adriesov">Получение списка адресов</h2>
@@ -1025,7 +1072,7 @@ API каталога предоставляет отделы в виде дву�
 
 <h2 id="spisok-produktov">Список продуктов</h2>
 
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/products?rid=1"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"&lt;%= config[:host] %&gt;/products?rid=1"</span>
 </code></pre>
 
 <blockquote>
@@ -1068,9 +1115,9 @@ API каталога предоставляет отделы в виде дву�
 
 <h3 id="http-zapros">HTTP запрос</h3>
 
-<p><code>GET https://api.instamart.ru/v2/products</code></p>
+<p><code>GET &lt;%= config[:host] %&gt;/products</code></p>
 
-<p>API ограничивает максимальное число возвращаемых продуктов 20 объектами. Для доступа к остальным продуктам реализован интерфейс пагинации.<br />
+<p>API ограничивает максимальное число возвращаемых продуктов 24 объектами. Для доступа к остальным продуктам реализован интерфейс пагинации.<br />
 Каждый запрос к <code>/v2/products</code> помимо самих продуктов также возвращает объект <code>meta</code>, указывающий номер текущей страницы, номер следующией страницы и общее количество страниц. Получить конкретную страницу с данными можно, указав параметр <code>page</code>.</p>
 
 <h3 id="paramietry-zaprosa">Параметры запроса</h3>
@@ -1108,7 +1155,7 @@ API каталога предоставляет отделы в виде дву�
 
 <h2 id="kartochka-produkta">Карточка продукта</h2>
 
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/products/6"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"&lt;%= config[:host] %&gt;/products/6"</span>
 </code></pre>
 
 <blockquote>
@@ -1164,7 +1211,7 @@ API каталога предоставляет отделы в виде дву�
 
 <h3 id="http-zapros-1">HTTP запрос</h3>
 
-<p><code>GET https://api.instamart.ru/v2/products/#{PRODUCT_ID}</code></p>
+<p><code>GET &lt;%= config[:host] %&gt;/products/#{PRODUCT_ID}</code></p>
 
 <h3 id="paramietry-zaprosa-1">Параметры запроса</h3>
 
