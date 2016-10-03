@@ -15,12 +15,10 @@ curl "<%= config[:host] %>/orders" \
 {
   "order": {
     "number": "R314234460",
-    "email": "test@email.ru",
     "total": 0.0,
     "item_total": 0.0,
     "ship_total": 0,
     "adjustment_total": 0.0,
-    "payment_total": 0.0,
     "shipment_state": null,
     "payment_state": null,
     "special_instructions": null,
@@ -28,20 +26,60 @@ curl "<%= config[:host] %>/orders" \
     "updated_at": "2016-09-23T16:19:29.284+03:00",
     "completed_at": null,
     "ship_address": null,
-    "line_items": [],
-    "payments": [],
-    "shipments": [],
+    "packages": [],
     "adjustments": []
   }
 }
 ```
 
+Для каждого пользователя может быть создано сколько угодно заказов, но если у пользователя есть незавершенный заказ, сервер вернет ошибку с кодом `422` и заказ не будет создан.
 Создать новый заказ можно, выполнив следующий запрос:
 
 `POST <%= config[:host] %>/orders`
 
-В случае, если у пользователя есть незавершенный заказ, данный запрос вернет ошибку с кодом `422`
+Объект `Order`, возвращаемый сервером, содержит информацию о заказе, заказанных товарах и скидках.
+В один заказ могут быть добавлены товары от разных ритейлеров. Заказанные товары, в разбивке по ритейлерам, можно получить из поля `packages` заказа.
 
+### Структура объекта Order
+
+Атрибут | Описание
+--------- | -----------
+number | номер заказа
+total | итоговая сумма заказа
+item_total | сумма всех позиций заказа, без скидки
+ship_total | стоимость доставки
+adjustment_total | сумма скидок
+shipment_state | состояние доставки
+payment_state | состояние оплаты
+special_instructions | примечание к заказу
+ship_address | адрес доставки
+packages | данные о добавленных товаров
+adjustments | данные о действующих скидках
+
+### Структура объекта Package
+
+Объект `Package` создается на каждого ритейлера, товары котого были добавлены в заказ.
+
+Атрибут | Описание
+--------- | -----------
+id | id пакета
+alerts | список предупреждений об ошибках в заказе
+promotions | список предложенй о скидках и пр.
+total | суммарная стоимость добавленных позиций 
+proposed_shipment | предлагаемый способ доставки
+retailer | информация о ритейлере
+line_items | список позиций
+
+### Структура объекта LineItem
+
+Атрибут | Описание
+--------- | -----------
+id | id позиции
+quantity | количество товаров
+description | текстовое описание содержимого
+price | стоимость одной позиции
+total | сумма
+product | информация о продукте
 
 ## Получение текущего заказ
 
@@ -58,12 +96,10 @@ curl "<%= config[:host] %>/orders/current" \
 {
   "order": {
     "number": "R314234460",
-    "email": "test@email.ru",
     "total": 0.0,
     "item_total": 0.0,
     "ship_total": 0,
     "adjustment_total": 0.0,
-    "payment_total": 0.0,
     "shipment_state": null,
     "payment_state": null,
     "special_instructions": null,
@@ -71,9 +107,7 @@ curl "<%= config[:host] %>/orders/current" \
     "updated_at": "2016-09-23T16:19:29.284+03:00",
     "completed_at": null,
     "ship_address": null,
-    "line_items": [],
-    "payments": [],
-    "shipments": [],
+    "packages": [],
     "adjustments": []
   }
 }
@@ -100,12 +134,10 @@ curl "<%= config[:host] %>/orders" \
   "orders": [
     {
       "number": "R314234460",
-      "email": "test@email.ru",
       "total": 0.0,
       "item_total": 0.0,
       "ship_total": 0,
       "adjustment_total": 0.0,
-      "payment_total": 0.0,
       "shipment_state": null,
       "payment_state": null,
       "special_instructions": null,
@@ -113,9 +145,7 @@ curl "<%= config[:host] %>/orders" \
       "updated_at": "2016-09-23T16:19:29.284+03:00",
       "completed_at": null,
       "ship_address": null,
-      "line_items": [],
-      "payments": [],
-      "shipments": [],
+      "packages": [],
       "adjustments": []
     }
   ],
@@ -170,33 +200,6 @@ curl "<%= config[:host] %>/line_items" \
   }
 }
 ```
-
-> Добавление позиции к заказу может изменить поле shipments заказа:
-
-```json
-{
-  "order": {
-    "number": "R314234460",
-    ...
-    "line_items": [{
-      ...
-    }],
-    "shipments": [
-      {
-        "id": 1,
-        "number": "H123456789",
-        "cost": 0,
-        "shipped_at": null,
-        "retailer_id": 1,
-        "delivery_slot_id": null,
-        "state": "pending",
-        "shipping_method": null
-      }
-    ]
-  }
-}
-```
-
 
 Добавить позицию к заказу, можно выполнив запрос:
 
@@ -313,10 +316,8 @@ curl "<%= config[:host] %>/checkouts/#{NUMBER}" \
   "created_at": "2014-07-06T18:52:33.724Z",
   "updated_at": "2014-07-06T18:52:33.752Z",
   "completed_at": null,
-  "payment_total": 0.0,
   "shipment_state": null,
   "payment_state": null,
-  "email": "test@example.com",
   "special_instructions": null,
   "total_quantity": 0,
   "ship_address": {
@@ -324,9 +325,7 @@ curl "<%= config[:host] %>/checkouts/#{NUMBER}" \
     "city": "Москва",
     "full_address": "Старая Басманная 3"
   },
-  "line_items": [...],
-  "payments": [],
-  "shipments": [...],
+  "packages": [...],
   "adjustments": []
 }
 ```
@@ -347,59 +346,12 @@ curl "<%= config[:host] %>/checkouts/#{NUMBER}" \
   -d "order[shipments_attributes][1][delivery_slot_id]=1"
 ```
 
-> Ответ вернет обновленный заказ:
-
-```json
-{
-  "number": "R307128032",
-  ...
-  "line_items": [{
-    ...
-  }],
-  "shipments": [
-    {
-      "id": 1,
-      "number": "H123456789",
-      "cost": 0,
-      "shipped_at": null,
-      "retailer_id": 1,
-      "delivery_slot_id": 1,
-      "state": "pending",
-      "shipping_method": null
-    }
-  ]
-}
-```
-
-
 > Пример команды выбора способа доставки:
 
 ```shell
 curl "<%= config[:host] %>/checkouts/#{NUMBER}" \
   -H "Authorization: Token token=#{TOKEN}" \
   -d "order[shipments_attributes][1][shipping_method_id]=1"
-```
-
-> При выбранном способе доставки, ответ будет включать дополнительные данные:
-
-```json
-{
-  "number": "R307128032",
-  "item_total": 0.0,
-  ...
-  "shipments": [
-    {
-      "id": 1,
-      "number": "H123456789",
-      "cost": 500.0,
-      "shipped_at": null,
-      "state": "pending",
-      "shipping_method": {
-        "name": "Доставка"
-      }
-    }
-  ]
-}
 ```
 
 > Пример выбора метода оплаты:
