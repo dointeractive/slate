@@ -380,7 +380,7 @@ curl <span class="s1">'https://api.instamart.ru/v2/sessions'</span> <span class=
 
 <pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/auth_providers/vkontakte/sessions'</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
-  -d <span class="nv">uid</span><span class="o">=</span>0 <span class="se">\</span>
+  -d session[uid]<span class="o">=</span>0 <span class="se">\</span>
   -d session[first_name]<span class="o">=</span>fname <span class="se">\</span>
   -d session[last_name]<span class="o">=</span>lname <span class="se">\</span>
   -d session[email]<span class="o">=</span>mail@example.com
