@@ -324,9 +324,9 @@
 <pre class="highlight shell"><code><span class="nv">email</span><span class="o">=</span><span class="nb">test</span>@test.ru
 <span class="nv">pass</span><span class="o">=</span>qwer
 <span class="nv">credentials</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="nv">$email</span>:<span class="nv">$pass</span> | base64<span class="k">)</span>
-curl <span class="s1">'https://api.instamart.ru/v2/sessions'</span> <span class="se">\</span>
+curl <span class="s2">"https://api.instamart.ru/v2/sessions"</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
-  -H <span class="s1">'Authorization: Basic $credentials'</span>
+  -H <span class="s2">"Authorization: Basic </span><span class="nv">$credentials</span><span class="s2">"</span>
 </code></pre>
 <blockquote>
   <p>Ответ будет содержать следующие данные</p>
@@ -378,7 +378,7 @@ curl <span class="s1">'https://api.instamart.ru/v2/sessions'</span> <span class=
   <p>Пример кода для аутентификации пользователя через vkontakte</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/auth_providers/vkontakte/sessions'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/auth_providers/vkontakte/sessions"</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
   -d session[uid]<span class="o">=</span>0 <span class="se">\</span>
   -d session[first_name]<span class="o">=</span>fname <span class="se">\</span>
@@ -585,8 +585,8 @@ curl <span class="s1">'https://api.instamart.ru/v2/sessions'</span> <span class=
 
 <h2 id="poluchieniie-spiska-adriesov">Получение списка адресов</h2>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/orders'</span> <span class="se">\</span>
-  -H <span class="s1">'Authorization: Token token=#{TOKEN}'</span> 
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/addresses"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> 
 </code></pre>
 
 <blockquote>
@@ -594,35 +594,41 @@ curl <span class="s1">'https://api.instamart.ru/v2/sessions'</span> <span class=
 </blockquote>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w"> 
-  </span><span class="nt">"addresses"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Москва"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Фридриха Энгельса"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"building"</span><span class="p">:</span><span class="w"> </span><span class="mi">56</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"111111"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="nt">"addresses"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Иван"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Петров"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"full_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Фридриха Энгельса 56"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Москва"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Фридриха Энгельса"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"building"</span><span class="p">:</span><span class="w"> </span><span class="s2">"56"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"block"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"apartment"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"lat"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"lon"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="p">}],</span><span class="w">
+  </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"current_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"next_page"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total_pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"per_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-
 </span></code></pre>
-<aside class="warning">
-  not implemented
-</aside>
 
 <p>Получить список всех адресов можно, выполнив запрос:</p>
 
-<p><code>GET https://api.instamart.ru/v2/orders</code></p>
+<p><code>GET https://api.instamart.ru/v2/addresses</code></p>
 
 <h2 id="sozdaniie-novogho-adriesa">Создание нового адреса</h2>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/orders'</span> <span class="se">\</span>
-  -H <span class="s1">'Authorization: Token token=#{TOKEN}'</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/addresses"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
-  -d <span class="s2">"address[city]=Москва"</span> <span class="se">\</span>
+  -d <span class="s2">"address[full_address]=Фридриха Энгельса 56"</span> <span class="se">\</span>
   -d <span class="s2">"address[street]=Фридриха Энгельса"</span> <span class="se">\</span>
-  -d <span class="s2">"address[building]=56"</span> <span class="se">\</span>
-  -d <span class="s2">"address[zipcode]=111111"</span>
+  -d <span class="s2">"address[building]=56"</span> 
 </code></pre>
 
 <blockquote>
@@ -630,21 +636,26 @@ curl <span class="s1">'https://api.instamart.ru/v2/sessions'</span> <span class=
 </blockquote>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Москва"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Фридриха Энгельса"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"building"</span><span class="p">:</span><span class="w"> </span><span class="mi">56</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"111111"</span><span class="w">
+  </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Иван"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Петров"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"full_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Фридриха Энгельса 56"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Москва"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Фридриха Энгельса"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"building"</span><span class="p">:</span><span class="w"> </span><span class="s2">"56"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"block"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"apartment"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"lat"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"lon"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<aside class="warning">
-  not implemented
-</aside>
-
 <p>Добавить новый адрес пользователя можно, выполнив запрос:</p>
 
-<p><code>POST https://api.instamart.ru/v2/orders</code></p>
+<p><code>POST https://api.instamart.ru/v2/addresses</code></p>
 
 <table>
   <thead>
@@ -656,32 +667,67 @@ curl <span class="s1">'https://api.instamart.ru/v2/sessions'</span> <span class=
   </thead>
   <tbody>
     <tr>
+      <td>address[first_name]</td>
+      <td>-</td>
+      <td>Имя пользователя/контактого лица</td>
+    </tr>
+    <tr>
+      <td>address[last_name]</td>
+      <td>-</td>
+      <td>Фамилия пользоватя/контактного лица</td>
+    </tr>
+    <tr>
+      <td>address[full_address]</td>
+      <td>Да (временно)</td>
+      <td>Полный адрес (в ближайшие дни уберем это поле)</td>
+    </tr>
+    <tr>
       <td>address[city]</td>
       <td>Да</td>
       <td>Город</td>
     </tr>
     <tr>
       <td>address[street]</td>
-      <td>-</td>
+      <td>Да</td>
       <td>Улица</td>
     </tr>
     <tr>
       <td>address[building]</td>
-      <td>-</td>
+      <td>Да</td>
       <td>Номер дома</td>
     </tr>
     <tr>
-      <td>address[zipcode]</td>
+      <td>address[block]</td>
       <td>-</td>
-      <td>Почтовый индекс</td>
+      <td>Строение</td>
+    </tr>
+    <tr>
+      <td>address[apartment]</td>
+      <td>-</td>
+      <td>Номер квартиры</td>
+    </tr>
+    <tr>
+      <td>address[comments]</td>
+      <td>-</td>
+      <td>Комментарий к адресу</td>
+    </tr>
+    <tr>
+      <td>address[lon]</td>
+      <td>-</td>
+      <td>Долгота</td>
+    </tr>
+    <tr>
+      <td>address[lat]</td>
+      <td>-</td>
+      <td>Широта</td>
     </tr>
   </tbody>
 </table>
 
 <h2 id="riedaktirovaniie-adriesa">Редактирование адреса</h2>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/orders/2'</span> <span class="se">\</span>
-  -H <span class="s1">'Authorization: Token token=#{TOKEN}'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/addresses/2"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
   -X PUT <span class="se">\</span>
   -d <span class="s2">"address[building]=53"</span>
 </code></pre>
@@ -691,21 +737,26 @@ curl <span class="s1">'https://api.instamart.ru/v2/sessions'</span> <span class=
 </blockquote>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Москва"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Фридриха Энгельса"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"building"</span><span class="p">:</span><span class="w"> </span><span class="mi">53</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"111111"</span><span class="w">
+  </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Иван"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Петров"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"full_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Фридриха Энгельса 56"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Москва"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Фридриха Энгельса"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"building"</span><span class="p">:</span><span class="w"> </span><span class="s2">"53"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"block"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"apartment"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"lat"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"lon"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<aside class="warning">
-  not implemented
-</aside>
-
 <p>Изменить адрес можно, выполнив запрос:</p>
 
-<p><code>PUT https://api.instamart.ru/v2/orders/#{ID}</code></p>
+<p><code>PUT https://api.instamart.ru/v2/addresses/#{ID}</code></p>
 
 <table>
   <thead>
@@ -717,9 +768,19 @@ curl <span class="s1">'https://api.instamart.ru/v2/sessions'</span> <span class=
   </thead>
   <tbody>
     <tr>
-      <td>ID</td>
-      <td>Да</td>
-      <td>id адреса</td>
+      <td>address[first_name]</td>
+      <td>-</td>
+      <td>Имя пользователя/контактого лица</td>
+    </tr>
+    <tr>
+      <td>address[last_name]</td>
+      <td>-</td>
+      <td>Фамилия пользоватя/контактного лица</td>
+    </tr>
+    <tr>
+      <td>address[full_address]</td>
+      <td>-</td>
+      <td>Полный адрес (в ближайшие дни уберем это поле)</td>
     </tr>
     <tr>
       <td>address[city]</td>
@@ -737,17 +798,37 @@ curl <span class="s1">'https://api.instamart.ru/v2/sessions'</span> <span class=
       <td>Номер дома</td>
     </tr>
     <tr>
-      <td>address[zipcode]</td>
+      <td>address[block]</td>
       <td>-</td>
-      <td>Почтовый индекс</td>
+      <td>Строение</td>
+    </tr>
+    <tr>
+      <td>address[apartment]</td>
+      <td>-</td>
+      <td>Номер квартиры</td>
+    </tr>
+    <tr>
+      <td>address[comments]</td>
+      <td>-</td>
+      <td>Комментарий к адресу</td>
+    </tr>
+    <tr>
+      <td>address[lon]</td>
+      <td>-</td>
+      <td>Долгота</td>
+    </tr>
+    <tr>
+      <td>address[lat]</td>
+      <td>-</td>
+      <td>Широта</td>
     </tr>
   </tbody>
 </table>
 
 <h2 id="udalieniie-adriesa">Удаление адреса</h2>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/orders/2'</span> <span class="se">\</span>
-  -H <span class="s1">'Authorization: Token token=#{TOKEN}'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/addresses/2"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
   -X DELETE
 </code></pre>
 
@@ -761,7 +842,7 @@ curl <span class="s1">'https://api.instamart.ru/v2/sessions'</span> <span class=
 
 <p>Удалить адрес можно, выполнив запрос:</p>
 
-<p><code>DELETE https://api.instamart.ru/v2/orders/#{ID}</code></p>
+<p><code>DELETE https://api.instamart.ru/v2/addresses/#{ID}</code></p>
 
 <table>
   <thead>
