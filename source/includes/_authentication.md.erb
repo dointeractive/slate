@@ -10,9 +10,9 @@
 email=test@test.ru
 pass=qwer
 credentials=$(echo $email:$pass | base64)
-curl '<%= config[:host] %>/sessions' \
+curl "<%= config[:host] %>/sessions" \
   -X POST \
-  -H 'Authorization: Basic $credentials'
+  -H "Authorization: Basic $credentials"
 ```
 > Ответ будет содержать следующие данные
 
@@ -45,7 +45,7 @@ password | Да | Пароль пользователя
 > Пример кода для аутентификации пользователя через vkontakte
 
 ```shell
-curl '<%= config[:host] %>/auth_providers/vkontakte/sessions' \
+curl "<%= config[:host] %>/auth_providers/vkontakte/sessions" \
   -X POST \
   -d session[uid]=0 \
   -d session[first_name]=fname \

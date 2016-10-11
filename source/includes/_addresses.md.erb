@@ -3,80 +3,97 @@
 ## Получение списка адресов
 
 ```shell
-curl '<%= config[:host] %>/orders' \
-  -H 'Authorization: Token token=#{TOKEN}' 
+curl "<%= config[:host] %>/addresses" \
+  -H "Authorization: Token token=#{TOKEN}" 
 ```
 
 > Ответ будет содержать следующие данные:
 
 ```json
 { 
-  "addresses": [
-    {
-      "id": 1,
-      "city": "Москва",
-      "street": "Фридриха Энгельса",
-      "building": 56,
-      "zipcode": "111111"
-    }
-  ]
+  "addresses": [{
+    "id": 1,
+    "first_name": "Иван",
+    "last_name": "Петров",
+    "full_address": "Фридриха Энгельса 56",
+    "city": "Москва",
+    "street": "Фридриха Энгельса",
+    "building": "56",
+    "block": null,
+    "apartment": null,
+    "comments": null,
+    "lat": null,
+    "lon": null
+  }],
+  "meta": {
+    "current_page": 1,
+    "next_page": null,
+    "total_pages": 1,
+    "per_page": 10
+  }
 }
-
 ```
-<aside class="warning">
-  not implemented
-</aside>
-
 
 Получить список всех адресов можно, выполнив запрос:
 
-`GET <%= config[:host] %>/orders`
+`GET <%= config[:host] %>/addresses`
 
 
 ## Создание нового адреса
 
 ```shell
-curl '<%= config[:host] %>/orders' \
-  -H 'Authorization: Token token=#{TOKEN}'
+curl "<%= config[:host] %>/addresses" \
+  -H "Authorization: Token token=#{TOKEN}" \
   -X POST \
-  -d "address[city]=Москва" \
+  -d "address[full_address]=Фридриха Энгельса 56" \
   -d "address[street]=Фридриха Энгельса" \
-  -d "address[building]=56" \
-  -d "address[zipcode]=111111"
+  -d "address[building]=56" 
 ```
 
 > В случае если данные были указаны верно, сервер вернет ответ:
 
 ```json
 {
-  "id": 2,
-  "city": "Москва",
-  "street": "Фридриха Энгельса",
-  "building": 56,
-  "zipcode": "111111"
+  "address": {
+    "id": 1,
+    "first_name": "Иван",
+    "last_name": "Петров",
+    "full_address": "Фридриха Энгельса 56",
+    "city": "Москва",
+    "street": "Фридриха Энгельса",
+    "building": "56",
+    "block": null,
+    "apartment": null,
+    "comments": null,
+    "lat": null,
+    "lon": null
+  }
 }
 ```
 
-<aside class="warning">
-  not implemented
-</aside>
-
 Добавить новый адрес пользователя можно, выполнив запрос:
 
-`POST <%= config[:host] %>/orders`
+`POST <%= config[:host] %>/addresses`
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
+address[first_name] | - | Имя пользователя/контактого лица
+address[last_name] | - | Фамилия пользоватя/контактного лица
+address[full_address] | Да (временно) | Полный адрес (в ближайшие дни уберем это поле)
 address[city] | Да | Город
-address[street] | - | Улица
-address[building] | - | Номер дома
-address[zipcode] | - | Почтовый индекс
+address[street] | Да | Улица
+address[building] | Да | Номер дома
+address[block] | - | Строение
+address[apartment] | - | Номер квартиры
+address[comments] | - | Комментарий к адресу
+address[lon] | - | Долгота
+address[lat] | - | Широта
 
 ## Редактирование адреса
 
 ```shell
-curl '<%= config[:host] %>/orders/2' \
-  -H 'Authorization: Token token=#{TOKEN}' \
+curl "<%= config[:host] %>/addresses/2" \
+  -H "Authorization: Token token=#{TOKEN}" \
   -X PUT \
   -d "address[building]=53"
 ```
@@ -85,48 +102,55 @@ curl '<%= config[:host] %>/orders/2' \
 
 ```json
 {
-  "id": 2,
-  "city": "Москва",
-  "street": "Фридриха Энгельса",
-  "building": 53,
-  "zipcode": "111111"
+  "address": {
+    "id": 1,
+    "first_name": "Иван",
+    "last_name": "Петров",
+    "full_address": "Фридриха Энгельса 56",
+    "city": "Москва",
+    "street": "Фридриха Энгельса",
+    "building": "53",
+    "block": null,
+    "apartment": null,
+    "comments": null,
+    "lat": null,
+    "lon": null
+  }
 }
 ```
 
-<aside class="warning">
-  not implemented
-</aside>
-
 Изменить адрес можно, выполнив запрос:
 
-`PUT <%= config[:host] %>/orders/#{ID}`
+`PUT <%= config[:host] %>/addresses/#{ID}`
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
-ID | Да | id адреса
+address[first_name] | - | Имя пользователя/контактого лица
+address[last_name] | - | Фамилия пользоватя/контактного лица
+address[full_address] | - | Полный адрес (в ближайшие дни уберем это поле)
 address[city] | - | Город
 address[street] | - | Улица
 address[building] | - | Номер дома
-address[zipcode] | - | Почтовый индекс
+address[block] | - | Строение
+address[apartment] | - | Номер квартиры
+address[comments] | - | Комментарий к адресу
+address[lon] | - | Долгота
+address[lat] | - | Широта
 
 
 ## Удаление адреса
 
 ```shell
-curl '<%= config[:host] %>/orders/2' \
-  -H 'Authorization: Token token=#{TOKEN}' \
+curl "<%= config[:host] %>/addresses/2" \
+  -H "Authorization: Token token=#{TOKEN}" \
   -X DELETE
 ```
 
 > В случае успешного удаления сервер вернет пустой ответ с кодом 200
 
-<aside class="warning">
-  not implemented
-</aside>
-
 Удалить адрес можно, выполнив запрос:
 
-`DELETE <%= config[:host] %>/orders/#{ID}`
+`DELETE <%= config[:host] %>/addresses/#{ID}`
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
