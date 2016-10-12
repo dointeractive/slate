@@ -1479,7 +1479,7 @@ API каталога предоставляет отделы в виде дву�
     </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-09-23T16:19:29.284+03:00"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"completed_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nt">"ship_address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"packages"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nt">"shipments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
     </span><span class="nt">"adjustments"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1491,7 +1491,7 @@ API каталога предоставляет отделы в виде дву�
 <p><code>POST https://api.instamart.ru/v2/orders</code></p>
 
 <p>Объект <code>Order</code>, возвращаемый сервером, содержит информацию о заказе, заказанных товарах и скидках.<br />
-В один заказ могут быть добавлены товары от разных ритейлеров. Заказанные товары, в разбивке по ритейлерам, можно получить из поля <code>packages</code> заказа.</p>
+В один заказ могут быть добавлены товары от разных ритейлеров. Заказанные товары, в разбивке по ритейлерам, можно получить из поля <code>shipments</code> заказа.</p>
 
 <h3 id="struktura-obiekta-order">Структура объекта Order</h3>
 
@@ -1540,19 +1540,19 @@ API каталога предоставляет отделы в виде дву�
       <td>адрес доставки</td>
     </tr>
     <tr>
-      <td>packages</td>
+      <td>shipments</td>
       <td>данные о добавленных товаров</td>
     </tr>
     <tr>
       <td>adjustments</td>
-      <td>данные о действующих скидках</td>
+      <td>корректировки стоимости заказа (скидки, доставка)</td>
     </tr>
   </tbody>
 </table>
 
-<h3 id="struktura-obiekta-package">Структура объекта Package</h3>
+<h3 id="struktura-obiekta-shipment">Структура объекта Shipment</h3>
 
-<p>Объект <code>Package</code> создается на каждого ритейлера, товары котого были добавлены в заказ.</p>
+<p>Объект <code>Shipment</code> создается на каждого ритейлера, товары которого были добавлены в заказ.</p>
 
 <table>
   <thead>
@@ -1579,8 +1579,8 @@ API каталога предоставляет отделы в виде дву�
       <td>суммарная стоимость добавленных позиций</td>
     </tr>
     <tr>
-      <td>proposed_shipment</td>
-      <td>предлагаемый способ доставки</td>
+      <td>next_deliveries</td>
+      <td>предлагаемые окна доставки</td>
     </tr>
     <tr>
       <td>retailer</td>
@@ -1646,20 +1646,65 @@ API каталога предоставляет отделы в виде дву�
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"order"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"R314234460"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"item_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C27387-16"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mf">229.89</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"item_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">229.89</span><span class="p">,</span><span class="w">
     </span><span class="nt">"ship_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nt">"adjustment_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
     </span><span class="nt">"shipment_state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nt">"payment_state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nt">"special_instructions"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-09-23T16:19:29.284+03:00"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-09-23T16:19:29.284+03:00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-11T12:28:03.000+03:00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-11T12:28:04.000+03:00"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"completed_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nt">"ship_address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"packages"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-    </span><span class="nt">"adjustments"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="nt">"shipments"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"alerts"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Добавьте больше товаров для заказа"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"full_message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Минимальная сумма заказа 229 р. в \"Metro C&amp;C\" не набрана"</span><span class="w">
+      </span><span class="p">}],</span><span class="w">
+      </span><span class="nt">"promotions"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Бесплатная доставка при заказе на сумму от 2999"</span><span class="w">
+      </span><span class="p">}],</span><span class="w">
+      </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mf">229.89</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"item_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">229.89</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"next_deliveries"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">350.0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"сегодня, 09:00-12:00"</span><span class="w">
+      </span><span class="p">}],</span><span class="w">
+      </span><span class="nt">"retailer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Metro C&amp;C"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#003d7a"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s11.postimg.org/kg57t4yrn/metro_logo_s.png"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"line_items"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">548260</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">229.89</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Цикорий Elza – растворимый гранулированный напиток с насыщенным кофейным вкусом и ароматом.Содержащийся в цикории инулин способствует улучшению обмена веществ и пищеварения. Оказывает успокаивающее действие на нервную систему, улучшает работу сердца. Цикорий повышает иммунитет,очищает организм. Он богат минеральными веществами, витаминами и микроэлементами."</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mf">229.89</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">960</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10963"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Цикорий Elza гранулированный"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">229.89</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"original_price"</span><span class="p">:</span><span class="w"> </span><span class="mf">229.89</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"items_per_pack"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"human_volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100 г."</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"weight"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Цикорий Elza – растворимый гранулированный напиток с насыщенным кофейным вкусом и ароматом.Содержащийся в цикории инулин способствует улучшению обмена веществ и пищеварения. Оказывает успокаивающее действие на нервную систему, улучшает работу сердца. Цикорий повышает иммунитет,очищает организм. Он богат минеральными веществами, витаминами и микроэлементами."</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+            </span><span class="nt">"mini_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/spree/products/3882/mini/10963.jpg?1473242393"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"small_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/spree/products/3882/small/10963.jpg?1473242393"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"product_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/spree/products/3882/product/10963.jpg?1473242393"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"original_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/spree/products/3882/original/10963.jpg?1473242393"</span><span class="w">
+          </span><span class="p">}]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}]</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -1698,7 +1743,7 @@ API каталога предоставляет отделы в виде дву�
       </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-09-23T16:19:29.284+03:00"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"completed_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nt">"ship_address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"packages"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"shipments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
       </span><span class="nt">"adjustments"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
@@ -1932,7 +1977,7 @@ API каталога предоставляет отделы в виде дву�
     </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Москва"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"full_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Старая Басманная 3"</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"packages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">],</span><span class="w">
+  </span><span class="nt">"shipments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">],</span><span class="w">
   </span><span class="nt">"adjustments"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -1952,7 +1997,7 @@ API каталога предоставляет отделы в виде дву�
 
 <pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/checkouts/#{NUMBER}"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
-  -d <span class="s2">"order[shipments_attributes][1][delivery_slot_id]=1"</span>
+  -d <span class="s2">"order[shipments_attributes][1][delivery_window_id]=1"</span>
 </code></pre>
 
 <blockquote>
@@ -2041,7 +2086,7 @@ API каталога предоставляет отделы в виде дву�
       <td>Комментарий к заказу</td>
     </tr>
     <tr>
-      <td>order[shipments_attributes][#{SHIPMENT_ID}][delivery_slot_id]</td>
+      <td>order[shipments_attributes][#{SHIPMENT_ID}][delivery_window_id]</td>
       <td>Да (для завершения)</td>
       <td>id слота доставки</td>
     </tr>
@@ -2070,8 +2115,8 @@ API каталога предоставляет отделы в виде дву�
 
           <h1 id="mietody-oplaty">Методы оплаты</h1>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/payment_tools'</span> <span class="se">\</span>
-  -H <span class="s1">'Authorization: Token token=#{TOKEN}'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/payment_tools"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> 
 </code></pre>
 
 <blockquote>
@@ -2079,23 +2124,34 @@ API каталога предоставляет отделы в виде дву�
 </blockquote>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"payment_tools"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
+  </span><span class="nt">"payment_tools"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Банковской картой"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"payment_method"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Оплата картой"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA *8888"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Наличными"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Оплата курьеру"</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Оплата банковской картой"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"После нажатия кнопки \"Завершить заказ\" вы будете переадресованы на страницу провайдера для ввода данных карты.\r\n"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"payanyway"</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Наличными курьеру"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"payment_method"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Наличными курьеру"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"check"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}],</span><span class="w">
+  </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"current_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"next_page"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total_pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"per_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
-<aside class="warning">
-  not implemented
-</aside>
 
 <p>Получить список доступных пользователю методов оплаты можно, выполнив запрос:</p>
 
