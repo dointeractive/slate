@@ -19,6 +19,7 @@ includes:
   - products
   - search
   - orders
+  - shipping_methods
   - payment_tools
   - flags
   - errors
