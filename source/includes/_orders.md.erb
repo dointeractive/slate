@@ -26,7 +26,7 @@ curl "<%= config[:host] %>/orders" \
     "updated_at": "2016-09-23T16:19:29.284+03:00",
     "completed_at": null,
     "ship_address": null,
-    "packages": [],
+    "shipments": [],
     "adjustments": []
   }
 }
@@ -38,7 +38,7 @@ curl "<%= config[:host] %>/orders" \
 `POST <%= config[:host] %>/orders`
 
 Объект `Order`, возвращаемый сервером, содержит информацию о заказе, заказанных товарах и скидках.
-В один заказ могут быть добавлены товары от разных ритейлеров. Заказанные товары, в разбивке по ритейлерам, можно получить из поля `packages` заказа.
+В один заказ могут быть добавлены товары от разных ритейлеров. Заказанные товары, в разбивке по ритейлерам, можно получить из поля `shipments` заказа.
 
 ### Структура объекта Order
 
@@ -53,12 +53,12 @@ shipment_state | состояние доставки
 payment_state | состояние оплаты
 special_instructions | примечание к заказу
 ship_address | адрес доставки
-packages | данные о добавленных товаров
-adjustments | данные о действующих скидках
+shipments | данные о добавленных товаров
+adjustments | корректировки стоимости заказа (скидки, доставка)
 
-### Структура объекта Package
+### Структура объекта Shipment
 
-Объект `Package` создается на каждого ритейлера, товары котого были добавлены в заказ.
+Объект `Shipment` создается на каждого ритейлера, товары которого были добавлены в заказ.
 
 Атрибут | Описание
 --------- | -----------
@@ -66,7 +66,7 @@ id | id пакета
 alerts | список предупреждений об ошибках в заказе
 promotions | список предложенй о скидках и пр.
 total | суммарная стоимость добавленных позиций 
-proposed_shipment | предлагаемый способ доставки
+next_deliveries | предлагаемые окна доставки
 retailer | информация о ритейлере
 line_items | список позиций
 
@@ -95,20 +95,65 @@ curl "<%= config[:host] %>/orders/current" \
 ```json
 {
   "order": {
-    "number": "R314234460",
-    "total": 0.0,
-    "item_total": 0.0,
+    "number": "C27387-16",
+    "total": 229.89,
+    "item_total": 229.89,
     "ship_total": 0,
     "adjustment_total": 0.0,
     "shipment_state": null,
     "payment_state": null,
     "special_instructions": null,
-    "created_at": "2016-09-23T16:19:29.284+03:00",
-    "updated_at": "2016-09-23T16:19:29.284+03:00",
+    "created_at": "2016-10-11T12:28:03.000+03:00",
+    "updated_at": "2016-10-11T12:28:04.000+03:00",
     "completed_at": null,
     "ship_address": null,
-    "packages": [],
-    "adjustments": []
+    "shipments": [{
+      "id": 1,
+      "alerts": [{
+        "message": "Добавьте больше товаров для заказа",
+        "full_message": "Минимальная сумма заказа 229 р. в \"Metro C&C\" не набрана"
+      }],
+      "promotions": [{
+        "message": "Бесплатная доставка при заказе на сумму от 2999"
+      }],
+      "total": 229.89,
+      "item_total": 229.89,
+      "next_deliveries": [{
+        "price": 350.0,
+        "summary": "сегодня, 09:00-12:00"
+      }],
+      "retailer": {
+        "id": 1,
+        "name": "Metro C&C",
+        "color": "#003d7a",
+        "logo": "https://s11.postimg.org/kg57t4yrn/metro_logo_s.png"
+      },
+      "line_items": [{
+        "id": 548260,
+        "quantity": 1,
+        "price": 229.89,
+        "description": "Цикорий Elza – растворимый гранулированный напиток с насыщенным кофейным вкусом и ароматом.Содержащийся в цикории инулин способствует улучшению обмена веществ и пищеварения. Оказывает успокаивающее действие на нервную систему, улучшает работу сердца. Цикорий повышает иммунитет,очищает организм. Он богат минеральными веществами, витаминами и микроэлементами.",
+        "total": 229.89,
+        "product": {
+          "id": 960,
+          "sku": "10963",
+          "name": "Цикорий Elza гранулированный",
+          "price": 229.89,
+          "original_price": 229.89,
+          "discount": 0.0,
+          "items_per_pack": 1,
+          "human_volume": "100 г.",
+          "weight": 100.0,
+          "description": "Цикорий Elza – растворимый гранулированный напиток с насыщенным кофейным вкусом и ароматом.Содержащийся в цикории инулин способствует улучшению обмена веществ и пищеварения. Оказывает успокаивающее действие на нервную систему, улучшает работу сердца. Цикорий повышает иммунитет,очищает организм. Он богат минеральными веществами, витаминами и микроэлементами.",
+          "images": [{
+            "mini_url": "http://instamart.ru/spree/products/3882/mini/10963.jpg?1473242393",
+            "small_url": "http://instamart.ru/spree/products/3882/small/10963.jpg?1473242393",
+            "product_url": "http://instamart.ru/spree/products/3882/product/10963.jpg?1473242393",
+            "original_url": "http://instamart.ru/spree/products/3882/original/10963.jpg?1473242393"
+          }]
+        }
+      }]
+    }]
   }
 }
 ```
@@ -145,7 +190,7 @@ curl "<%= config[:host] %>/orders" \
       "updated_at": "2016-09-23T16:19:29.284+03:00",
       "completed_at": null,
       "ship_address": null,
-      "packages": [],
+      "shipments": [],
       "adjustments": []
     }
   ],
@@ -325,7 +370,7 @@ curl "<%= config[:host] %>/checkouts/#{NUMBER}" \
     "city": "Москва",
     "full_address": "Старая Басманная 3"
   },
-  "packages": [...],
+  "shipments": [...],
   "adjustments": []
 }
 ```
@@ -343,7 +388,7 @@ curl "<%= config[:host] %>/checkouts/#{NUMBER}" \
 ```shell
 curl "<%= config[:host] %>/checkouts/#{NUMBER}" \
   -H "Authorization: Token token=#{TOKEN}" \
-  -d "order[shipments_attributes][1][delivery_slot_id]=1"
+  -d "order[shipments_attributes][1][delivery_window_id]=1"
 ```
 
 > Пример команды выбора способа доставки:
@@ -400,7 +445,7 @@ SHIPMENT_ID | Да | id доставки
 order[ship_address_id] | Да (для завершения) | Адрес доставки
 order[coupon_code] | - | Промо код
 order[special_instructions] | - | Комментарий к заказу
-order[shipments_attributes][#{SHIPMENT_ID}][delivery_slot_id] | Да (для завершения) | id слота доставки
+order[shipments_attributes][#{SHIPMENT_ID}][delivery_window_id] | Да (для завершения) | id слота доставки
 order[shipments_attributes][#{SHIPMENT_ID}][shipping_method_id] | Да (для завершения) | Метод доставки
 order[payment_attributes][payment_tool_id] | Да (для завершения) | Источник оплаты
 order[notification_attributes][notification_method_id] | Да (для завершения) | Способ связи

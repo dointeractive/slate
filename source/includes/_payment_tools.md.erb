@@ -1,31 +1,42 @@
 # Методы оплаты
 
 ```shell
-curl '<%= config[:host] %>/payment_tools' \
-  -H 'Authorization: Token token=#{TOKEN}' \
+curl "<%= config[:host] %>/payment_tools" \
+  -H "Authorization: Token token=#{TOKEN}" 
 ```
 
 > Ответ будет содержать следующие данные:
 
 ```json
 {
-  "payment_tools": [
-    {
+  "payment_tools": [{
+    "id": 1,
+    "name": "Банковской картой",
+    "payment_method": {
       "id": 1,
-      "name": "Оплата картой",
-      "description": "VISA *8888"
-    },
-    {
-      "id": 2,
-      "name": "Наличными",
-      "description": "Оплата курьеру"
+      "name": "Оплата банковской картой",
+      "description": "После нажатия кнопки \"Завершить заказ\" вы будете переадресованы на страницу провайдера для ввода данных карты.\r\n",
+      "type": "payanyway"
     }
-  ]
+  }, {
+    "id": 2,
+    "name": "Наличными курьеру",
+    "payment_method": {
+      "id": 2,
+      "name": "Наличными курьеру",
+      "description": null,
+      "type": "check"
+    }
+  }],
+  "meta": {
+    "current_page": 1,
+    "next_page": null,
+    "total_pages": 1,
+    "per_page": 20
+  }
 }
+
 ```
-<aside class="warning">
-  not implemented
-</aside>
 
 Получить список доступных пользователю методов оплаты можно, выполнив запрос:
 
