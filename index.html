@@ -2113,6 +2113,27 @@ API каталога предоставляет отделы в виде дву�
   </tbody>
 </table>
 
+          <h1 id="sposoby-dostavki">Способы доставки</h1>
+
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/shipping_methods"</span>
+</code></pre>
+
+<blockquote>
+  <p>Ответ будет содержать следующие данные:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"shipping_methods"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Курьером"</span><span class="w">
+  </span><span class="p">}]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Получить список доступных способов доставки можно, выполнив запрос:</p>
+
+<p><code>GET https://api.instamart.ru/v2/shipping_methods</code></p>
+
           <h1 id="mietody-oplaty">Методы оплаты</h1>
 
 <pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/payment_tools"</span> <span class="se">\</span>
