@@ -14,7 +14,7 @@ includes:
   - operational_zones
   - addresses
   - retailers
-  - taxons
+  - categories
   - departments
   - products
   - search
