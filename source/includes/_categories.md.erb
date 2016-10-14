@@ -1,0 +1,39 @@
+# Категории
+
+> Пример кода для получения списка всех категорий
+
+```shell
+curl "<%= config[:host] %>/categories?rid=1"
+```
+> Ответ будет содержать следующие данные:
+
+```json
+{
+  "categories": [{
+    "id": 466,
+    "type": "department",
+    "name": "Чай и кофе",
+    "children": [{
+      "id": 187,
+      "type": "taxon",
+      "name": "Чай",
+      "icon": {
+        "mini_url": "http://instamart.ru/spree/taxons/187/mini/%D1%87%D0%B0%D0%B8%CC%86-01.png?1453649106",
+        "normal_url": "http://instamart.ru/spree/taxons/187/normal/%D1%87%D0%B0%D0%B8%CC%86-01.png?1453649106"
+      }
+    }]
+  }],
+
+  "promoted_categoris": []
+}
+```
+
+Получить список всех категорий можно, выполнив запрос:
+
+`GET https://api.instamart.ru/v2/categories`
+
+### Параметры запроса
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+`rid` | Да | ID ритейлера для которого необходимо получить список категорий.
