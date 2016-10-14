@@ -324,7 +324,7 @@
 <pre class="highlight shell"><code><span class="nv">email</span><span class="o">=</span><span class="nb">test</span>@test.ru
 <span class="nv">pass</span><span class="o">=</span>qwer
 <span class="nv">credentials</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="nv">$email</span>:<span class="nv">$pass</span> | base64<span class="k">)</span>
-curl <span class="s2">"https://api.instamart.ru/v2/sessions"</span> <span class="se">\</span>
+curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
   -H <span class="s2">"Authorization: Basic </span><span class="nv">$credentials</span><span class="s2">"</span>
 </code></pre>
@@ -342,7 +342,7 @@ curl <span class="s2">"https://api.instamart.ru/v2/sessions"</span> <span class=
 <p>Аутентификация осуществляется методом <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">HTTP Basic Auth</a>.</p>
 
 <p>Получить токен можно, выполнив запрос:<br />
-<code>POST https://api.instamart.ru/v2/sessions</code></p>
+<code>POST http://api.instamart.ru/v2/sessions</code></p>
 
 <p>Учетные данные пользователя (емейл и пароль) передаются в заголовке запроса вида:<br />
 <code>Authorization: Basic #{DIGEST}</code><br />
@@ -378,7 +378,7 @@ curl <span class="s2">"https://api.instamart.ru/v2/sessions"</span> <span class=
   <p>Пример кода для аутентификации пользователя через vkontakte</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/auth_providers/vkontakte/sessions"</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/auth_providers/vkontakte/sessions"</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
   -d session[uid]<span class="o">=</span>0 <span class="se">\</span>
   -d session[first_name]<span class="o">=</span>fname <span class="se">\</span>
@@ -397,7 +397,7 @@ curl <span class="s2">"https://api.instamart.ru/v2/sessions"</span> <span class=
 </span></code></pre>
 
 <p>Получить токен можно, выполнив запрос:<br />
-<code>POST https://api.instamart.ru/v2/auth_providers/#{PROVIDER_ID}/sessions</code></p>
+<code>POST http://api.instamart.ru/v2/auth_providers/#{PROVIDER_ID}/sessions</code></p>
 
 <h3 id="paramietry-zaprosa-1">Параметры запроса</h3>
 
@@ -538,7 +538,7 @@ curl <span class="s2">"https://api.instamart.ru/v2/sessions"</span> <span class=
   <p>Пример проверки доступности Instamart в Москве:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/operational_zones?location=Москва"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/operational_zones?location=Москва"</span>
 </code></pre>
 
 <blockquote>
@@ -558,7 +558,7 @@ curl <span class="s2">"https://api.instamart.ru/v2/sessions"</span> <span class=
 
 <h3 id="http-zapros">HTTP запрос</h3>
 
-<p><code>GET https://api.instamart.ru/v2/operational_zones</code></p>
+<p><code>GET http://api.instamart.ru/v2/operational_zones</code></p>
 
 <p>В случае если Instamart не осуществляет доставку в указанный населенный пункт API вернет ошибку <code>404</code></p>
 
@@ -585,7 +585,7 @@ curl <span class="s2">"https://api.instamart.ru/v2/sessions"</span> <span class=
 
 <h2 id="poluchieniie-spiska-adriesov">Получение списка адресов</h2>
 
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/addresses"</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/addresses"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> 
 </code></pre>
 
@@ -619,11 +619,11 @@ curl <span class="s2">"https://api.instamart.ru/v2/sessions"</span> <span class=
 
 <p>Получить список всех адресов можно, выполнив запрос:</p>
 
-<p><code>GET https://api.instamart.ru/v2/addresses</code></p>
+<p><code>GET http://api.instamart.ru/v2/addresses</code></p>
 
 <h2 id="sozdaniie-novogho-adriesa">Создание нового адреса</h2>
 
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/addresses"</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/addresses"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
   -d <span class="s2">"address[full_address]=Фридриха Энгельса 56"</span> <span class="se">\</span>
@@ -655,7 +655,7 @@ curl <span class="s2">"https://api.instamart.ru/v2/sessions"</span> <span class=
 
 <p>Добавить новый адрес пользователя можно, выполнив запрос:</p>
 
-<p><code>POST https://api.instamart.ru/v2/addresses</code></p>
+<p><code>POST http://api.instamart.ru/v2/addresses</code></p>
 
 <table>
   <thead>
@@ -726,7 +726,7 @@ curl <span class="s2">"https://api.instamart.ru/v2/sessions"</span> <span class=
 
 <h2 id="riedaktirovaniie-adriesa">Редактирование адреса</h2>
 
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/addresses/2"</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/addresses/2"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
   -X PUT <span class="se">\</span>
   -d <span class="s2">"address[building]=53"</span>
@@ -756,7 +756,7 @@ curl <span class="s2">"https://api.instamart.ru/v2/sessions"</span> <span class=
 
 <p>Изменить адрес можно, выполнив запрос:</p>
 
-<p><code>PUT https://api.instamart.ru/v2/addresses/#{ID}</code></p>
+<p><code>PUT http://api.instamart.ru/v2/addresses/#{ID}</code></p>
 
 <table>
   <thead>
@@ -827,7 +827,7 @@ curl <span class="s2">"https://api.instamart.ru/v2/sessions"</span> <span class=
 
 <h2 id="udalieniie-adriesa">Удаление адреса</h2>
 
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/addresses/2"</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/addresses/2"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
   -X DELETE
 </code></pre>
@@ -838,7 +838,7 @@ curl <span class="s2">"https://api.instamart.ru/v2/sessions"</span> <span class=
 
 <p>Удалить адрес можно, выполнив запрос:</p>
 
-<p><code>DELETE https://api.instamart.ru/v2/addresses/#{ID}</code></p>
+<p><code>DELETE http://api.instamart.ru/v2/addresses/#{ID}</code></p>
 
 <table>
   <thead>
@@ -886,63 +886,7 @@ curl <span class="s2">"https://api.instamart.ru/v2/sessions"</span> <span class=
 
 <p><code>GET https://api.instamart.ru/v2/retailers</code></p>
 
-          <h1 id="katieghorii">Категории</h1>
-
-<blockquote>
-  <p>Пример кода для получения списка всех категорий</p>
-</blockquote>
-
-<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/taxons?rid=1'</span>
-</code></pre>
-<blockquote>
-  <p>Ответ будет содержать следующие данные</p>
-</blockquote>
-
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Продукты питания"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"parent_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"taxons"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Чай и кофе"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"parent_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-
-<aside class="warning">
-  not implemented
-</aside>
-
-<p>Получить список всех категорий можно, выполнив запрос:</p>
-
-<p><code>GET https://api.instamart.ru/v2/taxons</code></p>
-
-<h3 id="paramietry-zaprosa">Параметры запроса</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Параметр</th>
-      <th>Обязательный</th>
-      <th>Описание</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>rid</code></td>
-      <td>Да</td>
-      <td>ID ритейлера для которого необходимо получить список категорий.</td>
-    </tr>
-  </tbody>
-</table>
-
+          
           <h1 id="katalogh">Каталог</h1>
 
 <blockquote>
@@ -1151,7 +1095,7 @@ API каталога предоставляет отделы в виде дву�
 
 <h2 id="spisok-produktov">Список продуктов</h2>
 
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/products?rid=1"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/products?rid=1"</span>
 </code></pre>
 
 <blockquote>
@@ -1194,7 +1138,7 @@ API каталога предоставляет отделы в виде дву�
 
 <h3 id="http-zapros">HTTP запрос</h3>
 
-<p><code>GET https://api.instamart.ru/v2/products</code></p>
+<p><code>GET http://api.instamart.ru/v2/products</code></p>
 
 <p>API ограничивает максимальное число возвращаемых продуктов 24 объектами. Для доступа к остальным продуктам реализован интерфейс пагинации.<br />
 Каждый запрос к <code>/v2/products</code> помимо самих продуктов также возвращает объект <code>meta</code>, указывающий номер текущей страницы, номер следующией страницы и общее количество страниц. Получить конкретную страницу с данными можно, указав параметр <code>page</code>.</p>
@@ -1234,7 +1178,7 @@ API каталога предоставляет отделы в виде дву�
 
 <h2 id="kartochka-produkta">Карточка продукта</h2>
 
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/products/6"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/products/6"</span>
 </code></pre>
 
 <blockquote>
@@ -1290,7 +1234,7 @@ API каталога предоставляет отделы в виде дву�
 
 <h3 id="http-zapros-1">HTTP запрос</h3>
 
-<p><code>GET https://api.instamart.ru/v2/products/#{PRODUCT_ID}</code></p>
+<p><code>GET http://api.instamart.ru/v2/products/#{PRODUCT_ID}</code></p>
 
 <h3 id="paramietry-zaprosa-1">Параметры запроса</h3>
 
@@ -1320,7 +1264,7 @@ API каталога предоставляет отделы в виде дву�
   <p>Пример запроса подсказок, для слова “чай”</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/searches/suggestions?rid=1&amp;q=%D1%87%D0%B0%D0%B9'</span>
+<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v2/searches/suggestions?rid=1&amp;q=%D1%87%D0%B0%D0%B9'</span>
 </code></pre>
 <blockquote>
   <p>Ответ будет содержать следующие данные</p>
@@ -1348,7 +1292,7 @@ API каталога предоставляет отделы в виде дву�
 
 <p>Для получения списка подсказок поиска, выполните запрос:</p>
 
-<p><code>GET https://api.instamart.ru/v2/searches/suggestions</code></p>
+<p><code>GET http://api.instamart.ru/v2/searches/suggestions</code></p>
 
 <h3 id="paramietry-zaprosa">Параметры запроса</h3>
 
@@ -1380,7 +1324,7 @@ API каталога предоставляет отделы в виде дву�
   <p>Пример запроса результатов поиска, для слова “чай”</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/searches?rid=1&amp;q=%D1%87%D0%B0%D0%B9'</span>
+<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v2/searches?rid=1&amp;q=%D1%87%D0%B0%D0%B9'</span>
 </code></pre>
 <blockquote>
   <p>Ответ будет содержать продукты, сгруппированные по категориям:</p>
@@ -1418,7 +1362,7 @@ API каталога предоставляет отделы в виде дву�
 
 <p>Для получения результатов поиска, выполните запрос:</p>
 
-<p><code>GET https://api.instamart.ru/v2/searches</code></p>
+<p><code>GET http://api.instamart.ru/v2/searches</code></p>
 
 <h3 id="paramietry-zaprosa-1">Параметры запроса</h3>
 
@@ -1457,7 +1401,7 @@ API каталога предоставляет отделы в виде дву�
   <p>Пример команды:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/orders"</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/orders"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
   -X POST
 </code></pre>
@@ -1488,7 +1432,7 @@ API каталога предоставляет отделы в виде дву�
 <p>Для каждого пользователя может быть создано сколько угодно заказов, но если у пользователя есть незавершенный заказ, сервер вернет ошибку с кодом <code>422</code> и заказ не будет создан.<br />
 Создать новый заказ можно, выполнив следующий запрос:</p>
 
-<p><code>POST https://api.instamart.ru/v2/orders</code></p>
+<p><code>POST http://api.instamart.ru/v2/orders</code></p>
 
 <p>Объект <code>Order</code>, возвращаемый сервером, содержит информацию о заказе, заказанных товарах и скидках.<br />
 В один заказ могут быть добавлены товары от разных ритейлеров. Заказанные товары, в разбивке по ритейлерам, можно получить из поля <code>shipments</code> заказа.</p>
@@ -1636,7 +1580,7 @@ API каталога предоставляет отделы в виде дву�
   <p>Пример команды:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/orders/current"</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/orders/current"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
 </code></pre>
 
@@ -1710,7 +1654,7 @@ API каталога предоставляет отделы в виде дву�
 </span></code></pre>
 
 <p>Получить текущий заказ пользователя можно, выполнив запрос:<br />
-<code>GET https://api.instamart.ru/v2/orders/current</code></p>
+<code>GET http://api.instamart.ru/v2/orders/current</code></p>
 
 <p>В случае, если у пользователя нет текущего заказа, данный запрос вернет ошибку с кодом <code>404</code></p>
 
@@ -1720,7 +1664,7 @@ API каталога предоставляет отделы в виде дву�
   <p>Пример команды:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/orders"</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/orders"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
 </code></pre>
 
@@ -1758,11 +1702,11 @@ API каталога предоставляет отделы в виде дву�
 </span></code></pre>
 
 <p>Получить все заказы пользователя можно, выполнив запрос:<br />
-<code>GET https://api.instamart.ru/v2/orders</code></p>
+<code>GET http://api.instamart.ru/v2/orders</code></p>
 
 <h2 id="dobavlieniie-pozitsii-zakaza">Добавление позиции заказа</h2>
 
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/line_items"</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/line_items"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
   -d line_item[order_number]<span class="o">=</span>R314234460 <span class="se">\</span>
   -d line_item[product_id]<span class="o">=</span>6 <span class="se">\</span>
@@ -1801,7 +1745,7 @@ API каталога предоставляет отделы в виде дву�
 
 <p>Добавить позицию к заказу, можно выполнив запрос:</p>
 
-<p><code>POST https://api.instamart.ru/v2/line_items</code></p>
+<p><code>POST http://api.instamart.ru/v2/line_items</code></p>
 
 <h3 id="paramietry-zaprosa">Параметры запроса</h3>
 
@@ -1838,7 +1782,7 @@ API каталога предоставляет отделы в виде дву�
 
 <h2 id="riedaktirovaniie-pozitsii-zakaza">Редактирование позиции заказа</h2>
 
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/line_items/520884"</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/line_items/520884"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
   -d line_item[quantity]<span class="o">=</span>10 <span class="se">\</span>
   -X PUT
@@ -1876,7 +1820,7 @@ API каталога предоставляет отделы в виде дву�
 
 <p>Чтобы, например, изменить количество единиц товара, необходимо выполнить запрос:</p>
 
-<p><code>PUT https://api.instamart.ru/v2/line_items/#{ID}</code></p>
+<p><code>PUT http://api.instamart.ru/v2/line_items/#{ID}</code></p>
 
 <h3 id="paramietry-zaprosa-1">Параметры запроса</h3>
 
@@ -1908,7 +1852,7 @@ API каталога предоставляет отделы в виде дву�
 
 <h2 id="udalieniie-pozitsii-zakaza">Удаление позиции заказа</h2>
 
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/line_items/520884"</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/line_items/520884"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
   -X DELETE
 </code></pre>
@@ -1918,7 +1862,7 @@ API каталога предоставляет отделы в виде дву�
 
 <p>Чтобы удалить позицию заказа, необходимо выполнить запрос:</p>
 
-<p><code>DELETE https://api.instamart.ru/v2/line_items/#{ID}</code></p>
+<p><code>DELETE http://api.instamart.ru/v2/line_items/#{ID}</code></p>
 
 <h3 id="paramietry-zaprosa-2">Параметры запроса</h3>
 
@@ -1949,7 +1893,7 @@ API каталога предоставляет отделы в виде дву�
   <p>Пример команды для выбора адреса доставки:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/checkouts/#{NUMBER}"</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/checkouts/#{NUMBER}"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
   -d <span class="s2">"order[ship_address_id]=1"</span>
 </code></pre>
@@ -1986,7 +1930,7 @@ API каталога предоставляет отделы в виде дву�
   <p>Пример заполнения комментария к доставке:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/checkouts/#{NUMBER}"</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/checkouts/#{NUMBER}"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
   -d <span class="s2">"order[special_instructions]=Вход со двора"</span>
 </code></pre>
@@ -1995,7 +1939,7 @@ API каталога предоставляет отделы в виде дву�
   <p>Пример команды выбора интервала доставки:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/checkouts/#{NUMBER}"</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/checkouts/#{NUMBER}"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
   -d <span class="s2">"order[shipments_attributes][1][delivery_window_id]=1"</span>
 </code></pre>
@@ -2004,7 +1948,7 @@ API каталога предоставляет отделы в виде дву�
   <p>Пример команды выбора способа доставки:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/checkouts/#{NUMBER}"</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/checkouts/#{NUMBER}"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
   -d <span class="s2">"order[shipments_attributes][1][shipping_method_id]=1"</span>
 </code></pre>
@@ -2013,7 +1957,7 @@ API каталога предоставляет отделы в виде дву�
   <p>Пример выбора метода оплаты:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/checkouts/#{NUMBER}"</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/checkouts/#{NUMBER}"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
   -d <span class="s2">"order[payment_attributes][payment_tool_id]=1"</span>
 </code></pre>
@@ -2033,7 +1977,7 @@ API каталога предоставляет отделы в виде дву�
   <p>Пример выбора способа связи:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/checkouts/#{NUMBER}"</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/checkouts/#{NUMBER}"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
   -d <span class="s2">"order[notification_attributes][notification_method_id]=1"</span>
   -d <span class="s2">"order[notification_attributes][phone]=74951112233"</span>
@@ -2045,7 +1989,7 @@ API каталога предоставляет отделы в виде дву�
 
 <p>Для оформления заказа используется ресурс <code>checkouts</code>. Чтобы заполнить информацию о заказе, необходимо выполнить запрос:</p>
 
-<p><code>PUT https://api.instamart.ru/v2/checkouts/#{NUMBER}</code></p>
+<p><code>PUT http://api.instamart.ru/v2/checkouts/#{NUMBER}</code></p>
 
 <h3 id="paramietry-zaprosa-3">Параметры запроса</h3>
 
@@ -2115,7 +2059,7 @@ API каталога предоставляет отделы в виде дву�
 
           <h1 id="sposoby-dostavki">Способы доставки</h1>
 
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/shipping_methods"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/shipping_methods"</span>
 </code></pre>
 
 <blockquote>
@@ -2132,11 +2076,11 @@ API каталога предоставляет отделы в виде дву�
 
 <p>Получить список доступных способов доставки можно, выполнив запрос:</p>
 
-<p><code>GET https://api.instamart.ru/v2/shipping_methods</code></p>
+<p><code>GET http://api.instamart.ru/v2/shipping_methods</code></p>
 
           <h1 id="mietody-oplaty">Методы оплаты</h1>
 
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/payment_tools"</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/payment_tools"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> 
 </code></pre>
 
@@ -2176,7 +2120,7 @@ API каталога предоставляет отделы в виде дву�
 
 <p>Получить список доступных пользователю методов оплаты можно, выполнив запрос:</p>
 
-<p><code>GET https://api.instamart.ru/v2/payment_tools</code></p>
+<p><code>GET http://api.instamart.ru/v2/payment_tools</code></p>
 
           <h1 id="zhaloby-na-tovar">Жалобы на товар</h1>
 
