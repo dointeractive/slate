@@ -917,6 +917,41 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
   </span><span class="nt">"promoted_categoris"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+<p>API возвращает полную иерархию всех категорий. Ответ содержит два объекта верхего уровня: <code>categories</code> и <code>promoted_categories</code>.<br />
+<code>categories</code> – это список всех категорий сайта. <code>promoted_categories</code> – список маркетинговых категорий “скидки”, “новогоднее предложение” и пр.<br />
+Все объекты категорий имеют следующую структуру:</p>
+
+<h3 id="struktura-obiekta-category">Структура объекта Category</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Атрибут</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td>id категории</td>
+    </tr>
+    <tr>
+      <td>type</td>
+      <td>Тип категории: <strong>department</strong> или <strong>taxon</strong></td>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>Название категори</td>
+    </tr>
+    <tr>
+      <td>children</td>
+      <td>Список дочерних категорий</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>От значения поля <code>type</code> зависит способ отображения содержимого категории.<br />
+Если <code>type</code> содержит значение “department” – для отоброжения содержимого категории нужно использовать API <code>/v2/departments</code>. Если <code>type</code> содержит “taxon” – нужно использовать API <code>/v2/products</code></p>
 
 <p>Получить список всех категорий можно, выполнив запрос:</p>
 
