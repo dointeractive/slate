@@ -37,42 +37,44 @@ curl 'https://api.instamart.ru/v2/departments?rid=1' \
 
 ```json
 {
-  "departments": [
-    {
-      "id": 1,
-      "name": "Чай и кофе",
-      "products_count": 668,
-      "products": [
-        {
-          "id": 1,
-          "name": "Чай Lipton Yellow Label",
-          "price": 42,
-          "original_price": 70,
-          "discount": 28,
-          "weight": 150.0,
-          "human_volume": "10 пак x 6",
-          "items_per_pack": 2,
-          "images": [
-            {
-              "mini_url": "http:://instamart.ru/file.png?1370533476",
-              "small_url": "http::/instamart.ru/file.png?1370533476",
-              "product_url": "http::/instamart.ru/file.png?1370533476"
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  "deals": [{
-    "taxon_id": 487,
+  "departments": [{
+    "id": 173,
     "name": "Бакалея",
-    "products_count": 129,
-    "icon": {
-      "mini_url": "http://instamart.ru/spree/taxons/487/mini/Бакалея.png?1453225221",
-      "normal_url": "http://instamart.ru/spree/taxons/487/normal/Бакалея.png?1453225221"
+    "products_count": 1979,
+    "products": [{
+      "id": 1037,
+      "sku": "11040",
+      "name": "Хлопья Nordic овсяные",
+      "price": "125.35",
+      "original_price": "125.35",
+      "discount": "0.0",
+      "human_volume": "500 г.",
+      "images": [{
+        "mini_url": "http://instamart.ru/spree/products/5541/mini/11040.jpg?1473242574",
+        "small_url": "http://instamart.ru/spree/products/5541/small/11040.jpg?1473242574",
+        "product_url": "http://instamart.ru/spree/products/5541/product/11040.jpg?1473242574",
+        "original_url": "http://instamart.ru/spree/products/5541/original/11040.jpg?1473242574"
+      }]
+    }]
+  }],
+  "deals": {
+    "department": {
+      "id": 428,
+      "name": "Скидки",
+      "products_count": 910,
+      "aisles": [{
+        "taxon_id": 487,
+        "name": "Бакалея",
+        "products_count": 129,
+        "icon": {
+          "mini_url": "http://instamart.ru/spree/taxons/487/mini/Бакалея.png?1453225221",
+          "normal_url": "http://instamart.ru/spree/taxons/487/normal/Бакалея.png?1453225221"
+        }
+      }]
     }
-  }]
+  }
 }
+
 ```
 
 Получить выдачу для главной страницы можно, выполнив следующий запрос:
