@@ -340,12 +340,14 @@ ID | Да | ID позиции заказа
 
 ## Оформление заказа
 
-> Пример команды для выбора адреса доставки:
+> Пример команды для выбора адреса доставки и заполнения коментария доставки:
 
 ```shell
-curl "<%= config[:host] %>/checkouts/#{NUMBER}" \
+curl "<%= config[:host] %>/orders/#{NUMBER}" \
   -H "Authorization: Token token=#{TOKEN}" \
-  -d "order[ship_address_id]=1"
+  -X PUT \
+  -d "order[address_attributes][id]=1" \
+  -d "order[address_attributes][instructions]=1"
 ```
 > Если данные были указаны верно, ответ будет содержать json-документ заказа:
 
@@ -365,7 +367,7 @@ curl "<%= config[:host] %>/checkouts/#{NUMBER}" \
   "payment_state": null,
   "special_instructions": null,
   "total_quantity": 0,
-  "ship_address": {
+  "address": {
     "id": 1,
     "city": "Москва",
     "full_address": "Старая Басманная 3"
@@ -375,78 +377,45 @@ curl "<%= config[:host] %>/checkouts/#{NUMBER}" \
 }
 ```
 
-> Пример заполнения комментария к доставке:
+> Пример команды выбора интервала и способа доставки (id шипмента - 1):
 
 ```shell
-curl "<%= config[:host] %>/checkouts/#{NUMBER}" \
-  -H "Authorization: Token token=#{TOKEN}" \
-  -d "order[special_instructions]=Вход со двора"
-```
-
-> Пример команды выбора интервала доставки:
-
-```shell
-curl "<%= config[:host] %>/checkouts/#{NUMBER}" \
+curl "<%= config[:host] %>/orders/#{NUMBER}" \
   -H "Authorization: Token token=#{TOKEN}" \
   -d "order[shipments_attributes][1][delivery_window_id]=1"
-```
-
-> Пример команды выбора способа доставки:
-
-```shell
-curl "<%= config[:host] %>/checkouts/#{NUMBER}" \
-  -H "Authorization: Token token=#{TOKEN}" \
   -d "order[shipments_attributes][1][shipping_method_id]=1"
 ```
 
 > Пример выбора метода оплаты:
 
 ```shell
-curl "<%= config[:host] %>/checkouts/#{NUMBER}" \
+curl "<%= config[:host] %>/orders/#{NUMBER}" \
   -H "Authorization: Token token=#{TOKEN}" \
   -d "order[payment_attributes][payment_tool_id]=1"
 ```
 
-> При выбранном методе оплаты, ответ будет содержать дополнительные поля:
+Чтобы заполнить информацию о заказе, необходимо выполнить запрос:
 
-```json
-{
-  "number": "R307128032",
-  "item_total": 0.0,
-  ...
-}
-```
-
-> Пример выбора способа связи:
-
-```shell
-curl "<%= config[:host] %>/checkouts/#{NUMBER}" \
-  -H "Authorization: Token token=#{TOKEN}" \
-  -d "order[notification_attributes][notification_method_id]=1"
-  -d "order[notification_attributes][phone]=74951112233"
-```
-
-<aside class="warning">
-  not implemented
-</aside>
-
-Для оформления заказа используется ресурс `checkouts`. Чтобы заполнить информацию о заказе, необходимо выполнить запрос:
-
-`PUT <%= config[:host] %>/checkouts/#{NUMBER}`
+`PUT <%= config[:host] %>/orders/#{NUMBER}`
 
 ### Параметры запроса
 
 При выполнение запроса следующие параметры не обязательны, но пока некоторые из них не будут указаны заказ нельзя будет завершить.
+Чтобы получить окна доставки выполните запрос `GET <% config[:host] %>/shipments/#{SHIPMENT_ID}/delivery_windows`, которому можно передать параметр `date` для выбора окон доставки за конкретный день.
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
 NUMBER | Да | Номер заказа
-SHIPMENT_ID | Да | id доставки
-order[ship_address_id] | Да (для завершения) | Адрес доставки
-order[coupon_code] | - | Промо код
-order[special_instructions] | - | Комментарий к заказу
+order[address_attributes][id] | Да (для завершения) | Адрес доставки
+order[address_attributes][instructions] | - | Комментарий к заказу
 order[shipments_attributes][#{SHIPMENT_ID}][delivery_window_id] | Да (для завершения) | id слота доставки
 order[shipments_attributes][#{SHIPMENT_ID}][shipping_method_id] | Да (для завершения) | Метод доставки
 order[payment_attributes][payment_tool_id] | Да (для завершения) | Источник оплаты
-order[notification_attributes][notification_method_id] | Да (для завершения) | Способ связи
-order[notification_attributes][phone] | Да (для завершения) | Телефон для связи
+
+
+## Завершение заказа
+
+Чтобы завершить заказ, необходимо выполнить запрос:
+
+`PUT <%= config[:host] %>/orders/#{NUMBER}/completion`
+
