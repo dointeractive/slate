@@ -20,6 +20,7 @@ includes:
   - search
   - orders
   - shipping_methods
+  - delivery_windows
   - payment_tools
   - flags
   - errors
