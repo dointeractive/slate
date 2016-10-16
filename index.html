@@ -438,6 +438,11 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
   </tbody>
 </table>
 
+<h2 id="provierka-tokiena">Проверка токена</h2>
+
+<p>Проверить токен можно, выполнив запрос:<br />
+<code>GET http://api.instamart.ru/v2/sessions/#{ACCESS_TOKEN}</code></p>
+
           <h1 id="vosstanovlieniie-parolia">Восстановление пароля</h1>
 
 <h2 id="zapros-na-vosstanovlieniie-parolia">Запрос на восстановление пароля</h2>
@@ -1967,12 +1972,14 @@ API каталога предоставляет отделы в виде дву�
 <h2 id="oformlieniie-zakaza">Оформление заказа</h2>
 
 <blockquote>
-  <p>Пример команды для выбора адреса доставки:</p>
+  <p>Пример команды для выбора адреса доставки и заполнения коментария доставки:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/checkouts/#{NUMBER}"</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/orders/#{NUMBER}"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
-  -d <span class="s2">"order[ship_address_id]=1"</span>
+  -X PUT <span class="se">\</span>
+  -d <span class="s2">"order[address_attributes][id]=1"</span> <span class="se">\</span>
+  -d <span class="s2">"order[address_attributes][instructions]=1"</span>
 </code></pre>
 <blockquote>
   <p>Если данные были указаны верно, ответ будет содержать json-документ заказа:</p>
@@ -1993,7 +2000,7 @@ API каталога предоставляет отделы в виде дву�
   </span><span class="nt">"payment_state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="nt">"special_instructions"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="nt">"total_quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"ship_address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Москва"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"full_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Старая Басманная 3"</span><span class="w">
@@ -2004,29 +2011,12 @@ API каталога предоставляет отделы в виде дву�
 </span></code></pre>
 
 <blockquote>
-  <p>Пример заполнения комментария к доставке:</p>
+  <p>Пример команды выбора интервала и способа доставки (id шипмента - 1):</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/checkouts/#{NUMBER}"</span> <span class="se">\</span>
-  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
-  -d <span class="s2">"order[special_instructions]=Вход со двора"</span>
-</code></pre>
-
-<blockquote>
-  <p>Пример команды выбора интервала доставки:</p>
-</blockquote>
-
-<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/checkouts/#{NUMBER}"</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/orders/#{NUMBER}"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
   -d <span class="s2">"order[shipments_attributes][1][delivery_window_id]=1"</span>
-</code></pre>
-
-<blockquote>
-  <p>Пример команды выбора способа доставки:</p>
-</blockquote>
-
-<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/checkouts/#{NUMBER}"</span> <span class="se">\</span>
-  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
   -d <span class="s2">"order[shipments_attributes][1][shipping_method_id]=1"</span>
 </code></pre>
 
@@ -2034,43 +2024,19 @@ API каталога предоставляет отделы в виде дву�
   <p>Пример выбора метода оплаты:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/checkouts/#{NUMBER}"</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/orders/#{NUMBER}"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
   -d <span class="s2">"order[payment_attributes][payment_tool_id]=1"</span>
 </code></pre>
 
-<blockquote>
-  <p>При выбранном методе оплаты, ответ будет содержать дополнительные поля:</p>
-</blockquote>
+<p>Чтобы заполнить информацию о заказе, необходимо выполнить запрос:</p>
 
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"R307128032"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"item_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
-  </span><span class="err">...</span><span class="w">
-</span><span class="err">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-  <p>Пример выбора способа связи:</p>
-</blockquote>
-
-<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/checkouts/#{NUMBER}"</span> <span class="se">\</span>
-  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
-  -d <span class="s2">"order[notification_attributes][notification_method_id]=1"</span>
-  -d <span class="s2">"order[notification_attributes][phone]=74951112233"</span>
-</code></pre>
-
-<aside class="warning">
-  not implemented
-</aside>
-
-<p>Для оформления заказа используется ресурс <code>checkouts</code>. Чтобы заполнить информацию о заказе, необходимо выполнить запрос:</p>
-
-<p><code>PUT http://api.instamart.ru/v2/checkouts/#{NUMBER}</code></p>
+<p><code>PUT http://api.instamart.ru/v2/orders/#{NUMBER}</code></p>
 
 <h3 id="paramietry-zaprosa-3">Параметры запроса</h3>
 
-<p>При выполнение запроса следующие параметры не обязательны, но пока некоторые из них не будут указаны заказ нельзя будет завершить.</p>
+<p>При выполнение запроса следующие параметры не обязательны, но пока некоторые из них не будут указаны заказ нельзя будет завершить.<br />
+Чтобы получить окна доставки выполните запрос <code>GET /shipments/#{SHIPMENT_ID}/delivery_windows</code>, которому можно передать параметр <code>date</code> для выбора окон доставки за конкретный день.</p>
 
 <table>
   <thead>
@@ -2087,22 +2053,12 @@ API каталога предоставляет отделы в виде дву�
       <td>Номер заказа</td>
     </tr>
     <tr>
-      <td>SHIPMENT_ID</td>
-      <td>Да</td>
-      <td>id доставки</td>
-    </tr>
-    <tr>
-      <td>order[ship_address_id]</td>
+      <td>order[address_attributes][id]</td>
       <td>Да (для завершения)</td>
       <td>Адрес доставки</td>
     </tr>
     <tr>
-      <td>order[coupon_code]</td>
-      <td>-</td>
-      <td>Промо код</td>
-    </tr>
-    <tr>
-      <td>order[special_instructions]</td>
+      <td>order[address_attributes][instructions]</td>
       <td>-</td>
       <td>Комментарий к заказу</td>
     </tr>
@@ -2121,18 +2077,15 @@ API каталога предоставляет отделы в виде дву�
       <td>Да (для завершения)</td>
       <td>Источник оплаты</td>
     </tr>
-    <tr>
-      <td>order[notification_attributes][notification_method_id]</td>
-      <td>Да (для завершения)</td>
-      <td>Способ связи</td>
-    </tr>
-    <tr>
-      <td>order[notification_attributes][phone]</td>
-      <td>Да (для завершения)</td>
-      <td>Телефон для связи</td>
-    </tr>
   </tbody>
 </table>
+
+<h2 id="zaviershieniie-zakaza">Завершение заказа</h2>
+
+<p>Чтобы завершить заказ, необходимо выполнить запрос:</p>
+
+<p><code>PUT http://api.instamart.ru/v2/orders/#{NUMBER}/completion</code></p>
+
 
           <h1 id="sposoby-dostavki">Способы доставки</h1>
 
