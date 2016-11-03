@@ -22,6 +22,7 @@ includes:
   - shipping_methods
   - delivery_windows
   - payment_tools
+  - order_reviews
   - flags
   - errors
 

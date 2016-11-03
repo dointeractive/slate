@@ -1,0 +1,33 @@
+# Отзыв на заказ
+
+## Получение списка заказов без отзывов
+
+```shell
+curl "<%= config[:host] %>/orders/unrated" \
+  -H "Authorization: Token token=#{TOKEN}" 
+```
+
+Получить список заказов без отзывов можно, выполнив запрос:
+
+`GET <%= config[:host] %>/orders/unrated`
+
+Запрос вернет заказы, завершеные не позднее 10 дней назад
+
+## Создание отзыва
+
+```shell
+curl "<%= config[:host] %>/orders/C36324/reviews" \
+  -H "Authorization: Token token=#{TOKEN}" \
+  -d review[rate]=2
+  -d review[comment]='В коробку с заказом пролился отбеливатель'
+  -X POST
+```
+
+Добавить отзыв к заказу можно, выполнив запрос:
+
+`GET <%= config[:host] %>/orders/#{ORDER_NUMBER}/reviews`
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+review[rate] | Да | Оценка
+review[comment] | - | Комментарий
