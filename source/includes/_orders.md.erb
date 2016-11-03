@@ -89,13 +89,12 @@ price | стоимость одной позиции
 total | сумма
 product | информация о продукте
 
-## Получение текущего заказ
+## Получение заказа по номеру
 
 > Пример команды:
 
 ```shell
-curl "<%= config[:host] %>/orders/current" \
-  -H "Authorization: Token token=#{TOKEN}"
+curl "<%= config[:host] %>/orders/C27387-16"
 ```
 
 > Ответ будет содержать следующие данные:
@@ -162,6 +161,48 @@ curl "<%= config[:host] %>/orders/current" \
         }
       }]
     }]
+  }
+}
+```
+
+Получить заказ можно, выполнив запрос:
+`GET <%= config[:host] %>/orders/#{NUMBER}`
+
+### Параметры запроса
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+NUMBER | Да | Номер заказа
+
+
+## Получение текущего заказа пользователя
+
+> Пример команды:
+
+```shell
+curl "<%= config[:host] %>/orders/current" \
+  -H "Authorization: Token token=#{TOKEN}"
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+{
+  "order": {
+    "number": "R314234460",
+    "total": 0.0,
+    "item_total": 0.0,
+    "ship_total": 0,
+    "adjustment_total": 0.0,
+    "shipment_state": null,
+    "payment_state": null,
+    "special_instructions": null,
+    "created_at": "2016-09-23T16:19:29.284+03:00",
+    "updated_at": "2016-09-23T16:19:29.284+03:00",
+    "completed_at": null,
+    "ship_address": null,
+    "shipments": [],
+    "adjustments": []
   }
 }
 ```
