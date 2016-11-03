@@ -1665,14 +1665,13 @@ API каталога предоставляет отделы в виде дву�
   </tbody>
 </table>
 
-<h2 id="poluchieniie-tiekushchiegho-zakaz">Получение текущего заказ</h2>
+<h2 id="poluchieniie-zakaza-po-nomieru">Получение заказа по номеру</h2>
 
 <blockquote>
   <p>Пример команды:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/orders/current"</span> <span class="se">\</span>
-  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/orders/C27387-16"</span>
 </code></pre>
 
 <blockquote>
@@ -1740,6 +1739,62 @@ API каталога предоставляет отделы в виде дву�
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}]</span><span class="w">
     </span><span class="p">}]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Получить заказ можно, выполнив запрос:<br />
+<code>GET http://api.instamart.ru/v2/orders/#{NUMBER}</code></p>
+
+<h3 id="paramietry-zaprosa">Параметры запроса</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>NUMBER</td>
+      <td>Да</td>
+      <td>Номер заказа</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="poluchieniie-tiekushchiegho-zakaza-polzovatielia">Получение текущего заказа пользователя</h2>
+
+<blockquote>
+  <p>Пример команды:</p>
+</blockquote>
+
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/orders/current"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
+</code></pre>
+
+<blockquote>
+  <p>Ответ будет содержать следующие данные:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"order"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"R314234460"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"item_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ship_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"adjustment_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipment_state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"payment_state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"special_instructions"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-09-23T16:19:29.284+03:00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-09-23T16:19:29.284+03:00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"completed_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ship_address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nt">"adjustments"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -1837,7 +1892,7 @@ API каталога предоставляет отделы в виде дву�
 
 <p><code>POST http://api.instamart.ru/v2/line_items</code></p>
 
-<h3 id="paramietry-zaprosa">Параметры запроса</h3>
+<h3 id="paramietry-zaprosa-1">Параметры запроса</h3>
 
 <table>
   <thead>
@@ -1911,7 +1966,7 @@ API каталога предоставляет отделы в виде дву�
 
 <p><code>PUT http://api.instamart.ru/v2/line_items/#{ID}</code></p>
 
-<h3 id="paramietry-zaprosa-1">Параметры запроса</h3>
+<h3 id="paramietry-zaprosa-2">Параметры запроса</h3>
 
 <table>
   <thead>
@@ -1953,7 +2008,7 @@ API каталога предоставляет отделы в виде дву�
 
 <p><code>DELETE http://api.instamart.ru/v2/line_items/#{ID}</code></p>
 
-<h3 id="paramietry-zaprosa-2">Параметры запроса</h3>
+<h3 id="paramietry-zaprosa-3">Параметры запроса</h3>
 
 <table>
   <thead>
@@ -2040,7 +2095,7 @@ API каталога предоставляет отделы в виде дву�
 
 <p><code>PUT http://api.instamart.ru/v2/orders/#{NUMBER}</code></p>
 
-<h3 id="paramietry-zaprosa-3">Параметры запроса</h3>
+<h3 id="paramietry-zaprosa-4">Параметры запроса</h3>
 
 <p>Чтобы получить окна доставки выполните запрос <code>GET /shipments/#{SHIPMENT_ID}/delivery_windows</code>, которому можно передать параметр <code>date</code> для выбора окон доставки за конкретный день.</p>
 
