@@ -2274,6 +2274,55 @@ API каталога предоставляет отделы в виде дву�
 
 <p><code>GET http://api.instamart.ru/v2/payment_tools</code></p>
 
+          <h1 id="otzyv-na-zakaz">Отзыв на заказ</h1>
+
+<h2 id="poluchieniie-spiska-zakazov-biez-otzyvov">Получение списка заказов без отзывов</h2>
+
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/orders/unrated"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> 
+</code></pre>
+
+<p>Получить список заказов без отзывов можно, выполнив запрос:</p>
+
+<p><code>GET http://api.instamart.ru/v2/orders/unrated</code></p>
+
+<p>Запрос вернет заказы, завершеные не позднее 10 дней назад</p>
+
+<h2 id="sozdaniie-otzyva">Создание отзыва</h2>
+
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/orders/C36324/reviews"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
+  -d review[rate]<span class="o">=</span>2
+  -d review[comment]<span class="o">=</span><span class="s1">'В коробку с заказом пролился отбеливатель'</span>
+  -X POST
+</code></pre>
+
+<p>Добавить отзыв к заказу можно, выполнив запрос:</p>
+
+<p><code>GET http://api.instamart.ru/v2/orders/#{ORDER_NUMBER}/reviews</code></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>review[rate]</td>
+      <td>Да</td>
+      <td>Оценка</td>
+    </tr>
+    <tr>
+      <td>review[comment]</td>
+      <td>-</td>
+      <td>Комментарий</td>
+    </tr>
+  </tbody>
+</table>
+
           <h1 id="zhaloby-na-tovar">Жалобы на товар</h1>
 
 <h2 id="poluchieniie-spiska-standartnykh-zhalob">Получение списка стандартных жалоб</h2>
