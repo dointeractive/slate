@@ -11,6 +11,7 @@ includes:
   - users
   - authentication
   - passwords
+  - referrals
   - operational_zones
   - addresses
   - retailers
