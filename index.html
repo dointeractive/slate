@@ -537,6 +537,75 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
   </tbody>
 </table>
 
+          <h1 id="riefieralnaia-proghramma">Реферальная программа</h1>
+
+<h2 id="poluchieniie-koda-i-ssylki">Получение кода и ссылки</h2>
+
+<blockquote>
+  <p>Пример получения реферального кода и ссылки:</p>
+</blockquote>
+
+<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/users/test@test.com'</span>
+  -H <span class="s1">'Authorization: Token token=#{TOKEN}'</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test@test.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ivan"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Petrov"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Moscow"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"referral_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ABC67CD"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"referral_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/R/ABCD67CD"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Реферальный код и ссылку можно получить, выполив запрос к API пользователя:</p>
+
+<p><code>GET https://api.instamart.ru/v2/users/#{EMAIL}</code></p>
+
+<h3 id="paramietry-zaprosa">Параметры запроса</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>email</td>
+      <td>Да</td>
+      <td>Емейл пользователя</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="poluchieniie-spiska-riefieralov">Получение списка рефералов</h2>
+
+<blockquote>
+  <p>Пример получения списка рефералов:</p>
+</blockquote>
+
+<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/referrals'</span>
+  -H <span class="s1">'Authorization: Token token=#{TOKEN}'</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"referrals"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+    </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ivan"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Petrov"</span><span class="w">
+  </span><span class="p">}]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Получить список пользователей, воспользовавшихся реферальным кодом или ссылкой, можно получить, выполнив запрос:</p>
+
+<p><code>GET https://api.instamart.ru/v2/referrals</code></p>
+
           <h1 id="goroda-obsluzhivaniia">Города обслуживания</h1>
 
 <blockquote>
