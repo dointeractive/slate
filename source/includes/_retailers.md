@@ -15,7 +15,9 @@ curl "https://api.instamart.ru/v2/retailers" \
       "id": 1,
       "name": "Metro",
       "color": "#003d7a",
-      "logo": "https://www.metrogroup.de/~/assets/mag/images/teasers/metro-logo.png"
+      "logo": "https://www.metrogroup.de/~/assets/mag/images/teasers/metro-logo.png",
+      "available": true,
+      "environment": "production"
     }
   ]
 }
