@@ -366,7 +366,6 @@ line_item[quantity] | Нет | Количество единиц товара
 
 ```shell
 curl "<%= config[:host] %>/line_items/520884" \
-  -H "Authorization: Token token=#{TOKEN}" \
   -X DELETE
 ```
 > Ответ вернет результат с кодом 200
