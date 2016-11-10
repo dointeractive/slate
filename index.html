@@ -907,7 +907,9 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
       </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Metro"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#003d7a"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.metrogroup.de/~/assets/mag/images/teasers/metro-logo.png"</span><span class="w">
+      </span><span class="nt">"logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.metrogroup.de/~/assets/mag/images/teasers/metro-logo.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"available"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"environment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"production"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -2025,7 +2027,6 @@ API каталога предоставляет отделы в виде дву�
 <h2 id="udalieniie-pozitsii-zakaza">Удаление позиции заказа</h2>
 
 <pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/line_items/520884"</span> <span class="se">\</span>
-  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
   -X DELETE
 </code></pre>
 <blockquote>
