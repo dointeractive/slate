@@ -26,8 +26,9 @@ curl "<%= config[:host] %>/orders" \
     "created_at": "2016-09-23T16:19:29.284+03:00",
     "updated_at": "2016-09-23T16:19:29.284+03:00",
     "completed_at": null,
-    "ship_address": null,
+    "address": null,
     "shipments": [],
+    "payment": null,
     "adjustments": []
   }
 }
@@ -43,7 +44,7 @@ curl "<%= config[:host] %>/orders" -X POST
 
 `POST <%= config[:host] %>/orders`
 
-Вызов можно выполнить как для авторизованных пользователей, так и для неавторизованных. Если заголовок `Authorization` не будет указан, то созданый заказ не привяжется к пользователю. 
+Вызов можно выполнить как для авторизованных пользователей, так и для неавторизованных. Если заголовок `Authorization` не будет указан, то созданый заказ не привяжется к пользователю.
 Для каждого пользователя может быть создано сколько угодно заказов, но если у текущего пользователя уже есть незавершенный заказ, сервер вернет ошибку с кодом `422` и заказ не будет создан.
 Объект `Order`, возвращаемый сервером, содержит информацию о заказе, заказанных товарах и скидках.
 В один заказ могут быть добавлены товары от разных ритейлеров. Заказанные товары, в разбивке по ритейлерам, можно получить из поля `shipments` заказа.
@@ -60,9 +61,10 @@ adjustment_total | сумма скидок
 shipment_state | состояние доставки
 payment_state | состояние оплаты
 special_instructions | примечание к заказу
-ship_address | адрес доставки
+address | адрес доставки
 shipments | данные о добавленных товаров
-adjustments | корректировки стоимости заказа (скидки, доставка)
+payment | данные об оплате
+adjustments | корректировки стоимости заказа (скидки, цена доставки)
 
 ### Структура объекта Shipment
 
@@ -73,10 +75,29 @@ adjustments | корректировки стоимости заказа (ски
 id | id пакета
 alerts | список предупреждений об ошибках в заказе
 promotions | список предложенй о скидках и пр.
-total | суммарная стоимость добавленных позиций 
+total | суммарная стоимость добавленных позиций
 next_deliveries | предлагаемые окна доставки
 retailer | информация о ритейлере
 line_items | список позиций
+
+### Структура объекта Payment
+
+Атрибут | Описание
+--------- | -----------
+number | номер платежа
+state | состояние платежа
+is_finalization_needed | требуется ли оформление платежа
+finalization_url | url перехода для оформления платежа
+
+Платеж может быть в следующих состояниях
+
+Состояние | Описание
+--------- | --------
+checkout | начальное состояние
+completed | завершен
+invalid | отказ на стороне платежной системы
+processing | ожидает ответа платежной системы
+void | отменен администратором
 
 ### Структура объекта LineItem
 
@@ -113,7 +134,7 @@ curl "<%= config[:host] %>/orders/C27387-16"
     "created_at": "2016-10-11T12:28:03.000+03:00",
     "updated_at": "2016-10-11T12:28:04.000+03:00",
     "completed_at": null,
-    "ship_address": null,
+    "address": null,
     "shipments": [{
       "id": 1,
       "alerts": [{
@@ -160,7 +181,8 @@ curl "<%= config[:host] %>/orders/C27387-16"
           }]
         }
       }]
-    }]
+    }],
+    "payment": null
   }
 }
 ```
@@ -200,8 +222,9 @@ curl "<%= config[:host] %>/orders/current" \
     "created_at": "2016-09-23T16:19:29.284+03:00",
     "updated_at": "2016-09-23T16:19:29.284+03:00",
     "completed_at": null,
-    "ship_address": null,
+    "address": null,
     "shipments": [],
+    "payment": null,
     "adjustments": []
   }
 }
@@ -238,8 +261,9 @@ curl "<%= config[:host] %>/orders" \
       "created_at": "2016-09-23T16:19:29.284+03:00",
       "updated_at": "2016-09-23T16:19:29.284+03:00",
       "completed_at": null,
-      "ship_address": null,
+      "address": null,
       "shipments": [],
+      "payment": null,
       "adjustments": []
     }
   ],
@@ -419,6 +443,7 @@ curl "<%= config[:host] %>/orders/#{NUMBER}" \
     "full_address": "Старая Басманная 3"
   },
   "shipments": [...],
+  "payment": null,
   "adjustments": []
 }
 ```
@@ -429,7 +454,7 @@ curl "<%= config[:host] %>/orders/#{NUMBER}" \
 curl "<%= config[:host] %>/orders/#{NUMBER}" \
   -H "Authorization: Token token=#{TOKEN}" \
   -X PUT \
-  -d "order[phone_attributes][value]=+7(495)111-22-33" 
+  -d "order[phone_attributes][value]=+7(495)111-22-33"
 ```
 
 > Формат телефона не имеет значения, необходимо только чтобы был код из 3х цифр и номер из 7. Также необходимо учесть текущее ограничение: для сохранения номера телефона у заказа должен быть адрес. Т.е. телефон можно сохранить либо вместе с адресом, либо если адрес уже сохранен.
@@ -439,8 +464,9 @@ curl "<%= config[:host] %>/orders/#{NUMBER}" \
 ```shell
 curl "<%= config[:host] %>/orders/#{NUMBER}" \
   -H "Authorization: Token token=#{TOKEN}" \
-  -d "order[shipments_attributes][1][delivery_window_id]=1"
-  -d "order[shipments_attributes][1][shipping_method_id]=1"
+  -d "order[shipments_attributes][id]=1"
+  -d "order[shipments_attributes][delivery_window_id]=1"
+  -d "order[shipments_attributes][shipping_method_id]=1"
 ```
 
 > Пример выбора метода оплаты:
@@ -451,13 +477,44 @@ curl "<%= config[:host] %>/orders/#{NUMBER}" \
   -d "order[payment_attributes][payment_tool_id]=1"
 ```
 
+> В ответе вернется заказ с дополнительным объектом payment:
+
+```json
+{
+  "number": "R307128032",
+  ...
+  "payment": {
+    "number": 21156,
+    "state": "checkout",
+    "is_finalization_needed": false,
+    "finalization_url": null
+  }
+}
+```
+
 Чтобы заполнить информацию о заказе, необходимо выполнить запрос:
 
 `PUT <%= config[:host] %>/orders/#{NUMBER}`
 
-### Параметры запроса
+### Выбор способа доставки и времени доставки
 
-Чтобы получить окна доставки выполните запрос `GET <% config[:host] %>/shipments/#{SHIPMENT_ID}/delivery_windows`, которому можно передать параметр `date` для выбора окон доставки за конкретный день.
+Получить список способов доставки, необходимый для оформления заказа, можно выполнив запрос:
+
+`GET <%= config[:host] %>/shipping_methods`
+
+Окна доставки можно получить, выполнив запрос:
+
+`GET <%= config[:host] %>/shipments/#{SHIPMENT_ID}/delivery_windows`
+
+которому можно передать параметр `date` для выбора окон доставки за конкретный день.
+
+### Выбор способа оплаты
+
+Получить список способов оплаты, необходимый для оформления платежа, можно выполнив запрос:
+
+`GET <%= config[:host] %>/payment_tools`
+
+### Параметры запроса
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
@@ -475,4 +532,3 @@ order[payment_attributes][payment_tool_id] | Да | id источника опл
 Чтобы завершить заказ, необходимо выполнить запрос:
 
 `POST <%= config[:host] %>/orders/#{NUMBER}/completion`
-
