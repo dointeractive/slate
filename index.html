@@ -894,7 +894,7 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
 
 <h2 id="poluchieniie-spiska-ritieilierov">Получение списка ритейлеров</h2>
 
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.instamart.ru/v2/retailers"</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/retailers"</span> 
 </code></pre>
 
 <blockquote>
@@ -902,24 +902,79 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
 </blockquote>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"retailers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Metro"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#003d7a"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.metrogroup.de/~/assets/mag/images/teasers/metro-logo.png"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"available"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"environment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"production"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="nt">"retailers"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Metro C&amp;C"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#003d7a"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/logos/metro.png"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"available"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"environment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"production"</span><span class="w">
+  </span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>Получить список ритейлеров подключенных к Instamart можно выполнив запрос</p>
+<p>Получить список ритейлеров подключенных к Instamart можно, выполнив запрос</p>
 
 <h3 id="http-zapros">HTTP запрос</h3>
 
-<p><code>GET https://api.instamart.ru/v2/retailers</code></p>
+<p><code>GET http://api.instamart.ru/v2/retailers</code></p>
+
+<h2 id="rasshiriennyie-dannyie-ritieiliera">Расширенные данные ритейлера</h2>
+
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/retailers/1"</span> 
+</code></pre>
+
+<blockquote>
+  <p>Команда выше возвращает JSON:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"retailer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Metro C&amp;C"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#003d7a"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/logos/metro.png"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"available"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"environment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"production"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"services"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Доставка"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"next_delivery"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">350.0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"сегодня, 21:00-00:00"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Компания METRO Cash &amp; Carry присутствует с 2000 года и сегодня магазины компании открыты в 49 регионах страны..."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"operational_times"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+      </span><span class="nt">"week_day"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Понедельник"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"starts_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-28T09:00:00.000+03:00"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"ends_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-29T00:00:00.000+03:00"</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Получить полную информацию по ритейлеру можно, выполнив запрос</p>
+
+<h3 id="http-zapros-1">HTTP запрос</h3>
+
+<p><code>GET http://api.instamart.ru/v2/retailers/#{ID}</code></p>
+
+<h3 id="paramietry-zaprosa">Параметры запроса</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ID</td>
+      <td>Да</td>
+      <td>ID ритейлера</td>
+    </tr>
+  </tbody>
+</table>
 
           <h1 id="katieghorii">Категории</h1>
 
