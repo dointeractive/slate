@@ -1,0 +1,72 @@
+# Ритейлеры
+
+## Получение списка ритейлеров
+
+```shell
+curl "<%= config[:host] %>/retailers" 
+```
+
+> Команда выше возвращает JSON:
+
+```json
+{
+  "retailers": [{
+    "id": 1,
+    "name": "Metro C&C",
+    "color": "#003d7a",
+    "logo": "http://instamart.ru/logos/metro.png",
+    "available": true,
+    "environment": "production"
+  }]
+}
+```
+
+Получить список ритейлеров подключенных к Instamart можно, выполнив запрос
+
+### HTTP запрос
+
+`GET <%= config[:host] %>/retailers`
+
+## Расширенные данные ритейлера
+
+```shell
+curl "<%= config[:host] %>/retailers/1" 
+```
+
+> Команда выше возвращает JSON:
+
+```json
+{
+  "retailer": {
+    "id": 1,
+    "name": "Metro C&C",
+    "color": "#003d7a",
+    "logo": "http://instamart.ru/logos/metro.png",
+    "available": true,
+    "environment": "production",
+    "services": "Доставка",
+    "next_delivery": {
+      "price": 350.0,
+      "summary": "сегодня, 21:00-00:00"
+    },
+    "description": "Компания METRO Cash & Carry присутствует с 2000 года и сегодня магазины компании открыты в 49 регионах страны...",
+    "operational_times": [{
+      "week_day": "Понедельник",
+      "starts_at": "2016-11-28T09:00:00.000+03:00",
+      "ends_at": "2016-11-29T00:00:00.000+03:00"
+    }]
+  }
+}
+```
+
+Получить полную информацию по ритейлеру можно, выполнив запрос
+
+### HTTP запрос
+
+`GET <%= config[:host] %>/retailers/#{ID}`
+
+### Параметры запроса
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+ID | Да | ID ритейлера
