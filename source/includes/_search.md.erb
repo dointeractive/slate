@@ -109,11 +109,7 @@ curl '<%= config[:host] %>/searches?rid=1&q=%D1%87%D0%B0%D0%B9'
 > Пример поискового запроса с фильтрацией результатов:
 
 ```shell
-curl '<%= config[:host] %>/searches?rid=1&q=%D1%87%D0%B0%D0%B9' \
-  -X GET \
-  -d filter[brand][]=1 \
-  -d filter[property][]=4 \
-  -d filter[property][]=7
+curl '<%= config[:host] %>/searches?rid=1&q=%D1%87%D0%B0%D0%B9?filter[brand][]=1&filter[property][]=4&filter[property][]=7'
 ```
 
 Для получения результатов поиска, выполните запрос:

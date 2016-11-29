@@ -72,11 +72,7 @@ curl "<%= config[:host] %>/products?rid=1"
 > Пример запроса с фильтрацией выборки продуктов:
 
 ```shell
-curl "<%= config[:host] %>/products?rid=1" \
-  -X GET \
-  -d filter[brand][]=1 \
-  -d filter[property][]=4 \
-  -d filter[property][]=7
+curl "<%= config[:host] %>/products?rid=1&filter[brand][]=1filter[property][]=4&filter[property][]=7"
 ```
 
 Получить список продуктов доступных в текущий момент в Instamart можно, выполнив запрос:
