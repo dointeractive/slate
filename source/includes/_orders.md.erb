@@ -294,6 +294,54 @@ curl "<%= config[:host] %>/orders" \
 Получить все заказы пользователя можно, выполнив запрос:
 `GET <%= config[:host] %>/orders`
 
+## Применение промокода
+
+Чтобы применить промокод к заказу, необходимо выполнить запрос:
+
+`POST http://api.im.dev/v2/orders/#{NUMBER}/promotions`
+
+### Параметры запроса
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+promotion_code | Да | Промокод(число)
+
+> Пример пременения промокода:
+
+```shell
+curl "<%= config[:host] %>/orders/#{NUMBER}/promotions" \
+  -H "Authorization: Token token=#{TOKEN}"
+  -X POST \
+  -d "promotion_code=12345"
+```
+
+> В ответе вернется обновленный заказ:
+
+```json
+{
+  "order": {
+    "number": "R314234460",
+    "total": 1236.7,
+    "item_total": 1236.7,
+    ...
+    "promo_total": -100.0,
+    "shipments": [
+      {
+        "id": 3228,
+        "promotions": [
+          {
+            "message": "Бесплатная доставка при заказе на сумму от 2999"
+          }
+        ],
+        "cost": 0,
+        "item_total": 1236.7,
+        ...
+      }
+    ]
+  }
+}
+```
+
 ## Добавление позиции заказа
 
 ```shell
