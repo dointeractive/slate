@@ -565,11 +565,13 @@ curl "<%= config[:host] %>/orders/#{NUMBER}/cancellations" \
 
 ```json
 {
-  "reason": "Причина нет денег",
-  "order": {
-    "number": "R314234460",
-    ...
-    "state": "cancelled"
+  "cancellation": {
+    "reason": "Причина нет денег",
+    "order": {
+      "number": "R314234460",
+      ...
+      "state": "cancelled"
+    }
   }
 }
 ```
