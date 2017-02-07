@@ -304,7 +304,7 @@ curl "<%= config[:host] %>/orders" \
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
-promotion_code | Да | Промокод(число)
+promotion_code | Да | Промокод(строка)
 
 > Пример пременения промокода:
 
@@ -324,20 +324,7 @@ curl "<%= config[:host] %>/orders/#{NUMBER}/promotions" \
     "total": 1236.7,
     "item_total": 1236.7,
     ...
-    "promo_total": -100.0,
-    "shipments": [
-      {
-        "id": 3228,
-        "promotions": [
-          {
-            "message": "Бесплатная доставка при заказе на сумму от 2999"
-          }
-        ],
-        "cost": 0,
-        "item_total": 1236.7,
-        ...
-      }
-    ]
+    "promo_total": -100.0
   }
 }
 ```
