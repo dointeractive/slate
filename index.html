@@ -1824,6 +1824,7 @@ API каталога предоставляет отделы в виде дву�
   </span><span class="nt">"order"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"R314234460"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"item_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nt">"item_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
     </span><span class="nt">"ship_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nt">"adjustment_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
@@ -1886,6 +1887,10 @@ API каталога предоставляет отделы в виде дву�
     <tr>
       <td>adjustment_total</td>
       <td>сумма скидок</td>
+    </tr>
+    <tr>
+      <td>item_count</td>
+      <td>общее количество товаров в заказе</td>
     </tr>
     <tr>
       <td>shipment_state</td>
@@ -1965,6 +1970,10 @@ API каталога предоставляет отделы в виде дву�
     <tr>
       <td>line_items</td>
       <td>список позиций</td>
+    </tr>
+    <tr>
+      <td>delivery_window</td>
+      <td>окно доставки</td>
     </tr>
     <tr>
       <td>state</td>
@@ -2111,7 +2120,7 @@ API каталога предоставляет отделы в виде дву�
 
 <p>В <code>NUMBER</code> передается номер того заказа, который необходимо повторить.</p>
 
-<p>Заказ повторяется в текущий заказ или создается новый.</p>
+<p>Если у пользователя есть текущий заказ, то позиции повторяемого заказа скопируются в текущий заказ пользователя. Если текущего заказа нет – будет создан новый заказ, содержащий позиции повторяемого заказа.</p>
 
 <blockquote>
   <p>Пример повтора заказа:</p>
@@ -2123,7 +2132,7 @@ API каталога предоставляет отделы в виде дву�
 </code></pre>
 
 <blockquote>
-  <p>В ответе вернется новый или обновленный заказ:</p>
+  <p>В ответе вернется заказ:</p>
 </blockquote>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -2137,12 +2146,13 @@ API каталога предоставляет отделы в виде дву�
           </span><span class="p">{</span><span class="w">
             </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">548260</span><span class="p">,</span><span class="w">
             </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">229.89</span><span class="p">,</span><span class="w">
-          </span><span class="err">}</span><span class="w">
+            </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">229.89</span><span class="w">
+            </span><span class="err">...</span><span class="w">
+          </span><span class="p">}</span><span class="w">
         </span><span class="p">]</span><span class="w">
       </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-  </span><span class="err">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -2164,6 +2174,7 @@ API каталога предоставляет отделы в виде дву�
     </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C27387-16"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mf">229.89</span><span class="p">,</span><span class="w">
     </span><span class="nt">"item_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">229.89</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"item_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nt">"ship_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nt">"adjustment_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
     </span><span class="nt">"shipment_state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -2268,6 +2279,7 @@ API каталога предоставляет отделы в виде дву�
     </span><span class="nt">"item_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
     </span><span class="nt">"ship_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nt">"adjustment_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"item_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nt">"shipment_state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nt">"payment_state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nt">"special_instructions"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -2304,21 +2316,32 @@ API каталога предоставляет отделы в виде дву�
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"orders"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"R314234460"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"item_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"ship_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"adjustment_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"shipment_state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"payment_state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"special_instructions"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-09-23T16:19:29.284+03:00"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-09-23T16:19:29.284+03:00"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"completed_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"shipments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-      </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"adjustments"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+      </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"R656752828"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mf">2285.48</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"item_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">2035.48</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"ship_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">250.0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"item_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"shipment_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"canceled"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"payment_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balance_due"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-08T17:26:51.000+03:00"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-08T17:38:25.000+03:00"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"completed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-08T17:37:46.000+03:00"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"shipments"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">126866</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"cost"</span><span class="p">:</span><span class="w"> </span><span class="mf">250.0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"item_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">2035.48</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mf">2285.48</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"canceled"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"retailer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Metro CC"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"delivery_window"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1818</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"starts_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-09T11:00:00.000+03:00"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"ends_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-09T14:00:00.000+03:00"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}]</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
 
@@ -2333,6 +2356,94 @@ API каталога предоставляет отделы в виде дву�
 
 <p>Получить все заказы пользователя можно, выполнив запрос:<br />
 <code>GET http://api.instamart.ru/v2/orders</code></p>
+
+<p>Заказ, возращаемый в списке всех заказов, содержит ограниченное количество данных по сравнению с заказами, запрашиваемыми индивидуально.</p>
+
+<h3 id="struktura-obiekta-order-1">Структура объекта Order</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Атрибут</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>number</td>
+      <td>номер заказа</td>
+    </tr>
+    <tr>
+      <td>total</td>
+      <td>итоговая сумма заказа</td>
+    </tr>
+    <tr>
+      <td>item_total</td>
+      <td>сумма всех позиций заказа, без скидки</td>
+    </tr>
+    <tr>
+      <td>ship_total</td>
+      <td>стоимость доставки</td>
+    </tr>
+    <tr>
+      <td>item_count</td>
+      <td>общее количество товаров в заказе</td>
+    </tr>
+    <tr>
+      <td>shipment_state</td>
+      <td>состояние доставки</td>
+    </tr>
+    <tr>
+      <td>payment_state</td>
+      <td>состояние оплаты</td>
+    </tr>
+    <tr>
+      <td>shipments</td>
+      <td>данные о добавленных товаров</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="struktura-obiekta-shipment-1">Структура объекта Shipment</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Атрибут</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td>id пакета</td>
+    </tr>
+    <tr>
+      <td>cost</td>
+      <td>стоимость доставки</td>
+    </tr>
+    <tr>
+      <td>item_total</td>
+      <td>стоимость всех позиций заказа</td>
+    </tr>
+    <tr>
+      <td>total</td>
+      <td>суммарная стоимость всех позиций, доставки и скидок</td>
+    </tr>
+    <tr>
+      <td>retailer</td>
+      <td>информация о ритейлере</td>
+    </tr>
+    <tr>
+      <td>delivery_window</td>
+      <td>окно доставки</td>
+    </tr>
+    <tr>
+      <td>state</td>
+      <td>состояние</td>
+    </tr>
+  </tbody>
+</table>
 
 <h2 id="primienieniie-promokoda">Применение промокода</h2>
 
