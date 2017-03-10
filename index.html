@@ -2334,7 +2334,11 @@ API каталога предоставляет отделы в виде дву�
         </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"canceled"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"retailer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Metro CC"</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Metro CC"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#003d7a"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/logos/metro.png"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"available"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"environment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"production"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"delivery_window"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1818</span><span class="p">,</span><span class="w">
@@ -2357,7 +2361,9 @@ API каталога предоставляет отделы в виде дву�
 <p>Получить все заказы пользователя можно, выполнив запрос:<br />
 <code>GET http://api.instamart.ru/v2/orders</code></p>
 
-<p>Заказ, возращаемый в списке всех заказов, содержит ограниченное количество данных по сравнению с заказами, запрашиваемыми индивидуально.</p>
+<aside class="notice">
+  Объект заказа, возвращаемый API "списка заказов", содержит меньшее количество данных по сравнению с объектом, возвращаемым API "получения заказа по номеру", для уменьшения размера запроса.
+</aside>
 
 <h3 id="struktura-obiekta-order-1">Структура объекта Order</h3>
 
@@ -2404,6 +2410,13 @@ API каталога предоставляет отделы в виде дву�
   </tbody>
 </table>
 
+<p>В ответ не включаются следующие поля:<br />
+- adjustment_total<br />
+- promo_total<br />
+- special_instructions<br />
+- address<br />
+- payment</p>
+
 <h3 id="struktura-obiekta-shipment-1">Структура объекта Shipment</h3>
 
 <table>
@@ -2444,6 +2457,12 @@ API каталога предоставляет отделы в виде дву�
     </tr>
   </tbody>
 </table>
+
+<p>В ответ не включаются следующие поля:<br />
+- alerts<br />
+- promotions<br />
+- next_deliveries<br />
+- line_items</p>
 
 <h2 id="primienieniie-promokoda">Применение промокода</h2>
 
