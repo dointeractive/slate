@@ -5,6 +5,7 @@
 ```json
 {
   "id": 1,
+  "type": "department",
   "name": "Чай и кофе",
   "products_count": 668,
   "products": []
@@ -16,6 +17,7 @@
 ```json
 {
   "taxon_id": 1,
+  "type": "taxon",
   "name": "Чай",
   "products_count": 232,
   "products": []
@@ -59,6 +61,7 @@ curl 'https://api.instamart.ru/v2/departments?rid=1' \
 {
   "departments": [{
     "id": 173,
+    "type": "department",
     "name": "Бакалея",
     "products_count": 1979,
     "products": [{
@@ -80,10 +83,12 @@ curl 'https://api.instamart.ru/v2/departments?rid=1' \
   "deals": {
     "department": {
       "id": 428,
+      "type": "department",
       "name": "Скидки",
       "products_count": 910,
       "aisles": [{
         "taxon_id": 487,
+        "type": "taxon",
         "name": "Бакалея",
         "products_count": 129,
         "icon": {
@@ -124,6 +129,7 @@ curl 'https://api.instamart.ru/v2/departments/174?rid=1' \
 {
   "department": {
     "id": 1,
+    "type": "department",
     "name": "Чай и кофе",
     "products_count": 668,
     "aisles": [
@@ -131,6 +137,7 @@ curl 'https://api.instamart.ru/v2/departments/174?rid=1' \
         "name": "Чай",
         "product_counts": 327,
         "taxon_id": 267,
+        "type": "taxon",
         "products": [
           {
             "id": 1,
