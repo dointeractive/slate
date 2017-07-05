@@ -12,10 +12,6 @@ curl 'https://api.instamart.ru/v2/passwords/reset' \
 
 > Если пользователя не существует, то сервер вернет ответ с кодом 404
 
-<aside class="warning">
-  not implemented
-</aside>
-
 Отправить пользователю письмо с инструкцией "восстановления пароля" можно, выполнив запрос:
 `POST https://api.instamart.ru/v2/passwords/reset`
 
