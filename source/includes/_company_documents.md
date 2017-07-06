@@ -23,10 +23,10 @@ curl "<%= config[:host] %>/company_documents" \
       "kpp": "123456789",
       "bik": "123456789",
       "bank": "чудо банк",
-      "correspondentAccount": "12345678901234567890",
-      "operatingAccount": "12345678901234567890",
+      "correspondent_account": "12345678901234567890",
+      "operating_account": "12345678901234567890",
       "address": "123123, г. Москва, ул. Тверская, 1",
-      "paymentTool": {
+      "payment_tool": {
         "id": 684,
         "name": "ООО Гугл, ИНН: 1234567890",
         "type": "sber_bank_invoice"
@@ -39,10 +39,10 @@ curl "<%= config[:host] %>/company_documents" \
       "kpp": "123456789",
       "bik": "123456789",
       "bank": null,
-      "correspondentAccount": "12345678901234567890",
-      "operatingAccount": "12345678901234567890",
+      "correspondent_account": "12345678901234567890",
+      "operating_account": "12345678901234567890",
       "address": "123123, г. Москва, ул. Тверская, 2",
-      "paymentTool": {
+      "payment_tool": {
         "id": 685,
         "name": "ООО Яндекс, ИНН: 1234567890",
         "type": "sber_bank_invoice"
@@ -71,17 +71,17 @@ curl "<%= config[:host] %>/company_documents" \
 
 ```json
 {
-  "companyDocument": {
+  "company_document": {
     "id": 680,
     "name": "ООО Название Компании",
     "inn": "1234567890",
     "kpp": "123456789",
     "bik": "123456789",
     "bank": "чудо банк",
-    "correspondentAccount": "12345678901234567890",
-    "operatingAccount": "12345678901234567890",
+    "correspondent_account": "12345678901234567890",
+    "operating_account": "12345678901234567890",
     "address": "123123, г. Москва, ул. Тверская, 1",
-    "paymentTool": {
+    "payment_tool": {
       "id": 686,
       "name": "ООО Название Компании, ИНН: 1234567890",
       "type": "sber_bank_invoice"
@@ -118,17 +118,17 @@ curl "<%= config[:host] %>/company_documents/680" \
 
 ```json
 {
-  "companyDocument": {
+  "company_document": {
     "id": 680,
     "name": "ООО Новое Название Компании",
     "inn": "1234567890",
     "kpp": "123456789",
     "bik": "123456789",
     "bank": "чудо банк",
-    "correspondentAccount": "12345678901234567890",
-    "operatingAccount": "12345678901234567890",
+    "correspondent_account": "12345678901234567890",
+    "operating_account": "12345678901234567890",
     "address": "123123, г. Москва, ул. Тверская, 1",
-    "paymentTool": {
+    "payment_tool": {
       "id": 686,
       "name": "ООО Название Компании, ИНН: 1234567890",
       "type": "sber_bank_invoice"
