@@ -24,6 +24,7 @@ includes:
   - delivery_windows
   - payment_tools
   - payments
+  - phones
   - order_reviews
   - flags
   - errors
