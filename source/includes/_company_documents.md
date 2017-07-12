@@ -48,9 +48,54 @@ curl "<%= config[:host] %>/company_documents" \
         "type": "sber_bank_invoice"
       }
     }
-  ]
+  ],
+  "meta": {
+    "current_page": 1,
+    "next_page": null,
+    "total_pages": 1,
+    "per_page": 10
+  }
 }
 ```
+
+## Запрос на получение реквизита по номеру
+
+```shell
+curl "<%= config[:host] %>/company_documents/680" \
+  -H "Authorization: Token token=#{TOKEN}"
+```
+
+> В случае если данные были указаны верно, сервер вернет ответ:
+
+```json
+{
+  "company_document": {
+    "id": 680,
+    "name": "ООО Название Компании",
+    "inn": "1234567890",
+    "kpp": "123456789",
+    "bik": "123456789",
+    "bank": "чудо банк",
+    "correspondent_account": "12345678901234567890",
+    "operating_account": "12345678901234567890",
+    "address": "123123, г. Москва, ул. Тверская, 1",
+    "payment_tool": {
+      "id": 686,
+      "name": "ООО Название Компании, ИНН: 1234567890",
+      "type": "sber_bank_invoice"
+    }
+  }
+}
+```
+
+Получить реквизит можно, выполнив запрос:
+`GET <%= config[:host] %>/company_documents/#{ID}`
+
+### Параметры запроса
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+ID | Да | ID реквизита
 
 ## Запрос на создание нового реквизита юридического лица
 
