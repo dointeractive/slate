@@ -66,7 +66,7 @@ list[image] | Да | Изображение
 ## Получение списка по номеру
 
 ```shell
-curl "<%= config[:host] %>/lists/1" \
+curl "<%= config[:host] %>/lists/1?rid=1" \
   -H "Authorization: Token token=#{TOKEN}"
 ```
 
@@ -103,13 +103,14 @@ curl "<%= config[:host] %>/lists/1" \
 ```
 
 Получить список можно, выполнив запрос:
-`GET <%= config[:host] %>/lists/#{ID}`
+`GET <%= config[:host] %>/lists/#{ID}?rid={RID}`
 
 ### Параметры запроса
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
 ID | Да | ID списка
+RID | Да | ID текущего ритейлера
 
 
 ### Структура объекта ListItem
@@ -223,7 +224,7 @@ list_item[product_id] | Да | ИД продукта
 ## Редактирование позиции продукта в списке
 
 ```shell
-curl "<%= config[:host] %>/lists_items/1/lists_items/22" \
+curl "<%= config[:host] %>/lists_items/1/lists_items/22?rid=1" \
   -d list_item[position]=5 \
   -X PUT
 ```
@@ -255,12 +256,13 @@ curl "<%= config[:host] %>/lists_items/1/lists_items/22" \
 
 Чтобы изменить позицию в списке, необходимо выполнить запрос:
 
-`PUT <%= config[:host] %>/lists/#{ID}/lists_items/#{LID}`
+`PUT <%= config[:host] %>/lists/#{ID}/lists_items/#{LID}?rid=#{RID}`
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
 ID | Да | ИД списка
 LID | Да | ИД позиции списка
+RID | Да | ID текущего ритейлера
 list_item[quantity] | Да | Количество товара для добавления в корзину
 list_item[position] | Да | Позиция в списке
 
