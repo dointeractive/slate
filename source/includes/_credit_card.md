@@ -108,7 +108,7 @@ credit_card[name] | Да | Имя держателя карты
 credit_card[year] | Да | Год
 credit_card[month] | Да | Месяц
 credit_card[last_digits] | Да | Последние 4 цифры номера карты
-credit_card[cryptogram_packet] | Да | Шифр
+credit_card[cryptogram_packet] | Да | Шифрограмма
 
 
 ## Запрос на удаление карты
