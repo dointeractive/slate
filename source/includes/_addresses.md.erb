@@ -4,13 +4,13 @@
 
 ```shell
 curl "<%= config[:host] %>/addresses" \
-  -H "Authorization: Token token=#{TOKEN}" 
+  -H "Authorization: Token token=#{TOKEN}"
 ```
 
 > Ответ будет содержать следующие данные:
 
 ```json
-{ 
+{
   "addresses": [{
     "id": 1,
     "first_name": "Иван",
@@ -23,7 +23,8 @@ curl "<%= config[:host] %>/addresses" \
     "apartment": null,
     "comments": null,
     "lat": null,
-    "lon": null
+    "lon": null,
+    "kind": "home"
   }],
   "meta": {
     "current_page": 1,
@@ -38,6 +39,12 @@ curl "<%= config[:host] %>/addresses" \
 
 `GET <%= config[:host] %>/addresses`
 
+### Структура объекта Address
+
+Атрибут | Описание
+--------- | -----------
+id | id адреса
+kind | Тип адреса: work или home. По-умолчанию home
 
 ## Создание нового адреса
 
@@ -47,7 +54,8 @@ curl "<%= config[:host] %>/addresses" \
   -X POST \
   -d "address[full_address]=Фридриха Энгельса 56" \
   -d "address[street]=Фридриха Энгельса" \
-  -d "address[building]=56" 
+  -d "address[building]=56" \
+  -d "address[kind]=work"
 ```
 
 > В случае если данные были указаны верно, сервер вернет ответ:
@@ -66,7 +74,8 @@ curl "<%= config[:host] %>/addresses" \
     "apartment": null,
     "comments": null,
     "lat": null,
-    "lon": null
+    "lon": null,
+    "kind": "work"
   }
 }
 ```
@@ -88,6 +97,7 @@ address[apartment] | - | Номер квартиры
 address[comments] | - | Комментарий к адресу
 address[lon] | - | Долгота
 address[lat] | - | Широта
+address[kind] | - | Тип адреса. Доступные значения: home, work
 
 ## Редактирование адреса
 
@@ -114,7 +124,8 @@ curl "<%= config[:host] %>/addresses/2" \
     "apartment": null,
     "comments": null,
     "lat": null,
-    "lon": null
+    "lon": null,
+    "kind": "home"
   }
 }
 ```
@@ -136,6 +147,7 @@ address[apartment] | - | Номер квартиры
 address[comments] | - | Комментарий к адресу
 address[lon] | - | Долгота
 address[lat] | - | Широта
+address[kind] | - | Тип адреса. Доступные значения: home, work
 
 
 ## Удаление адреса
