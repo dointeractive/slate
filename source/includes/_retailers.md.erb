@@ -3,7 +3,7 @@
 ## Получение списка ритейлеров
 
 ```shell
-curl "<%= config[:host] %>/retailers" 
+curl "<%= config[:host] %>/retailers"
 ```
 
 > Команда выше возвращает JSON:
@@ -16,7 +16,8 @@ curl "<%= config[:host] %>/retailers"
     "color": "#003d7a",
     "logo": "http://instamart.ru/logos/metro.png",
     "available": true,
-    "environment": "production"
+    "environment": "production",
+    "markup": 10
   }]
 }
 ```
@@ -30,7 +31,7 @@ curl "<%= config[:host] %>/retailers"
 ## Расширенные данные ритейлера
 
 ```shell
-curl "<%= config[:host] %>/retailers/1" 
+curl "<%= config[:host] %>/retailers/1"
 ```
 
 > Команда выше возвращает JSON:
@@ -45,6 +46,7 @@ curl "<%= config[:host] %>/retailers/1"
     "available": true,
     "environment": "production",
     "services": "Доставка",
+    "markup": 0,
     "next_delivery": {
       "price": 350.0,
       "summary": "сегодня, 21:00-00:00"
@@ -70,3 +72,9 @@ curl "<%= config[:host] %>/retailers/1"
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
 ID | Да | ID ритейлера
+
+### Структура объекта Retailer
+
+Атрибут | Описание
+--------- | -----------
+markup | Процент отличия цен от цен ритейлера
