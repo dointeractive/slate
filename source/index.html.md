@@ -16,6 +16,7 @@ includes:
   - addresses
   - retailers
   - categories
+  - taxons
   - departments
   - products
   - search
