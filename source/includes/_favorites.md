@@ -11,31 +11,26 @@ curl "<%= config[:host] %>/lists/favorites" \
 
 ```json
 {
-  "list": {
-    "id": 1,
-    "name": "Избранное",
-    "image_url": "http://instamart.ru/lists/1/list/file.png",
-    "list_items": [
-      {
-        "id": 22,
-        "product_id": 12345,
-        "name": "Бананы",
-        "quantity": 3,
-        "position": 0,
-        "price": 54.79,
-        "original_price": 55.79,
-        "human_volume": "500 г.",
-        "available": true,
-        "images": [
-          {
-            "mini_url": "http://instamart.ru/products/22/mini/file.png",
-            "small_url": "http://instamart.ru/products/22/small/file.png",
-            "product_url": "http://instamart.ru/products/22/product/file.png"
-          }
-        ]
-      }
-    ]
-  }
+  "list_items": [
+    {
+      "id": 22,
+      "product_id": 12345,
+      "name": "Бананы",
+      "quantity": 3,
+      "position": 0,
+      "price": 54.79,
+      "original_price": 55.79,
+      "human_volume": "500 г.",
+      "available": true,
+      "images": [
+        {
+          "mini_url": "http://instamart.ru/products/22/mini/file.png",
+          "small_url": "http://instamart.ru/products/22/small/file.png",
+          "product_url": "http://instamart.ru/products/22/product/file.png"
+        }
+      ]
+    }
+  ]
 }
 ```
 
@@ -152,7 +147,7 @@ LID | Да | ИД позиции списка
 ## Добавление всех позиции продуктов из списка в корзину
 
 ```shell
-curl "<%= config[:host] %>/lists/1/orders?rid=1" \
+curl "<%= config[:host] %>/lists/favorites/orders?rid=1" \
   -X POST
 ```
 > Ответ вернет результат с кодом 200
