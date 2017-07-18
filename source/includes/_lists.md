@@ -61,7 +61,7 @@ curl "<%= config[:host] %>/lists" \
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
 list[name] | Да | Название
-list[image] | Да | Изображение
+list[image] | - | Изображение
 
 ## Получение списка по номеру
 
@@ -224,7 +224,7 @@ list_item[product_id] | Да | ИД продукта
 ## Редактирование позиции продукта в списке
 
 ```shell
-curl "<%= config[:host] %>/lists_items/1/lists_items/22?rid=1" \
+curl "<%= config[:host] %>/lists/1/lists_items/22?rid=1" \
   -d list_item[position]=5 \
   -X PUT
 ```
