@@ -18,6 +18,7 @@ includes:
   - categories
   - departments
   - products
+  - product_replacements
   - search
   - orders
   - shipping_methods
