@@ -460,10 +460,6 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
   <p>Если пользователя не существует, то сервер вернет ответ с кодом 404</p>
 </blockquote>
 
-<aside class="warning">
-  not implemented
-</aside>
-
 <p>Отправить пользователю письмо с инструкцией “восстановления пароля” можно, выполнив запрос:<br />
 <code>POST https://api.instamart.ru/v2/passwords/reset</code></p>
 
@@ -565,13 +561,11 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
 <p><code>GET http://api.instamart.ru/v2/promotions/referral</code></p>
 
 
-          <h1 id="goroda-obsluzhivaniia">Города обслуживания</h1>
+          <h1 id="maghaziny">Магазины</h1>
 
-<blockquote>
-  <p>Пример проверки доступности Instamart в Москве:</p>
-</blockquote>
+<h2 id="poluchieniie-spiska-maghazinov">Получение списка магазинов</h2>
 
-<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/operational_zones?location=Москва"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/stores"</span>
 </code></pre>
 
 <blockquote>
@@ -579,21 +573,64 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
 </blockquote>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"zones"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="nt">"stores"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Москва"</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Метро, просп. Мира"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"zones"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"lon"</span><span class="p">:</span><span class="w"> </span><span class="mf">37.621164</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"lat"</span><span class="p">:</span><span class="w"> </span><span class="mf">55.633049</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"lon"</span><span class="p">:</span><span class="w"> </span><span class="mf">37.627966</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"lat"</span><span class="p">:</span><span class="w"> </span><span class="mf">55.633231</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"lon"</span><span class="p">:</span><span class="w"> </span><span class="mf">37.628481</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"lat"</span><span class="p">:</span><span class="w"> </span><span class="mf">55.628691</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"lon"</span><span class="p">:</span><span class="w"> </span><span class="mf">37.619641</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"lat"</span><span class="p">:</span><span class="w"> </span><span class="mf">55.628558</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"lon"</span><span class="p">:</span><span class="w"> </span><span class="mf">37.621164</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"lat"</span><span class="p">:</span><span class="w"> </span><span class="mf">55.633049</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"retailer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Метро"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#003d7a"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://instamart.ru/logos/metro.png"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"available"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"environment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"production"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">84646</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"full_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Москва, просп. Мира, 211, стр. 1"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Москва"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"просп. Мира"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"building"</span><span class="p">:</span><span class="w"> </span><span class="s2">"211, стр. 1"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"lat"</span><span class="p">:</span><span class="w"> </span><span class="mf">55.844041</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"lon"</span><span class="p">:</span><span class="w"> </span><span class="mf">37.66265</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 
-<p>Проверить доступен Instamart в указанном городе или нет можно, выполнив следующий запрос:</p>
+<p>Получить список доступных магазинов можно получить, выполнив запрос</p>
 
 <h3 id="http-zapros">HTTP запрос</h3>
 
-<p><code>GET http://api.instamart.ru/v2/operational_zones</code></p>
+<p><code>GET http://api.instamart.ru/v2/stores</code></p>
 
-<p>В случае если Instamart не осуществляет доставку в указанный населенный пункт API вернет ошибку <code>404</code></p>
+<p>Список магазинов можно отфильтровать, оставив только доступные для данного адреса доставки,<br />
+если передать два дополнительных параметра <code>lat</code> и <code>lon</code>.</p>
 
 <h3 id="paramietry-zaprosa">Параметры запроса</h3>
 
@@ -607,9 +644,100 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
   </thead>
   <tbody>
     <tr>
-      <td>location</td>
+      <td>lon</td>
+      <td>-</td>
+      <td>долгота</td>
+    </tr>
+    <tr>
+      <td>lat</td>
+      <td>-</td>
+      <td>широта</td>
+    </tr>
+  </tbody>
+</table>
+
+          <h1 id="ritieiliery">Ритейлеры</h1>
+
+<h2 id="poluchieniie-spiska-ritieilierov">Получение списка ритейлеров</h2>
+
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/retailers"</span> 
+</code></pre>
+
+<blockquote>
+  <p>Команда выше возвращает JSON:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"retailers"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Metro C&amp;C"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#003d7a"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/logos/metro.png"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"available"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"environment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"production"</span><span class="w">
+  </span><span class="p">}]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Получить список ритейлеров подключенных к Instamart можно, выполнив запрос</p>
+
+<h3 id="http-zapros">HTTP запрос</h3>
+
+<p><code>GET http://api.instamart.ru/v2/retailers</code></p>
+
+<h2 id="rasshiriennyie-dannyie-ritieiliera">Расширенные данные ритейлера</h2>
+
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/retailers/1"</span> 
+</code></pre>
+
+<blockquote>
+  <p>Команда выше возвращает JSON:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"retailer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Metro C&amp;C"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#003d7a"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/logos/metro.png"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"available"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"environment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"production"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"services"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Доставка"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"next_delivery"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">350.0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"сегодня, 21:00-00:00"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Компания METRO Cash &amp; Carry присутствует с 2000 года и сегодня магазины компании открыты в 49 регионах страны..."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"operational_times"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+      </span><span class="nt">"week_day"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Понедельник"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"starts_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-28T09:00:00.000+03:00"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"ends_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-29T00:00:00.000+03:00"</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Получить полную информацию по ритейлеру можно, выполнив запрос</p>
+
+<h3 id="http-zapros-1">HTTP запрос</h3>
+
+<p><code>GET http://api.instamart.ru/v2/retailers/#{ID}</code></p>
+
+<h3 id="paramietry-zaprosa">Параметры запроса</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ID</td>
       <td>Да</td>
-      <td>Город, поселок, населенный пункт пользователя</td>
+      <td>ID ритейлера</td>
     </tr>
   </tbody>
 </table>
@@ -890,99 +1018,13 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
   </tbody>
 </table>
 
-          <h1 id="ritieiliery">Ритейлеры</h1>
-
-<h2 id="poluchieniie-spiska-ritieilierov">Получение списка ритейлеров</h2>
-
-<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/retailers"</span> 
-</code></pre>
-
-<blockquote>
-  <p>Команда выше возвращает JSON:</p>
-</blockquote>
-
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"retailers"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Metro C&amp;C"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#003d7a"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/logos/metro.png"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"available"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"environment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"production"</span><span class="w">
-  </span><span class="p">}]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<p>Получить список ритейлеров подключенных к Instamart можно, выполнив запрос</p>
-
-<h3 id="http-zapros">HTTP запрос</h3>
-
-<p><code>GET http://api.instamart.ru/v2/retailers</code></p>
-
-<h2 id="rasshiriennyie-dannyie-ritieiliera">Расширенные данные ритейлера</h2>
-
-<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/retailers/1"</span> 
-</code></pre>
-
-<blockquote>
-  <p>Команда выше возвращает JSON:</p>
-</blockquote>
-
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"retailer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Metro C&amp;C"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#003d7a"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/logos/metro.png"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"available"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"environment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"production"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"services"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Доставка"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"next_delivery"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">350.0</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"сегодня, 21:00-00:00"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Компания METRO Cash &amp; Carry присутствует с 2000 года и сегодня магазины компании открыты в 49 регионах страны..."</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"operational_times"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
-      </span><span class="nt">"week_day"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Понедельник"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"starts_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-28T09:00:00.000+03:00"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"ends_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-29T00:00:00.000+03:00"</span><span class="w">
-    </span><span class="p">}]</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<p>Получить полную информацию по ритейлеру можно, выполнив запрос</p>
-
-<h3 id="http-zapros-1">HTTP запрос</h3>
-
-<p><code>GET http://api.instamart.ru/v2/retailers/#{ID}</code></p>
-
-<h3 id="paramietry-zaprosa">Параметры запроса</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Параметр</th>
-      <th>Обязательный</th>
-      <th>Описание</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>ID</td>
-      <td>Да</td>
-      <td>ID ритейлера</td>
-    </tr>
-  </tbody>
-</table>
-
           <h1 id="katieghorii">Категории</h1>
 
 <blockquote>
   <p>Пример кода для получения списка всех категорий</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/categories?rid=1"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/categories?sid=1"</span>
 </code></pre>
 <blockquote>
   <p>Ответ будет содержать следующие данные:</p>
@@ -1059,12 +1101,16 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
   </thead>
   <tbody>
     <tr>
-      <td><code>rid</code></td>
+      <td><code>sid</code></td>
       <td>Да</td>
-      <td>ID ритейлера для которого необходимо получить список категорий.</td>
+      <td>ID магазина для которого необходимо получить список категорий</td>
     </tr>
   </tbody>
 </table>
+
+<aside class="notice">
+API обратно совместимо со старой версией API и поддерживает параметр rid - идентификатор ритейлера
+</aside>
 
           <h1 id="katalogh">Каталог</h1>
 
@@ -1160,7 +1206,7 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
   <p>Пример команды</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/departments?rid=1'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/departments?sid=1'</span> <span class="se">\</span>
 </code></pre>
 <blockquote>
   <p>Ответ будет содержать следующие данные</p>
@@ -1226,9 +1272,9 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
   </thead>
   <tbody>
     <tr>
-      <td><code>rid</code></td>
+      <td><code>sid</code></td>
       <td>Да</td>
-      <td>ID ритейлера для которого необходимо получить список товаров.</td>
+      <td>ID магазина для которого необходимо получить список товаров</td>
     </tr>
   </tbody>
 </table>
@@ -1237,13 +1283,17 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
 
 <p>Документ <code>deals</code> содержит данные для отображения продуктов из категории “скидки”.</p>
 
+<aside class="notice">
+API обратно совместимо со старой версией API и поддерживает параметр rid - идентификатор ритейлера
+</aside>
+
 <h2 id="vydacha-ekrana-katieghorii">Выдача экрана категории</h2>
 
 <blockquote>
   <p>Пример команды</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/departments/174?rid=1'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s1">'https://api.instamart.ru/v2/departments/174?sid=1'</span> <span class="se">\</span>
 </code></pre>
 <blockquote>
   <p>Ответ будет содержать следующие данные</p>
@@ -1302,9 +1352,9 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
   </thead>
   <tbody>
     <tr>
-      <td><code>rid</code></td>
+      <td><code>sid</code></td>
       <td>Да</td>
-      <td>ID ритейлера для которого необходимо получить список товаров.</td>
+      <td>ID магазина для которого необходимо получить список товаров</td>
     </tr>
     <tr>
       <td>DEPARTMENT_ID</td>
@@ -1317,11 +1367,16 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
 <p>Ответ содержит расширенные данные для данной категории.<br />
 Список подкатегорий лежит в объекте <code>aisles</code> документа <code>department</code>.</p>
 
+<aside class="notice">
+API обратно совместимо со старой версией API и поддерживает параметр rid - идентификатор ритейлера
+</aside>
+
+
           <h1 id="produkty">Продукты</h1>
 
 <h2 id="spisok-produktov">Список продуктов</h2>
 
-<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/products?rid=1"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/products?sid=1"</span>
 </code></pre>
 
 <blockquote>
@@ -1392,7 +1447,7 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
   <p>Пример запроса с фильтрацией выборки продуктов:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/products?rid=1&amp;filter[brand][]=1filter[property][]=4&amp;filter[property][]=7"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/products?sid=1&amp;filter[brand][]=1filter[property][]=4&amp;filter[property][]=7"</span>
 </code></pre>
 
 <p>Получить список продуктов доступных в текущий момент в Instamart можно, выполнив запрос:</p>
@@ -1499,9 +1554,9 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
   </thead>
   <tbody>
     <tr>
-      <td>rid</td>
+      <td>sid</td>
       <td>Да</td>
-      <td>ID ритейлера</td>
+      <td>ID магазина</td>
     </tr>
     <tr>
       <td>tid</td>
@@ -1522,7 +1577,7 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
 </table>
 
 <aside class="notice">
-Не забудьте указать обязательный параметр идентификатор ритейлера
+API обратно совместимо со старой версией API и поддерживает параметр rid - идентификатор ритейлера
 </aside>
 
 <h2 id="kartochka-produkta">Карточка продукта</h2>
@@ -1613,7 +1668,7 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
   <p>Пример запроса подсказок, для слова “чай”</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v2/searches/suggestions?rid=1&amp;q=%D1%87%D0%B0%D0%B9'</span>
+<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v2/searches/suggestions?sid=1&amp;q=%D1%87%D0%B0%D0%B9'</span>
 </code></pre>
 <blockquote>
   <p>Ответ будет содержать следующие данные</p>
@@ -1655,9 +1710,9 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
   </thead>
   <tbody>
     <tr>
-      <td><code>rid</code></td>
+      <td><code>sid</code></td>
       <td>Да</td>
-      <td>ID ритейлера, по которому происходит поиск</td>
+      <td>ID магазина, в котором происходит поиск</td>
     </tr>
     <tr>
       <td><code>q</code></td>
@@ -1667,13 +1722,17 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
   </tbody>
 </table>
 
+<aside class="notice">
+API обратно совместимо со старой версией API и поддерживает параметр rid - идентификатор ритейлера
+</aside>
+
 <h2 id="riezultaty-poiska">Результаты поиска</h2>
 
 <blockquote>
   <p>Пример запроса результатов поиска, для слова “чай”</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v2/searches?rid=1&amp;q=%D1%87%D0%B0%D0%B9'</span>
+<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v2/searches?sid=1&amp;q=%D1%87%D0%B0%D0%B9'</span>
 </code></pre>
 <blockquote>
   <p>Ответ будет содержать продукты, сгруппированные по категориям:</p>
@@ -1738,7 +1797,7 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
   <p>Пример поискового запроса с фильтрацией результатов:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v2/searches?rid=1&amp;q=%D1%87%D0%B0%D0%B9?filter[brand][]=1&amp;filter[property][]=4&amp;filter[property][]=7'</span>
+<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v2/searches?sid=1&amp;q=%D1%87%D0%B0%D0%B9?filter[brand][]=1&amp;filter[property][]=4&amp;filter[property][]=7'</span>
 </code></pre>
 
 <p>Для получения результатов поиска, выполните запрос:</p>
@@ -1840,9 +1899,9 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
   </thead>
   <tbody>
     <tr>
-      <td><code>rid</code></td>
+      <td><code>sid</code></td>
       <td>Да</td>
-      <td>ID ритейлера, по которому происходит поиск</td>
+      <td>ID магазина, в котором происходит поиск</td>
     </tr>
     <tr>
       <td><code>q</code></td>
@@ -1861,6 +1920,11 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
     </tr>
   </tbody>
 </table>
+
+<aside class="notice">
+API обратно совместимо со старой версией API и поддерживает параметр rid - идентификатор ритейлера
+</aside>
+
 
           <h1 id="zakazy">Заказы</h1>
 
