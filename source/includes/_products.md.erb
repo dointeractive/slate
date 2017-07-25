@@ -3,7 +3,7 @@
 ## Список продуктов
 
 ```shell
-curl "<%= config[:host] %>/products?rid=1"
+curl "<%= config[:host] %>/products?sid=1"
 ```
 
 > Команда выше возвращает JSON:
@@ -72,7 +72,7 @@ curl "<%= config[:host] %>/products?rid=1"
 > Пример запроса с фильтрацией выборки продуктов:
 
 ```shell
-curl "<%= config[:host] %>/products?rid=1&filter[brand][]=1filter[property][]=4&filter[property][]=7"
+curl "<%= config[:host] %>/products?sid=1&filter[brand][]=1filter[property][]=4&filter[property][]=7"
 ```
 
 Получить список продуктов доступных в текущий момент в Instamart можно, выполнив запрос:
@@ -120,13 +120,13 @@ multi_select | Выбор множества значений
 
 Параметр | Обязательный | Описание
 -------- | ------- | -----------
-rid | Да | ID ритейлера
+sid | Да | ID магазина
 tid | Да | ID категории
 page | - | Номер страницы
 filter[#{KEY}][] | - | Значение фильтра
 
 <aside class="notice">
-Не забудьте указать обязательный параметр идентификатор ритейлера
+API обратно совместимо со старой версией API и поддерживает параметр rid - идентификатор ритейлера
 </aside>
 
 

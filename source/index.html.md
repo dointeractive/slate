@@ -12,9 +12,9 @@ includes:
   - authentication
   - passwords
   - referrals
-  - operational_zones
-  - addresses
+  - stores
   - retailers
+  - addresses
   - categories
   - departments
   - products
