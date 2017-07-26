@@ -155,3 +155,16 @@ curl "<%= config[:host] %>/addresses/2" \
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
 ID | Да | id адреса
+
+
+## Получение выбранного адреса доставки
+
+```shell
+curl "<%= config[:host] %>/addresses/current" \
+  -H "Authorization: Token token=#{TOKEN}" 
+```
+
+
+Получить текущий, выбранный адрес доставки заказа можно, выполнив запрос:
+
+`GET <%= config[:host] %>/addresses/current`

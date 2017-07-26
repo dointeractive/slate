@@ -15,6 +15,7 @@ includes:
   - stores
   - retailers
   - addresses
+  - ship_address_changes
   - categories
   - departments
   - products
