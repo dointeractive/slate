@@ -20,13 +20,13 @@ curl "<%= config[:host] %>/phones" \
       "id": 14959,
       "code": "920",
       "number": "1111111",
-      "number_human": "+7 (920) 111-11-11"
+      "human_number": "+7 (920) 111-11-11"
     },
     {
       "id": 14960,
       "code": "920",
       "number": "2222222",
-      "number_human": "+7 (920) 222-22-22"
+      "human_number": "+7 (920) 222-22-22"
     },
   ],
   "meta": {
@@ -53,7 +53,7 @@ curl "<%= config[:host] %>/phones/14959" \
     "id": 14959,
     "code": "920",
     "number": "2222222",
-    "number_human": "+7 (920) 222-22-22"
+    "human_number": "+7 (920) 222-22-22"
   }
 }
 ```
@@ -84,7 +84,7 @@ curl "<%= config[:host] %>/phones" \
     "id": 14959,
     "code": "920",
     "number": "1111111",
-    "number_human": "+7 (920) 111-11-11"
+    "human_number": "+7 (920) 111-11-11"
   }
 }
 ```
@@ -114,7 +114,7 @@ curl "<%= config[:host] %>/phones/14959" \
     "id": 14959,
     "code": "920",
     "number": "2222222",
-    "number_human": "+7 (920) 222-22-22"
+    "human_number": "+7 (920) 222-22-22"
   }
 }
 ```
