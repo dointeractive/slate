@@ -19,6 +19,7 @@ includes:
   - categories
   - departments
   - products
+  - product_errors
   - search
   - orders
   - shipping_methods
