@@ -1018,17 +1018,17 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
   </tbody>
 </table>
 
+          <h1 id="adries-dostavki">Адрес доставки</h1>
+
 <h2 id="poluchieniie-vybrannogho-adriesa-dostavki">Получение выбранного адреса доставки</h2>
 
-<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/addresses/current"</span> <span class="se">\</span>
-  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> 
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/orders/#{NUMBER}/ship_address"</span> 
 </code></pre>
 
 <p>Получить текущий, выбранный адрес доставки заказа можно, выполнив запрос:</p>
 
-<p><code>GET http://api.instamart.ru/v2/addresses/current</code></p>
-
-          <h1 id="adries-dostavki">Адрес доставки</h1>
+<p><code>GET http://api.instamart.ru/v2/orders/#{NUMBER}/ship_address</code><br />
+Этот запрос может выполнятьтся как без токена авторизации (для нового пользователя), так и с указанием токена (для залогиненого пользователя)</p>
 
 <h2 id="poluchieniie-spiska-vozmozhnykh-izmienienii-v-zakazie">Получение списка возможных изменений в заказе</h2>
 
@@ -1076,7 +1076,7 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
 <h2 id="izmienieniia-adriesa-dostavki">Изменения адреса доставки</h2>
 
 <pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/orders/R2104267/ship_address_change"</span> <span class="se">\</span>
-  -X PUT
+  -X PUT <span class="se">\</span>
   -d ship_address[address_id]<span class="o">=</span>1
 </code></pre>
 
