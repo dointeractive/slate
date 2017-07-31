@@ -1,5 +1,16 @@
 # Адрес доставки
 
+## Получение выбранного адреса доставки
+
+```shell
+curl "<%= config[:host] %>/orders/#{NUMBER}/ship_address" 
+```
+
+Получить текущий, выбранный адрес доставки заказа можно, выполнив запрос:
+
+`GET <%= config[:host] %>/orders/#{NUMBER}/ship_address`
+Этот запрос может выполнятьтся как без токена авторизации (для нового пользователя), так и с указанием токена (для залогиненого пользователя)
+
 ## Получение списка возможных изменений в заказе
 
 ```shell
@@ -48,7 +59,7 @@ curl "<%= config[:host] %>/orders/R2104267/ship_address_change?ship_address[addr
 
 ```shell
 curl "<%= config[:host] %>/orders/R2104267/ship_address_change" \
-  -X PUT
+  -X PUT \
   -d ship_address[address_id]=1
 ```
 
