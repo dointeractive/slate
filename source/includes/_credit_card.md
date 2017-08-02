@@ -20,7 +20,7 @@ curl "<%= config[:host] %>/credit_cards" \
   "credit_cards": [
     {
       "id": 14959,
-      "card_name": "Зарплатная",
+      "title": "Зарплатная",
       "name": "IVAN IVANOV",
       "year": "22",
       "month": "12",
@@ -49,7 +49,7 @@ curl "<%= config[:host] %>/credit_cards/14959" \
 {
   "credit_card": {
     "id": 14959,
-    "card_name": "Зарплатная",
+    "title": "Зарплатная",
     "name": "IVAN IVANOV",
     "year": "22",
     "month": "12",
@@ -74,7 +74,7 @@ ID | Да | ID карты
 curl "<%= config[:host] %>/credit_cards" \
   -H "Authorization: Token token=#{TOKEN}"
   -X POST \
-  -d "credit_card[card_name]=Зарплатная" \
+  -d "credit_card[title]=Зарплатная" \
   -d "credit_card[name]=IVAN IVANOV" \
   -d "credit_card[year]=22" \
   -d "credit_card[month]=12" \
@@ -88,7 +88,7 @@ curl "<%= config[:host] %>/credit_cards" \
 {
   "credit_card": {
     "id": 14959,
-    "card_name": "Зарплатная",
+    "title": "Зарплатная",
     "name": "IVAN IVANOV",
     "year": "22",
     "month": "12",
@@ -103,7 +103,7 @@ curl "<%= config[:host] %>/credit_cards" \
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
-credit_card[card_name] | - | Название карты
+credit_card[title] | - | Название карты
 credit_card[name] | Да | Имя держателя карты
 credit_card[year] | Да | Год
 credit_card[month] | Да | Месяц
