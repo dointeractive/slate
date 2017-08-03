@@ -3,7 +3,7 @@
 ## Получение списка ритейлеров
 
 ```shell
-curl "<%= config[:host] %>/retailers" 
+curl "<%= config[:host] %>/retailers"
 ```
 
 > Команда выше возвращает JSON:
@@ -30,7 +30,7 @@ curl "<%= config[:host] %>/retailers"
 ## Расширенные данные ритейлера
 
 ```shell
-curl "<%= config[:host] %>/retailers/1" 
+curl "<%= config[:host] %>/retailers/1"
 ```
 
 > Команда выше возвращает JSON:
@@ -45,6 +45,13 @@ curl "<%= config[:host] %>/retailers/1"
     "available": true,
     "environment": "production",
     "services": "Доставка",
+    "retailer_services": [
+      {
+        "id": 6,
+        "key": "prices",
+        "description": "Цены как в магазине"
+      }
+    ],
     "next_delivery": {
       "price": 350.0,
       "summary": "сегодня, 21:00-00:00"
@@ -70,3 +77,28 @@ curl "<%= config[:host] %>/retailers/1"
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
 ID | Да | ID ритейлера
+
+### Структура объекта Retailer
+
+Атрибут | Описание
+--------- | -----------
+retailer_services | Список услуг в магазинах
+
+### Структура объекта RetailerService
+`RetailerService` - услуга в магазине.
+К примеру `RetailerService` с полем `key` равным `prices` обозначает наличие услуги
+`Цена как в магазине`.
+
+Атрибут | Описание
+--------- | -----------
+key | Тип дополнительной информации
+description | Отображение информации в интерфейсе
+
+
+### Возможные варианты поля `key` объекта RetailerService
+
+Вариант | Описание
+--------- | -----------
+prices | описывает особенности ценообразования в магазине (выше, ниже или аналогично самому магазину)
+
+
