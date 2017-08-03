@@ -35,7 +35,8 @@ user[location] | Нет | Местоположение пользователя
 curl 'https://api.instamart.ru/v2/users/test@test.com' \
   -H 'Authorization: Token token=#{TOKEN}' \
   -X PUT \
-  -d user[location]=Perm
+  -d user[location]=Perm \
+  -d user[setting][communication_method]=sms
 ```
 ```json
 {
@@ -43,7 +44,10 @@ curl 'https://api.instamart.ru/v2/users/test@test.com' \
     "email": "test@test.com",
     "first_name": "Ivan",
     "last_name": "Petrov",
-    "location": "Perm"
+    "location": "Perm",
+    "setting": {
+      "communication_method": "sms"
+    }
   }
 }
 ```
@@ -60,6 +64,7 @@ email | Да | Емейл пользователя
 user[first_name] | - | Имя пользователя
 user[last_name] | - | Фамилия пользователя
 user[location] | - | Местоположение пользователя
+user[setting][communication_method] | - | Способ связи с пользователем. Возможные варианты: `sms`, `phone`, `not_notify(не уведомлять)`. По-умолчанию `phone`
 
 ## Получение данных пользователя
 
@@ -91,7 +96,10 @@ curl 'https://api.instamart.ru/v2/users/test@test.com'
     "email": "test@test.com",
     "first_name": "Ivan",
     "last_name": "Petrov",
-    "location": "Moscow"
+    "location": "Moscow",
+    "setting": {
+      "communication_method": "sms"
+    }
   }
 }
 ```
