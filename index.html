@@ -1030,6 +1030,10 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
 <p><code>GET http://api.instamart.ru/v2/orders/#{NUMBER}/ship_address</code><br />
 Этот запрос может выполнятьтся как без токена авторизации (для нового пользователя), так и с указанием токена (для залогиненого пользователя)</p>
 
+<aside class="notice">
+  Токен авторизации обязателен для авторизованных пользователей!
+</aside>
+
 <h2 id="poluchieniie-spiska-vozmozhnykh-izmienienii-v-zakazie">Получение списка возможных изменений в заказе</h2>
 
 <pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/orders/R2104267/ship_address_change?ship_address[address_id]=1"</span> 
@@ -1067,11 +1071,24 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
 
 </span></code></pre>
 
+<blockquote>
+  <p>Также список изменений может быть получен для нового адреса:</p>
+</blockquote>
+
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/orders/R2104267/ship_address_change?ship_address[city]=Москва&amp;ship_address[street]=Фридриха Энгельса&amp;ship_address[building]=56 c.3&amp;ship_address[lat]=37&amp;ship_address[lon]=54"</span>
+</code></pre>
+
 <p>В результате изменения адреса доставки может измениться список доступных магазинов, некоторые товары из корзины станут при этом недоступны. Чтобы получить список возможных изменений необходимо выполнить запрос:</p>
 
 <h3 id="http-zapros">HTTP запрос</h3>
 
 <p><code>GET http://api.instamart.ru/v2/orders/#{NUMBER}/ship_address_change</code></p>
+
+<p>Этот запрос может выполнятьтся как без токена авторизации (для нового пользователя), так и с указанием токена (для залогиненого пользователя)</p>
+
+<aside class="notice">
+  Токен авторизации обязателен для авторизованных пользователей!
+</aside>
 
 <h2 id="izmienieniia-adriesa-dostavki">Изменения адреса доставки</h2>
 
@@ -1143,11 +1160,88 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
 
 </span></code></pre>
 
+<blockquote>
+  <p>Также в качестве адреса доставки можно передать атрибуты нового адреса:</p>
+</blockquote>
+
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/orders/R2104267/ship_address_change"</span> <span class="se">\</span>
+  -X PUT <span class="se">\</span>
+  -d ship_address[city]<span class="o">=</span>Москва <span class="se">\</span>
+  -d ship_address[street]<span class="o">=</span><span class="s1">'Фридриха Энгельса'</span> <span class="se">\</span>
+  -d ship_address[building]<span class="o">=</span><span class="s1">'56 c.3'</span> <span class="se">\</span>
+  -d ship_address[lat]<span class="o">=</span>37 <span class="se">\</span>
+  -d ship_address[lon]<span class="o">=</span>54 
+</code></pre>
+
 <p>Изменить адрес доставки можно выполнив запрос</p>
 
 <h3 id="http-zapros-1">HTTP запрос</h3>
 
 <p><code>PUT http://api.instamart.ru/v2/orders/#{NUMBER}/ship_address_change</code></p>
+
+<p>Этот запрос может выполнятьтся как без токена авторизации (для нового пользователя), так и с указанием токена (для залогиненого пользователя)</p>
+
+<aside class="notice">
+  Токен авторизации обязателен для авторизованных пользователей!
+</aside>
+
+<h3 id="paramietry-zaprosa-dlia-sushchiestvuiushchiegho-adriesa">Параметры запроса для существующего адреса</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ship_address[address_id]</td>
+      <td>да</td>
+      <td>id адреса</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="paramietry-zaprosa-dlia-novogho-adriesa">Параметры запроса для нового адреса</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ship_address[city]</td>
+      <td>да</td>
+      <td>город</td>
+    </tr>
+    <tr>
+      <td>ship_address[street]</td>
+      <td>да</td>
+      <td>улица</td>
+    </tr>
+    <tr>
+      <td>ship_address[building]</td>
+      <td>да</td>
+      <td>дом</td>
+    </tr>
+    <tr>
+      <td>ship_address[lat]</td>
+      <td>да</td>
+      <td>широта</td>
+    </tr>
+    <tr>
+      <td>ship_address[lon]</td>
+      <td>да</td>
+      <td>долгота</td>
+    </tr>
+  </tbody>
+</table>
 
           <h1 id="katieghorii">Категории</h1>
 
