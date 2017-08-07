@@ -206,6 +206,7 @@ curl "<%= config[:host] %>/orders/C27387-16"
       }],
       "total": 229.89,
       "item_total": 229.89,
+      "customer_comment": "All cool",
       "next_deliveries": [{
         "price": 350.0,
         "summary": "сегодня, 09:00-12:00"
@@ -622,6 +623,28 @@ curl "<%= config[:host] %>/orders/#{NUMBER}" \
   -d "order[shipments_attributes][shipping_method_id]=1"
 ```
 
+> Пример заполнения комментария пользователя (id шипмента - 1):
+
+```shell
+curl "<%= config[:host] %>/orders/#{NUMBER}" \
+  -H "Authorization: Token token=#{TOKEN}" \
+  -X PUT \
+  -d "order[shipments_attributes][id]=1" \
+  -d "order[shipments_attributes][customer_comment]=Тестовый комментарий"
+```
+
+> В ответе вернется заказ с обновленным shipment:
+
+```json
+{
+  ...
+  "shipments": [{
+    ...
+    "customer_comment": "Тестовый комментарий"
+  }]
+}
+```
+
 > Пример выбора метода оплаты:
 
 ```shell
@@ -677,6 +700,7 @@ order[address_attributes][instructions] | - | Комментарий к зака
 order[shipments_attributes][][id] | Да | id shipment'а
 order[shipments_attributes][][delivery_window_id] | Да | id слота доставки
 order[shipments_attributes][][shipping_method_id] | Да | id cпособа доставки
+order[shipments_attributes][][customer_comment] | Да | комментарий пользователя
 order[payment_attributes][payment_tool_id] | Да | id источника оплаты
 
 ## Отмена заказа
