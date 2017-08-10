@@ -10,10 +10,7 @@ curl 'https://api.instamart.ru/v2/users' \
   -d user[email]=#{EMAIL} \
   -d user[first_name]=#{FIRSTNAME} \
   -d user[last_name]=#{LASTNAME} \
-  -d user[password]=#{PASSWORD} \
-  -d user[sending_emails]=true \
-  -d user[sending_sms]=true \
-  -d user[sending_push]=true
+  -d user[password]=#{PASSWORD}
 ```
 
 Зарегистрировать нового пользователя можно, выполнив запрос:
@@ -29,9 +26,6 @@ user[password] | Да | Пароль
 user[first_name] | Да | Имя пользователя
 user[last_name] | Да | Фамилия пользователя
 user[location] | Нет | Местоположение пользователя
-user[sending_emails] | Нет | Отправлять email пользователю (true или false)
-user[sending_sms] | Нет | Отправлять sms пользователю (true или false)
-user[sending_push] | Нет | Отправлять push пользователю (true или false)
 
 ## Изменение данных пользователя
 
@@ -50,9 +44,11 @@ curl 'https://api.instamart.ru/v2/users/test@test.com' \
     "first_name": "Ivan",
     "last_name": "Petrov",
     "location": "Perm",
-    "sending_emails": true,
-    "sending_sms": true,
-    "sending_push": true
+    "config": {
+      "send_emails": true,
+      "send_sms": true,
+      "send_push": true
+    }
   }
 }
 ```
@@ -69,9 +65,9 @@ email | Да | Емейл пользователя
 user[first_name] | - | Имя пользователя
 user[last_name] | - | Фамилия пользователя
 user[location] | - | Местоположение пользователя
-user[sending_emails] | Нет | Отправлять email пользователю (true или false)
-user[sending_sms] | Нет | Отправлять sms пользователю (true или false)
-user[sending_push] | Нет | Отправлять push пользователю (true или false)
+user[config][send_emails] | Нет | Отправлять email пользователю (true или false)
+user[config][send_sms] | Нет | Отправлять sms пользователю (true или false)
+user[config][send_push] | Нет | Отправлять push пользователю (true или false)
 
 ## Получение данных пользователя
 
@@ -104,9 +100,11 @@ curl 'https://api.instamart.ru/v2/users/test@test.com'
     "first_name": "Ivan",
     "last_name": "Petrov",
     "location": "Moscow",
-    "sending_emails": true,
-    "sending_sms": true,
-    "sending_push": true
+    "config": {
+      "send_emails": true,
+      "send_sms": true,
+      "send_push": true
+    }
   }
 }
 ```
