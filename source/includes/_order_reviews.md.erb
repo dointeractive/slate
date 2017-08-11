@@ -18,16 +18,69 @@ curl "<%= config[:host] %>/orders/unrated" \
 ```shell
 curl "<%= config[:host] %>/orders/C36324/reviews" \
   -H "Authorization: Token token=#{TOKEN}" \
-  -d review[rate]=2
-  -d review[comment]='В коробку с заказом пролился отбеливатель'
+  -d review[rate]=2 \
+  -d review[comment]='В коробку с заказом пролился отбеливатель' \
+  -d review[order_errors_attributes][][error_type]=invalid_product \
+  -d review[order_errors_attributes][][line_item_ids]=[1] \
   -X POST
 ```
 
+> Ответ будет содержать следующие данные:
+
+```json
+{
+  "review": {
+    "rate": 2,
+    "comment": "В коробку с заказом пролился отбеливатель",
+    "order_errors": [
+      {
+        "error_type": "invalid_product"
+      }
+    ]
+  }
+}
+```
+
+
 Добавить отзыв к заказу можно, выполнив запрос:
 
-`GET <%= config[:host] %>/orders/#{ORDER_NUMBER}/reviews`
+`POST <%= config[:host] %>/orders/#{ORDER_NUMBER}/reviews`
+
+Все ошибки заказов должны лежать в параметре `order_errors_attributes`
+У каждой ошибки обязательный полем является поле `error_type`
+Дополнительный полем является либо поле `line_item_ids`, либо `error_comment`
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
 review[rate] | Да | Оценка
 review[comment] | - | Комментарий
+review[order_errors_attributes][][error_type] | Да | Тип ошибки
+review[order_errors_attributes][][line_item_ids] | - | массив ID позиций заказа с проблемой
+review[order_errors_attributes][][error_comment] | - | Комментарий проблемы
+
+### Структура объекта Review
+
+Атрибут | Описание
+--------- | -----------
+rate | оценка
+comment | комментарий к оценке
+order_errors_attributes | массив ошибок заказа
+
+### Структура объекта OrderError
+
+Атрибут | Описание
+--------- | -----------
+error_type | тип ошибки
+line_item_ids | массив ID позиций заказа с ошибкой
+error_comment | комментарий проблемы
+
+### Возможные вариаты поля error_type
+
+Вариант | Описание
+--------- | -----------
+invalid_product | неверный товар
+no_product | товар отсутсвует
+damaged | товар поврежден
+incorrect_replacement | неверная замена
+other | другое
+
