@@ -4,7 +4,7 @@
 
 ```shell
 curl "<%= config[:host] %>/orders/unrated" \
-  -H "Authorization: Token token=#{TOKEN}" 
+  -H "Authorization: Token token=#{TOKEN}"
 ```
 
 Получить список заказов без отзывов можно, выполнив запрос:
@@ -20,7 +20,7 @@ curl "<%= config[:host] %>/orders/C36324/reviews" \
   -H "Authorization: Token token=#{TOKEN}" \
   -d review[rate]=2 \
   -d review[comment]='В коробку с заказом пролился отбеливатель' \
-  -d review[order_errors_attributes][][error_type]=invalid_product \
+  -d review[order_errors_attributes][][error_flag_id]=3 \
   -d review[order_errors_attributes][][line_item_ids]=[1] \
   -X POST
 ```
@@ -34,27 +34,28 @@ curl "<%= config[:host] %>/orders/C36324/reviews" \
     "comment": "В коробку с заказом пролился отбеливатель",
     "order_errors": [
       {
-        "error_type": "invalid_product"
+        "error_flag_id": "3",
+        "error_flag_name": "invalid_product",
+        "error_comment": nil
       }
     ]
   }
 }
 ```
 
-
 Добавить отзыв к заказу можно, выполнив запрос:
 
 `POST <%= config[:host] %>/orders/#{ORDER_NUMBER}/reviews`
 
 Все ошибки заказов должны лежать в параметре `order_errors_attributes`
-У каждой ошибки обязательный полем является поле `error_type`
+У каждой ошибки обязательный полем является поле `error_flag_id`
 Дополнительный полем является либо поле `line_item_ids`, либо `error_comment`
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
 review[rate] | Да | Оценка
 review[comment] | - | Комментарий
-review[order_errors_attributes][][error_type] | Да | Тип ошибки
+review[order_errors_attributes][][error_flag_id] | Да | ID флага ошибки
 review[order_errors_attributes][][line_item_ids] | - | массив ID позиций заказа с проблемой
 review[order_errors_attributes][][error_comment] | - | Комментарий проблемы
 
@@ -70,17 +71,55 @@ order_errors_attributes | массив ошибок заказа
 
 Атрибут | Описание
 --------- | -----------
-error_type | тип ошибки
+error_flag_id | ID флага ошибки
 line_item_ids | массив ID позиций заказа с ошибкой
 error_comment | комментарий проблемы
 
-### Возможные вариаты поля error_type
+## Получение списка флагов ошибок
 
-Вариант | Описание
+```shell
+curl "https://api.instamart.ru/v2/orders/error_flags"
+```
+> Эта комманда возвращает следующий JSON:
+
+```json
+[
+  {
+    "error_flags": [
+      {
+        "id": 4,
+        "name": "Неверный товар"
+      },
+      {
+        "id": 5,
+        "name": "Товар отсутствует"
+      },
+      {
+        "id": 6,
+        "name": "Товар поврежден"
+      },
+      {
+        "id": 7,
+        "name": "Неверная замена"
+      },
+      {
+        "id": 8,
+        "name": "Другое"
+      }
+    ]
+  }
+]
+```
+
+Список всех возможных флагов ошибок заказа можно загрузить, выполнив запрос:
+
+`GET https://api.instamart.ru/v2/error_flags`
+
+Используется при [создании отзыва с ошибкой](#sozdaniie-otzyva)
+
+### Структура объекта ErrorFlag
+
+Атрибут | Описание
 --------- | -----------
-invalid_product | неверный товар
-no_product | товар отсутсвует
-damaged | товар поврежден
-incorrect_replacement | неверная замена
-other | другое
-
+id | ID флага который надо использовать при создании ошибки
+name | локализованное название
