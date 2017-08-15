@@ -29,24 +29,45 @@ user[location] | Нет | Местоположение пользователя
 
 ## Изменение данных пользователя
 
-> Пример кода для изменения, местоположения пользователя:
+> Пример кода для изменения местоположения пользователя:
 
 ```shell
 curl 'https://api.instamart.ru/v2/users/test@test.com' \
   -H 'Authorization: Token token=#{TOKEN}' \
   -X PUT \
   -d user[location]=Perm \
-  -d user[config][communication_method]=sms
 ```
+
 ```json
 {
   "user": {
     "email": "test@test.com",
     "first_name": "Ivan",
     "last_name": "Petrov",
-    "location": "Perm",
+    "location": "Perm"
+  }
+}
+```
+
+> Пример кода для изменения настроек способа связи пользователя и действия при отсутсвии товара:
+
+```shell
+curl 'https://api.instamart.ru/v2/users/test@test.com' \
+  -H 'Authorization: Token token=#{TOKEN}' \
+  -X PUT \
+  -d user[config_attributes][communication_method]=sms \
+  -d user[config_attributes][replacement_method]=collector
+```
+
+```json
+{
+  "user": {
+    "email": "test@test.com",
+    "first_name": "Ivan",
+    "last_name": "Petrov",
     "config": {
-      "communication_method": "sms"
+      "communication_method": "sms",
+      "replacement_method": "collector"
     }
   }
 }
@@ -64,15 +85,16 @@ email | Да | Емейл пользователя
 user[first_name] | - | Имя пользователя
 user[last_name] | - | Фамилия пользователя
 user[location] | - | Местоположение пользователя
-user[config][communication_method] | - | Способ связи с пользователем
+user[config_attributes][communication_method] | - | Способ связи с пользователем
+user[config_attributes][replacement_method] | - | Действия при отсутсвии товара
 
-### Возможные вариаты поля способа связи с пользователем
+### Возможные варианты поля 'Способ связи с пользователем'
 
-Вариант | Описание
---------- | -----------
-sms | Уведомлять по sms
-phone | Уведомлять по телефону. По-умолчанию выбирается этот параметр
-not_notify | Не уведомлять
+Можно получить с помощью API [Флаги способов связи при необходимости замены товара](#flaghi-sposobov-sviazi-pri-nieobkhodimosti-zamieny-tovara)
+
+### Возможные варианты поля 'Действия при отсутсвии товара'
+
+Можно получить с помощью API [Флаги действий в случае отсутсвия товара](#flaghi-dieistvii-v-sluchaie-otsutsviia-tovara)
 
 ## Получение данных пользователя
 

@@ -27,6 +27,8 @@ includes:
   - payments
   - order_reviews
   - flags
+  - communication_methods
+  - replacement_methods
   - errors
 
 search: true
