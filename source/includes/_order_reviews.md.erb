@@ -20,8 +20,8 @@ curl "<%= config[:host] %>/orders/C36324/reviews" \
   -H "Authorization: Token token=#{TOKEN}" \
   -d review[rate]=2 \
   -d review[comment]='В коробку с заказом пролился отбеливатель' \
-  -d review[order_errors_attributes][][error_flag_id]=3 \
-  -d review[order_errors_attributes][][line_item_ids]=[1] \
+  -d review[order_errors_attributes][][error_flag_id]=4 \
+  -d review[order_errors_attributes][][line_item_ids]=[1, 2] \
   -X POST
 ```
 
@@ -34,9 +34,11 @@ curl "<%= config[:host] %>/orders/C36324/reviews" \
     "comment": "В коробку с заказом пролился отбеливатель",
     "order_errors": [
       {
-        "error_flag_id": "3",
-        "error_flag_name": "invalid_product",
-        "error_comment": nil
+        "error_comment": nil,
+        "error_flag": {
+          "id": "4",
+          "name": "Неверный товар"
+        }
       }
     ]
   }
@@ -71,8 +73,7 @@ order_errors_attributes | массив ошибок заказа
 
 Атрибут | Описание
 --------- | -----------
-error_flag_id | ID флага ошибки
-line_item_ids | массив ID позиций заказа с ошибкой
+error_flag | Объект флага ошибки
 error_comment | комментарий проблемы
 
 ## Получение списка флагов ошибок
