@@ -19,7 +19,6 @@ includes:
   - categories
   - departments
   - products
-  - product_errors
   - search
   - orders
   - shipping_methods
@@ -27,7 +26,7 @@ includes:
   - payment_tools
   - payments
   - order_reviews
-  - flags
+  - product_errors
   - errors
 
 search: true
