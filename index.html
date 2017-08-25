@@ -372,7 +372,7 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
   </tbody>
 </table>
 
-<h2 id="autientifikatsiia-chieriez-sotsialnyie-sieti">Аутентификация через социальные сети</h2>
+<h2 id="autientifikatsiia-chieriez-vnieshnikh-provaidrov-sotsialnyie-sieti">Аутентификация через внешних провайдров (социальные сети)</h2>
 
 <blockquote>
   <p>Пример кода для аутентификации пользователя через vkontakte</p>
@@ -413,12 +413,17 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
     <tr>
       <td>provider_id</td>
       <td>Да</td>
-      <td>Название социальной сети (vkontakte / facebook)</td>
+      <td>Название провайдера (vkontakte / facebook)</td>
     </tr>
     <tr>
       <td>session[uid]</td>
       <td>Да</td>
-      <td>Идентификатор пользователя в социальной сети</td>
+      <td>Идентификатор пользователя в системе провайдера</td>
+    </tr>
+    <tr>
+      <td>session[digest]</td>
+      <td>Да</td>
+      <td>bcrypt(app_secret + “:” + uid), кост-фактор 12 (4096 раундов)</td>
     </tr>
     <tr>
       <td>session[first_name]</td>
@@ -660,7 +665,7 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
 
 <h2 id="poluchieniie-spiska-ritieilierov">Получение списка ритейлеров</h2>
 
-<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/retailers"</span> 
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/retailers"</span>
 </code></pre>
 
 <blockquote>
@@ -687,7 +692,7 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
 
 <h2 id="rasshiriennyie-dannyie-ritieiliera">Расширенные данные ритейлера</h2>
 
-<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/retailers/1"</span> 
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/retailers/1"</span>
 </code></pre>
 
 <blockquote>
@@ -703,6 +708,13 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
     </span><span class="nt">"available"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="nt">"environment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"production"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"services"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Доставка"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"retailer_services"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"prices"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Цены как в магазине"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
     </span><span class="nt">"next_delivery"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">350.0</span><span class="p">,</span><span class="w">
       </span><span class="nt">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"сегодня, 21:00-00:00"</span><span class="w">
@@ -741,6 +753,65 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
     </tr>
   </tbody>
 </table>
+
+<h3 id="struktura-obiekta-retailer">Структура объекта Retailer</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Атрибут</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>retailer_services</td>
+      <td>Список услуг в магазинах</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="struktura-obiekta-retailerservice">Структура объекта RetailerService</h3>
+<p><code>RetailerService</code> - услуга в магазине.<br />
+К примеру <code>RetailerService</code> с полем <code>key</code> равным <code>prices</code> обозначает наличие услуги<br />
+<code>Цена как в магазине</code>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Атрибут</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>key</td>
+      <td>Тип дополнительной информации</td>
+    </tr>
+    <tr>
+      <td>description</td>
+      <td>Отображение информации в интерфейсе</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="vozmozhnyie-varianty-polia-key-obiekta-retailerservice">Возможные варианты поля <code>key</code> объекта RetailerService</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Вариант</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>prices</td>
+      <td>описывает особенности ценообразования в магазине (выше, ниже или аналогично самому магазину)</td>
+    </tr>
+  </tbody>
+</table>
+
 
           <h1 id="adriesa-polzovatieliei">Адреса пользователей</h1>
 
