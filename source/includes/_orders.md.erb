@@ -651,7 +651,7 @@ curl "<%= config[:host] %>/orders/#{NUMBER}" \
 curl "<%= config[:host] %>/orders/#{NUMBER}" \
   -H "Authorization: Token token=#{TOKEN}" \
   -X PUT \
-  -d "order[order_attributes][special_instructions]=Test comment"
+  -d "[special_instructions]=Test comment"
 ```
 
 > В ответе вернется заказ с обновленны полем special_instructions:
@@ -697,7 +697,7 @@ order[shipments_attributes][][id] | Да | id shipment'а
 order[shipments_attributes][][delivery_window_id] | Да | id слота доставки
 order[shipments_attributes][][shipping_method_id] | Да | id cпособа доставки
 order[payment_attributes][payment_tool_id] | Да | id источника оплаты
-order[order_attributes][special_instructions] | - | Комментарий пользователя к заказу
+order[special_instructions] | - | Комментарий пользователя к заказу
 
 ## Отмена заказа
 
