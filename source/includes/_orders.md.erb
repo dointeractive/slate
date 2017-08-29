@@ -105,6 +105,8 @@ number | номер платежа
 state | состояние платежа
 is_finalization_needed | требуется ли оформление платежа
 finalization_url | url перехода для оформления платежа
+source | объект платежа. `CompanyDocument` или `CreditCard` или `null`
+payment_method | тип платежа
 
 Платеж может быть в следующих состояниях:
 
@@ -115,6 +117,51 @@ completed | завершен
 invalid | отказ на стороне платежной системы
 processing | ожидает ответа платежной системы
 void | отменен администратором
+
+### Структура объекта `source` объекта Payment
+
+Когда объект `source` это `CompanyDocument`
+
+Атрибут | Описание
+--------- | -----------
+id | ID объекта
+name | Название юридического лица
+inn | ИНН
+kpp | КПП
+bik | БИК
+bank | Банк
+correspondent_account | Корреспондентский счет
+operating_account | Расчетный счет
+address | Юридический адрес
+
+Когда объект `source` это `CreditCard`
+
+Атрибут | Описание
+--------- | -----------
+id | ID карты
+title | Название карты
+name | Имя пользователя
+year | Год
+month | Месяц
+last_digits | Последние 4 цифры номера карты
+
+### Структура объекта `payment_method` объекта Payment
+
+Атрибут | Описание
+--------- | -----------
+id | ID способа оплаты
+name | Название
+description | Описание
+type | Тип способа оплаты
+
+Возможные типы способов оплаты
+
+Атрибут | Описание
+--------- | -----------
+check | Наличными
+sber_bank_invoice | Банковский перевод
+cloud_payments_gateway | Картой
+payanyway | Картой
 
 ### Структура объекта LineItem
 
@@ -242,7 +289,26 @@ curl "<%= config[:host] %>/orders/C27387-16"
         }
       }]
     }],
-    "payment": null
+    "payment": {
+      "number": "DR6HN3XE",
+      "state": "checkout",
+      "is_finalization_needed": false,
+      "finalization_url": null,
+      "source": {
+        "id": 2,
+        "title": null,
+        "name": "Ivan Petrov",
+        "year": 2018,
+        "month": 8,
+        "last_digits": 1111
+      },
+      "payment_method": {
+        "id": 6,
+        "name": "CloudPayments",
+        "description": "Pay with card.",
+        "type": "cloud_payments_gateway"
+      }
+    }
   }
 }
 ```
