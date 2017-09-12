@@ -69,7 +69,7 @@ curl "<%= config[:host] %>/auth_providers/vkontakte/sessions" \
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
-provider_id | Да | Название провайдера (vkontakte / facebook)
+provider_id | Да | Название провайдера (vkontakte / facebook / veon)
 session[uid] | Да | Идентификатор пользователя в системе провайдера
 session[digest] | Да | bcrypt(app_secret + ":" + uid), кост-фактор 12 (4096 раундов)
 session[first_name] | Да (в первый раз) | Имя пользователя
