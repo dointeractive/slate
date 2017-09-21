@@ -20,6 +20,7 @@ curl "<%= config[:host] %>/addresses" \
     "street": "Фридриха Энгельса",
     "building": "56",
     "block": null,
+    "entrance", null,
     "apartment": null,
     "comments": null,
     "lat": null,
@@ -63,6 +64,7 @@ curl "<%= config[:host] %>/addresses" \
     "street": "Фридриха Энгельса",
     "building": "56",
     "block": null,
+    "entrance": null,
     "apartment": null,
     "comments": null,
     "lat": null,
@@ -84,6 +86,7 @@ address[city] | Да | Город
 address[street] | Да | Улица
 address[building] | Да | Номер дома
 address[block] | - | Строение
+address[entrance] | - | Подъезд
 address[apartment] | - | Номер квартиры
 address[comments] | - | Комментарий к адресу
 address[lon] | - | Долгота
@@ -111,6 +114,7 @@ curl "<%= config[:host] %>/addresses/2" \
     "street": "Фридриха Энгельса",
     "building": "53",
     "block": null,
+    "entrance", null,
     "floor": null,
     "apartment": null,
     "comments": null,
@@ -132,7 +136,8 @@ address[full_address] | - | Полный адрес (в ближайшие дн�
 address[city] | - | Город
 address[street] | - | Улица
 address[building] | - | Номер дома
-address[block] | - | Строение/подъезд
+address[block] | - | Строение
+address[entrance] | - | Подъезд
 address[floor] | - | Этаж
 address[apartment] | - | Номер квартиры
 address[comments] | - | Комментарий к адресу
