@@ -20,7 +20,8 @@ curl "<%= config[:host] %>/addresses" \
     "street": "Фридриха Энгельса",
     "building": "56",
     "block": null,
-    "entrance", null,
+    "entrance": null,
+    "floor": null,
     "apartment": null,
     "comments": null,
     "lat": null,
@@ -65,6 +66,7 @@ curl "<%= config[:host] %>/addresses" \
     "building": "56",
     "block": null,
     "entrance": null,
+    "floor": null,
     "apartment": null,
     "comments": null,
     "lat": null,
@@ -87,6 +89,7 @@ address[street] | Да | Улица
 address[building] | Да | Номер дома
 address[block] | - | Строение
 address[entrance] | - | Подъезд
+address[floor] | - | Этаж
 address[apartment] | - | Номер квартиры
 address[comments] | - | Комментарий к адресу
 address[lon] | - | Долгота
