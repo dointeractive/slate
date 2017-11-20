@@ -110,7 +110,7 @@ credit_card[month] | Да | Месяц
 credit_card[last_digits] | Да | Последние 4 цифры номера карты
 credit_card[cryptogram_packet] | Да | Криптограмма
 
-### получение cryptogram_packet
+### Получение криптограммы(cryptogram_packet)
 Чтобы создать криптограмму, надо использовать [Cloudpayments SDK](https://cloudpayments.ru/Docs/MobileSDK)
 
 ## Запрос на удаление карты
