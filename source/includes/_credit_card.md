@@ -6,10 +6,10 @@
 
 Получить список всех карт пользователя можно, выполнив запрос:
 
-`GET <%= config[:host] %>/credit_cards`
+`GET https://api.instamart.ru/v2/credit_cards`
 
 ```shell
-curl "<%= config[:host] %>/credit_cards" \
+curl "https://api.instamart.ru/v2/credit_cards" \
   -H "Authorization: Token token=#{TOKEN}"
 ```
 
@@ -39,7 +39,7 @@ curl "<%= config[:host] %>/credit_cards" \
 ## Запрос на получение карты по ID
 
 ```shell
-curl "<%= config[:host] %>/credit_cards/14959" \
+curl "https://api.instamart.ru/v2/credit_cards/14959" \
   -H "Authorization: Token token=#{TOKEN}"
 ```
 
@@ -60,7 +60,7 @@ curl "<%= config[:host] %>/credit_cards/14959" \
 
 Получить карту можно, выполнив запрос:
 
-`GET <%= config[:host] %>/credit_cards/#{ID}`
+`GET https://api.instamart.ru/v2/credit_cards/#{ID}`
 
 ### Параметры запроса
 
@@ -71,7 +71,7 @@ ID | Да | ID карты
 ## Запрос на создание карты
 
 ```shell
-curl "<%= config[:host] %>/credit_cards" \
+curl "https://api.instamart.ru/v2/credit_cards" \
   -H "Authorization: Token token=#{TOKEN}"
   -X POST \
   -d "credit_card[title]=Зарплатная" \
@@ -99,7 +99,7 @@ curl "<%= config[:host] %>/credit_cards" \
 
 Создать новую карту пользователя можно, выполнив запрос:
 
-`POST <%= config[:host] %>/credit_cards`
+`POST https://api.instamart.ru/v2/credit_cards`
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
@@ -116,7 +116,7 @@ credit_card[cryptogram_packet] | Да | Криптограмма
 ## Запрос на удаление карты
 
 ```shell
-curl "<%= config[:host] %>/credit_cards/14959" \
+curl "https://api.instamart.ru/v2/credit_cards/14959" \
   -H "Authorization: Token token=#{TOKEN}" \
   -X DELETE
 ```
@@ -125,7 +125,7 @@ curl "<%= config[:host] %>/credit_cards/14959" \
 
 Удалить карту пользователя можно, выполнив запрос:
 
-`DELETE <%= config[:host] %>/credit_cards/#{ID}`
+`DELETE https://api.instamart.ru/v2/credit_cards/#{ID}`
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
