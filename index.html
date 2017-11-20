@@ -3626,6 +3626,199 @@ API обратно совместимо со старой версией API и 
   </tbody>
 </table>
 
+          <h1 id="bankovskiie-karty">Банковские карты</h1>
+
+<p>/credit_cards</p>
+
+<h2 id="zapros-na-poluchieniie-spiska-kart">Запрос на получение списка карт</h2>
+
+<p>Получить список всех карт пользователя можно, выполнив запрос:</p>
+
+<p><code>GET &lt;%= config[:host] %&gt;/credit_cards</code></p>
+
+<pre class="highlight shell"><code>curl <span class="s2">"&lt;%= config[:host] %&gt;/credit_cards"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
+</code></pre>
+
+<blockquote>
+  <p>Ответ будет содержать следующие данные:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"credit_cards"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">14959</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Зарплатная"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IVAN IVANOV"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"year"</span><span class="p">:</span><span class="w"> </span><span class="s2">"22"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"month"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"last_digits"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1111"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"current_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"next_page"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total_pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"per_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h2 id="zapros-na-poluchieniie-karty-po-id">Запрос на получение карты по ID</h2>
+
+<pre class="highlight shell"><code>curl <span class="s2">"&lt;%= config[:host] %&gt;/credit_cards/14959"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
+</code></pre>
+
+<blockquote>
+  <p>В случае если данные были указаны верно, сервер вернет ответ:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"credit_card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">14959</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Зарплатная"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IVAN IVANOV"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"year"</span><span class="p">:</span><span class="w"> </span><span class="s2">"22"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"month"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_digits"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1111"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Получить карту можно, выполнив запрос:</p>
+
+<p><code>GET &lt;%= config[:host] %&gt;/credit_cards/#{ID}</code></p>
+
+<h3 id="paramietry-zaprosa">Параметры запроса</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ID</td>
+      <td>Да</td>
+      <td>ID карты</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="zapros-na-sozdaniie-karty">Запрос на создание карты</h2>
+
+<pre class="highlight shell"><code>curl <span class="s2">"&lt;%= config[:host] %&gt;/credit_cards"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
+  -X POST <span class="se">\</span>
+  -d <span class="s2">"credit_card[title]=Зарплатная"</span> <span class="se">\</span>
+  -d <span class="s2">"credit_card[name]=IVAN IVANOV"</span> <span class="se">\</span>
+  -d <span class="s2">"credit_card[year]=22"</span> <span class="se">\</span>
+  -d <span class="s2">"credit_card[month]=12"</span> <span class="se">\</span>
+  -d <span class="s2">"credit_card[last_digits]=1111"</span> <span class="se">\</span>
+  -d <span class="s2">"credit_card[cryptogram_packet]="</span> <span class="se">\</span>
+</code></pre>
+
+<blockquote>
+  <p>Ответ будет содержать следующие данные:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"credit_card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">14959</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Зарплатная"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IVAN IVANOV"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"year"</span><span class="p">:</span><span class="w"> </span><span class="s2">"22"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"month"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_digits"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1111"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Создать новую карту пользователя можно, выполнив запрос:</p>
+
+<p><code>POST &lt;%= config[:host] %&gt;/credit_cards</code></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>credit_card[title]</td>
+      <td>-</td>
+      <td>Название карты</td>
+    </tr>
+    <tr>
+      <td>credit_card[name]</td>
+      <td>Да</td>
+      <td>Имя держателя карты</td>
+    </tr>
+    <tr>
+      <td>credit_card[year]</td>
+      <td>Да</td>
+      <td>Год</td>
+    </tr>
+    <tr>
+      <td>credit_card[month]</td>
+      <td>Да</td>
+      <td>Месяц</td>
+    </tr>
+    <tr>
+      <td>credit_card[last_digits]</td>
+      <td>Да</td>
+      <td>Последние 4 цифры номера карты</td>
+    </tr>
+    <tr>
+      <td>credit_card[cryptogram_packet]</td>
+      <td>Да</td>
+      <td>Криптограмма</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="poluchieniie-kriptoghrammycryptogrampacket">Получение криптограммы(cryptogram_packet)</h3>
+<p>Чтобы создать криптограмму, надо использовать <a href="https://cloudpayments.ru/Docs/MobileSDK">Cloudpayments SDK</a></p>
+
+<h2 id="zapros-na-udalieniie-karty">Запрос на удаление карты</h2>
+
+<pre class="highlight shell"><code>curl <span class="s2">"&lt;%= config[:host] %&gt;/credit_cards/14959"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
+  -X DELETE
+</code></pre>
+
+<blockquote>
+  <p>В случае успешного удаления сервер вернет пустой ответ с кодом 200</p>
+</blockquote>
+
+<p>Удалить карту пользователя можно, выполнив запрос:</p>
+
+<p><code>DELETE &lt;%= config[:host] %&gt;/credit_cards/#{ID}</code></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ID</td>
+      <td>Да</td>
+      <td>ID карты</td>
+    </tr>
+  </tbody>
+</table>
+
           <h1 id="zhaloby-na-tovar">Жалобы на товар</h1>
 
 <h2 id="poluchieniie-spiska-standartnykh-zhalob">Получение списка стандартных жалоб</h2>
