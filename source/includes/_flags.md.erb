@@ -29,8 +29,8 @@ curl "<%= config[:host] %>/flags"
 > Пример отправки стандартной жалобы из списка:
 
 ```shell
-curl "<%= config[:host] %>/products/1/flags" \
-  -H "Authorization: Token token=<% TOKEN %>" \
+curl '<%= config[:host] %>/products/1/flags' \
+  -H 'Authorization: Token token=#{TOKEN}' \
   -X POST \
   -d product_flag[flag_id]=1
 ```
@@ -38,8 +38,8 @@ curl "<%= config[:host] %>/products/1/flags" \
 > Пример отправки собственной жалобы
 
 ```shell
-curl "<%= config[:host] %>/products/#{PRODUCT_ID}/flags" \
-  -H "Authorization: Token token=<% TOKEN %>" \
+curl '<%= config[:host] %>/products/#{PRODUCT_ID}/flags' \
+  -H 'Authorization: Token token=#{TOKEN}' \
   -X POST \
   -d "product_flag[description]=Слишком высокая цена"
 ```
