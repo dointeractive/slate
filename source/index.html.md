@@ -26,6 +26,7 @@ includes:
   - payment_tools
   - payments
   - order_reviews
+  - credit_card
   - flags
   - errors
 
