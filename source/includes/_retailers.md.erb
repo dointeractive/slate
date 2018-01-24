@@ -16,7 +16,14 @@ curl "<%= config[:host] %>/retailers"
     "color": "#003d7a",
     "logo": "http://instamart.ru/logos/metro.png",
     "available": true,
-    "environment": "production"
+    "environment": "production",
+    "retailer_services": [
+      {
+        "id": 6,
+        "key": "prices",
+        "description": "Цены как в магазине"
+      }
+    ],
   }]
 }
 ```
