@@ -622,7 +622,14 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
         </span><span class="nt">"building"</span><span class="p">:</span><span class="w"> </span><span class="s2">"211, стр. 1"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"lat"</span><span class="p">:</span><span class="w"> </span><span class="mf">55.844041</span><span class="p">,</span><span class="w">
         </span><span class="nt">"lon"</span><span class="p">:</span><span class="w"> </span><span class="mf">37.66265</span><span class="w">
-      </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"services"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"prices"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Цены как в магазине"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 
@@ -661,6 +668,130 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
   </tbody>
 </table>
 
+<h3 id="struktura-obiekta-store">Структура объекта Store</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Атрибут</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>services</td>
+      <td>Список услуг в магазине</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="rasshiriennyie-dannyie-maghazina">Расширенные данные магазина</h2>
+
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/stores/1"</span>
+</code></pre>
+
+<blockquote>
+  <p>Команда выше возвращает JSON:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"store"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Метро, просп. Мира"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"zones"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"lon"</span><span class="p">:</span><span class="w"> </span><span class="mf">37.621164</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"lat"</span><span class="p">:</span><span class="w"> </span><span class="mf">55.633049</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"lon"</span><span class="p">:</span><span class="w"> </span><span class="mf">37.627966</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"lat"</span><span class="p">:</span><span class="w"> </span><span class="mf">55.633231</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"lon"</span><span class="p">:</span><span class="w"> </span><span class="mf">37.628481</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"lat"</span><span class="p">:</span><span class="w"> </span><span class="mf">55.628691</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"lon"</span><span class="p">:</span><span class="w"> </span><span class="mf">37.619641</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"lat"</span><span class="p">:</span><span class="w"> </span><span class="mf">55.628558</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"lon"</span><span class="p">:</span><span class="w"> </span><span class="mf">37.621164</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"lat"</span><span class="p">:</span><span class="w"> </span><span class="mf">55.633049</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"retailer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Метро"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#003d7a"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://instamart.ru/logos/metro.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"available"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"environment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"production"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">84646</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"full_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Москва, просп. Мира, 211, стр. 1"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Москва"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"просп. Мира"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"building"</span><span class="p">:</span><span class="w"> </span><span class="s2">"211, стр. 1"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"lat"</span><span class="p">:</span><span class="w"> </span><span class="mf">55.844041</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"lon"</span><span class="p">:</span><span class="w"> </span><span class="mf">37.66265</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"services"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"prices"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Цены как в магазине"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Получить полную информацию по магазину можно, выполнив запрос</p>
+
+<h3 id="http-zapros-1">HTTP запрос</h3>
+
+<p><code>GET http://api.instamart.ru/v2/stores/#{ID}</code></p>
+
+<h3 id="paramietry-zaprosa-1">Параметры запроса</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ID</td>
+      <td>Да</td>
+      <td>ID магазина</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="struktura-obiekta-store-1">Структура объекта Store</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Атрибут</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>services</td>
+      <td>Список услуг в магазин</td>
+    </tr>
+  </tbody>
+</table>
+
           <h1 id="ritieiliery">Ритейлеры</h1>
 
 <h2 id="poluchieniie-spiska-ritieilierov">Получение списка ритейлеров</h2>
@@ -677,6 +808,7 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Metro C&amp;C"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#003d7a"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"logo_background_color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#003d7a"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/logos/metro.png"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"available"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="nt">"environment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"production"</span><span class="w">
@@ -689,6 +821,27 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
 <h3 id="http-zapros">HTTP запрос</h3>
 
 <p><code>GET http://api.instamart.ru/v2/retailers</code></p>
+
+<h3 id="struktura-obiekta-retailer">Структура объекта Retailer</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Атрибут</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>color</td>
+      <td>Цвет фона ритейлера</td>
+    </tr>
+    <tr>
+      <td>logo_background_color</td>
+      <td>Цвет фона логотипа ритейлера</td>
+    </tr>
+  </tbody>
+</table>
 
 <h2 id="rasshiriennyie-dannyie-ritieiliera">Расширенные данные ритейлера</h2>
 
@@ -704,6 +857,7 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Metro C&amp;C"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#003d7a"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"logo_background_color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#003d7a"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/logos/metro.png"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"available"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="nt">"environment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"production"</span><span class="p">,</span><span class="w">
@@ -754,7 +908,7 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
   </tbody>
 </table>
 
-<h3 id="struktura-obiekta-retailer">Структура объекта Retailer</h3>
+<h3 id="struktura-obiekta-retailer-1">Структура объекта Retailer</h3>
 
 <table>
   <thead>
