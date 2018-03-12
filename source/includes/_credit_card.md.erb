@@ -53,7 +53,12 @@ curl "<%= config[:host] %>/credit_cards/14959" \
     "name": "IVAN IVANOV",
     "year": "22",
     "month": "12",
-    "last_digits": "1111"
+    "last_digits": "1111",
+    "payment_tool": {
+      "id": 299,
+      "name": "•••• 2222",
+      "type": "cloud_payments_gateway"
+    }
   }
 }
 ```
@@ -67,6 +72,12 @@ curl "<%= config[:host] %>/credit_cards/14959" \
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
 ID | Да | ID карты
+
+### Структура объекта CreditCard
+
+Атрибут | Описание
+--------- | -----------
+payment_tool | PaymentTool используемый при оформлении заказа
 
 ## Запрос на создание карты
 
@@ -92,7 +103,12 @@ curl "<%= config[:host] %>/credit_cards" \
     "name": "IVAN IVANOV",
     "year": "22",
     "month": "12",
-    "last_digits": "1111"
+    "last_digits": "1111",
+    "payment_tool": {
+      "id": 299,
+      "name": "•••• 2222",
+      "type": "cloud_payments_gateway"
+    }
   }
 }
 ```
