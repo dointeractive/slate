@@ -30,8 +30,7 @@ curl "<%= config[:host] %>/orders" \
     "address": null,
     "shipments": [],
     "payment": null,
-    "adjustments": [],
-    "promotion_codes": []
+    "adjustments": []
   }
 }
 ```
@@ -344,8 +343,7 @@ curl "<%= config[:host] %>/orders" \
           "starts_at": "2017-02-09T11:00:00.000+03:00",
           "ends_at": "2017-02-09T14:00:00.000+03:00"
         }
-      }],
-      "promotion_codes": []
+      }]
     }
   ],
 
@@ -377,7 +375,6 @@ item_count | общее количество товаров в заказе
 shipment_state | состояние доставки
 payment_state | состояние оплаты
 shipments | данные о добавленных товаров
-promotion_codes | список примененных промокодов
 
 В ответ не включаются следующие поля:
 - adjustment_total
