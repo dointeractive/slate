@@ -17,6 +17,7 @@ includes:
   - addresses
   - ship_address_changes
   - categories
+  - taxons
   - departments
   - products
   - search
