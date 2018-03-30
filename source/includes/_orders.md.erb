@@ -67,6 +67,7 @@ address | адрес доставки
 shipments | данные о добавленных товаров
 payment | данные об оплате
 adjustments | корректировки стоимости заказа (скидки, цена доставки)
+promotion_codes | Список примененных промокодов
 
 ### Структура объекта Shipment
 
@@ -242,7 +243,8 @@ curl "<%= config[:host] %>/orders/C27387-16"
         }
       }]
     }],
-    "payment": null
+    "payment": null,
+    "promotion_codes": []
   }
 }
 ```
@@ -286,7 +288,8 @@ curl "<%= config[:host] %>/orders/current" \
     "address": null,
     "shipments": [],
     "payment": null,
-    "adjustments": []
+    "adjustments": [],
+    "promotion_codes": []
   }
 }
 ```
@@ -428,7 +431,49 @@ curl "<%= config[:host] %>/orders/#{NUMBER}/promotions" \
     "total": 1236.7,
     "item_total": 1236.7,
     ...
-    "promo_total": -100.0
+    "promo_total": -100.0,
+    "promotion_codes": [
+      {
+        "id": 1,
+        "value": "12345"
+      }
+    ]
+  }
+}
+```
+
+## Удаление промокода
+
+Чтобы удалить промокод из заказа, необходимо выполнить запрос:
+
+`DELETE http://api.im.dev/v2/orders/#{NUMBER}/promotions?promotion_code=12345`
+
+### Параметры запроса
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+promotion_code | Да | Промокод(строка)
+
+> Пример удаления промокода:
+
+```shell
+curl "<%= config[:host] %>/orders/#{NUMBER}/promotions" \
+  -H "Authorization: Token token=#{TOKEN}"
+  -X DELETE \
+  -d "promotion_code=12345"
+```
+
+> В ответе вернется обновленный заказ:
+
+```json
+{
+  "order": {
+    "number": "R314234460",
+    "total": 1236.7,
+    "item_total": 1236.7,
+    ...
+    "promo_total": 0,
+    "promotion_codes": []
   }
 }
 ```
