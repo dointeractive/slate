@@ -681,7 +681,7 @@ order[payment_attributes][payment_tool_id] | Да | id источника опл
 
 ## Отмена заказа
 
-Чтобы завершить заказ, необходимо выполнить запрос:
+Чтобы отменить заказ, необходимо выполнить запрос:
 
 `POST http://api.im.dev/v2/orders/#{NUMBER}/cancellations`
 
@@ -720,3 +720,9 @@ curl "<%= config[:host] %>/orders/#{NUMBER}/cancellations" \
 Чтобы завершить заказ, необходимо выполнить запрос:
 
 `POST <%= config[:host] %>/orders/#{NUMBER}/completion`
+
+## Очистка заказа
+
+Чтобы очистить заказ, необходимо выполнить запрос:
+
+`DELETE <%= config[:host] %>/orders/#{NUMBER}/shipments`
