@@ -994,7 +994,9 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
     </span><span class="nt">"apartment"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nt">"lat"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"lon"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="nt">"lon"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"home"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"door_phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123"</span><span class="w">
   </span><span class="p">}],</span><span class="w">
   </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"current_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -1038,7 +1040,9 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
     </span><span class="nt">"apartment"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nt">"lat"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"lon"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="nt">"lon"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"home"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"door_phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -1121,6 +1125,11 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
       <td>-</td>
       <td>Широта</td>
     </tr>
+    <tr>
+      <td>address[door_phone]</td>
+      <td>-</td>
+      <td>Номер домофона</td>
+    </tr>
   </tbody>
 </table>
 
@@ -1151,7 +1160,9 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
     </span><span class="nt">"apartment"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nt">"lat"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"lon"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="nt">"lon"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"home"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"door_phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -1233,6 +1244,11 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
       <td>address[lat]</td>
       <td>-</td>
       <td>Широта</td>
+    </tr>
+    <tr>
+      <td>address[door_phone]</td>
+      <td>-</td>
+      <td>Номер домофона</td>
     </tr>
   </tbody>
 </table>
@@ -1587,6 +1603,168 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
 <aside class="notice">
 API обратно совместимо со старой версией API и поддерживает параметр rid - идентификатор ритейлера
 </aside>
+
+          <h1 id="katieghorii-s-ghruppami">Категории с группами</h1>
+
+<blockquote>
+  <p>Пример кода для получения списка всех категорий</p>
+</blockquote>
+
+<pre class="highlight shell"><code>curl <span class="s2">"&lt;%= config[:host] %&gt;/taxons?sid=1"</span>
+</code></pre>
+<blockquote>
+  <p>Ответ будет содержать следующие данные:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"taxons"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">172</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"department"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Продукты питания"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"icon"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"mini_url"</span><span class="p">:</span><span class="w">
+          </span><span class="s2">"http://im.dev/spree/taxons/172/mini/%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D1%8B_%D0%BF%D0%B8%D1%82%D0%B0%D0%BD%D0%B8%D1%8F.png?1453225215"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"normal_url"</span><span class="p">:</span><span class="w">
+          </span><span class="s2">"http://im.dev/spree/taxons/172/normal/%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D1%8B_%D0%BF%D0%B8%D1%82%D0%B0%D0%BD%D0%B8%D1%8F.png?1453225215"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"children"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">466</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"department"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Чай и кофе"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"icon"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"mini_url"</span><span class="p">:</span><span class="w">
+              </span><span class="s2">"http://im.dev/spree/taxons/466/mini/%D0%A7%D0%B0%D0%B8%CC%86_%D0%B8_%D0%BA%D0%BE%D1%84%D0%B5.png?1453225181"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"normal_url"</span><span class="p">:</span><span class="w">
+              </span><span class="s2">"http://im.dev/spree/taxons/466/normal/%D0%A7%D0%B0%D0%B8%CC%86_%D0%B8_%D0%BA%D0%BE%D1%84%D0%B5.png?1453225181"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"children"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">187</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"taxon"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Чай"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"icon"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"mini_url"</span><span class="p">:</span><span class="w">
+                  </span><span class="s2">"http://im.dev/spree/taxons/187/mini/%D1%87%D0%B0%D0%B8%CC%86-01.png?1453649106"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"normal_url"</span><span class="p">:</span><span class="w">
+                  </span><span class="s2">"http://im.dev/spree/taxons/187/normal/%D1%87%D0%B0%D0%B8%CC%86-01.png?1453649106"</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">188</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"taxon"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Кофе"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"icon"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"mini_url"</span><span class="p">:</span><span class="w">
+                  </span><span class="s2">"http://im.dev/spree/taxons/188/mini/%D0%BA%D0%BE%D1%84%D0%B5-01.png?1453649151"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"normal_url"</span><span class="p">:</span><span class="w">
+                  </span><span class="s2">"http://im.dev/spree/taxons/188/normal/%D0%BA%D0%BE%D1%84%D0%B5-01.png?1453649151"</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"promoted_taxons"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">663</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"department"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Спецпредложения"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"icon"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"mini_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://im.dev/assets/default_taxon.png"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"normal_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://im.dev/assets/default_taxon.png"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"children"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">665</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"department"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unilever"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"icon"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"mini_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://im.dev/assets/default_taxon.png"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"normal_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://im.dev/assets/default_taxon.png"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"children"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">911</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"taxon"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Бакалея"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"icon"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"mini_url"</span><span class="p">:</span><span class="w">
+                  </span><span class="s2">"http://im.dev/spree/taxons/911/mini/%D0%91%D0%B0%D0%BA%D0%B0%D0%BB%D0%B5%D1%8F.png?1453225221"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"normal_url"</span><span class="p">:</span><span class="w">
+                  </span><span class="s2">"http://im.dev/spree/taxons/911/normal/%D0%91%D0%B0%D0%BA%D0%B0%D0%BB%D0%B5%D1%8F.png?1453225221"</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>API возвращает полную иерархию всех категорий(вместе с группой). Ответ содержит два объекта верхего уровня: <code>taxons</code> и <code>promoted_taxons</code>.<br />
+<code>taxons</code> – это список всех категорий сайта. <code>promoted_taxons</code> – список маркетинговых категорий “скидки”, “новогоднее предложение” и пр.</p>
+
+<p><code>taxons</code> и <code>promoted_taxons</code> имеют древовидную структуру неограниченной вложенности.</p>
+
+<p>Все объекты категорий имеют следующую структуру:</p>
+
+<h3 id="struktura-obiekta-taxons">Структура объекта Taxons</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Атрибут</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td>id категории</td>
+    </tr>
+    <tr>
+      <td>type</td>
+      <td>Тип категории: <strong>department</strong> или <strong>taxon</strong></td>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>Название категори</td>
+    </tr>
+    <tr>
+      <td>children</td>
+      <td>Список дочерних категорий</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>От значения поля <code>type</code> зависит способ отображения содержимого категории.<br />
+Если <code>type</code> содержит значение “department” – для отоброжения содержимого категории нужно использовать API <code>/v2/departments</code>. Если <code>type</code> содержит “taxon” – нужно использовать API <code>/v2/products</code></p>
+
+<p>Получить список всех категорий можно, выполнив запрос:</p>
+
+<p><code>GET &lt;%= config[:host] %&gt;/taxons</code></p>
+
+<h3 id="paramietry-zaprosa">Параметры запроса</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>sid</code></td>
+      <td>Да</td>
+      <td>ID магазина для которого необходимо получить список категорий.</td>
+    </tr>
+  </tbody>
+</table>
 
           <h1 id="katalogh">Каталог</h1>
 
@@ -2519,6 +2697,10 @@ API обратно совместимо со старой версией API и 
       <td>adjustments</td>
       <td>корректировки стоимости заказа (скидки, цена доставки)</td>
     </tr>
+    <tr>
+      <td>promotion_codes</td>
+      <td>Список примененных промокодов</td>
+    </tr>
   </tbody>
 </table>
 
@@ -2830,7 +3012,8 @@ API обратно совместимо со старой версией API и 
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}]</span><span class="w">
     </span><span class="p">}],</span><span class="w">
-    </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"promotion_codes"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -2888,7 +3071,8 @@ API обратно совместимо со старой версией API и 
     </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nt">"shipments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
     </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"adjustments"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="nt">"adjustments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nt">"promotion_codes"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -3108,7 +3292,64 @@ API обратно совместимо со старой версией API и 
     </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mf">1236.7</span><span class="p">,</span><span class="w">
     </span><span class="nt">"item_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">1236.7</span><span class="p">,</span><span class="w">
     </span><span class="err">...</span><span class="w">
-    </span><span class="nt">"promo_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">-100.0</span><span class="w">
+    </span><span class="nt">"promo_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">-100.0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"promotion_codes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h2 id="udalieniie-promokoda">Удаление промокода</h2>
+
+<p>Чтобы удалить промокод из заказа, необходимо выполнить запрос:</p>
+
+<p><code>DELETE http://api.im.dev/v2/orders/#{NUMBER}/promotions?promotion_code=12345</code></p>
+
+<h3 id="paramietry-zaprosa-2">Параметры запроса</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>promotion_code</td>
+      <td>Да</td>
+      <td>Промокод(строка)</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>Пример удаления промокода:</p>
+</blockquote>
+
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/orders/#{NUMBER}/promotions"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
+  -X DELETE <span class="se">\</span>
+  -d <span class="s2">"promotion_code=12345"</span>
+</code></pre>
+
+<blockquote>
+  <p>В ответе вернется обновленный заказ:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"order"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"R314234460"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mf">1236.7</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"item_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">1236.7</span><span class="p">,</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+    </span><span class="nt">"promo_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"promotion_codes"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -3155,7 +3396,7 @@ API обратно совместимо со старой версией API и 
 
 <p><code>POST http://api.instamart.ru/v2/line_items</code></p>
 
-<h3 id="paramietry-zaprosa-2">Параметры запроса</h3>
+<h3 id="paramietry-zaprosa-3">Параметры запроса</h3>
 
 <table>
   <thead>
@@ -3229,7 +3470,7 @@ API обратно совместимо со старой версией API и 
 
 <p><code>PUT http://api.instamart.ru/v2/line_items/#{ID}</code></p>
 
-<h3 id="paramietry-zaprosa-3">Параметры запроса</h3>
+<h3 id="paramietry-zaprosa-4">Параметры запроса</h3>
 
 <table>
   <thead>
@@ -3270,7 +3511,7 @@ API обратно совместимо со старой версией API и 
 
 <p><code>DELETE http://api.instamart.ru/v2/line_items/#{ID}</code></p>
 
-<h3 id="paramietry-zaprosa-4">Параметры запроса</h3>
+<h3 id="paramietry-zaprosa-5">Параметры запроса</h3>
 
 <table>
   <thead>
@@ -3407,7 +3648,7 @@ API обратно совместимо со старой версией API и 
 
 <p><code>GET http://api.instamart.ru/v2/payment_tools</code></p>
 
-<h3 id="paramietry-zaprosa-5">Параметры запроса</h3>
+<h3 id="paramietry-zaprosa-6">Параметры запроса</h3>
 
 <table>
   <thead>
@@ -3458,11 +3699,11 @@ API обратно совместимо со старой версией API и 
 
 <h2 id="otmiena-zakaza">Отмена заказа</h2>
 
-<p>Чтобы завершить заказ, необходимо выполнить запрос:</p>
+<p>Чтобы отменить заказ, необходимо выполнить запрос:</p>
 
 <p><code>POST http://api.im.dev/v2/orders/#{NUMBER}/cancellations</code></p>
 
-<h3 id="paramietry-zaprosa-6">Параметры запроса</h3>
+<h3 id="paramietry-zaprosa-7">Параметры запроса</h3>
 
 <table>
   <thead>
@@ -3512,6 +3753,18 @@ API обратно совместимо со старой версией API и 
 <p>Чтобы завершить заказ, необходимо выполнить запрос:</p>
 
 <p><code>POST http://api.instamart.ru/v2/orders/#{NUMBER}/completion</code></p>
+
+<h2 id="ochistka-zakaza">Очистка заказа</h2>
+
+<p>Чтобы очистить заказ, необходимо выполнить запрос:</p>
+
+<p><code>DELETE http://api.instamart.ru/v2/orders/#{NUMBER}/shipments</code></p>
+
+<h2 id="ochistka-podzakaza">Очистка подзаказа</h2>
+
+<p>Чтобы очистить подзаказ, необходимо выполнить запрос:</p>
+
+<p><code>DELETE http://api.instamart.ru/v2/shipments/#{NUMBER}</code></p>
 
           <h1 id="sposoby-dostavki">Способы доставки</h1>
 
@@ -3589,6 +3842,79 @@ API обратно совместимо со старой версией API и 
   </tbody>
 </table>
 
+
+          <h1 id="tipy-sposobov-oplaty">Типы способов оплаты</h1>
+
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/payment_tool_types"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
+</code></pre>
+
+<blockquote>
+  <p>Ответ будет содержать следующие данные:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"payment_tool_types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Наличными курьеру"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"check"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Банковский перевод"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sber_bank_invoice"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Visa/Mastercard"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Оплата по пластиковым картам"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cloud_payments_gateway"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"current_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"next_page"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total_pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"per_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>API возвращает возможные типы способов оплаты.</p>
+
+<p><code>GET http://api.instamart.ru/v2/payment_tool_types</code></p>
+
+<h3 id="struktura-obiekta-paymenttooltypes">Структура объекта PaymentToolTypes</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Атрибут</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td>идентификатор</td>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>название</td>
+    </tr>
+    <tr>
+      <td>type</td>
+      <td>тип способа оплаты. Указывается в <a href="#sposoby-oplaty">Способах оплаты</a></td>
+    </tr>
+    <tr>
+      <td>description</td>
+      <td>описание</td>
+    </tr>
+  </tbody>
+</table>
 
           <h1 id="sposoby-oplaty">Способы оплаты</h1>
 
@@ -3671,6 +3997,10 @@ API обратно совместимо со старой версией API и 
       <td>платежный шлюз moneta.ru</td>
     </tr>
     <tr>
+      <td>cloud_payments_gateway</td>
+      <td>оплата картой через cloudpayments.ru</td>
+    </tr>
+    <tr>
       <td>sber_bank_invoice</td>
       <td>перевод по реквизитам</td>
     </tr>
@@ -3714,22 +4044,18 @@ API обратно совместимо со старой версией API и 
   </tbody>
 </table>
 
-<p>Если выбранный пользователем способ оплаты предполагает оформление платежа на стороннем сайте, то поле <code>is_finalization_needed</code> будет содержать значение <code>true</code>. В этом случае клиент API должен отобразить пользователю сайт внутри web-view компонента по ссылке из поля <code>finalization_url</code>. Пользователь осуществляет оплату (включая 3d-secure авторизацию) внутри этого компонента. После завершения оплаты пользователь будет переадресован на сайт instamart.ru, по этому переходу web-view можно будет закрыть.</p>
+<p>Если выбранный пользователем способ оплаты предполагает оформление платежа на стороннем сайте, то поле <code>is_finalization_needed</code> будет содержать значение <code>true</code>. В этом случае клиент API должен отобразить пользователю сайт внутри web-view компонента по ссылке из поля <code>finalization_url</code>.</p>
 
-<aside class="success">
-  Сигналом завершения оплаты будет переадресация из стороннего сервиса на хост instamart.ru
-</aside>
+<p>Пользователь осуществляет оплату (включая 3d-secure авторизацию) внутри этого компонента.</p>
 
-<p>Например, для сервиса <code>moneta.ru</code> пользователь в случае успешной и неуспешной оплаты будет перенаправлен по соответствующим адресам:</p>
+<p>После завершения оплаты пользователь будет переадресован на сайт instamart.ru, на адрес <code>/api/v2/credit_card_authorization?order_number=#{order_number}</code></p>
+
+<p>В зависимости от успешности завершения оплаты произойдет переадресация на один из следующих адресов:</p>
 
 <ul>
-  <li>http://instamart.ru/gateway/payanyway/success</li>
-  <li>http://instamart.ru/gateway/payanyway/fail</li>
+  <li><code>/api/v2/credit_card_authorization/success</code> если оплата прошла успешно</li>
+  <li><code>/api/v2/credit_card_authorization/fail</code> если оплата прошла неуспешно</li>
 </ul>
-
-<aside class="warning">
-  У каждого сервиса может быть свой собственный набор URL для переадрессации.
-</aside>
 
           <h1 id="otzyv-na-zakaz">Отзыв на заказ</h1>
 
@@ -3788,9 +4114,9 @@ API обратно совместимо со старой версией API и 
 
 <p>Получить список всех карт пользователя можно, выполнив запрос:</p>
 
-<p><code>GET &lt;%= config[:host] %&gt;/credit_cards</code></p>
+<p><code>GET http://api.instamart.ru/v2/credit_cards</code></p>
 
-<pre class="highlight shell"><code>curl <span class="s2">"&lt;%= config[:host] %&gt;/credit_cards"</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/credit_cards"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
 </code></pre>
 
@@ -3820,7 +4146,7 @@ API обратно совместимо со старой версией API и 
 
 <h2 id="zapros-na-poluchieniie-karty-po-id">Запрос на получение карты по ID</h2>
 
-<pre class="highlight shell"><code>curl <span class="s2">"&lt;%= config[:host] %&gt;/credit_cards/14959"</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/credit_cards/14959"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
 </code></pre>
 
@@ -3835,14 +4161,19 @@ API обратно совместимо со старой версией API и 
     </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IVAN IVANOV"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"year"</span><span class="p">:</span><span class="w"> </span><span class="s2">"22"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"month"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"last_digits"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1111"</span><span class="w">
+    </span><span class="nt">"last_digits"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1111"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"payment_tool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">299</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"•••• 2222"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cloud_payments_gateway"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
 <p>Получить карту можно, выполнив запрос:</p>
 
-<p><code>GET &lt;%= config[:host] %&gt;/credit_cards/#{ID}</code></p>
+<p><code>GET http://api.instamart.ru/v2/credit_cards/#{ID}</code></p>
 
 <h3 id="paramietry-zaprosa">Параметры запроса</h3>
 
@@ -3863,9 +4194,26 @@ API обратно совместимо со старой версией API и 
   </tbody>
 </table>
 
+<h3 id="struktura-obiekta-creditcard">Структура объекта CreditCard</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Атрибут</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>payment_tool</td>
+      <td>PaymentTool используемый при оформлении заказа</td>
+    </tr>
+  </tbody>
+</table>
+
 <h2 id="zapros-na-sozdaniie-karty">Запрос на создание карты</h2>
 
-<pre class="highlight shell"><code>curl <span class="s2">"&lt;%= config[:host] %&gt;/credit_cards"</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/credit_cards"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
   -X POST <span class="se">\</span>
   -d <span class="s2">"credit_card[title]=Зарплатная"</span> <span class="se">\</span>
@@ -3887,14 +4235,19 @@ API обратно совместимо со старой версией API и 
     </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IVAN IVANOV"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"year"</span><span class="p">:</span><span class="w"> </span><span class="s2">"22"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"month"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"last_digits"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1111"</span><span class="w">
+    </span><span class="nt">"last_digits"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1111"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"payment_tool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">299</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"•••• 2222"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cloud_payments_gateway"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
 <p>Создать новую карту пользователя можно, выполнив запрос:</p>
 
-<p><code>POST &lt;%= config[:host] %&gt;/credit_cards</code></p>
+<p><code>POST http://api.instamart.ru/v2/credit_cards</code></p>
 
 <table>
   <thead>
@@ -3943,7 +4296,7 @@ API обратно совместимо со старой версией API и 
 
 <h2 id="zapros-na-udalieniie-karty">Запрос на удаление карты</h2>
 
-<pre class="highlight shell"><code>curl <span class="s2">"&lt;%= config[:host] %&gt;/credit_cards/14959"</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/credit_cards/14959"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
   -X DELETE
 </code></pre>
@@ -3954,7 +4307,7 @@ API обратно совместимо со старой версией API и 
 
 <p>Удалить карту пользователя можно, выполнив запрос:</p>
 
-<p><code>DELETE &lt;%= config[:host] %&gt;/credit_cards/#{ID}</code></p>
+<p><code>DELETE http://api.instamart.ru/v2/credit_cards/#{ID}</code></p>
 
 <table>
   <thead>
