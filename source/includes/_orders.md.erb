@@ -726,3 +726,9 @@ curl "<%= config[:host] %>/orders/#{NUMBER}/cancellations" \
 Чтобы очистить заказ, необходимо выполнить запрос:
 
 `DELETE <%= config[:host] %>/orders/#{NUMBER}/shipments`
+
+## Очистка подзаказа
+
+Чтобы очистить подзаказ, необходимо выполнить запрос:
+
+`DELETE <%= config[:host] %>/shipments/#{NUMBER}`
