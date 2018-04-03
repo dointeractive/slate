@@ -30,6 +30,8 @@ includes:
   - order_reviews
   - credit_card
   - flags
+  - communication_methods
+  - replacement_methods
   - errors
 
 search: true
