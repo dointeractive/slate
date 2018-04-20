@@ -132,7 +132,7 @@ product | информация о продукте
 
 Чтобы повторить заказ, необходимо выполнить запрос:
 
-`POST http://api.im.dev/v2/orders/#{NUMBER}/clones`
+`POST <%= config[:host] %>/orders/#{NUMBER}/clones`
 
 В `NUMBER` передается номер того заказа, который необходимо повторить.
 
@@ -405,7 +405,7 @@ state | состояние
 
 Чтобы применить промокод к заказу, необходимо выполнить запрос:
 
-`POST http://api.im.dev/v2/orders/#{NUMBER}/promotions`
+`POST <%= config[:host] %>/orders/#{NUMBER}/promotions`
 
 ### Параметры запроса
 
@@ -727,7 +727,7 @@ order[payment_attributes][payment_tool_id] | Да | id источника опл
 
 Чтобы отменить заказ, необходимо выполнить запрос:
 
-`POST http://api.im.dev/v2/orders/#{NUMBER}/cancellations`
+`POST <%= config[:host] %>/orders/#{NUMBER}/cancellations`
 
 ### Параметры запроса
 
