@@ -446,7 +446,7 @@ curl "<%= config[:host] %>/orders/#{NUMBER}/promotions" \
 
 Чтобы удалить промокод из заказа, необходимо выполнить запрос:
 
-`DELETE http://api.im.dev/v2/orders/#{NUMBER}/promotions/#{PROMOTION_CODE}`
+`DELETE <%= config[:host] %>/v2/orders/#{NUMBER}/promotions/#{PROMOTION_CODE}`
 
 ### Параметры запроса
 
