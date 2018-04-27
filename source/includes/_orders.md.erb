@@ -132,7 +132,7 @@ product | информация о продукте
 
 Чтобы повторить заказ, необходимо выполнить запрос:
 
-`POST http://api.im.dev/v2/orders/#{NUMBER}/clones`
+`POST <%= config[:host] %>/orders/#{NUMBER}/clones`
 
 В `NUMBER` передается номер того заказа, который необходимо повторить.
 
@@ -405,7 +405,7 @@ state | состояние
 
 Чтобы применить промокод к заказу, необходимо выполнить запрос:
 
-`POST http://api.im.dev/v2/orders/#{NUMBER}/promotions`
+`POST <%= config[:host] %>/orders/#{NUMBER}/promotions`
 
 ### Параметры запроса
 
@@ -434,8 +434,8 @@ curl "<%= config[:host] %>/orders/#{NUMBER}/promotions" \
     "promo_total": -100.0,
     "promotion_codes": [
       {
-        "id": 1,
-        "value": "12345"
+        "value": "12345",
+        "description": "Суперскидка"
       }
     ]
   }
@@ -446,21 +446,21 @@ curl "<%= config[:host] %>/orders/#{NUMBER}/promotions" \
 
 Чтобы удалить промокод из заказа, необходимо выполнить запрос:
 
-`DELETE http://api.im.dev/v2/orders/#{NUMBER}/promotions?promotion_code=12345`
+`DELETE http://api.im.dev/v2/orders/#{NUMBER}/promotions/#{PROMOTION_CODE}`
 
 ### Параметры запроса
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
-promotion_code | Да | Промокод(строка)
+NUMBER | Да | Номер заказа
+PROMOTION_CODE | Да | Промокод(строка)
 
 > Пример удаления промокода:
 
 ```shell
-curl "<%= config[:host] %>/orders/#{NUMBER}/promotions" \
+curl "<%= config[:host] %>/orders/R314234460/promotions/12345" \
   -H "Authorization: Token token=#{TOKEN}"
   -X DELETE \
-  -d "promotion_code=12345"
 ```
 
 > В ответе вернется обновленный заказ:
@@ -728,7 +728,7 @@ order[payment_attributes][payment_tool_id] | Да | id источника опл
 
 Чтобы отменить заказ, необходимо выполнить запрос:
 
-`POST http://api.im.dev/v2/orders/#{NUMBER}/cancellations`
+`POST <%= config[:host] %>/orders/#{NUMBER}/cancellations`
 
 ### Параметры запроса
 
