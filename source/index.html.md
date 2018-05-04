@@ -30,6 +30,7 @@ includes:
   - order_reviews
   - credit_card
   - flags
+  - loyalty_programs
   - errors
 
 search: true

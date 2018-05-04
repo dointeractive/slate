@@ -1,0 +1,40 @@
+# Программы лояльности
+
+## Получение списка программ лояльности
+<aside class="warning">
+  not implemented
+</aside>
+
+Получить список доступных программ лояльности можно, выполнив запрос:
+
+`GET <%= config[:host] %>/loyalty_programs`
+
+```shell
+curl "<%= config[:host] %>/loyalty_programs" \
+  -H "Authorization: Token token=#{TOKEN}"
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+{
+   "loyalty_programs":[
+      {
+         "id":1,
+         "name":"Семейная команда",
+         "slug":"rosneft",
+         "logo":"https://<%= config[:host] %>/public/loyalty_cards_logos/16/default/rosneft-img.png",
+         "logoWidth":40,
+         "logoHeight":34
+      },
+      {
+         "id":2,
+         "name":"Связной клуб",
+         "slug":"sclub",
+         "logo":"https://<%= config[:host] %>/public/loyalty_cards_logos/17/default/svyaznoy-img.png",
+         "logoWidth":34,
+         "logoHeight":30
+      }
+   ]
+}
+```
