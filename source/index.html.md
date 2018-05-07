@@ -31,6 +31,7 @@ includes:
   - credit_card
   - flags
   - loyalty_programs
+  - bonus_cards
   - errors
 
 search: true

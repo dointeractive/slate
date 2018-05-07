@@ -1,0 +1,134 @@
+# Бонусные карты
+
+## Получение списка бонусных карт
+
+```shell
+curl "<%= config[:host] %>/bonus_cards" \
+  -H "Authorization: Token token=#{TOKEN}"
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+{
+   "bonus_cards":[
+      {
+         "id": 2,
+         "number":"12345678",
+         "loyaltyProgramId": 3
+      },
+      {
+         "id":3,
+         "number":"11111111",
+         "loyaltyProgramId": 3
+      }
+   ],
+   "meta": {
+     "defaultBonusCardId": 2
+   }
+}
+```
+
+<aside class="warning">
+  not implemented
+</aside>
+
+Получить список бонусных карт пользователя можно, выполнив запрос:
+
+`GET <%= config[:host] %>/bonus_cards`
+
+Описание полей ответа
+
+Параметр|Описание
+---|---
+id|Идентификатор бонусной карты
+number|Номер бонусной карты
+loyaltyProgramId|Идентификатор программы лояльности, к которой относится карта
+defaultBonusCardId|Идентификатор карты, которая должна использоваться по-умолчанию
+
+## Запрос на добавление бонусной карты
+
+```shell
+curl "<%= config[:host] %>/bonus_cards" \
+  -H "Authorization: Token token=#{TOKEN}"
+  -X POST \
+  -d "bonus_card[number]=12341234" \
+  -d "bonus_card[loyaltyProgramId]=3"
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+{
+   "bonus_cards": {
+     "id": 2,
+     "number": "12341234",
+     "loyaltyProgramId": 3
+   }
+}
+```
+
+Добавить новую бонусную карту пользователя можно, выполнив запрос:
+
+<aside class="warning">
+  not implemented
+</aside>
+
+`POST <%= config[:host] %>/bonus_cards`
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+bonus_card[number]|Да|Номер бонусной карты
+bonus_card[loyaltyProgramId]|Да|Идентификатор программы лояльности, к которой относится карта
+
+## Запрос на обновление номера бонусной карты
+
+```shell
+curl "<%= config[:host] %>/bonus_cards/#{ID}" \
+  -H "Authorization: Token token=#{TOKEN}"
+  -X POST \
+  -d "bonus_card[number]=1111111"
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+{
+   "bonus_cards": {
+     "id": 2,
+     "number": "1111111",
+     "loyaltyProgramId": 3
+   }
+}
+```
+
+Обновить номер бонусной карты можно, выполнив запрос:
+
+<aside class="warning">
+  not implemented
+</aside>
+
+`POST <%= config[:host] %>/bonus_cards/#{ID}`
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+ID|Да|Идентификатор бонусной карты
+bonus_card[number]|Да|Номер бонусной карты
+
+## Запрос на удаление бонусной карты
+
+```shell
+curl "<%= config[:host] %>/bonus_cards/#{ID}" \
+  -H "Authorization: Token token=#{TOKEN}" \
+  -X DELETE
+```
+
+> В случае успешного удаления сервер вернет пустой ответ с кодом 200
+
+Удалить бонусную карту пользователя можно, выполнив запрос:
+
+`DELETE <%= config[:host] %>/bonus_cards/#{ID}`
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+ID | Да | ID карты
