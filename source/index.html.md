@@ -21,6 +21,7 @@ includes:
   - departments
   - products
   - search
+  - replacement_policies
   - orders
   - shipping_methods
   - delivery_windows
