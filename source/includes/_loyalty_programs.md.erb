@@ -1,16 +1,11 @@
 # Программы лояльности
 
+При совершении заказа, пользователь может выбрать одну из программ лояльности для начисления бонусов при покупке.
+
 ## Получение списка программ лояльности
-<aside class="warning">
-  not implemented
-</aside>
-
-Получить список доступных программ лояльности можно, выполнив запрос:
-
-`GET <%= config[:host] %>/loyalty_programs`
 
 ```shell
-curl "<%= config[:host] %>/loyalty_programs" \
+curl "<%= config[:host] %>/loyalty_programs/#{NUMBER}" \
   -H "Authorization: Token token=#{TOKEN}"
 ```
 
@@ -21,8 +16,8 @@ curl "<%= config[:host] %>/loyalty_programs" \
    "loyalty_programs":[
       {
          "id":1,
-         "name":"Семейная команда",
-         "slug":"rosneft",
+         "name":"«Аэрофлот Бонус»",
+         "bonus": "21 миля",
          "logo":"https://<%= config[:host] %>/public/loyalty_cards_logos/16/default/rosneft-img.png",
          "logoWidth":40,
          "logoHeight":34
@@ -30,7 +25,7 @@ curl "<%= config[:host] %>/loyalty_programs" \
       {
          "id":2,
          "name":"Связной клуб",
-         "slug":"sclub",
+         "bonus":"+ 20 бонусов",
          "logo":"https://<%= config[:host] %>/public/loyalty_cards_logos/17/default/svyaznoy-img.png",
          "logoWidth":34,
          "logoHeight":30
@@ -38,3 +33,28 @@ curl "<%= config[:host] %>/loyalty_programs" \
    ]
 }
 ```
+
+<aside class="warning">
+  not implemented
+</aside>
+
+Получить список доступных программ лояльности можно, выполнив запрос:
+
+`GET <%= config[:host] %>/loyalty_programs/#{NUMBER}`
+
+Параметр|Обязательный|Описание
+---|----|----
+NUMBER|Да|Номер заказа
+
+
+
+Описание полей ответа
+
+Параметр|Описание
+---|---
+id|Идентификатор программы лояльности
+name|Наименование программы лояльности
+bonus|Бонусы, которые будут начислены при выборе этой программы
+logo|Ссылка на логотип программы лояльности
+logoWidth| ширина логотипа
+logoHeight| высота логотипа
