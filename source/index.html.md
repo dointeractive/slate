@@ -32,6 +32,8 @@ includes:
   - flags
   - loyalty_programs
   - bonus_cards
+  - retailer_loyalty_programs
+  - retailer_cards
   - errors
 
 search: true

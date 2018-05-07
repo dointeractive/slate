@@ -1,0 +1,49 @@
+# Программы лояльности ритейлеров
+
+При совершении заказа, пользователь может выбрать одну или более программ лояльности ритейлера
+для начисления бонусов при покупке.
+
+## Получение списка программ лояльности ритейлера
+
+```shell
+curl "<%= config[:host] %>/retailer_loyalty_programs/#{NUMBER}" \
+  -H "Authorization: Token token=#{TOKEN}"
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+{
+   "loyalty_programs":[
+      {
+         "name": "ВкусВилл",
+         "retailer_card_type": "vkusvill",
+         "logo":"https://<%= config[:host] %>/public/loyalty_cards_logos/16/default/vkusvill-img.png",
+         "logoWidth":40,
+         "logoHeight":34
+      }
+   ]
+}
+```
+
+<aside class="warning">
+  not implemented
+</aside>
+
+Получить список доступных программ лояльности можно, выполнив запрос:
+
+`GET <%= config[:host] %>/retailer_loyalty_programs/#{NUMBER}`
+
+Параметр|Обязательный|Описание
+---|----|----
+NUMBER|Да|Номер заказа
+
+Описание полей ответа
+
+Параметр|Описание
+---|---
+name|Наименование программы лояльности
+retailer_card_type|Тип карты программы лояльности
+logo|Ссылка на логотип программы лояльности
+logoWidth| ширина логотипа
+logoHeight| высота логотипа

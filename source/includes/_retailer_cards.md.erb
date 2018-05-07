@@ -1,0 +1,125 @@
+# Карты ритейлеров
+
+## Получение списка карт ритейлеров
+
+```shell
+curl "<%= config[:host] %>/retailer_cards" \
+  -H "Authorization: Token token=#{TOKEN}"
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+{
+   "retailer_cards": [
+      {
+         "id": 2,
+         "number":"12345678",
+         "type": "vkusvill"
+      }
+   ]
+}
+```
+
+<aside class="warning">
+  not implemented
+</aside>
+
+Получить список карт ритейлеров можно, выполнив запрос:
+
+`GET <%= config[:host] %>/retailer_cards`
+
+Описание полей ответа
+
+Параметр|Описание
+---|---
+id|Идентификатор карты
+type|Тип карты ритейлера
+number|Номер карты
+
+## Запрос на добавление карты ритейлера
+
+```shell
+curl "<%= config[:host] %>/retailer_cards" \
+  -H "Authorization: Token token=#{TOKEN}"
+  -X POST \
+  -d "retailer_card[number]=12341234" \
+  -d "retailer_card[type]=vkusvill"
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+{
+   "retailer_card": {
+     "id": 2,
+     "number": "12341234",
+     "type": "vkusvill"
+   }
+}
+```
+
+Добавить новую карту ритейлера можно, выполнив запрос:
+
+<aside class="warning">
+  not implemented
+</aside>
+
+`POST <%= config[:host] %>/retailer_cards`
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+bonus_card[number]|Да|Номер бонусной карты
+bonus_card[type]|Да|Тип карты ритейлера
+
+## Запрос на обновление номера карты ритейлера
+
+```shell
+curl "<%= config[:host] %>/retailer_cards/#{ID}" \
+  -H "Authorization: Token token=#{TOKEN}"
+  -X PUT \
+  -d "retailer_card[number]=1111111"
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+{
+   "retailer_card": {
+     "id": 2,
+     "number": "1111111",
+     "type": "vkusvill"
+   }
+}
+```
+
+Обновить номер карты ритейлера можно, выполнив запрос:
+
+<aside class="warning">
+  not implemented
+</aside>
+
+`PUT <%= config[:host] %>/retailer_cards/#{ID}`
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+ID|Да|Идентификатор карты ритейлера
+retailer_card[number]|Да|Номер карты ритейлера
+
+## Запрос на удаление карты ритейлера
+
+```shell
+curl "<%= config[:host] %>/retailer_cards/#{ID}" \
+  -H "Authorization: Token token=#{TOKEN}" \
+  -X DELETE
+```
+
+> В случае успешного удаления сервер вернет пустой ответ с кодом 200
+
+Удалить карту ритейлера можно, выполнив запрос:
+
+`DELETE <%= config[:host] %>/retailer_cards/#{ID}`
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+ID | Да | ID карты ритейлера

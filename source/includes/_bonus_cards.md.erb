@@ -60,7 +60,7 @@ curl "<%= config[:host] %>/bonus_cards" \
 
 ```json
 {
-   "bonus_cards": {
+   "bonus_card": {
      "id": 2,
      "number": "12341234",
      "loyaltyProgramId": 3
@@ -86,7 +86,7 @@ bonus_card[loyaltyProgramId]|Да|Идентификатор программы 
 ```shell
 curl "<%= config[:host] %>/bonus_cards/#{ID}" \
   -H "Authorization: Token token=#{TOKEN}"
-  -X POST \
+  -X PUT \
   -d "bonus_card[number]=1111111"
 ```
 
@@ -94,7 +94,7 @@ curl "<%= config[:host] %>/bonus_cards/#{ID}" \
 
 ```json
 {
-   "bonus_cards": {
+   "bonus_card": {
      "id": 2,
      "number": "1111111",
      "loyaltyProgramId": 3
@@ -108,7 +108,7 @@ curl "<%= config[:host] %>/bonus_cards/#{ID}" \
   not implemented
 </aside>
 
-`POST <%= config[:host] %>/bonus_cards/#{ID}`
+`PUT <%= config[:host] %>/bonus_cards/#{ID}`
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
