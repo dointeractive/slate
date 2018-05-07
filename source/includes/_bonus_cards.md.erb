@@ -1,5 +1,7 @@
 # Бонусные карты
 
+Бонусные карты принадлежат программам лояльности.
+
 ## Получение списка бонусных карт
 
 ```shell
@@ -87,6 +89,7 @@ bonus_card[loyaltyProgramId]|Да|Идентификатор программы 
 curl "<%= config[:host] %>/bonus_cards/#{ID}" \
   -H "Authorization: Token token=#{TOKEN}"
   -X PUT \
+  -d "bonus_card[number]=1111111" \
   -d "bonus_card[number]=1111111"
 ```
 
@@ -132,3 +135,28 @@ curl "<%= config[:host] %>/bonus_cards/#{ID}" \
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
 ID | Да | ID карты
+
+## Выбор активной бонусной карты
+
+```shell
+curl "<%= config[:host] %>/bonus_cards/#{ID}/select" \
+  -H "Authorization: Token token=#{TOKEN}"
+  -X POST \
+  -d "order_number=#{ORDER_NUMBER}" \
+```
+
+> В случае успешного запроса сервер вернет пустой ответ с кодом 200
+
+<aside class="warning">
+  not implemented
+</aside>
+
+Чтобы выбрать активную бонусную карту необходимо выполнить запрос:
+
+`POST "<%= config[:host] %>/bonus_cards/#{ID}/select"`
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+ID | Да | ID карты
+order_number|Да|Номер заказа, к которому должна быть применена карта
+
