@@ -4,7 +4,7 @@
 
 
 ```shell
-curl "<%= config[:host] %>/retailer_loyalty_programs/#{NUMBER}" \
+curl "<%= config[:host] %>/orders/#{NUMBER}/retailer_loyalty_programs" \
   -H "Authorization: Token token=#{TOKEN}"
 ```
 
@@ -30,7 +30,7 @@ curl "<%= config[:host] %>/retailer_loyalty_programs/#{NUMBER}" \
 
 Получить список доступных программ лояльности можно, выполнив запрос:
 
-`GET <%= config[:host] %>/retailer_loyalty_programs/#{NUMBER}`
+`GET <%= config[:host] %>/orders/#{NUMBER}/retailer_loyalty_programs`
 
 Параметр|Обязательный|Описание
 ---|----|----

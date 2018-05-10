@@ -3,7 +3,7 @@
 При совершении заказа, пользователь может выбрать одну из программ лояльности для начисления бонусов при покупке.
 
 ```shell
-curl "<%= config[:host] %>/loyalty_programs/#{NUMBER}" \
+curl "<%= config[:host] %>/orders/#{NUMBER}/loyalty_programs" \
   -H "Authorization: Token token=#{TOKEN}"
 ```
 
@@ -38,7 +38,7 @@ curl "<%= config[:host] %>/loyalty_programs/#{NUMBER}" \
 
 Получить список доступных программ лояльности можно, выполнив запрос:
 
-`GET <%= config[:host] %>/loyalty_programs/#{NUMBER}`
+`GET <%= config[:host] %>/orders/#{NUMBER}/loyalty_programs`
 
 Параметр|Обязательный|Описание
 ---|----|----
