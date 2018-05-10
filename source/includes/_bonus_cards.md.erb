@@ -17,16 +17,16 @@ curl "<%= config[:host] %>/bonus_cards" \
       {
          "id": 2,
          "number":"12345678",
-         "loyaltyProgramId": 3
+         "loyalty_program_id": 3
       },
       {
          "id":3,
          "number":"11111111",
-         "loyaltyProgramId": 3
+         "loyalty_program_id": 4
       }
    ],
    "meta": {
-     "defaultBonusCardId": 2
+     "selected": 2
    }
 }
 ```
@@ -45,8 +45,8 @@ curl "<%= config[:host] %>/bonus_cards" \
 ---|---
 id|Идентификатор бонусной карты
 number|Номер бонусной карты
-loyaltyProgramId|Идентификатор программы лояльности, к которой относится карта
-defaultBonusCardId|Идентификатор карты, которая должна использоваться по-умолчанию
+loyalty_program_id|Идентификатор программы лояльности, к которой относится карта
+selected|Идентификатор карты, которая выбрана по-умолчанию
 
 ## Запрос на добавление бонусной карты
 
@@ -55,7 +55,7 @@ curl "<%= config[:host] %>/bonus_cards" \
   -H "Authorization: Token token=#{TOKEN}"
   -X POST \
   -d "bonus_card[number]=12341234" \
-  -d "bonus_card[loyaltyProgramId]=3"
+  -d "bonus_card[loyalty_program_id]=3"
 ```
 
 > Ответ будет содержать следующие данные:
@@ -65,7 +65,7 @@ curl "<%= config[:host] %>/bonus_cards" \
    "bonus_card": {
      "id": 2,
      "number": "12341234",
-     "loyaltyProgramId": 3
+     "loyalty_program_id": 3
    }
 }
 ```
@@ -81,7 +81,7 @@ curl "<%= config[:host] %>/bonus_cards" \
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
 bonus_card[number]|Да|Номер бонусной карты
-bonus_card[loyaltyProgramId]|Да|Идентификатор программы лояльности, к которой относится карта
+bonus_card[loyalty_program_id]|Да|Идентификатор программы лояльности, к которой относится карта
 
 ## Запрос на обновление номера бонусной карты
 
@@ -89,7 +89,6 @@ bonus_card[loyaltyProgramId]|Да|Идентификатор программы 
 curl "<%= config[:host] %>/bonus_cards/#{ID}" \
   -H "Authorization: Token token=#{TOKEN}"
   -X PUT \
-  -d "bonus_card[number]=1111111" \
   -d "bonus_card[number]=1111111"
 ```
 
@@ -100,7 +99,7 @@ curl "<%= config[:host] %>/bonus_cards/#{ID}" \
    "bonus_card": {
      "id": 2,
      "number": "1111111",
-     "loyaltyProgramId": 3
+     "loyalty_program_id": 3
    }
 }
 ```
@@ -159,4 +158,3 @@ curl "<%= config[:host] %>/bonus_cards/#{ID}/select" \
 --------- | ------- | -----------
 ID | Да | ID карты
 order_number|Да|Номер заказа, к которому должна быть применена карта
-
