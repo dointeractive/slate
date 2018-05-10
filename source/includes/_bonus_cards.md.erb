@@ -144,8 +144,13 @@ curl "<%= config[:host] %>/bonus_cards/#{ID}/select" \
   -d "order_number=#{ORDER_NUMBER}" \
 ```
 
-> В случае успешного запроса сервер вернет пустой ответ с кодом 200
+> В случае успешного запроса сервер вернет идентификатор карты, которая будет применена к заказу:
 
+```json
+{
+  "selected": 3
+}
+```
 <aside class="warning">
   not implemented
 </aside>
