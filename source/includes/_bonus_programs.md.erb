@@ -19,15 +19,15 @@ curl "<%= config[:host] %>/orders/#{NUMBER}/bonus_programs" \
          "name": "«Аэрофлот Бонус»",
          "bonus_card": {
            "bonus": "21 миля",
-           "number": "12345678",
-           "default": true
+           "number": "12345678"
          },
          "logos": [
            {
              "mini_url": "https://<%= config[:host] %>/public/loyalty_cards_logos/16/mini/aero-img.png",
              "small_url": "https://<%= config[:host] %>/public/loyalty_cards_logos/16/small/aero-img.png"
            }
-         ]
+         ],
+         "default": true
       },
       {
          "id": 2,
@@ -38,7 +38,8 @@ curl "<%= config[:host] %>/orders/#{NUMBER}/bonus_programs" \
              "mini_url": "https://<%= config[:host] %>/public/loyalty_cards_logos/11/mini/sclub-img.png",
              "small_url": "https://<%= config[:host] %>/public/loyalty_cards_logos/11/small/sclub-img.png"
            }
-         ]
+         ],
+         "default": false
       }
    ]
 }
@@ -48,9 +49,9 @@ curl "<%= config[:host] %>/orders/#{NUMBER}/bonus_programs" \
   not implemented
 </aside>
 
-Получить список доступных программ лояльности можно, выполнив запрос:
+Получить список доступных бонусных программ можно, выполнив запрос:
 
-`POST <%= config[:host] %>/orders/#{NUMBER}/bonus_programs`
+`GET <%= config[:host] %>/orders/#{NUMBER}/bonus_programs`
 
 Параметр|Обязательный|Описание
 ---|----|----
@@ -64,13 +65,39 @@ id|Идентификатор бонусной программы
 name|Наименование бонусной программы
 logos|Список логотипов
 bonus_card|Объект с описанием бонусной карты
+default|Показывает, какая бонусная программа должна быть выбрана по-умолчанию
 
-Объект bonus_card
+Объект `bonus_card`
+
 Параметр|Описание
 ---|---
 number|Номер бонусной карты
 bonus|Начисляемые бонусы
-default|Выбрана ли карта по-умолчанию?
+
+## Выбор активной бонусной программы
+
+```shell
+curl "<%= config[:host] %>/orders/#{NUMBER}/bonus_programs/#{ID}" \
+  -H "Authorization: Token token=#{TOKEN}"
+  -X PUT \
+```
+
+> В случае успешного запроса сервер вернет пустой ответ с кодом 200
+
+<aside class="warning">
+  not implemented
+</aside>
+
+Перед завершением заказа необходимо выбрать, какую бонусную программу нужно использовать для этого заказа. Если у пользователя нет бонусных карт, то запрос не нужен.
+
+Выбрать применяемую бонусную программу можно, выполнив запрос:
+
+`PUT "<%= config[:host] %>/orders/#{NUMBER}/bonus_programs/#{ID}"`
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+NUMBER | Номер заказа
+ID | Да | Идентификатор бонусной программы
 
 ## Запрос на добавление/изменение бонусной карты
 
@@ -121,27 +148,4 @@ curl "<%= config[:host] %>/orders/#{NUMBER}/bonus_programs/#{ID}/bonus_card" \
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
 NUMBER|Да|Номер заказа
-ID | Да | Идентификатор программы лояльности
-
-## Выбор активной программы лояльности
-
-```shell
-curl "<%= config[:host] %>/orders/#{NUMBER}/bonus_programs/#{ID}" \
-  -H "Authorization: Token token=#{TOKEN}"
-  -X POST \
-```
-
-> В случае успешного запроса сервер вернет пустой ответ с кодом 200
-
-<aside class="warning">
-  not implemented
-</aside>
-
-Чтобы выбрать активную бонусную карту необходимо выполнить запрос:
-
-`POST "<%= config[:host] %>/orders/#{NUMBER}/bonus_programs/#{ID}"`
-
-Параметр | Обязательный | Описание
---------- | ------- | -----------
-NUMBER | Номер заказа
-ID | Да | Идентификатор программы лояльности
+ID | Да | Идентификатор бонусной программы

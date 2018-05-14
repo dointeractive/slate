@@ -1,10 +1,13 @@
 # Программы лояльности ритейлеров
 
-При совершении заказа, пользователь может указать одну или более программ лояльности ритейлера для начисления бонусов при покупке.
+К заказу могут быть применены несколько карт ритейлеров.
 
+## Список программ ритейлеров
+
+Список доступных программ ритейлеров для заказа можно выполнить запрос:
 
 ```shell
-curl "<%= config[:host] %>/orders/#{NUMBER}/retailer_loyalty_programs" \
+curl "<%= config[:host] %>/orders/#{NUMBER}/retailer_programs" \
   -H "Authorization: Token token=#{TOKEN}"
 ```
 
@@ -14,11 +17,17 @@ curl "<%= config[:host] %>/orders/#{NUMBER}/retailer_loyalty_programs" \
 {
    "loyalty_programs":[
       {
+         "id": 1,
          "name": "ВкусВилл",
-         "retailer_card_type": "vkusvill",
-         "logo":"https://<%= config[:host] %>/public/loyalty_cards_logos/16/default/vkusvill-img.png",
-         "logo_width":40,
-         "logo_height":34
+         "retailer_card": {
+           "number": "12345678"
+         },
+         "logos": [
+           {
+             "mini_url": "https://<%= config[:host] %>/public/cards_logos/1/mini/vkusvill-img.png",
+             "small_url": "https://<%= config[:host] %>/public/cards_logos/1/small/vkusvill-img.png"
+           }
+         ]
       }
    ]
 }
@@ -28,20 +37,100 @@ curl "<%= config[:host] %>/orders/#{NUMBER}/retailer_loyalty_programs" \
   not implemented
 </aside>
 
-Получить список доступных программ лояльности можно, выполнив запрос:
+Получить список доступных программ ритейлера для заказа можно, выполнив запрос:
 
-`GET <%= config[:host] %>/orders/#{NUMBER}/retailer_loyalty_programs`
+`GET <%= config[:host] %>/orders/#{NUMBER}/retailer_programs`
 
 Параметр|Обязательный|Описание
 ---|----|----
 NUMBER|Да|Номер заказа
 
-Описание полей ответа
+Структура ответа
 
 Параметр|Описание
 ---|---
-name|Наименование программы лояльности
-retailer_card_type|Тип карты программы лояльности
-logo|Ссылка на логотип программы лояльности
-logo_width| ширина логотипа
-logo_height| высота логотипа
+id|Идентификатор программы ритейлера
+name|Наименование программы ритейлера
+logos|Список логотипов
+retailer_card|Описание карты ритейлера
+
+Объект `reteiler_card`
+
+Параметр|Описание
+---|---
+number|Номер карты ритейлера
+
+## Применение программ ритейлеров к заказу
+
+```shell
+curl "<%= config[:host] %>/orders/#{NUMBER}/retailer_programs" \
+  -H "Authorization: Token token=#{TOKEN}"
+  -X POST \
+```
+
+> В случае успешного запроса сервер вернет пустой ответ с кодом 200
+
+<aside class="warning">
+  not implemented
+</aside>
+
+Перед завершением заказа необходимо применить программы ритейлера к заказу. Если у пользователя нет карт ритейлера, то запрос не нужен.
+
+Применить программы ритейлера к заказу можно, выполнив запрос:
+
+`POST <%= config[:host] %>/orders/#{NUMBER}/retailer_programs`
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+NUMBER | Номер заказа
+
+## Запрос на добавление/изменение карты ритейлера
+
+```shell
+curl "<%= config[:host] %>/orders/#{NUMBER}/retailer_programs/#{ID}/retailer_card" \
+  -H "Authorization: Token token=#{TOKEN}"
+  -X POST \
+  -d "retailer_card[number]=12341234" \
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+{
+   "retailer_card": {
+     "number": "12341234"
+   }
+}
+```
+
+Добавить/изменить номер карты ритейлера пользователя можно, выполнив запрос:
+
+<aside class="warning">
+  not implemented
+</aside>
+
+`POST <%= config[:host] %>/orders/#{NUMBER}/retailer_programs/#{ID}/retailer_card`
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+retailer_card[number]|Да|Номер карты ритейлера
+
+## Запрос на удаление карты ритейлера
+
+```shell
+curl "<%= config[:host] %>/orders/#{NUMBER}/retailer_programs/#{ID}/retailer_card" \
+  -H "Authorization: Token token=#{TOKEN}" \
+  -X DELETE
+```
+
+> В случае успешного удаления сервер вернет пустой ответ с кодом 200
+
+Удалить карту ритейлера можно, выполнив запрос:
+
+`DELETE <%= config[:host] %>/orders/#{NUMBER}/retailer_programs/#{ID}/retailer_card`
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+NUMBER|Да|Номер заказа
+ID | Да | Идентификатор программы ритейлера
+
