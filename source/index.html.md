@@ -30,9 +30,9 @@ includes:
   - order_reviews
   - credit_card
   - flags
-  - loyalty_programs
+  - bonus_programs
   - bonus_cards
-  - retailer_loyalty_programs
+  - retailer_programs
   - retailer_cards
   - errors
 

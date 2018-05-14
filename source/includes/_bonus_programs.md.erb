@@ -1,0 +1,147 @@
+# Бонусные программы
+
+## Список бонусных программ
+
+При совершении заказа, пользователь может выбрать одну из бонусных программ для начисления бонусов при покупке.
+
+```shell
+curl "<%= config[:host] %>/orders/#{NUMBER}/bonus_programs" \
+  -H "Authorization: Token token=#{TOKEN}"
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+{
+   "loyalty_programs":[
+      {
+         "id": 1,
+         "name": "«Аэрофлот Бонус»",
+         "bonus_card": {
+           "bonus": "21 миля",
+           "number": "12345678",
+           "default": true
+         },
+         "logos": [
+           {
+             "mini_url": "https://<%= config[:host] %>/public/loyalty_cards_logos/16/mini/aero-img.png",
+             "small_url": "https://<%= config[:host] %>/public/loyalty_cards_logos/16/small/aero-img.png"
+           }
+         ]
+      },
+      {
+         "id": 2,
+         "name": "Связной клуб",
+         "bonus_card": null,
+         "logos": [
+           {
+             "mini_url": "https://<%= config[:host] %>/public/loyalty_cards_logos/11/mini/sclub-img.png",
+             "small_url": "https://<%= config[:host] %>/public/loyalty_cards_logos/11/small/sclub-img.png"
+           }
+         ]
+      }
+   ]
+}
+```
+
+<aside class="warning">
+  not implemented
+</aside>
+
+Получить список доступных программ лояльности можно, выполнив запрос:
+
+`POST <%= config[:host] %>/orders/#{NUMBER}/bonus_programs`
+
+Параметр|Обязательный|Описание
+---|----|----
+NUMBER|Да|Номер заказа
+
+Структура ответа
+
+Параметр|Описание
+---|---
+id|Идентификатор бонусной программы
+name|Наименование бонусной программы
+logos|Список логотипов
+bonus_card|Объект с описанием бонусной карты
+
+Объект bonus_card
+Параметр|Описание
+---|---
+number|Номер бонусной карты
+bonus|Начисляемые бонусы
+default|Выбрана ли карта по-умолчанию?
+
+## Запрос на добавление/изменение бонусной карты
+
+```shell
+curl "<%= config[:host] %>/orders/#{NUMBER}/bonus_programs/#{ID}/bonus_card" \
+  -H "Authorization: Token token=#{TOKEN}"
+  -X POST \
+  -d "bonus_card[number]=12341234" \
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+{
+   "bonus_card": {
+     "number": "12341234",
+     "bonus": "21 миля"
+   }
+}
+```
+
+Добавить/изменить номер бонусной карты пользователя можно, выполнив запрос:
+
+<aside class="warning">
+  not implemented
+</aside>
+
+`POST <%= config[:host] %>/orders/#{NUMBER}/bonus_programs/#{ID}/bonus_card`
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+bonus_card[number]|Да|Номер бонусной карты
+
+## Запрос на удаление бонусной карты
+
+```shell
+curl "<%= config[:host] %>/orders/#{NUMBER}/bonus_programs/#{ID}/bonus_card" \
+  -H "Authorization: Token token=#{TOKEN}" \
+  -X DELETE
+```
+
+> В случае успешного удаления сервер вернет пустой ответ с кодом 200
+
+Удалить бонусную карту пользователя можно, выполнив запрос:
+
+`DELETE <%= config[:host] %>/bonus_cards/#{ID}`
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+NUMBER|Да|Номер заказа
+ID | Да | Идентификатор программы лояльности
+
+## Выбор активной программы лояльности
+
+```shell
+curl "<%= config[:host] %>/orders/#{NUMBER}/bonus_programs/#{ID}" \
+  -H "Authorization: Token token=#{TOKEN}"
+  -X POST \
+```
+
+> В случае успешного запроса сервер вернет пустой ответ с кодом 200
+
+<aside class="warning">
+  not implemented
+</aside>
+
+Чтобы выбрать активную бонусную карту необходимо выполнить запрос:
+
+`POST "<%= config[:host] %>/orders/#{NUMBER}/bonus_programs/#{ID}"`
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+NUMBER | Номер заказа
+ID | Да | Идентификатор программы лояльности
