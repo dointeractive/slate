@@ -89,8 +89,8 @@ NUMBER | Номер заказа
 ```shell
 curl "<%= config[:host] %>/orders/#{NUMBER}/retailer_programs/#{ID}/retailer_card" \
   -H "Authorization: Token token=#{TOKEN}"
-  -X POST \
   -d "retailer_card[number]=12341234" \
+  -X POST
 ```
 
 > Ответ будет содержать следующие данные:
@@ -124,6 +124,10 @@ curl "<%= config[:host] %>/orders/#{NUMBER}/retailer_programs/#{ID}/retailer_car
 ```
 
 > В случае успешного удаления сервер вернет пустой ответ с кодом 200
+
+<aside class="warning">
+  not implemented
+</aside>
 
 Удалить карту ритейлера можно, выполнив запрос:
 

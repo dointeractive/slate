@@ -104,8 +104,8 @@ ID | Да | Идентификатор бонусной программы
 ```shell
 curl "<%= config[:host] %>/orders/#{NUMBER}/bonus_programs/#{ID}/bonus_card" \
   -H "Authorization: Token token=#{TOKEN}"
-  -X POST \
   -d "bonus_card[number]=12341234" \
+  -X POST
 ```
 
 > Ответ будет содержать следующие данные:
@@ -130,6 +130,8 @@ curl "<%= config[:host] %>/orders/#{NUMBER}/bonus_programs/#{ID}/bonus_card" \
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
 bonus_card[number]|Да|Номер бонусной карты
+NUMBER | Номер заказа
+ID | Да | Идентификатор бонусной программы
 
 ## Запрос на удаление бонусной карты
 
@@ -140,6 +142,10 @@ curl "<%= config[:host] %>/orders/#{NUMBER}/bonus_programs/#{ID}/bonus_card" \
 ```
 
 > В случае успешного удаления сервер вернет пустой ответ с кодом 200
+
+<aside class="warning">
+  not implemented
+</aside>
 
 Удалить бонусную карту пользователя можно, выполнив запрос:
 
