@@ -608,6 +608,47 @@ ID | Да | ID позиции заказа
 
 ## Оформление заказа
 
+> Пример команды для выбора способа замены:
+
+```shell
+curl "<%= config[:host] %>/orders/#{NUMBER}" \
+  -H "Authorization: Token token=#{TOKEN}" \
+  -X PUT \
+  -d "order[replacement_policy_id]=1"
+```
+> Если данные были указаны верно, ответ будет содержать json-документ заказа:
+
+```json
+{
+  "number": "R307128032",
+  "item_total": 0.0,
+  "total": 0.0,
+  "ship_total": 0.0,
+  "state": "cart",
+  "adjustment_total": 0.0,
+  "user_id": 1,
+  "created_at": "2014-07-06T18:52:33.724Z",
+  "updated_at": "2014-07-06T18:52:33.752Z",
+  "completed_at": null,
+  "shipment_state": null,
+  "payment_state": null,
+  "special_instructions": null,
+  "total_quantity": 0,
+  "address": {
+    "id": 1,
+    "city": "Москва",
+    "full_address": "Старая Басманная 3"
+  },
+  "shipments": [...],
+  "payment": null,
+  "replacement_policy": {
+    "id": 1,
+    "description": "Позвонить мне. Если не удастся, выбирает сборщик."
+  },
+  "adjustments": []
+}
+```
+
 > Пример команды для выбора адреса доставки и заполнения коментария доставки:
 
 ```shell
@@ -694,6 +735,9 @@ curl "<%= config[:host] %>/orders/#{NUMBER}" \
 
 `PUT <%= config[:host] %>/orders/#{NUMBER}`
 
+### Выбор способа замен
+Получить список способов замен товаров при сборке заказа можно, [выполнив запрос](#sposoby-zamien)
+
 ### Выбор способа доставки и времени доставки
 
 Получить список способов доставки, необходимый для оформления заказа, можно выполнив запрос:
@@ -723,6 +767,7 @@ order[shipments_attributes][][id] | Да | id shipment'а
 order[shipments_attributes][][delivery_window_id] | Да | id слота доставки
 order[shipments_attributes][][shipping_method_id] | Да | id cпособа доставки
 order[payment_attributes][payment_tool_id] | Да | id источника оплаты
+order[replacement_policy_id] | Да | id способа замены
 
 ## Отмена заказа
 
