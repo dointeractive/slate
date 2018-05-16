@@ -2580,6 +2580,42 @@ API обратно совместимо со старой версией API и 
 </aside>
 
 
+          <h1 id="sposoby-zamien">Способы замен</h1>
+
+<h2 id="poluchieniie-spiska-sposobov-zamien">Получение списка способов замен</h2>
+
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/replacement_policies"</span>
+</code></pre>
+<blockquote>
+  <p>Эта команда возвращает следующий JSON:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"replacement_policies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Позвонить мне. Если не удастся, выбирает сборщик."</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Позвонить мне. Если не удастся, убрать товар."</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Пускай замену выберет сборщик"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Убрать отсутствующие товары"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Cписок способов замен товаров при сборке заказа можно получить, выполнив запрос:</p>
+
+<p><code>GET http://api.instamart.ru/v2/replacement_policies</code></p>
+
           <h1 id="zakazy">Заказы</h1>
 
 <h2 id="sozdaniie-novogho-zakaza">Создание нового заказа</h2>
@@ -3541,6 +3577,49 @@ API обратно совместимо со старой версией API и 
 <h2 id="oformlieniie-zakaza">Оформление заказа</h2>
 
 <blockquote>
+  <p>Пример команды для выбора способа замены:</p>
+</blockquote>
+
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/orders/#{NUMBER}"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
+  -X PUT <span class="se">\</span>
+  -d <span class="s2">"order[replacement_policy_id]=1"</span>
+</code></pre>
+<blockquote>
+  <p>Если данные были указаны верно, ответ будет содержать json-документ заказа:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"R307128032"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"item_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"ship_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cart"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"adjustment_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-06T18:52:33.724Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-06T18:52:33.752Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"completed_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"shipment_state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"payment_state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"special_instructions"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"total_quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Москва"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"full_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Старая Басманная 3"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"shipments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">],</span><span class="w">
+  </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"replacement_policy"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Позвонить мне. Если не удастся, выбирает сборщик."</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"adjustments"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
   <p>Пример команды для выбора адреса доставки и заполнения коментария доставки:</p>
 </blockquote>
 
@@ -3634,6 +3713,9 @@ API обратно совместимо со старой версией API и 
 
 <p><code>PUT http://api.instamart.ru/v2/orders/#{NUMBER}</code></p>
 
+<h3 id="vybor-sposoba-zamien">Выбор способа замен</h3>
+<p>Получить список способов замен товаров при сборке заказа можно, <a href="#sposoby-zamien">выполнив запрос</a></p>
+
 <h3 id="vybor-sposoba-dostavki-i-vriemieni-dostavki">Выбор способа доставки и времени доставки</h3>
 
 <p>Получить список способов доставки, необходимый для оформления заказа, можно выполнив запрос:</p>
@@ -3697,6 +3779,11 @@ API обратно совместимо со старой версией API и 
       <td>order[payment_attributes][payment_tool_id]</td>
       <td>Да</td>
       <td>id источника оплаты</td>
+    </tr>
+    <tr>
+      <td>order[replacement_policy_id]</td>
+      <td>Да</td>
+      <td>id способа замены</td>
     </tr>
   </tbody>
 </table>
