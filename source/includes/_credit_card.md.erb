@@ -24,7 +24,8 @@ curl "<%= config[:host] %>/credit_cards" \
       "name": "IVAN IVANOV",
       "year": "22",
       "month": "12",
-      "last_digits": "1111"
+      "last_digits": "1111",
+      "brand": null
     }
   ],
   "meta": {
@@ -54,6 +55,7 @@ curl "<%= config[:host] %>/credit_cards/14959" \
     "year": "22",
     "month": "12",
     "last_digits": "1111",
+    "brand": null,
     "payment_tool": {
       "id": 299,
       "name": "•••• 2222",
@@ -91,6 +93,7 @@ curl "<%= config[:host] %>/credit_cards" \
   -d "credit_card[month]=12" \
   -d "credit_card[last_digits]=1111" \
   -d "credit_card[cryptogram_packet]=" \
+  -d "credit_card[brand]=visa" \
 ```
 
 > Ответ будет содержать следующие данные:
@@ -104,6 +107,7 @@ curl "<%= config[:host] %>/credit_cards" \
     "year": "22",
     "month": "12",
     "last_digits": "1111",
+    "brand": "visa",
     "payment_tool": {
       "id": 299,
       "name": "•••• 2222",
@@ -125,6 +129,7 @@ credit_card[year] | Да | Год
 credit_card[month] | Да | Месяц
 credit_card[last_digits] | Да | Последние 4 цифры номера карты
 credit_card[cryptogram_packet] | Да | Криптограмма
+credit_card[brand] | - | Бренд карты. Допускаются значения visa, mastercard или mir
 
 ### Получение криптограммы(cryptogram_packet)
 Чтобы создать криптограмму, надо использовать [Cloudpayments SDK](https://cloudpayments.ru/Docs/MobileSDK)
