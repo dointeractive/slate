@@ -24,7 +24,8 @@ curl "<%= config[:host] %>/credit_cards" \
       "name": "IVAN IVANOV",
       "year": "22",
       "month": "12",
-      "last_digits": "1111"
+      "last_digits": "1111",
+      "cc_type": "Visa"
     }
   ],
   "meta": {
@@ -54,6 +55,7 @@ curl "<%= config[:host] %>/credit_cards/14959" \
     "year": "22",
     "month": "12",
     "last_digits": "1111",
+    "cc_type": "Visa",
     "payment_tool": {
       "id": 299,
       "name": "•••• 2222",
@@ -104,6 +106,7 @@ curl "<%= config[:host] %>/credit_cards" \
     "year": "22",
     "month": "12",
     "last_digits": "1111",
+    "cc_type": "Visa",
     "payment_tool": {
       "id": 299,
       "name": "•••• 2222",
