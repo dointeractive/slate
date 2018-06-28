@@ -29,6 +29,7 @@ includes:
   - payment_tools
   - payments
   - order_reviews
+  - app_reviews
   - credit_card
   - flags
   - errors
