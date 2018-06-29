@@ -4018,15 +4018,46 @@ API обратно совместимо со старой версией API и 
 </blockquote>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"payment_tools"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Банковской картой"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"payanyway"</span><span class="w">
-  </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Наличными курьеру"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"check"</span><span class="w">
-  </span><span class="p">}],</span><span class="w">
+  </span><span class="nt">"payment_tools"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Банковской картой"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cloud_payments_gateway"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credit_card"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"credit_card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ivan Petrov"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"year"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"month"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"last_digits"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1111"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"authorized"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"cc_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Visa"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"eligible"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Наличными курьеру"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"check"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"company_document"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"company_document"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACME corp"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"inn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234567890"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"kpp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456789"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"bik"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456789"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"bank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sberbank"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"correspondent_account"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678901234567890"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"operating_account"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678901234567890"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Moscow"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
   </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"current_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nt">"next_page"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -4038,7 +4069,9 @@ API обратно совместимо со старой версией API и 
 
 <p>API способов оплаты возвращает список инструментов, который пользователь видит, оформляя заказ и может использовать для оплаты заказа.</p>
 
-<p>У каждого пользователя свой собственный список способов оплаты, который включает стандартные способы: оплата наличными, оплата через платежный шлюз, а также способы, добавленные самим пользователем: оплата банковской картой, оплата по реквизитам компании.</p>
+<p>У каждого пользователя свой собственный список способов оплаты, который включает:<br />
+- стандартные способы (оплата наличными, оплата через платежный шлюз), а также способы, добавленные самим пользователем: оплата банковской картой, оплата по реквизитам компании.);<br />
+- платежное средство (документы юридического лица, банковская карта).</p>
 
 <p>Получить список доступных пользователю способов оплаты можно, выполнив запрос:</p>
 
@@ -4065,6 +4098,10 @@ API обратно совместимо со старой версией API и 
     <tr>
       <td>type</td>
       <td>тип способа оплаты</td>
+    </tr>
+    <tr>
+      <td>source</td>
+      <td>платежное средство</td>
     </tr>
   </tbody>
 </table>
@@ -4197,6 +4234,60 @@ API обратно совместимо со старой версией API и 
   </tbody>
 </table>
 
+          <h1 id="otzyv-o-prilozhienii">Отзыв о приложении</h1>
+
+<h2 id="sozdaniiepieriezapis-otzyva">Создание/перезапись отзыва</h2>
+
+<blockquote>
+  <p>Пример вызова для авторизованного пользователя:</p>
+</blockquote>
+
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/app_reviews"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
+  -H <span class="s2">"User-Agent: #{USER_AGENT}"</span> <span class="se">\</span>
+  -d <span class="s2">"app_review[rate]=5"</span> <span class="se">\</span>
+  -d <span class="s2">"app_review[comment]=Отличное приложение"</span> <span class="se">\</span>
+  -X POST
+</code></pre>
+
+<blockquote>
+  <p>Ответ будет содержать следующие данные:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"app_review"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Отличное приложение"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Добавить отзыв о приложении или перезаписать его если он уже существует можно выполнив запрос:</p>
+
+<p><code>POST http://api.instamart.ru/v2/app_reviews</code></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>app_review[rate]</td>
+      <td>Да</td>
+      <td>Оценка (от 1 до 5)</td>
+    </tr>
+    <tr>
+      <td>app_review[comment]</td>
+      <td>Нет</td>
+      <td>Комментарий</td>
+    </tr>
+  </tbody>
+</table>
+
           <h1 id="bankovskiie-karty">Банковские карты</h1>
 
 <p>/credit_cards</p>
@@ -4223,7 +4314,9 @@ API обратно совместимо со старой версией API и 
       </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IVAN IVANOV"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"year"</span><span class="p">:</span><span class="w"> </span><span class="s2">"22"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"month"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"last_digits"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1111"</span><span class="w">
+      </span><span class="nt">"last_digits"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1111"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"cc_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Visa"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"eligible"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -4253,6 +4346,8 @@ API обратно совместимо со старой версией API и 
     </span><span class="nt">"year"</span><span class="p">:</span><span class="w"> </span><span class="s2">"22"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"month"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"last_digits"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1111"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"cc_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Visa"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"eligible"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="nt">"payment_tool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">299</span><span class="p">,</span><span class="w">
       </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"•••• 2222"</span><span class="p">,</span><span class="w">
@@ -4327,6 +4422,8 @@ API обратно совместимо со старой версией API и 
     </span><span class="nt">"year"</span><span class="p">:</span><span class="w"> </span><span class="s2">"22"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"month"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"last_digits"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1111"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"cc_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Visa"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"eligible"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="nt">"payment_tool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">299</span><span class="p">,</span><span class="w">
       </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"•••• 2222"</span><span class="p">,</span><span class="w">
