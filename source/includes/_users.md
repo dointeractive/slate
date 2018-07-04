@@ -40,6 +40,7 @@ curl 'https://api.instamart.ru/v2/users/test@test.com' \
 ```json
 {
   "user": {
+    "id": "bb2cbd4e-ae46-4947-aa48-c8e5c284d9fe",
     "email": "test@test.com",
     "first_name": "Ivan",
     "last_name": "Petrov",
@@ -88,6 +89,7 @@ curl 'https://api.instamart.ru/v2/users/test@test.com'
 ```json
 {
   "user": {
+    "id": "bb2cbd4e-ae46-4947-aa48-c8e5c284d9fe",
     "email": "test@test.com",
     "first_name": "Ivan",
     "last_name": "Petrov",
