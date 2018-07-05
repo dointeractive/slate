@@ -4484,6 +4484,61 @@ API обратно совместимо со старой версией API и 
 <h3 id="poluchieniie-kriptoghrammycryptogrampacket">Получение криптограммы(cryptogram_packet)</h3>
 <p>Чтобы создать криптограмму, надо использовать <a href="https://cloudpayments.ru/Docs/MobileSDK">Cloudpayments SDK</a></p>
 
+<h2 id="zapros-na-obnovlieniie-nazvaniia-karty">Запрос на обновление названия карты</h2>
+
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/credit_cards/14959"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
+  -X PUT <span class="se">\</span>
+  -d <span class="s2">"credit_card[title]=Новое название"</span>
+</code></pre>
+
+<blockquote>
+  <p>Ответ будет содержать следующие данные:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"credit_card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">14959</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Новое название"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IVAN IVANOV"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"year"</span><span class="p">:</span><span class="w"> </span><span class="s2">"22"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"month"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_digits"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1111"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"payment_tool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">299</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"•••• 2222"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cloud_payments_gateway"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Обновить название карты пользователя можно, выполнив запрос:</p>
+
+<p><code>PUT http://api.instamart.ru/v2/credit_cards/#{ID}</code></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ID</td>
+      <td>Да</td>
+      <td>ID карты</td>
+    </tr>
+    <tr>
+      <td>credit_card[title]</td>
+      <td>Да</td>
+      <td>Название карты</td>
+    </tr>
+  </tbody>
+</table>
+
 <h2 id="zapros-na-udalieniie-karty">Запрос на удаление карты</h2>
 
 <pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/credit_cards/14959"</span> <span class="se">\</span>
