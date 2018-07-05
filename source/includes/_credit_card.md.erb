@@ -135,6 +135,44 @@ credit_card[cryptogram_packet] | Да | Криптограмма
 ### Получение криптограммы(cryptogram_packet)
 Чтобы создать криптограмму, надо использовать [Cloudpayments SDK](https://cloudpayments.ru/Docs/MobileSDK)
 
+## Запрос на обновление названия карты
+
+```shell
+curl "<%= config[:host] %>/credit_cards/14959" \
+  -H "Authorization: Token token=#{TOKEN}"
+  -X PUT \
+  -d "credit_card[title]=Новое название"
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+{
+  "credit_card": {
+    "id": 14959,
+    "title": "Новое название",
+    "name": "IVAN IVANOV",
+    "year": "22",
+    "month": "12",
+    "last_digits": "1111",
+    "payment_tool": {
+      "id": 299,
+      "name": "•••• 2222",
+      "type": "cloud_payments_gateway"
+    }
+  }
+}
+```
+
+Обновить название карты пользователя можно, выполнив запрос:
+
+`PUT <%= config[:host] %>/credit_cards/#{ID}`
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+ID | Да | ID карты
+credit_card[title] | Да | Название карты
+
 ## Запрос на удаление карты
 
 ```shell
