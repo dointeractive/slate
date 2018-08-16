@@ -1,0 +1,50 @@
+# Продукты купленные ранее
+
+## Получение списка купленных ранее продуктов
+
+```shell
+curl "<%= config[:host] %>/purchased_products?sid=1"
+```
+
+> Команда выше возвращает JSON:
+
+```json
+{
+  "products": [
+    {
+      "id": 1,
+      "sku": "20002",
+      "name": "Product #0",
+      "price": 1236.7,
+      "original_price": 1236.7,
+      "discount": 0,
+      "human_volume": "500 г.",
+      "items_per_pack": 1,
+      "images": []
+    },
+    {
+      "id": 2,
+      "sku": "20003",
+      "name": "Product #1",
+      "price": 1236.7,
+      "original_price": 1236.7,
+      "discount": 0,
+      "human_volume": "500 г.",
+      "items_per_pack": 1,
+      "images": []
+    }
+  ]
+}
+```
+
+Получить список купленных ранее продуктов можно, выполнив запрос
+
+### HTTP запрос
+
+`GET <%= config[:host] %>/purchased_products`
+
+### Параметры запроса
+
+Параметр | Обязательный | Описание
+-------- | ------- | -----------
+sid | Да | ID магазина
