@@ -20,6 +20,7 @@ includes:
   - taxons
   - departments
   - products
+  - purchased_products
   - search
   - replacement_policies
   - orders
