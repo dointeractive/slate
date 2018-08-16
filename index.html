@@ -2316,6 +2316,70 @@ API обратно совместимо со старой версией API и 
 </table>
 
 
+          <h1 id="produkty-kupliennyie-ranieie">Продукты купленные ранее</h1>
+
+<h2 id="poluchieniie-spiska-kupliennykh-ranieie-produktov">Получение списка купленных ранее продуктов</h2>
+
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/purchased_products?sid=1"</span>
+</code></pre>
+
+<blockquote>
+  <p>Команда выше возвращает JSON:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20002"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product #0"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">1236.7</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"original_price"</span><span class="p">:</span><span class="w"> </span><span class="mf">1236.7</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"human_volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"500 г."</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"items_per_pack"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20003"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product #1"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">1236.7</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"original_price"</span><span class="p">:</span><span class="w"> </span><span class="mf">1236.7</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"human_volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"500 г."</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"items_per_pack"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Получить список купленных ранее продуктов можно, выполнив запрос</p>
+
+<h3 id="http-zapros">HTTP запрос</h3>
+
+<p><code>GET http://api.instamart.ru/v2/purchased_products</code></p>
+
+<h3 id="paramietry-zaprosa">Параметры запроса</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>sid</td>
+      <td>Да</td>
+      <td>ID магазина</td>
+    </tr>
+  </tbody>
+</table>
+
           <h1 id="poisk">Поиск</h1>
 
 <h2 id="podskazki-poiska">Подсказки поиска</h2>
@@ -3030,6 +3094,7 @@ API обратно совместимо со старой версией API и 
         </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">229.89</span><span class="p">,</span><span class="w">
         </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Цикорий Elza – растворимый гранулированный напиток с насыщенным кофейным вкусом и ароматом.Содержащийся в цикории инулин способствует улучшению обмена веществ и пищеварения. Оказывает успокаивающее действие на нервную систему, улучшает работу сердца. Цикорий повышает иммунитет,очищает организм. Он богат минеральными веществами, витаминами и микроэлементами."</span><span class="p">,</span><span class="w">
         </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mf">229.89</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"product_in_stock"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="nt">"product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">960</span><span class="p">,</span><span class="w">
           </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10963"</span><span class="p">,</span><span class="w">
@@ -3074,6 +3139,23 @@ API обратно совместимо со старой версией API и 
       <td>NUMBER</td>
       <td>Да</td>
       <td>Номер заказа</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="struktura-obiekta-lineitem-1">Структура объекта LineItem</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Атрибут</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>product_in_stock</td>
+      <td>Наличие продукта в магазине</td>
     </tr>
   </tbody>
 </table>
@@ -3861,7 +3943,7 @@ API обратно совместимо со старой версией API и 
 
           <h1 id="sposoby-dostavki">Способы доставки</h1>
 
-<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/shipping_methods"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/shipping_methods?sid=1"</span>
 </code></pre>
 
 <blockquote>
@@ -3871,14 +3953,35 @@ API обратно совместимо со старой версией API и 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"shipping_methods"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Курьером"</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Доставка курьером"</span><span class="w">
   </span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
+<h3 id="http-zapros">HTTP запрос</h3>
+
 <p>Получить список доступных способов доставки можно, выполнив запрос:</p>
 
 <p><code>GET http://api.instamart.ru/v2/shipping_methods</code></p>
+
+<h3 id="paramietry-zaprosa">Параметры запроса</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>sid</td>
+      <td>Да</td>
+      <td>ID магазина</td>
+    </tr>
+  </tbody>
+</table>
 
           <h1 id="okna-dostavki">Окна доставки</h1>
 
@@ -3965,6 +4068,12 @@ API обратно совместимо со старой версией API и 
       </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Visa/Mastercard"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Оплата по пластиковым картам"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cloud_payments_gateway"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Картой курьеру"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lifepay"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -4058,6 +4167,12 @@ API обратно совместимо со старой версией API и 
           </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Moscow"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Картой курьеру"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lifepay"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -4134,6 +4249,10 @@ API обратно совместимо со старой версией API и 
       <td>sber_bank_invoice</td>
       <td>перевод по реквизитам</td>
     </tr>
+    <tr>
+      <td>lifepay</td>
+      <td>картой курьеру</td>
+    </tr>
   </tbody>
 </table>
 
@@ -4186,6 +4305,211 @@ API обратно совместимо со старой версией API и 
   <li><code>/api/v2/credit_card_authorization/success</code> если оплата прошла успешно</li>
   <li><code>/api/v2/credit_card_authorization/fail</code> если оплата прошла неуспешно</li>
 </ul>
+
+          <h1 id="tieliefony-polzovatielia">Телефоны пользователя</h1>
+
+<h2 id="zapros-na-poluchieniie-spiska-vsiekh-tieliefonov-polzovatielia">Запрос на получение списка всех телефонов пользователя</h2>
+
+<p>Получить список всех телефонов пользователя можно, выполнив запрос:</p>
+
+<p><code>GET &lt;%= config[:host] %&gt;/phones</code></p>
+
+<pre class="highlight shell"><code>curl <span class="s2">"&lt;%= config[:host] %&gt;/phones"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
+</code></pre>
+
+<blockquote>
+  <p>Ответ будет содержать следующие данные:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"phones"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">14959</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"920"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1111111"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"human_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+7 (920) 111-11-11"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">14960</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"920"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2222222"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"human_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+7 (920) 222-22-22"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"current_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"next_page"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total_pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"per_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h2 id="zapros-na-poluchieniie-tieliefona-po-nomieru">Запрос на получение телефона по номеру</h2>
+
+<pre class="highlight shell"><code>curl <span class="s2">"&lt;%= config[:host] %&gt;/phones/14959"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
+</code></pre>
+
+<blockquote>
+  <p>В случае если данные были указаны верно, сервер вернет ответ:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">14959</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"920"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2222222"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"human_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+7 (920) 222-22-22"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Получить телефон можно, выполнив запрос:<br />
+<code>GET &lt;%= config[:host] %&gt;/phones/#{ID}</code></p>
+
+<h3 id="paramietry-zaprosa">Параметры запроса</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ID</td>
+      <td>Да</td>
+      <td>ID телефона</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="zapros-na-sozdaniie-novogho-tieliefona-polzovatielia">Запрос на создание нового телефона пользователя</h2>
+
+<pre class="highlight shell"><code>curl <span class="s2">"&lt;%= config[:host] %&gt;/phones"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
+  -X POST <span class="se">\</span>
+  -d <span class="s2">"phone[value]=9201111111"</span>
+</code></pre>
+
+<blockquote>
+  <p>Ответ будет содержать следующие данные:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">14959</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"920"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1111111"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"human_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+7 (920) 111-11-11"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Создать новый телефон пользователя можно, выполнив запрос:</p>
+
+<p><code>POST &lt;%= config[:host] %&gt;/phones</code></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>phone[value]</td>
+      <td>Да</td>
+      <td>Номер телефона</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="zapros-na-obnovlieniie-tieliefona-polzovatielia">Запрос на обновление телефона пользователя</h2>
+
+<pre class="highlight shell"><code>curl <span class="s2">"&lt;%= config[:host] %&gt;/phones/14959"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
+  -X PUT <span class="se">\</span>
+  -d <span class="s2">"phone[value]=9202222222"</span>
+</code></pre>
+
+<blockquote>
+  <p>В случае если данные были указаны верно, сервер вернет ответ:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">14959</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"920"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2222222"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"human_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+7 (920) 222-22-22"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Изменить телефон пользователя можно, выполнив запрос:</p>
+
+<p><code>PUT &lt;%= config[:host] %&gt;/phones/#{ID}</code></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ID</td>
+      <td>Да</td>
+      <td>ID телефона</td>
+    </tr>
+    <tr>
+      <td>phone[value]</td>
+      <td>Да</td>
+      <td>Номер телефона</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="zapros-na-udalieniie-tieliefona-polzovatielia">Запрос на удаление телефона пользователя</h2>
+
+<pre class="highlight shell"><code>curl <span class="s2">"&lt;%= config[:host] %&gt;/phones/14959"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
+  -X DELETE
+</code></pre>
+
+<blockquote>
+  <p>В случае успешного удаления сервер вернет пустой ответ с кодом 200</p>
+</blockquote>
+
+<p>Удалить телефон пользователя можно, выполнив запрос:</p>
+
+<p><code>DELETE &lt;%= config[:host] %&gt;/phones/#{ID}</code></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ID</td>
+      <td>Да</td>
+      <td>ID телефона</td>
+    </tr>
+  </tbody>
+</table>
 
           <h1 id="otzyv-na-zakaz">Отзыв на заказ</h1>
 
