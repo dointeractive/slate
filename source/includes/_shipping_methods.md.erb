@@ -1,7 +1,7 @@
 # Способы доставки
 
 ```shell
-curl "<%= config[:host] %>/shipping_methods"
+curl "<%= config[:host] %>/shipping_methods?sid=1"
 ```
 
 > Ответ будет содержать следующие данные:
@@ -10,11 +10,19 @@ curl "<%= config[:host] %>/shipping_methods"
 {
   "shipping_methods": [{
     "id": 2,
-    "name": "Курьером"
+    "name": "Доставка курьером"
   }]
 }
 ```
 
+### HTTP запрос
+
 Получить список доступных способов доставки можно, выполнив запрос:
 
 `GET <%= config[:host] %>/shipping_methods`
+
+### Параметры запроса
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+sid | Да | ID магазина
