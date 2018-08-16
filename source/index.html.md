@@ -29,6 +29,7 @@ includes:
   - payment_tool_types
   - payment_tools
   - payments
+  - phones
   - order_reviews
   - app_reviews
   - credit_card
