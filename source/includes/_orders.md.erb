@@ -123,9 +123,10 @@ void | отменен администратором
 --------- | -----------
 id | id позиции
 quantity | количество товаров
-description | текстовое описание содержимого
 price | стоимость одной позиции
 total | сумма
+customer_comment | комментарий пользователя
+product_in_stock | наличие продукта в магазине
 product | информация о продукте
 
 ## Повтор заказа
@@ -258,13 +259,6 @@ curl "<%= config[:host] %>/orders/C27387-16"
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
 NUMBER | Да | Номер заказа
-
-### Структура объекта LineItem
-
-Атрибут | Описание
---------- | -----------
-product_in_stock | Наличие продукта в магазине
-
 
 ## Получение текущего заказа пользователя
 
@@ -500,6 +494,61 @@ curl "<%= config[:host] %>/orders/R314234460/promotions/12345" \
   }
 }
 ```
+
+## Получение списка позиций заказа
+
+> Пример команды:
+
+```shell
+curl "<%= config[:host] %>/orders/R314234460/line_items" \
+  -H "Authorization: Token token=#{TOKEN}"
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+{
+  "line_items": [
+    {
+      "id": 1,
+      "quantity": 1,
+      "price": 1236.7,
+      "total": 1236.7,
+      "customer_comment": null,
+      "product_in_stock": true,
+      "product": {
+        "id": 1,
+        "sku": "20002",
+        "name": "Product #0",
+        "price": 1136.7,
+        "original_price": 1236.7,
+        "discount": 100,
+        "human_volume": "100 г. x 12",
+        "items_per_pack": 12,
+        "images": [{
+          "mini_url": "http://instamart.ru/spree/products/5946/mini/10006.jpg?1473242617",
+          "small_url": "http://instamart.ru/spree/products/5946/small/10006.jpg?1473242617",
+          "product_url": "http://instamart.ru/spree/products/5946/product/10006.jpg?1473242617",
+          "preview_url": "http://instamart.ru/spree/products/5946/preview/10006.jpg?1473242617",
+          "original_url": "http://instamart.ru/spree/products/5946/original/10006.jpg?1473242617"
+        }]
+      }
+    }
+  ],
+  "meta": {
+    "current_page": 1,
+    "next_page": null,
+    "total_pages": 1,
+    "per_page": 10
+  }
+}
+```
+
+Получить все позиции заказа пользователя можно, выполнив запросы:
+
+`GET <%= config[:host] %>/orders/#{ORDER_NUMBER}/line_items`
+
+`GET <%= config[:host] %>/shipments/#{SHIPMENT_NUMBER}/line_items`
 
 ## Добавление позиции заказа
 
