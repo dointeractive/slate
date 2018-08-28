@@ -20,6 +20,9 @@ curl "<%= config[:host] %>/categories?sid=1"
       "icon": {
         "mini_url": "http://instamart.ru/spree/taxons/187/mini/%D1%87%D0%B0%D0%B8%CC%86-01.png?1453649106",
         "normal_url": "http://instamart.ru/spree/taxons/187/normal/%D1%87%D0%B0%D0%B8%CC%86-01.png?1453649106"
+      },
+      "alt_icon": {
+        "url": "http://instamart.ru/icons/37/original/%D1%87%D0%B0%D0%B8%CC%86-01.svg?1453649106"
       }
     }]
   }],
@@ -38,6 +41,8 @@ API возвращает полную иерархию всех категори
 id | id категории
 type | Тип категории: __department__ или __taxon__
 name | Название категори
+icon | Иконка категории
+alt_icon | Альтернатинвая иконка категории
 children | Список дочерних категорий
 
 От значения поля `type` зависит способ отображения содержимого категории.
