@@ -16,7 +16,7 @@
 
 ```json
 {
-  "taxon_id": 1,
+  "id": 1,
   "type": "taxon",
   "name": "Чай",
   "products_count": 232,
@@ -42,10 +42,6 @@ aisles | Список дочерних отделов
 ---------  | -----------
 department | отдел "верхнего уровня", имеет дочерние отделы и может быть отображен на экране категорий (API `v2/departments`)
 taxon | отдел "нижнего уровня", не имеет дочерних отделов, и его не нужно отображать на экране категорий (API `v2/products`)
-
-<aside class="warning">
-  В текущей реализации API все отделы с типом "department" не содержат поля `taxon_id`, а отделы с типом "taxon" не содержат поля `id`. Данная реализация будет изменена и отделы всегда будут содержать только поле `id`. Чтобы быть готовым к этим изменениям, по умолчанию id отдела надо получать из поля `id` и, только если оно пустое, получать его из поля `taxon_id`
-</aside>
 
 
 ## Выдача для главного экрана
@@ -87,7 +83,7 @@ curl 'https://api.instamart.ru/v2/departments?sid=1' \
       "name": "Скидки",
       "products_count": 910,
       "aisles": [{
-        "taxon_id": 487,
+        "id": 487,
         "type": "taxon",
         "name": "Бакалея",
         "products_count": 129,
@@ -139,9 +135,9 @@ curl 'https://api.instamart.ru/v2/departments/174?sid=1' \
     "products_count": 668,
     "aisles": [
       {
+        "id": 267,
         "name": "Чай",
         "product_counts": 327,
-        "taxon_id": 267,
         "type": "taxon",
         "products": [
           {
