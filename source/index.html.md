@@ -34,6 +34,8 @@ includes:
   - app_reviews
   - credit_card
   - flags
+  - bonus_programs
+  - retailer_programs
   - errors
 
 search: true
