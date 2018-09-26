@@ -44,12 +44,9 @@ curl "<%= config[:host] %>/retailer_loyalty_cards" \
 ```json
   {
     "retailer_loyalty_cards": [{
-      "points": null,
-      "retailer_loyalty_card": {
-        "id": 11,
-        "number": "34567890",
-        "retailer_loyalty_program_id": 1
-       }
+      "id": 11,
+      "number": "34567890",
+      "retailer_loyalty_program_id": 1
     }]
   }
 ```
@@ -59,18 +56,6 @@ curl "<%= config[:host] %>/retailer_loyalty_cards" \
 `GET <%= config[:host] %>/retailer_loyalty_cards`
 
 Параметры ответа:
-
-Параметр|Описание
----|---
-points|Количество начисляемых баллов по карте
-retailer_loyalty_card|Описание карты лояльности ритейлера
-
-<aside class="notice">
-Значение `null` для параметра `points` означает, что данные по количеству начисляемых баллов
-по карте недоступны
-</aside>
-
-Структура объекта retailer_loyalty_card:
 
 Параметр|Описание
 ---|---
@@ -187,12 +172,9 @@ curl "<%= config[:host] %>/retailer_loyalty_cards?shipment_number=H0123456" \
 ```json
  {
     "retailer_loyalty_cards": [{
-      "points": null,
-      "retailer_loyalty_card": {
-        "id": 11,
-        "number": "34567890",
-        "retailer_loyalty_program_id": 1
-       }
+      "id": 11,
+      "number": "34567890",
+      "retailer_loyalty_program_id": 1
     }]
   }
 ```
@@ -208,18 +190,6 @@ curl "<%= config[:host] %>/retailer_loyalty_cards?shipment_number=H0123456" \
 shipment_number|Да|Номер подзаказа
 
 Параметры ответа:
-
-Параметр|Описание
----|---
-points|Количество начисляемых баллов по карте
-retailer_loyalty_card|Описание карты лояльности ритейлера
-
-<aside class="notice">
-Значение `null` для параметра `points` означает, что данные по количеству начисляемых баллов
-по карте недоступны
-</aside>
-
-Структура объекта retailer_loyalty_card:
 
 Параметр|Описание
 ---|---
@@ -268,7 +238,7 @@ icon|Логотип программы лояльности ритейлера
 
 ## API применения карт к подзаказу
 
-К каждому подзаказу в составе заказа может быть применена карта лояльности ритейлера
+К каждому подзаказу в составе заказа может быть применена максимум одна карта лояльности ритейлера
 
 ### Получение данных по карте лояльности ритейлера, которая будет применена к подзаказу:
 

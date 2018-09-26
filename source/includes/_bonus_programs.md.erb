@@ -44,12 +44,9 @@ curl "<%= config[:host] %>/bonus_cards" \
 ```json
   {
     "bonus_cards": [{
-      "points": null,
-      "bonus_card": {
-        "id": 121,
-        "number": "1234567890",
-        "bonus_program_id": 1
-       }
+      "id": 121,
+      "number": "1234567890",
+      "bonus_program_id": 1
     }]
   }
 ```
@@ -59,18 +56,6 @@ curl "<%= config[:host] %>/bonus_cards" \
 `GET <%= config[:host] %>/bonus_cards`
 
 Параметры ответа:
-
-Параметр|Описание
----|---
-points|Количество начисляемых баллов по карте
-bonus_card|Описание бонусной карты
-
-<aside class="notice">
-Значение `null` для параметра `points` означает, что данные по количеству начисляемых бонусов
-по карте не доступно
-</aside>
-
-Структура объекта bonus_card:
 
 Параметр|Описание
 ---|---
@@ -187,12 +172,9 @@ curl "<%= config[:host] %>/bonus_cards?order_number=R123456" \
 ```json
   {
     "bonus_cards": [{
-      "points": "12 миль",
-      "bonus_card": {
-        "id": 121,
-        "number": "1234567890",
-        "bonus_program_id": 1
-       }
+      "id": 121,
+      "number": "1234567890",
+      "bonus_PROGRam_id": 1
     }]
   }
 ```
@@ -208,18 +190,6 @@ curl "<%= config[:host] %>/bonus_cards?order_number=R123456" \
 order_number|Да|Номер заказа
 
 Параметры ответа:
-
-Параметр|Описание
----|---
-points|Количество начисляемых баллов по карте
-bonus_card|Описание бонусной карты
-
-<aside class="notice">
-Значение `null` для параметра `points` означает, что данные по количеству начисляемых бонусов
-по карте не доступно
-</aside>
-
-Структура объекта bonus_card:
 
 Параметр|Описание
 ---|---
