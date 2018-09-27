@@ -108,7 +108,7 @@ retailer_loyalty_program_id|Идентификатор программы лоя
 curl "<%= config[:host] %>/retailer_loyalty_cards/123" \
   -H "Authorization: Token token=#{TOKEN}"
   -X PUT
-  -d "number=12341234"
+  -d "retailer_loyalty_card[number]=12341234"
 ```
 > Ответ будет содержать следующие данные:
 
@@ -121,7 +121,7 @@ curl "<%= config[:host] %>/retailer_loyalty_cards/123" \
     }
   }
 ```
-Для обновления данных карты лояльности ритейлера необходимо выполинть запрос:
+Для обновления данных карты лояльности ритейлера необходимо выполнить запрос:
 
 `PUT <%= config[:host] %>/retailer_loyalty_cards/#{id}`
 
@@ -130,8 +130,7 @@ curl "<%= config[:host] %>/retailer_loyalty_cards/123" \
 Параметр|Обязательный|Описание
 ---|---
 id|Да|Идентификатор карты лояльности ритейлера
-number|Нет|Номер карты лояльности ритейлера
-retailer_loyalty_program_id|Нет|Идентификатор программы лояльности ритейлера
+retailer_loyalty_card[number]|Да|Номер карты лояльности ритейлера
 
 Параметры ответа:
 
