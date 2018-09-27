@@ -69,8 +69,8 @@ bonus_program_id|Идентификатор бонусной программы
 curl "<%= config[:host] %>/bonus_cards" \
   -H "Authorization: Token token=#{TOKEN}"
   -X POST
-  -d "bonus_program_id=1"
-  -d "number=12341234"
+  -d "bonus_card[bonus_program_id]=1"
+  -d "bonus_card[number]=12341234"
 ```
 > Ответ будет содержать следующие данные:
 
@@ -91,8 +91,8 @@ curl "<%= config[:host] %>/bonus_cards" \
 
 Параметр|Обязательный|Описание
 ---|---
-number|Да|Номер бонусной карты
-bonus_program_id|Да|Идентификатор бонусной программы
+bonus_card[number]|Да|Номер бонусной карты
+bonus_card[bonus_program_id]|Да|Идентификатор бонусной программы
 
 Параметры ответа:
 
@@ -108,7 +108,7 @@ bonus_program_id|Идентификатор бонусной программы
 curl "<%= config[:host] %>/bonus_cards/123" \
   -H "Authorization: Token token=#{TOKEN}"
   -X PUT
-  -d "number=12341234"
+  -d "bonus_card[number]=12341234"
 ```
 > Ответ будет содержать следующие данные:
 
@@ -243,7 +243,7 @@ icon|Логотип бонусной программы
 ### Получение данных по бонусной карте, которая будет применена к заказу:
 
 ```shell
-curl "<%= config[:host] %>/order/R010203/bonus_card_action" \
+curl "<%= config[:host] %>/orders/R010203/bonus_card_action" \
   -H "Authorization: Token token=#{TOKEN}"
 ```
 > Ответ будет содержать следующие данные:
@@ -261,7 +261,7 @@ curl "<%= config[:host] %>/order/R010203/bonus_card_action" \
 
 Получить выбранную бонусную карту пользователя можно, выполнив запрос:
 
-`GET <%= config[:host] %>/order/#{number}/bonus_card_action`
+`GET <%= config[:host] %>/orders/#{number}/bonus_card_action`
 
 Параметры запроса:
 
@@ -287,7 +287,7 @@ bonus_program_id|Идентификатор бонусной программы
 ### Выбор бонусной карты, которая бедет применена к заказу
 
 ```shell
-curl "<%= config[:host] %>/order/R010203/bonus_card_action" \
+curl "<%= config[:host] %>/orders/R010203/bonus_card_action" \
   -H "Authorization: Token token=#{TOKEN}"
   -X POST
   -d "bonus_card_id=123"
@@ -308,7 +308,7 @@ curl "<%= config[:host] %>/order/R010203/bonus_card_action" \
 Для того, чтобы выбрать бонусную карту, которая должна быть применена к заказу,
 необходимо выполнить запрос:
 
-`POST <%= config[:host] %>/order/#{number}/bonus_card_action`
+`POST <%= config[:host] %>/orders/#{number}/bonus_card_action`
 
 Параметры запроса:
 
@@ -339,7 +339,7 @@ bonus_program_id|Идентификатор бонусной программы
 ### Отмена выбора бонусной карты
 
 ```shell
-curl "<%= config[:host] %>/order/R010203/bonus_card_action" \
+curl "<%= config[:host] %>/orders/R010203/bonus_card_action" \
   -H "Authorization: Token token=#{TOKEN}"
   -X DELETE
 ```
@@ -348,7 +348,7 @@ curl "<%= config[:host] %>/order/R010203/bonus_card_action" \
 
 Для отмены применения бонусной карты необходимо выполнить запрос:
 
-`DELETE <%= config[:host] %>/order/#{number}/bonus_card_action`
+`DELETE <%= config[:host] %>/orders/#{number}/bonus_card_action`
 
 Параметры запроса:
 

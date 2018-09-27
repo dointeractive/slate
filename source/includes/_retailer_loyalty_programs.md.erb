@@ -69,8 +69,8 @@ retailer_loyalty_program_id|Идентификатор программы лоя
 curl "<%= config[:host] %>/retailer_loyalty_cards" \
   -H "Authorization: Token token=#{TOKEN}"
   -X POST
-  -d "retailer_loyalty_program_id=1"
-  -d "number=12341234"
+  -d "retailer_loyalty_card[retailer_loyalty_program_id]=1"
+  -d "retailer_loyalty_card[number]=12341234"
 ```
 > Ответ будет содержать следующие данные:
 
@@ -91,8 +91,8 @@ curl "<%= config[:host] %>/retailer_loyalty_cards" \
 
 Параметр|Обязательный|Описание
 ---|---
-number|Да|Номер карты лояльности ритейлера
-retailer_loyalty_program_id|Да|Идентификатор программы лояльности ритейлера
+retailer_loyalty_card[number]|Да|Номер карты лояльности ритейлера
+retailer_loyalty_card[retailer_loyalty_program_id]|Да|Идентификатор программы лояльности ритейлера
 
 Параметры ответа:
 
@@ -243,7 +243,7 @@ icon|Логотип программы лояльности ритейлера
 ### Получение данных по карте лояльности ритейлера, которая будет применена к подзаказу:
 
 ```shell
-curl "<%= config[:host] %>/shipment/H0123413/retailer_loyalty_card_action" \
+curl "<%= config[:host] %>/shipments/H0123413/retailer_loyalty_card_action" \
   -H "Authorization: Token token=#{TOKEN}"
 ```
 > Ответ будет содержать следующие данные:
@@ -261,7 +261,7 @@ curl "<%= config[:host] %>/shipment/H0123413/retailer_loyalty_card_action" \
 
 Получить выбранную карту лояльности можно, выполнив запрос:
 
-`GET <%= config[:host] %>/shipment/#{number}/retailer_loyalty_card_action`
+`GET <%= config[:host] %>/shipments/#{number}/retailer_loyalty_card_action`
 
 Параметры запроса:
 
@@ -292,7 +292,7 @@ retailer_loyalty_program_id|Идентификатор программы лоя
 ### Выбор карты лояльности ретейлера, которая бедет применена к подзаказу
 
 ```shell
-curl "<%= config[:host] %>/shipment/H0123412/retailer_loyalty_card_action" \
+curl "<%= config[:host] %>/shipments/H0123412/retailer_loyalty_card_action" \
   -H "Authorization: Token token=#{TOKEN}"
   -X POST
   -d "retailer_loyalty_card_id=123"
@@ -313,7 +313,7 @@ curl "<%= config[:host] %>/shipment/H0123412/retailer_loyalty_card_action" \
 Для того, чтобы выбрать карту лояльности ритейлера, которая должна быть применена к подзаказу,
 необходимо выполнить запрос:
 
-`POST <%= config[:host] %>/shipment/#{number}/retailer_loyalty_card_action`
+`POST <%= config[:host] %>/shipments/#{number}/retailer_loyalty_card_action`
 
 Параметры запроса:
 
@@ -345,7 +345,7 @@ retailer_loyalty_program_id|Идентификатор программы лоя
 ### Отмена выбора карты лояльности ритейлера
 
 ```shell
-curl "<%= config[:host] %>/shipment/H0123412/retailer_loyalty_card_action" \
+curl "<%= config[:host] %>/shipments/H0123412/retailer_loyalty_card_action" \
   -H "Authorization: Token token=#{TOKEN}"
   -X DELETE
 ```
@@ -354,7 +354,7 @@ curl "<%= config[:host] %>/shipment/H0123412/retailer_loyalty_card_action" \
 
 Для отмены применения карты лояльности необходимо выполнить запрос:
 
-`DELETE <%= config[:host] %>/shipment/#{number}/retailer_loyalty_card_action`
+`DELETE <%= config[:host] %>/shipments/#{number}/retailer_loyalty_card_action`
 
 Параметры запроса:
 
