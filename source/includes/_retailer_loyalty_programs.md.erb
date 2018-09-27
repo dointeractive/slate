@@ -29,7 +29,7 @@ curl "<%= config[:host] %>/retailer_loyalty_programs" \
 
 Параметр|Описание
 ---|---
-id|Идентификатор программы лояльности ритейлеров
+id|ID программы лояльности ритейлеров
 name|Наименование программы лояльности ритейлеров
 icon|Логотип программы лояльности ритейлеров
 
@@ -46,7 +46,10 @@ curl "<%= config[:host] %>/retailer_loyalty_cards" \
     "retailer_loyalty_cards": [{
       "id": 11,
       "number": "34567890",
-      "retailer_loyalty_program_id": 1
+      "name": "ВкусВилл",
+      "icon": {
+        "url": "https://<%= config[:host] %>/public/loyalty_cards_logos/16/mini/vkusvill.svg"
+      }
     }]
   }
 ```
@@ -59,9 +62,10 @@ curl "<%= config[:host] %>/retailer_loyalty_cards" \
 
 Параметр|Описание
 ---|---
-id|Идентификатор карты
+id|ID карты
 number|Номер карты лояльности ритейлеров
-retailer_loyalty_program_id|Идентификатор программы лояльности ритейлера
+name|Наименование программы лояльности ритейлеров
+icon|Логотип программы лояльности ритейлеров
 
 ### Добавление карты лояльности ритейлера
 
@@ -79,7 +83,10 @@ curl "<%= config[:host] %>/retailer_loyalty_cards" \
     "retailer_loyalty_card": {
       "id": 121,
       "number": "1234567890",
-      "retailer_loyalty_program_id": 1
+      "name": "ВкусВилл",
+      "icon": {
+        "url": "https://<%= config[:host] %>/public/loyalty_cards_logos/16/mini/vkusvill.svg"
+      }
     }
   }
 ```
@@ -92,15 +99,7 @@ curl "<%= config[:host] %>/retailer_loyalty_cards" \
 Параметр|Обязательный|Описание
 ---|---
 retailer_loyalty_card[number]|Да|Номер карты лояльности ритейлера
-retailer_loyalty_card[retailer_loyalty_program_id]|Да|Идентификатор программы лояльности ритейлера
-
-Параметры ответа:
-
-Параметр|Описание
----|---
-id|Идентификатор карты лояльности ритейлера
-number|Номер карты лояльности ритейлера
-retailer_loyalty_program_id|Идентификатор программы лояльности ритейлера
+retailer_loyalty_card[retailer_loyalty_program_id]|Да|ID программы лояльности ритейлера
 
 ### Обновление данных карты лояльности ритейлера
 
@@ -117,7 +116,10 @@ curl "<%= config[:host] %>/retailer_loyalty_cards/123" \
     "retailer_loyalty_card": {
       "id": 121,
       "number": "1234567890",
-      "retailer_loyalty_program_id": 1
+      "name": "ВкусВилл",
+      "icon": {
+        "url": "https://<%= config[:host] %>/public/loyalty_cards_logos/16/mini/vkusvill.svg"
+      }
     }
   }
 ```
@@ -129,16 +131,8 @@ curl "<%= config[:host] %>/retailer_loyalty_cards/123" \
 
 Параметр|Обязательный|Описание
 ---|---
-id|Да|Идентификатор карты лояльности ритейлера
+id|Да|ID карты лояльности ритейлера
 retailer_loyalty_card[number]|Да|Номер карты лояльности ритейлера
-
-Параметры ответа:
-
-Параметр|Описание
----|---
-id|Идентификатор карты лояльности ритейлера
-number|Номер карты лояльности ритейлера
-retailer_loyalty_program_id|Идентификатор программы лояльности ритейлера
 
 ### Удаление карты лояльности ритейлера
 
@@ -158,7 +152,7 @@ curl "<%= config[:host] %>/retailer_loyalty_cards/123" \
 
 Параметр|Обязательный|Описание
 ---|---
-id|Да|Идентификатор карты лояльности ритейлера
+id|Да|ID карты лояльности ритейлера
 
 ## API для получения карт и типов карт, которые можно применить к данному подзаказу (Shipment)
 
@@ -173,7 +167,10 @@ curl "<%= config[:host] %>/retailer_loyalty_cards?shipment_number=H0123456" \
     "retailer_loyalty_cards": [{
       "id": 11,
       "number": "34567890",
-      "retailer_loyalty_program_id": 1
+      "name": "ВкусВилл",
+      "icon": {
+        "url": "https://<%= config[:host] %>/public/loyalty_cards_logos/16/mini/vkusvill.svg"
+      }
     }]
   }
 ```
@@ -192,9 +189,10 @@ shipment_number|Да|Номер подзаказа
 
 Параметр|Описание
 ---|---
-id|Идентификатор карты
+id|ID карты лояльности
 number|Номер карты лояльности ритейлеров
-retailer_loyalty_program_id|Идентификатор программы лояльности ритейлера
+name|Наименование программы лояльности ритейлера
+icon|Логотип программы лояльности ритейлера
 
 ### Список программ лояльности, которые могу быть применены к данному подзаказу:
 
@@ -231,7 +229,7 @@ shipment_number|Да|Номер подзаказа
 
 Параметр|Описание
 ---|---
-id|Идентификатор программы лояльности ритейлера
+id|ID программы лояльности ритейлера
 name|Наименование программы лояльности ритейлера
 icon|Логотип программы лояльности ритейлера
 
@@ -253,7 +251,10 @@ curl "<%= config[:host] %>/shipments/H0123413/retailer_loyalty_card_action" \
     "retailer_loyalty_card": {
       "id": 11,
       "number": "34567890",
-      "retailer_loyalty_program_id": 1
+      "name": "ВкусВилл",
+      "icon": {
+        "url": "https://<%= config[:host] %>/public/loyalty_cards_logos/16/mini/vkusvill.svg"
+      }
      }
   }
 ```
@@ -280,14 +281,6 @@ number|Да|Номер подзаказа
 points|Количество начисляемых баллов по карте
 retailer_loyalty_card|Описание карты лояльности
 
-Структура объекта retailer_loyalty_card:
-
-Параметр|Описание
----|---
-id|Идентификатор карты лояльности ритейлера
-number|Номер карты лояльности ритейлера
-retailer_loyalty_program_id|Идентификатор программы лояльности ритейлера
-
 ### Выбор карты лояльности ретейлера, которая бедет применена к подзаказу
 
 ```shell
@@ -304,7 +297,10 @@ curl "<%= config[:host] %>/shipments/H0123412/retailer_loyalty_card_action" \
     "retailer_loyalty_card": {
       "id": 11,
       "number": "34567890",
-      "retailer_loyalty_program_id": 1
+      "name": "ВкусВилл",
+      "icon": {
+        "url": "https://<%= config[:host] %>/public/loyalty_cards_logos/16/mini/vkusvill.svg"
+      }
      }
   }
 ```
@@ -319,27 +315,7 @@ curl "<%= config[:host] %>/shipments/H0123412/retailer_loyalty_card_action" \
 Параметр|Обязательный|Описание
 ---|---
 number|Да|Номер подзаказа
-retailer_loyalty_card_id|Идентификатор карты лояльности ритейлера
-
-Параметры ответа:
-
-<aside class="notice">
-Значение `null` для параметра `points` означает, что данные по количеству начисляемых баллов
-по карте недоступны
-</aside>
-
-Параметр|Описание
----|---
-points|Количество начисляемых баллов по карте
-retailer_loyalty_card|Описание карты лояльности
-
-Структура объекта retailer_loyalty_card:
-
-Параметр|Описание
----|---
-id|Идентификатор карты лояльности
-number|Номер карты лояльности ритейлера
-retailer_loyalty_program_id|Идентификатор программы лояльности ритейлера
+retailer_loyalty_card_id|ID карты лояльности ритейлера
 
 ### Отмена выбора карты лояльности ритейлера
 
