@@ -233,12 +233,14 @@ curl "<%= config[:host] %>/orders/R010203/bonus_card_action" \
 
 ```json
   {
-    "points": "201 миля",
-    "bonus_card": {
-      "id": 121,
-      "number": "1234567890",
-      "icon": {
-        "url": "https://<%= config[:host] %>/public/loyalty_cards_logos/16/mini/aero-img.png"
+    "bonus_card_action": {
+      "points": "201 миля",
+      "bonus_card": {
+        "id": 121,
+        "number": "1234567890",
+        "icon": {
+          "url": "https://<%= config[:host] %>/public/loyalty_cards_logos/16/mini/aero-img.png"
+        }
       }
     }
   }
@@ -282,11 +284,13 @@ curl "<%= config[:host] %>/orders/R010203/bonus_card_action" \
 
 ```json
   {
-    "points": "201 миля",
-    "bonus_card": {
-      "id": 121,
-      "number": "1234567890",
-      "bonus_program_id": 1
+    "bonus_card_action": {
+      "points": "201 миля",
+      "bonus_card": {
+        "id": 121,
+        "number": "1234567890",
+        "bonus_program_id": 1
+      }
     }
   }
 ```
