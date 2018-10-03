@@ -1,0 +1,342 @@
+# Карты лояльности ритейлеров
+
+## Список программ лояльности
+
+```shell
+curl "<%= config[:host] %>/retailer_loyalty_programs" \
+  -H "Authorization: Token token=#{TOKEN}"
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+  {
+    "retailer_loyalty_programs": [{
+      "id": 1,
+      "name": "ВкусВилл",
+      "icon": {
+        "url": "https://<%= config[:host] %>/public/loyalty_cards_logos/16/mini/vkusvill.svg"
+      }
+    }]
+  }
+```
+
+Получить список доступных программ лояльности ритейлеров можно, выполнив запрос:
+
+`GET <%= config[:host] %>/retailer_loyalty_programs`
+
+Вернется массив доступных программ лояльности ритейлеров следующей структуры:
+
+Параметр|Описание
+---|---
+id|ID программы лояльности ритейлеров
+name|Наименование программы лояльности ритейлеров
+icon|Логотип программы лояльности ритейлеров
+
+## Список карт лояльности
+
+```shell
+curl "<%= config[:host] %>/retailer_loyalty_cards" \
+  -H "Authorization: Token token=#{TOKEN}"
+```
+> Ответ будет содержать следующие данные:
+
+```json
+  {
+    "retailer_loyalty_cards": [{
+      "id": 11,
+      "number": "34567890",
+      "name": "ВкусВилл",
+      "icon": {
+        "url": "https://<%= config[:host] %>/public/loyalty_cards_logos/16/mini/vkusvill.svg"
+      }
+    }]
+  }
+```
+
+Получить список доступных карт лояльности ритейлера можно, выполнив запрос:
+
+`GET <%= config[:host] %>/retailer_loyalty_cards`
+
+Параметры ответа:
+
+Параметр|Описание
+---|---
+id|ID карты
+number|Номер карты лояльности ритейлеров
+name|Наименование программы лояльности ритейлеров
+icon|Логотип программы лояльности ритейлеров
+
+## Добавление карты лояльности
+
+```shell
+curl "<%= config[:host] %>/retailer_loyalty_cards" \
+  -H "Authorization: Token token=#{TOKEN}"
+  -X POST
+  -d "retailer_loyalty_card[retailer_loyalty_program_id]=1"
+  -d "retailer_loyalty_card[number]=12341234"
+```
+> Ответ будет содержать следующие данные:
+
+```json
+  {
+    "retailer_loyalty_card": {
+      "id": 121,
+      "number": "1234567890",
+      "name": "ВкусВилл",
+      "icon": {
+        "url": "https://<%= config[:host] %>/public/loyalty_cards_logos/16/mini/vkusvill.svg"
+      }
+    }
+  }
+```
+Для добавление новой карты лояльности ритейлера необходимо выполнить запрос:
+
+`POST <%= config[:host] %>/retailer_loyalty_cards`
+
+Параметры запроса:
+
+Параметр|Обязательный|Описание
+---|---
+retailer_loyalty_card[number]|Да|Номер карты лояльности ритейлера
+retailer_loyalty_card[retailer_loyalty_program_id]|Да|ID программы лояльности ритейлера
+
+## Обновление карты лояльности
+
+```shell
+curl "<%= config[:host] %>/retailer_loyalty_cards/123" \
+  -H "Authorization: Token token=#{TOKEN}"
+  -X PUT
+  -d "retailer_loyalty_card[number]=12341234"
+```
+> Ответ будет содержать следующие данные:
+
+```json
+  {
+    "retailer_loyalty_card": {
+      "id": 121,
+      "number": "1234567890",
+      "name": "ВкусВилл",
+      "icon": {
+        "url": "https://<%= config[:host] %>/public/loyalty_cards_logos/16/mini/vkusvill.svg"
+      }
+    }
+  }
+```
+Для обновления данных карты лояльности ритейлера необходимо выполнить запрос:
+
+`PUT <%= config[:host] %>/retailer_loyalty_cards/#{id}`
+
+Параметры запроса:
+
+Параметр|Обязательный|Описание
+---|---
+id|Да|ID карты лояльности ритейлера
+retailer_loyalty_card[number]|Да|Номер карты лояльности ритейлера
+
+## Удаление карты лояльности
+
+```shell
+curl "<%= config[:host] %>/retailer_loyalty_cards/123" \
+  -H "Authorization: Token token=#{TOKEN}"
+  -X DELETE
+```
+
+> Ответ вернет результат с кодом 200
+
+Чтобы удалить карту лояльности необходимо выполнить запрос:
+
+`DELETE <%= config[:host] %>/retailer_loyalty_cards/#{id}`
+
+Параметры запроса:
+
+Параметр|Обязательный|Описание
+---|---
+id|Да|ID карты лояльности ритейлера
+
+## Список карт ритейлеров, применимых к подзаказу
+
+```shell
+curl "<%= config[:host] %>/retailer_loyalty_cards?shipment_number=H0123456" \
+  -H "Authorization: Token token=#{TOKEN}"
+```
+> Ответ будет содержать следующие данные:
+
+```json
+ {
+    "retailer_loyalty_cards": [{
+      "id": 11,
+      "number": "34567890",
+      "name": "ВкусВилл",
+      "icon": {
+        "url": "https://<%= config[:host] %>/public/loyalty_cards_logos/16/mini/vkusvill.svg"
+      }
+    }]
+  }
+```
+
+Получить список карт лояльности, которые могут быть применены к подзаказу можно, выполнив запрос:
+
+`GET <%= config[:host] %>/retailer_loyalty_cards?shipment_number=#{shipment_number}`
+
+Параметры запроса:
+
+Параметр|Обязательный|Описание
+---|---
+shipment_number|Да|Номер подзаказа
+
+Параметры ответа:
+
+Параметр|Описание
+---|---
+id|ID карты лояльности
+number|Номер карты лояльности ритейлеров
+name|Наименование программы лояльности ритейлера
+icon|Логотип программы лояльности ритейлера
+
+## Список программ ритейлеров, применимых к подзаказу
+
+```shell
+curl "<%= config[:host] %>retailer_loyalty_programs?shipment_number=H3234567" \
+  -H "Authorization: Token token=#{TOKEN}"
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+  {
+    "retailer_loyalty_programs": [{
+      "id": 1,
+      "name": "ВкусВилл",
+      "icon": {
+        "url": "https://<%= config[:host] %>/public/loyalty_cards_logos/16/mini/vkusvill.svg"
+      }
+    }]
+  }
+```
+<aside class="notice">
+К каждому подзаказу в составе заказа может быть применена максимум одна карта лояльности ритейлера
+</aside>
+
+
+Получить список программ лояльности, которые могут быть применены к подзаказу, можно, выполнив запрос:
+
+`GET <%= config[:host] %>/retailer_loyalty_programs?shipment_number=H#{shipment_number}`
+
+Параметры запроса:
+
+Параметр|Обязательный|Описание
+---|---
+shipment_number|Да|Номер подзаказа
+
+Вернется массив программ лояльности следующей структуры:
+
+Параметр|Описание
+---|---
+id|ID программы лояльности ритейлера
+name|Наименование программы лояльности ритейлера
+icon|Логотип программы лояльности ритейлера
+
+## Запрос выбранной карты лояльности
+
+```shell
+curl "<%= config[:host] %>/shipments/H0123413/retailer_loyalty_card_action" \
+  -H "Authorization: Token token=#{TOKEN}"
+```
+> Ответ будет содержать следующие данные:
+
+```json
+  {
+    "retailer_loyalty_card_action": {
+      "points": null,
+      "retailer_loyalty_card": {
+        "id": 11,
+        "number": "34567890",
+        "name": "ВкусВилл",
+        "icon": {
+          "url": "https://<%= config[:host] %>/public/loyalty_cards_logos/16/mini/vkusvill.svg"
+        }
+      }
+    }
+  }
+```
+
+Получить выбранную карту лояльности можно, выполнив запрос:
+
+`GET <%= config[:host] %>/shipments/#{number}/retailer_loyalty_card_action`
+
+Параметры запроса:
+
+Параметр|Обязательный|Описание
+---|---
+number|Да|Номер подзаказа
+
+Параметры ответа:
+
+<aside class="notice">
+Значение `null` для параметра `points` означает, что данные по количеству начисляемых баллов
+по карте недоступны
+</aside>
+
+Параметр|Описание
+---|---
+points|Количество начисляемых баллов по карте
+retailer_loyalty_card|Описание карты лояльности
+
+## Выбор карты лояльности
+
+```shell
+curl "<%= config[:host] %>/shipments/H0123412/retailer_loyalty_card_action" \
+  -H "Authorization: Token token=#{TOKEN}"
+  -X POST
+  -d "retailer_loyalty_card_id=123"
+```
+> Ответ будет содержать следующие данные:
+
+```json
+  {
+    "retailer_loyalty_card_action": {
+      "points": null,
+      "retailer_loyalty_card": {
+        "id": 11,
+        "number": "34567890",
+        "name": "ВкусВилл",
+        "icon": {
+          "url": "https://<%= config[:host] %>/public/loyalty_cards_logos/16/mini/vkusvill.svg"
+        }
+      }
+    }
+  }
+```
+
+Для того, чтобы выбрать карту лояльности ритейлера, которая должна быть применена к подзаказу,
+необходимо выполнить запрос:
+
+`POST <%= config[:host] %>/shipments/#{number}/retailer_loyalty_card_action`
+
+Параметры запроса:
+
+Параметр|Обязательный|Описание
+---|---
+number|Да|Номер подзаказа
+retailer_loyalty_card_id|ID карты лояльности ритейлера
+
+## Отмена выбора карты лояльности
+
+```shell
+curl "<%= config[:host] %>/shipments/H0123412/retailer_loyalty_card_action" \
+  -H "Authorization: Token token=#{TOKEN}"
+  -X DELETE
+```
+
+> Ответ вернет результат с кодом 200
+
+Для отмены выбора карты лояльности необходимо выполнить запрос:
+
+`DELETE <%= config[:host] %>/shipments/#{number}/retailer_loyalty_card_action`
+
+Параметры запроса:
+
+Параметр|Обязательный|Описание
+---|---
+number|Да|Номер подзаказа

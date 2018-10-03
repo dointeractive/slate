@@ -29,6 +29,8 @@ includes:
   - payment_tool_types
   - payment_tools
   - payments
+  - bonus_programs
+  - retailer_loyalty_programs
   - phones
   - order_reviews
   - app_reviews
