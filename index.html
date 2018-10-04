@@ -4098,7 +4098,7 @@ API обратно совместимо со старой версией API и 
 
           <h1 id="okna-dostavki">Окна доставки</h1>
 
-<h2 id="poluchieniie-okon-dlia-ghruza-shipment">Получение окон для груза (shipment)</h2>
+<h2 id="poluchieniie-okon-dlia-podzakaza-shipment">Получение окон для подзаказа (shipment)</h2>
 
 <blockquote>
   <p>Пример получения интервалов доставки для конкретного дня:</p>
@@ -4123,7 +4123,7 @@ API обратно совместимо со старой версией API и 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>Чтобы получить окна доставки для груза, выполните следующий запрос:</p>
+<p>Чтобы получить окна доставки для подзаказа, выполните следующий запрос:</p>
 
 <p><code>GET /shipments/#{SHIPMENT_ID}/delivery_windows</code><br />
 Данный запрос вернет все доступные окна доставки.<br />
@@ -4141,7 +4141,7 @@ API обратно совместимо со старой версией API и 
     <tr>
       <td>SHIPMENT_ID</td>
       <td>Да</td>
-      <td>id груза</td>
+      <td>id подзаказа</td>
     </tr>
     <tr>
       <td>date</td>
@@ -4151,6 +4151,91 @@ API обратно совместимо со старой версией API и 
   </tbody>
 </table>
 
+<h2 id="poluchieniie-okon-dlia-podzakaza-novaia-miekhanika-tsienoobrazovaniia">Получение окон для подзаказа (новая механика ценообразования)</h2>
+
+<blockquote>
+  <p>Пример получения интервалов доставки для конкретного дня:</p>
+</blockquote>
+
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/shipments/H57226465122/shipping_rates?date=2016-01-01"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
+</code></pre>
+
+<blockquote>
+  <p>Ответ:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"shipping_rates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"total_value"</span><span class="p">:</span><span class="w"> </span><span class="mi">490</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">490</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"is_boost"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"is_drop"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"is_free"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"delivery_window"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"starts_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-10-02T09:00:00.000+03:00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"ends_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-10-02T11:00:00.000+03:00"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Чтобы получить окна доставки для подзаказа, выполните следующий запрос:</p>
+
+<p><code>GET /shipments/#{NUMBER}/shipping_rates</code></p>
+
+<p>Данный запрос вернет все доступные окна доставки для указанного дня(или для текущего).<br />
+Чтобы получить список окон доставки за конкретный день, указажите дополнительный параметр <code>date</code> в формате <code>yyyy-mm-dd</code> (или <code>dd-mm-yyyy</code>).</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>NUMBER</td>
+      <td>Да</td>
+      <td>Номер доставки</td>
+    </tr>
+    <tr>
+      <td>date</td>
+      <td>Нет</td>
+      <td>Дата доставки</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="struktura-obiekta-shippingrates">Структура объекта ShippingRates</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Атрибут</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>total_value</td>
+      <td>Стоимость доставки с наценкой</td>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>Стоимость доставки без наценки</td>
+    </tr>
+    <tr>
+      <td>delivery_window</td>
+      <td>Окно доставки</td>
+    </tr>
+  </tbody>
+</table>
 
           <h1 id="tipy-sposobov-oplaty">Типы способов оплаты</h1>
 
@@ -4423,7 +4508,7 @@ API обратно совместимо со старой версией API и 
 
           <h1 id="bonusnyie-proghrammy">Бонусные программы</h1>
 
-<h2 id="api-vozmozhnykh-tipov-bonusnykh-kart">API возможных типов бонусных карт</h2>
+<h2 id="spisok-bonusnykh-proghramm">Список бонусных программ</h2>
 
 <pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/bonus_programs"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
@@ -4460,7 +4545,7 @@ API обратно совместимо со старой версией API и 
   <tbody>
     <tr>
       <td>id</td>
-      <td>Идентификатор бонусной программы</td>
+      <td>ID бонусной программы</td>
     </tr>
     <tr>
       <td>name</td>
@@ -4473,7 +4558,7 @@ API обратно совместимо со старой версией API и 
   </tbody>
 </table>
 
-<h2 id="api-prosmotra-i-dobavlieniia-bonusnykh-kart">API просмотра и добавления бонусных карт</h2>
+<h2 id="spisok-bonusnykh-kart">Список бонусных карт</h2>
 
 <pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/bonus_cards"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
@@ -4486,7 +4571,9 @@ API обратно совместимо со старой версией API и 
     </span><span class="nt">"bonus_cards"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
       </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">121</span><span class="p">,</span><span class="w">
       </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234567890"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"bonus_program_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+      </span><span class="nt">"icon"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://http://api.instamart.ru/v2/public/loyalty_cards_logos/16/mini/aero-img.png"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">}]</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -4507,20 +4594,24 @@ API обратно совместимо со старой версией API и 
   <tbody>
     <tr>
       <td>id</td>
-      <td>Идентификатор бонусной карты</td>
+      <td>ID бонусной карты</td>
     </tr>
     <tr>
       <td>number</td>
       <td>Номер бонусной карты</td>
     </tr>
     <tr>
-      <td>bonus_program_id</td>
-      <td>Идентификатор бонусной программы</td>
+      <td>name</td>
+      <td>Наименование бонусной программы</td>
+    </tr>
+    <tr>
+      <td>icon</td>
+      <td>Логотип бонусной программы</td>
     </tr>
   </tbody>
 </table>
 
-<h3 id="dobavlieniie-bonusnoi-karty">Добавление бонусной карты</h3>
+<h2 id="dobavlieniie-bonusnoi-karty">Добавление бонусной карты</h2>
 
 <pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/bonus_cards"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
@@ -4563,37 +4654,12 @@ API обратно совместимо со старой версией API и 
     <tr>
       <td>bonus_card[bonus_program_id]</td>
       <td>Да</td>
-      <td>Идентификатор бонусной программы</td>
+      <td>ID бонусной программы</td>
     </tr>
   </tbody>
 </table>
 
-<p>Параметры ответа:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Параметр</th>
-      <th>Описание</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>id</td>
-      <td>Идентификатор бонусной карты</td>
-    </tr>
-    <tr>
-      <td>number</td>
-      <td>Номер бонусной карты</td>
-    </tr>
-    <tr>
-      <td>bonus_program_id</td>
-      <td>Идентификатор бонусной программы</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="obnovlieniie-dannykh-bonusnoi-karty">Обновление данных бонусной карты</h3>
+<h2 id="obnovlieniie-bonusnoi-karty">Обновление бонусной карты</h2>
 
 <pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/bonus_cards/123"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
@@ -4608,7 +4674,9 @@ API обратно совместимо со старой версией API и 
     </span><span class="nt">"bonus_card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">121</span><span class="p">,</span><span class="w">
       </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234567890"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"bonus_program_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+      </span><span class="nt">"icon"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://http://api.instamart.ru/v2/public/loyalty_cards_logos/16/mini/aero-img.png"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -4630,7 +4698,7 @@ API обратно совместимо со старой версией API и 
     <tr>
       <td>id</td>
       <td>Да</td>
-      <td>Идентификатор бонусной карты</td>
+      <td>ID бонусной карты</td>
     </tr>
     <tr>
       <td>bonus_card[number]</td>
@@ -4640,32 +4708,7 @@ API обратно совместимо со старой версией API и 
   </tbody>
 </table>
 
-<p>Параметры ответа:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Параметр</th>
-      <th>Описание</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>id</td>
-      <td>Идентификатор бонусной карты</td>
-    </tr>
-    <tr>
-      <td>number</td>
-      <td>Номер бонусной карты</td>
-    </tr>
-    <tr>
-      <td>bonus_program_id</td>
-      <td>Идентификатор бонусной программы</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="udalieniie-bonusnoi-karty">Удаление бонусной карты</h3>
+<h2 id="udalieniie-bonusnoi-karty">Удаление бонусной карты</h2>
 
 <pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/bonus_cards/123"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
@@ -4694,12 +4737,12 @@ API обратно совместимо со старой версией API и 
     <tr>
       <td>id</td>
       <td>Да</td>
-      <td>Идентификатор бонусной карты</td>
+      <td>ID бонусной карты</td>
     </tr>
   </tbody>
 </table>
 
-<h2 id="api-dlia-poluchieniia-kart-i-tipov-kart-kotoryie-mozhno-primienit-k-zakazu">API для получения карт и типов карт, которые можно применить к заказу</h2>
+<h2 id="spisok-bonusnykh-kart-primienimykh-k-zakazu">Список бонусных карт, применимых к заказу</h2>
 
 <pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/bonus_cards?order_number=R123456"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
@@ -4712,10 +4755,16 @@ API обратно совместимо со старой версией API и 
     </span><span class="nt">"bonus_cards"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
       </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">121</span><span class="p">,</span><span class="w">
       </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234567890"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"bonus_PROGRam_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+      </span><span class="nt">"icon"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://http://api.instamart.ru/v2/public/loyalty_cards_logos/16/mini/aero-img.png"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">}]</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span></code></pre>
+
+<aside class="notice">
+При совершении заказа, пользователь может выбрать одну из бонусных карт для начисления бонусов при покупке.
+</aside>
 
 <p>Получить список бонусных карт, которые могут быть применены к заказу можно, выполнив запрос:</p>
 
@@ -4752,20 +4801,24 @@ API обратно совместимо со старой версией API и 
   <tbody>
     <tr>
       <td>id</td>
-      <td>Идентификатор бонусной карты</td>
+      <td>ID бонусной карты</td>
     </tr>
     <tr>
       <td>number</td>
       <td>Номер бонусной карты</td>
     </tr>
     <tr>
-      <td>bonus_program_id</td>
-      <td>Идентификатор бонусной программы</td>
+      <td>name</td>
+      <td>Наименование бонусной программы</td>
+    </tr>
+    <tr>
+      <td>icon</td>
+      <td>Логотип бонусной программы</td>
     </tr>
   </tbody>
 </table>
 
-<h3 id="spisok-bonusnykh-proghramm-kotoryie-moghu-byt-primienieny-k-dannomu-zakazu">Список бонусных программ, которые могу быть применены к данному заказу:</h3>
+<h2 id="spisok-bonusnykh-proghramm-primienimykh-k-zakazu">Список бонусных программ, применимых к заказу</h2>
 
 <pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/bonus_programs?order_number=R1234567"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
@@ -4809,36 +4862,7 @@ API обратно совместимо со старой версией API и 
   </tbody>
 </table>
 
-<p>Вернется массив бонусных программ следующей структуры:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Параметр</th>
-      <th>Описание</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>id</td>
-      <td>Идентификатор бонусной программы</td>
-    </tr>
-    <tr>
-      <td>name</td>
-      <td>Наименование бонусной программы</td>
-    </tr>
-    <tr>
-      <td>icon</td>
-      <td>Логотип бонусной программы</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="api-primienieniia-kart-k-zakazu">API применения карт к заказу</h2>
-
-<p>При совершении заказа, пользователь может выбрать одну из бонусных программ для начисления бонусов при покупке.</p>
-
-<h3 id="poluchieniie-dannykh-po-bonusnoi-kartie-kotoraia-budiet-primieniena-k-zakazu">Получение данных по бонусной карте, которая будет применена к заказу:</h3>
+<h2 id="zapros-vybrannoi-bonusnoi-karty">Запрос выбранной бонусной карты</h2>
 
 <pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/orders/R010203/bonus_card_action"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
@@ -4848,16 +4872,20 @@ API обратно совместимо со старой версией API и 
 </blockquote>
 
 <pre class="highlight json"><code><span class="w">  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"points"</span><span class="p">:</span><span class="w"> </span><span class="s2">"201 миля"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"bonus_card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">121</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234567890"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"bonus_program_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="nt">"bonus_card_action"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"points"</span><span class="p">:</span><span class="w"> </span><span class="s2">"201 миля"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"bonus_card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">121</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234567890"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"icon"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://http://api.instamart.ru/v2/public/loyalty_cards_logos/16/mini/aero-img.png"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>Получить выбранную бонусную карту пользователя можно, выполнив запрос:</p>
+<p>Получить выбранную бонусную карту, которая будет применена к заказу, можно, выполнив запрос:</p>
 
 <p><code>GET http://api.instamart.ru/v2/orders/#{number}/bonus_card_action</code></p>
 
@@ -4913,20 +4941,24 @@ API обратно совместимо со старой версией API и 
   <tbody>
     <tr>
       <td>id</td>
-      <td>Идентификатор бонусной карты</td>
+      <td>ID бонусной карты</td>
     </tr>
     <tr>
       <td>number</td>
       <td>Номер бонусной карты</td>
     </tr>
     <tr>
-      <td>bonus_program_id</td>
-      <td>Идентификатор бонусной программы</td>
+      <td>name</td>
+      <td>Наименование бонусной программы</td>
+    </tr>
+    <tr>
+      <td>icon</td>
+      <td>Логотип бонусной программы</td>
     </tr>
   </tbody>
 </table>
 
-<h3 id="vybor-bonusnoi-karty-kotoraia-budiet-primieniena-k-zakazu">Выбор бонусной карты, которая будет применена к заказу</h3>
+<h2 id="vybor-bonusnoi-karty">Выбор бонусной карты</h2>
 
 <pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/orders/R010203/bonus_card_action"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
@@ -4938,11 +4970,13 @@ API обратно совместимо со старой версией API и 
 </blockquote>
 
 <pre class="highlight json"><code><span class="w">  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"points"</span><span class="p">:</span><span class="w"> </span><span class="s2">"201 миля"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"bonus_card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">121</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234567890"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"bonus_program_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="nt">"bonus_card_action"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"points"</span><span class="p">:</span><span class="w"> </span><span class="s2">"201 миля"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"bonus_card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">121</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234567890"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"bonus_program_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -4970,54 +5004,8 @@ API обратно совместимо со старой версией API и 
     </tr>
     <tr>
       <td>bonus_card_id</td>
-      <td>Идентификатор бонусной карты</td>
+      <td>ID бонусной карты</td>
       <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Параметры ответа:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Параметр</th>
-      <th>Описание</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>points</td>
-      <td>Количество начисляемых баллов по карте</td>
-    </tr>
-    <tr>
-      <td>bonus_card</td>
-      <td>Описание бонусной карты</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Структура объекта bonus_card:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Параметр</th>
-      <th>Описание</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>id</td>
-      <td>Идентификатор бонусной карты</td>
-    </tr>
-    <tr>
-      <td>number</td>
-      <td>Номер бонусной карты</td>
-    </tr>
-    <tr>
-      <td>bonus_program_id</td>
-      <td>Идентификатор бонусной программы</td>
     </tr>
   </tbody>
 </table>
@@ -5027,7 +5015,7 @@ API обратно совместимо со старой версией API и 
 до завершения заказа.
 </aside>
 
-<h3 id="otmiena-vybora-bonusnoi-karty">Отмена выбора бонусной карты</h3>
+<h2 id="otmiena-vybora-bonusnoi-karty">Отмена выбора бонусной карты</h2>
 
 <pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/orders/R010203/bonus_card_action"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
@@ -5038,7 +5026,7 @@ API обратно совместимо со старой версией API и 
   <p>Ответ вернет результат с кодом 200</p>
 </blockquote>
 
-<p>Для отмены применения бонусной карты необходимо выполнить запрос:</p>
+<p>Для отмены выбора бонусной карты необходимо выполнить запрос:</p>
 
 <p><code>DELETE http://api.instamart.ru/v2/orders/#{number}/bonus_card_action</code></p>
 
@@ -5063,7 +5051,7 @@ API обратно совместимо со старой версией API и 
 
           <h1 id="karty-loialnosti-ritieilierov">Карты лояльности ритейлеров</h1>
 
-<h2 id="api-vozmozhnykh-tipov-kart-loialnosti-ritieilierov">API возможных типов карт лояльности ритейлеров</h2>
+<h2 id="spisok-proghramm-loialnosti">Список программ лояльности</h2>
 
 <pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/retailer_loyalty_programs"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
@@ -5100,7 +5088,7 @@ API обратно совместимо со старой версией API и 
   <tbody>
     <tr>
       <td>id</td>
-      <td>Идентификатор программы лояльности ритейлеров</td>
+      <td>ID программы лояльности ритейлеров</td>
     </tr>
     <tr>
       <td>name</td>
@@ -5113,7 +5101,7 @@ API обратно совместимо со старой версией API и 
   </tbody>
 </table>
 
-<h2 id="api-prosmotra-i-dobavlieniia-kart-loialnosti-ritieilierov">API просмотра и добавления карт лояльности ритейлеров</h2>
+<h2 id="spisok-kart-loialnosti">Список карт лояльности</h2>
 
 <pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/retailer_loyalty_cards"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
@@ -5126,7 +5114,10 @@ API обратно совместимо со старой версией API и 
     </span><span class="nt">"retailer_loyalty_cards"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
       </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
       </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"34567890"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"retailer_loyalty_program_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ВкусВилл"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"icon"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://http://api.instamart.ru/v2/public/loyalty_cards_logos/16/mini/vkusvill.svg"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">}]</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -5147,20 +5138,24 @@ API обратно совместимо со старой версией API и 
   <tbody>
     <tr>
       <td>id</td>
-      <td>Идентификатор карты</td>
+      <td>ID карты</td>
     </tr>
     <tr>
       <td>number</td>
       <td>Номер карты лояльности ритейлеров</td>
     </tr>
     <tr>
-      <td>retailer_loyalty_program_id</td>
-      <td>Идентификатор программы лояльности ритейлера</td>
+      <td>name</td>
+      <td>Наименование программы лояльности ритейлеров</td>
+    </tr>
+    <tr>
+      <td>icon</td>
+      <td>Логотип программы лояльности ритейлеров</td>
     </tr>
   </tbody>
 </table>
 
-<h3 id="dobavlieniie-karty-loialnosti-ritieiliera">Добавление карты лояльности ритейлера</h3>
+<h2 id="dobavlieniie-karty-loialnosti">Добавление карты лояльности</h2>
 
 <pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/retailer_loyalty_cards"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
@@ -5176,7 +5171,10 @@ API обратно совместимо со старой версией API и 
     </span><span class="nt">"retailer_loyalty_card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">121</span><span class="p">,</span><span class="w">
       </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234567890"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"retailer_loyalty_program_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ВкусВилл"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"icon"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://http://api.instamart.ru/v2/public/loyalty_cards_logos/16/mini/vkusvill.svg"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -5203,37 +5201,12 @@ API обратно совместимо со старой версией API и 
     <tr>
       <td>retailer_loyalty_card[retailer_loyalty_program_id]</td>
       <td>Да</td>
-      <td>Идентификатор программы лояльности ритейлера</td>
+      <td>ID программы лояльности ритейлера</td>
     </tr>
   </tbody>
 </table>
 
-<p>Параметры ответа:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Параметр</th>
-      <th>Описание</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>id</td>
-      <td>Идентификатор карты лояльности ритейлера</td>
-    </tr>
-    <tr>
-      <td>number</td>
-      <td>Номер карты лояльности ритейлера</td>
-    </tr>
-    <tr>
-      <td>retailer_loyalty_program_id</td>
-      <td>Идентификатор программы лояльности ритейлера</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="obnovlieniie-dannykh-karty-loialnosti-ritieiliera">Обновление данных карты лояльности ритейлера</h3>
+<h2 id="obnovlieniie-karty-loialnosti">Обновление карты лояльности</h2>
 
 <pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/retailer_loyalty_cards/123"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
@@ -5248,7 +5221,10 @@ API обратно совместимо со старой версией API и 
     </span><span class="nt">"retailer_loyalty_card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">121</span><span class="p">,</span><span class="w">
       </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234567890"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"retailer_loyalty_program_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ВкусВилл"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"icon"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://http://api.instamart.ru/v2/public/loyalty_cards_logos/16/mini/vkusvill.svg"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -5270,7 +5246,7 @@ API обратно совместимо со старой версией API и 
     <tr>
       <td>id</td>
       <td>Да</td>
-      <td>Идентификатор карты лояльности ритейлера</td>
+      <td>ID карты лояльности ритейлера</td>
     </tr>
     <tr>
       <td>retailer_loyalty_card[number]</td>
@@ -5280,32 +5256,7 @@ API обратно совместимо со старой версией API и 
   </tbody>
 </table>
 
-<p>Параметры ответа:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Параметр</th>
-      <th>Описание</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>id</td>
-      <td>Идентификатор карты лояльности ритейлера</td>
-    </tr>
-    <tr>
-      <td>number</td>
-      <td>Номер карты лояльности ритейлера</td>
-    </tr>
-    <tr>
-      <td>retailer_loyalty_program_id</td>
-      <td>Идентификатор программы лояльности ритейлера</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="udalieniie-karty-loialnosti-ritieiliera">Удаление карты лояльности ритейлера</h3>
+<h2 id="udalieniie-karty-loialnosti">Удаление карты лояльности</h2>
 
 <pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/retailer_loyalty_cards/123"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
@@ -5334,12 +5285,12 @@ API обратно совместимо со старой версией API и 
     <tr>
       <td>id</td>
       <td>Да</td>
-      <td>Идентификатор карты лояльности ритейлера</td>
+      <td>ID карты лояльности ритейлера</td>
     </tr>
   </tbody>
 </table>
 
-<h2 id="api-dlia-poluchieniia-kart-i-tipov-kart-kotoryie-mozhno-primienit-k-dannomu-podzakazu-shipment">API для получения карт и типов карт, которые можно применить к данному подзаказу (Shipment)</h2>
+<h2 id="spisok-kart-ritieilierov-primienimykh-k-podzakazu">Список карт ритейлеров, применимых к подзаказу</h2>
 
 <pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/retailer_loyalty_cards?shipment_number=H0123456"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
@@ -5352,7 +5303,10 @@ API обратно совместимо со старой версией API и 
     </span><span class="nt">"retailer_loyalty_cards"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
       </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
       </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"34567890"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"retailer_loyalty_program_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ВкусВилл"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"icon"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://http://api.instamart.ru/v2/public/loyalty_cards_logos/16/mini/vkusvill.svg"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">}]</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -5392,20 +5346,24 @@ API обратно совместимо со старой версией API и 
   <tbody>
     <tr>
       <td>id</td>
-      <td>Идентификатор карты</td>
+      <td>ID карты лояльности</td>
     </tr>
     <tr>
       <td>number</td>
       <td>Номер карты лояльности ритейлеров</td>
     </tr>
     <tr>
-      <td>retailer_loyalty_program_id</td>
-      <td>Идентификатор программы лояльности ритейлера</td>
+      <td>name</td>
+      <td>Наименование программы лояльности ритейлера</td>
+    </tr>
+    <tr>
+      <td>icon</td>
+      <td>Логотип программы лояльности ритейлера</td>
     </tr>
   </tbody>
 </table>
 
-<h3 id="spisok-proghramm-loialnosti-kotoryie-moghu-byt-primienieny-k-dannomu-podzakazu">Список программ лояльности, которые могу быть применены к данному подзаказу:</h3>
+<h2 id="spisok-proghramm-ritieilierov-primienimykh-k-podzakazu">Список программ ритейлеров, применимых к подзаказу</h2>
 
 <pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2retailer_loyalty_programs?shipment_number=H3234567"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
@@ -5425,6 +5383,9 @@ API обратно совместимо со старой версией API и 
     </span><span class="p">}]</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span></code></pre>
+<aside class="notice">
+К каждому подзаказу в составе заказа может быть применена максимум одна карта лояльности ритейлера
+</aside>
 
 <p>Получить список программ лояльности, которые могут быть применены к подзаказу, можно, выполнив запрос:</p>
 
@@ -5461,7 +5422,7 @@ API обратно совместимо со старой версией API и 
   <tbody>
     <tr>
       <td>id</td>
-      <td>Идентификатор программы лояльности ритейлера</td>
+      <td>ID программы лояльности ритейлера</td>
     </tr>
     <tr>
       <td>name</td>
@@ -5474,11 +5435,7 @@ API обратно совместимо со старой версией API и 
   </tbody>
 </table>
 
-<h2 id="api-primienieniia-kart-k-podzakazu">API применения карт к подзаказу</h2>
-
-<p>К каждому подзаказу в составе заказа может быть применена максимум одна карта лояльности ритейлера</p>
-
-<h3 id="poluchieniie-dannykh-po-kartie-loialnosti-ritieiliera-kotoraia-budiet-primieniena-k-podzakazu">Получение данных по карте лояльности ритейлера, которая будет применена к подзаказу:</h3>
+<h2 id="zapros-vybrannoi-karty-loialnosti">Запрос выбранной карты лояльности</h2>
 
 <pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/shipments/H0123413/retailer_loyalty_card_action"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
@@ -5488,12 +5445,17 @@ API обратно совместимо со старой версией API и 
 </blockquote>
 
 <pre class="highlight json"><code><span class="w">  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"points"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"retailer_loyalty_card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"34567890"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"retailer_loyalty_program_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-     </span><span class="p">}</span><span class="w">
+    </span><span class="nt">"retailer_loyalty_card_action"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"points"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"retailer_loyalty_card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"34567890"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ВкусВилл"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"icon"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://http://api.instamart.ru/v2/public/loyalty_cards_logos/16/mini/vkusvill.svg"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -5546,32 +5508,7 @@ API обратно совместимо со старой версией API и 
   </tbody>
 </table>
 
-<p>Структура объекта retailer_loyalty_card:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Параметр</th>
-      <th>Описание</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>id</td>
-      <td>Идентификатор карты лояльности ритейлера</td>
-    </tr>
-    <tr>
-      <td>number</td>
-      <td>Номер карты лояльности ритейлера</td>
-    </tr>
-    <tr>
-      <td>retailer_loyalty_program_id</td>
-      <td>Идентификатор программы лояльности ритейлера</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="vybor-karty-loialnosti-rietieiliera-kotoraia-biediet-primieniena-k-podzakazu">Выбор карты лояльности ретейлера, которая бедет применена к подзаказу</h3>
+<h2 id="vybor-karty-loialnosti">Выбор карты лояльности</h2>
 
 <pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/shipments/H0123412/retailer_loyalty_card_action"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
@@ -5583,12 +5520,17 @@ API обратно совместимо со старой версией API и 
 </blockquote>
 
 <pre class="highlight json"><code><span class="w">  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"points"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"retailer_loyalty_card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"34567890"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"retailer_loyalty_program_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-     </span><span class="p">}</span><span class="w">
+    </span><span class="nt">"retailer_loyalty_card_action"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"points"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"retailer_loyalty_card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"34567890"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ВкусВилл"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"icon"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://http://api.instamart.ru/v2/public/loyalty_cards_logos/16/mini/vkusvill.svg"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -5615,64 +5557,13 @@ API обратно совместимо со старой версией API и 
     </tr>
     <tr>
       <td>retailer_loyalty_card_id</td>
-      <td>Идентификатор карты лояльности ритейлера</td>
+      <td>ID карты лояльности ритейлера</td>
       <td> </td>
     </tr>
   </tbody>
 </table>
 
-<p>Параметры ответа:</p>
-
-<aside class="notice">
-Значение `null` для параметра `points` означает, что данные по количеству начисляемых баллов
-по карте недоступны
-</aside>
-
-<table>
-  <thead>
-    <tr>
-      <th>Параметр</th>
-      <th>Описание</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>points</td>
-      <td>Количество начисляемых баллов по карте</td>
-    </tr>
-    <tr>
-      <td>retailer_loyalty_card</td>
-      <td>Описание карты лояльности</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Структура объекта retailer_loyalty_card:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Параметр</th>
-      <th>Описание</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>id</td>
-      <td>Идентификатор карты лояльности</td>
-    </tr>
-    <tr>
-      <td>number</td>
-      <td>Номер карты лояльности ритейлера</td>
-    </tr>
-    <tr>
-      <td>retailer_loyalty_program_id</td>
-      <td>Идентификатор программы лояльности ритейлера</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="otmiena-vybora-karty-loialnosti-ritieiliera">Отмена выбора карты лояльности ритейлера</h3>
+<h2 id="otmiena-vybora-karty-loialnosti">Отмена выбора карты лояльности</h2>
 
 <pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/shipments/H0123412/retailer_loyalty_card_action"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
@@ -5683,7 +5574,7 @@ API обратно совместимо со старой версией API и 
   <p>Ответ вернет результат с кодом 200</p>
 </blockquote>
 
-<p>Для отмены применения карты лояльности необходимо выполнить запрос:</p>
+<p>Для отмены выбора карты лояльности необходимо выполнить запрос:</p>
 
 <p><code>DELETE http://api.instamart.ru/v2/shipments/#{number}/retailer_loyalty_card_action</code></p>
 
