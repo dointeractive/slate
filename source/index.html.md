@@ -37,6 +37,7 @@ includes:
   - credit_card
   - flags
   - errors
+  - favorites
 
 search: true
 ---
