@@ -23,6 +23,7 @@ includes:
   - purchased_products
   - search
   - replacement_policies
+  - promotion_codes
   - orders
   - shipping_methods
   - delivery_windows

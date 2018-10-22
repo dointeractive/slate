@@ -1,0 +1,23 @@
+# Промокоды
+
+## Информация о промокоде
+
+```shell
+curl "<%= config[:host] %>/promotion_codes/#{CODE}"
+```
+
+Получить информацию о промокоде можно, выполнив запрос:
+
+`GET <%= config[:host] %>/promotion_codes/#{CODE}`
+
+
+> Команда возвращает JSON:
+
+```json
+{
+  "promotion_code": {
+    "value": "12345",
+    "description": "Суперскидка"
+  }
+}
+```
