@@ -4,7 +4,7 @@
 
 ```shell
 curl "<%= config[:host] %>/orders/unrated" \
-  -H "Authorization: Token token=#{TOKEN}" 
+  -H "Authorization: Token token=#{TOKEN}"
 ```
 
 Получить список заказов без отзывов можно, выполнив запрос:
@@ -13,21 +13,96 @@ curl "<%= config[:host] %>/orders/unrated" \
 
 Запрос вернет заказы, завершеные не позднее 10 дней назад
 
+## Получение списка возможных проблем
+
+```shell
+curl "<%= config[:host] %>/orders/C36324/review_issues" \
+  -H "Authorization: Token token=#{TOKEN}"
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+{
+  "review_issues": [
+    {
+      "id": 14959,
+      "position": "1",
+      "description": "Курьер опоздал"
+    },
+    {
+      "id": 14960,
+      "position": "2",
+      "description": "У курьера не было сдачи"
+    },
+    {
+      "id": 14961,
+      "position": "3",
+      "description": "Качество или срок годности"
+    }
+  ]
+}
+```
+
+Предлагаемые отзывы собираются на основе заказа, напр. анализируя форму оплаты для конкретного заказа:
+
+`GET <%= config[:host] %>/orders/#{ORDER_NUMBER}/review_issues`
+
 ## Создание отзыва
 
 ```shell
 curl "<%= config[:host] %>/orders/C36324/reviews" \
   -H "Authorization: Token token=#{TOKEN}" \
-  -d review[rate]=2
-  -d review[comment]='В коробку с заказом пролился отбеливатель'
+  -F review[rate]=2 \
+  -F review[issue_ids][]=14959 \
+  -F review[issue_ids][]=14960 \
+  -F review[images_attributes][][attachment]=@/home/user/rate.jpg \
+  -F review[images_attributes][][attachment]=@/home/user/rate2.jpg \
+  -F review[comment]='В коробку с заказом пролился отбеливатель' \
   -X POST
+```
+
+> В случае успешного создания отзыва сервер вернет ответ:
+
+```json
+{
+    "order_review": {
+        "id": 7013,
+        "rate": 2,
+        "comment": "Тут будет комментарий пользователя при наличии",
+        "issues": [
+            {
+                "id": 1,
+                "position": 1,
+                "description": "Курьер опоздал"
+            },
+            {
+                "id": 2,
+                "position": 2,
+                "description": "Курьер был невежлив"
+            }
+        ],
+        "images": [
+            {
+                "original_url": "https://instamart.ru/spree/order_reviews/#{ORDER_REVIEW_ID}/original_url/example.jpg?1539940260"
+            },
+            {
+                "original_url": "https://instamart.ru/spree/order_reviews/#{ORDER_REVIEW_ID}/original_url/example2.jpg?1539940260"
+            }
+        ]
+    }
+}
 ```
 
 Добавить отзыв к заказу можно, выполнив запрос:
 
-`GET <%= config[:host] %>/orders/#{ORDER_NUMBER}/reviews`
+`POST <%= config[:host] %>/orders/#{ORDER_NUMBER}/reviews`
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
 review[rate] | Да | Оценка
+review[issue_ids] | - | Список выбранных вариантов ответа
+review[images_attributes] | - | Прикрепленные изображения
 review[comment] | - | Комментарий
+
+Также необходимо учитывать, что данные передаются в режиме multipart/form-data для передачи файлов серверу
