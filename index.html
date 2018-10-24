@@ -2721,6 +2721,29 @@ API обратно совместимо со старой версией API и 
 
 <p><code>GET http://api.instamart.ru/v2/replacement_policies</code></p>
 
+          <h1 id="promokody">Промокоды</h1>
+
+<h2 id="informatsiia-o-promokodie">Информация о промокоде</h2>
+
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/promotion_codes/#{CODE}"</span>
+</code></pre>
+
+<p>Получить информацию о промокоде можно, выполнив запрос:</p>
+
+<p><code>GET http://api.instamart.ru/v2/promotion_codes/#{CODE}</code></p>
+
+<blockquote>
+  <p>Команда возвращает JSON:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"promotion_code"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Суперскидка"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
           <h1 id="zakazy">Заказы</h1>
 
 <h2 id="sozdaniie-novogho-zakaza">Создание нового заказа</h2>
@@ -5808,7 +5831,7 @@ API обратно совместимо со старой версией API и 
 <h2 id="poluchieniie-spiska-zakazov-biez-otzyvov">Получение списка заказов без отзывов</h2>
 
 <pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/orders/unrated"</span> <span class="se">\</span>
-  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> 
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
 </code></pre>
 
 <p>Получить список заказов без отзывов можно, выполнив запрос:</p>
@@ -5817,18 +5840,90 @@ API обратно совместимо со старой версией API и 
 
 <p>Запрос вернет заказы, завершеные не позднее 10 дней назад</p>
 
+<h2 id="poluchieniie-spiska-vozmozhnykh-probliem">Получение списка возможных проблем</h2>
+
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/orders/C36324/review_issues"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
+</code></pre>
+
+<blockquote>
+  <p>Ответ будет содержать следующие данные:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"review_issues"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">14959</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"position"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Курьер опоздал"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">14960</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"position"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"У курьера не было сдачи"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">14961</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"position"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Качество или срок годности"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Предлагаемые отзывы собираются на основе заказа, напр. анализируя форму оплаты для конкретного заказа:</p>
+
+<p><code>GET http://api.instamart.ru/v2/orders/#{ORDER_NUMBER}/review_issues</code></p>
+
 <h2 id="sozdaniie-otzyva">Создание отзыва</h2>
 
 <pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/orders/C36324/reviews"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
-  -d review[rate]<span class="o">=</span>2
-  -d review[comment]<span class="o">=</span><span class="s1">'В коробку с заказом пролился отбеливатель'</span>
+  -F review[rate]<span class="o">=</span>2 <span class="se">\</span>
+  -F review[issue_ids][]<span class="o">=</span>14959 <span class="se">\</span>
+  -F review[issue_ids][]<span class="o">=</span>14960 <span class="se">\</span>
+  -F review[images_attributes][][attachment]<span class="o">=</span>@/home/user/rate.jpg <span class="se">\</span>
+  -F review[images_attributes][][attachment]<span class="o">=</span>@/home/user/rate2.jpg <span class="se">\</span>
+  -F review[comment]<span class="o">=</span><span class="s1">'В коробку с заказом пролился отбеливатель'</span> <span class="se">\</span>
   -X POST
 </code></pre>
 
+<blockquote>
+  <p>В случае успешного создания отзыва сервер вернет ответ:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"order_review"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7013</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Тут будет комментарий пользователя при наличии"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"issues"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Курьер опоздал"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Курьер был невежлив"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"original_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://instamart.ru/spree/order_reviews/#{ORDER_REVIEW_ID}/original_url/example.jpg?1539940260"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"original_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://instamart.ru/spree/order_reviews/#{ORDER_REVIEW_ID}/original_url/example2.jpg?1539940260"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
 <p>Добавить отзыв к заказу можно, выполнив запрос:</p>
 
-<p><code>GET http://api.instamart.ru/v2/orders/#{ORDER_NUMBER}/reviews</code></p>
+<p><code>POST http://api.instamart.ru/v2/orders/#{ORDER_NUMBER}/reviews</code></p>
 
 <table>
   <thead>
@@ -5845,12 +5940,24 @@ API обратно совместимо со старой версией API и 
       <td>Оценка</td>
     </tr>
     <tr>
+      <td>review[issue_ids]</td>
+      <td>-</td>
+      <td>Список выбранных вариантов ответа</td>
+    </tr>
+    <tr>
+      <td>review[images_attributes]</td>
+      <td>-</td>
+      <td>Прикрепленные изображения</td>
+    </tr>
+    <tr>
       <td>review[comment]</td>
       <td>-</td>
       <td>Комментарий</td>
     </tr>
   </tbody>
 </table>
+
+<p>Также необходимо учитывать, что данные передаются в режиме multipart/form-data для передачи файлов серверу</p>
 
           <h1 id="otzyv-o-prilozhienii">Отзыв о приложении</h1>
 
