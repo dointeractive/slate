@@ -41,7 +41,7 @@ curl "<%= config[:host] %>/orders" \
 curl "<%= config[:host] %>/orders" -X POST
 ```
 
-Создать новый заказ можно, выполнив следующий запрос:
+Создать новый заказ можно выполнив следующий запрос:
 
 `POST <%= config[:host] %>/orders`
 
@@ -251,7 +251,7 @@ curl "<%= config[:host] %>/orders/C27387-16"
 }
 ```
 
-Получить заказ можно, выполнив запрос:
+Получить заказ можно выполнив запрос:
 `GET <%= config[:host] %>/orders/#{NUMBER}`
 
 ### Параметры запроса
@@ -295,7 +295,7 @@ curl "<%= config[:host] %>/orders/current" \
 }
 ```
 
-Получить текущий заказ пользователя можно, выполнив запрос:
+Получить текущий заказ пользователя можно выполнив запрос:
 `GET <%= config[:host] %>/orders/current`
 
 В случае, если у пользователя нет текущего заказа, данный запрос вернет ошибку с кодом `404`
@@ -365,7 +365,7 @@ curl "<%= config[:host] %>/orders?status=canceled" \
 }
 ```
 
-Получить все заказы пользователя можно, выполнив запрос:
+Получить все заказы пользователя можно выполнив запрос:
 `GET <%= config[:host] %>/orders`
 
 Параметр | Обязательный | Описание
@@ -544,11 +544,148 @@ curl "<%= config[:host] %>/orders/R314234460/line_items" \
 }
 ```
 
-Получить все позиции заказа пользователя можно, выполнив запросы:
+Получить все позиции заказа пользователя можно выполнив запросы:
 
 `GET <%= config[:host] %>/orders/#{ORDER_NUMBER}/line_items`
 
 `GET <%= config[:host] %>/shipments/#{SHIPMENT_NUMBER}/line_items`
+
+
+## Получение списка отмененных позиций заказа
+
+> Пример команды:
+
+```shell
+curl "<%= config[:host] %>/orders/R314234460/line_item_cancellations" \
+  -H "Authorization: Token token=#{TOKEN}"
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+{
+  "line_item_cancellations": [
+    {
+      "line_item": {
+        "id": 4,
+        "quantity": 6,
+        "price": 1136.7,
+        "total": 6820.2,
+        "customer_comment": null,
+        "product_in_stock": true,
+        "product": {
+          "id": 20,
+          "sku": "10020",
+          "name": "Product #19",
+          "price": 1136.7,
+          "original_price": 1236.7,
+          "discount": 100,
+          "human_volume": "100 г. x 6",
+          "items_per_pack": 6,
+          "images": []
+        }
+      }
+    },
+    {
+      "line_item": {
+        ...
+      }
+    }
+  ]
+}
+```
+
+Получить отмененные позиции заказа пользователя можно выполнив запросы:
+
+`GET <%= config[:host] %>/orders/#{ORDER_NUMBER}/line_item_cancellations`
+
+`GET <%= config[:host] %>/shipments/#{SHIPMENT_NUMBER}/line_item_cancellations`
+
+
+### Структура объекта LineItemCancellation
+
+Атрибут | Описание
+--------- | -----------
+line_item | Отмененная позиция из заказа
+
+## Получение списка замененных позиций заказа
+
+> Пример команды:
+
+```shell
+curl "<%= config[:host] %>/orders/R314234460/line_item_replacements" \
+  -H "Authorization: Token token=#{TOKEN}"
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+{
+  "line_item_replacements": [
+    {
+      "from_item": {
+        "id": 3,
+        "quantity": 1,
+        "price": 1136.7,
+        "total": 1136.7,
+        "customer_comment": null,
+        "product_in_stock": true,
+        "product": {
+          "id": 12,
+          "sku": "10012",
+          "name": "Product #11",
+          "price": 1136.7,
+          "original_price": 1236.7,
+          "discount": 100,
+          "human_volume": "100 г.",
+          "items_per_pack": 1,
+          "images": []
+        }
+      },
+      "to_item": {
+        "id": 35,
+        "quantity": 1,
+        "price": 1000,
+        "total": 1000,
+        "customer_comment": null,
+        "product_in_stock": true,
+        "product": {
+          "id": 20,
+          "sku": "10020",
+          "name": "Product #19",
+          "price": 1136.7,
+          "original_price": 1236.7,
+          "discount": 100,
+          "human_volume": "100 г. x 6",
+          "items_per_pack": 6,
+          "images": []
+        }
+      }
+    },
+    {
+      "from_item": {
+        ...
+      },
+      "to_item": {
+        ...
+      }
+    }
+  ]
+}
+```
+
+Получить замененные позиции заказа пользователя можно выполнив запросы:
+
+`GET <%= config[:host] %>/orders/#{ORDER_NUMBER}/line_item_replacements`
+
+`GET <%= config[:host] %>/shipments/#{SHIPMENT_NUMBER}/line_item_replacements`
+
+### Структура объекта LineItemReplacement
+
+Атрибут | Описание
+--------- | -----------
+from_item | Старая позиция заказа
+to_item | Новая позиция заказа
 
 ## Добавление позиции заказа
 
@@ -588,7 +725,7 @@ curl "<%= config[:host] %>/line_items" \
 }
 ```
 
-Добавить позицию к заказу можно, выполнив запрос:
+Добавить позицию к заказу можно выполнив запрос:
 
 `POST <%= config[:host] %>/line_items`
 
