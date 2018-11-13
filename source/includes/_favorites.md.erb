@@ -1,39 +1,53 @@
-# Избранные товары (избранное)
+# Cписок избранного (Избранные товары)
 
 ## Получение списка избранного
 
 > Пример кода для получения элементов из списка избранного:
 
 ```shell
-curl "<%= config[:host] %>/favorites?sid=1"
+curl "<%= config[:host] %>/favorites_list/items?sid=1"
 ```
 
 > Ответ будет содержать следующие данные:
 
 ```json
 {
-    "favorites": [
+    "items": [
         {
-            "id": 1,
-            "name": "Product #0",
-            "image": null,
+            "id": 2,
+            "name": "Product #2",
             "product": {
-                "id": 1,
-                "sku": "20002",
-                "name": "Product #0",
+                "id": 3,
+                "sku": "20004",
+                "name": "Product #2",
                 "price": 1236.7,
                 "original_price": 1236.7,
                 "discount": 0,
-                "human_volume": "100 г.",
-                "items_per_pack": 1,
-                "images": []
+                "human_volume": "100 г. x 6",
+                "items_per_pack": 6,
+                "images": [
+                    {
+                        "mini_url": "http://im.test/spree/products/6/mini/2.jpg?1542107911",
+                        "small_url": "http://im.test/spree/products/6/small/2.jpg?1542107911",
+                        "product_url": "http://im.test/spree/products/6/product/2.jpg?1542107911",
+                        "preview_url": "http://im.test/spree/products/6/preview/2.jpg?1542107911",
+                        "original_url": "http://im.test/spree/products/6/original/2.jpg?1542107911"
+                    }
+                ]
+            },
+            "image": {
+                "mini_url": "http://im.test/spree/products/6/mini/2.jpg?1542107911",
+                "small_url": "http://im.test/spree/products/6/small/2.jpg?1542107911",
+                "product_url": "http://im.test/spree/products/6/product/2.jpg?1542107911",
+                "preview_url": "http://im.test/spree/products/6/preview/2.jpg?1542107911",
+                "original_url": "http://im.test/spree/products/6/original/2.jpg?1542107911"
             }
         },
         {
-            "id": 2,
+            "id": 3,
             "name": "Product #28",
-            "image": null,
-            "product": null
+            "product": null,
+            "image": null
         }
     ],
     "meta": {
@@ -48,7 +62,7 @@ curl "<%= config[:host] %>/favorites?sid=1"
 
 Перечень элементов из списка избранного можно получить, выполнив запрос:
 
-`GET <%= config[:host] %>/favorites`
+`GET <%= config[:host] %>/favorites_list/items`
 
 Если избранный товар доступен в магазине, то поле `product` элемента списка заполнено
 
@@ -63,18 +77,18 @@ curl "<%= config[:host] %>/favorites?sid=1"
 > Пример кода для добавления элемента в список избранного:
 
 ```shell
- curl "<%= config[:host] %>/favorites" \
+ curl "<%= config[:host] %>/favorites_list/items" \
    -H "Authorization: Token token=#{TOKEN}" \
    -X POST \
-   -d "favorite[product_id]=3"
+   -d "item[product_id]=3"
 ```
 
 > В случае если данные были указаны верно, сервер вернет ответ:
 
 ```json
 {
-    "favorite": {
-        "id": 8,
+    "item": {
+        "id": 2,
         "name": "Product #2",
         "product": {
             "id": 3,
@@ -87,20 +101,20 @@ curl "<%= config[:host] %>/favorites?sid=1"
             "items_per_pack": 6,
             "images": [
                 {
-                    "mini_url": "http://instamart.ru/spree/products/6/mini/2.jpg?1539788944",
-                    "small_url": "http://instamart.ru/spree/products/6/small/2.jpg?1539788944",
-                    "product_url": "http://instamart.ru/spree/products/6/product/2.jpg?1539788944",
-                    "preview_url": "http://instamart.ru/spree/products/6/preview/2.jpg?1539788944",
-                    "original_url": "http://instamart.ru/spree/products/6/original/2.jpg?1539788944"
+                    "mini_url": "http://im.test/spree/products/6/mini/2.jpg?1542107911",
+                    "small_url": "http://im.test/spree/products/6/small/2.jpg?1542107911",
+                    "product_url": "http://im.test/spree/products/6/product/2.jpg?1542107911",
+                    "preview_url": "http://im.test/spree/products/6/preview/2.jpg?1542107911",
+                    "original_url": "http://im.test/spree/products/6/original/2.jpg?1542107911"
                 }
             ]
         },
         "image": {
-            "mini_url": "http://instamart.ru/spree/products/6/mini/2.jpg?1539788944",
-            "small_url": "http://instamart.ru/spree/products/6/small/2.jpg?1539788944",
-            "product_url": "http://instamart.ru/spree/products/6/product/2.jpg?1539788944",
-            "preview_url": "http://instamart.ru/spree/products/6/preview/2.jpg?1539788944",
-            "original_url": "http://instamart.ru/spree/products/6/original/2.jpg?1539788944"
+            "mini_url": "http://im.test/spree/products/6/mini/2.jpg?1542107911",
+            "small_url": "http://im.test/spree/products/6/small/2.jpg?1542107911",
+            "product_url": "http://im.test/spree/products/6/product/2.jpg?1542107911",
+            "preview_url": "http://im.test/spree/products/6/preview/2.jpg?1542107911",
+            "original_url": "http://im.test/spree/products/6/original/2.jpg?1542107911"
         }
     }
 }
@@ -108,20 +122,20 @@ curl "<%= config[:host] %>/favorites?sid=1"
 
 Добавить элемент в список избранного можно, выполнив запрос:
 
-`POST <%= config[:host] %>/favorites`
+`POST <%= config[:host] %>/favorites_list/items`
 
 ### Параметры запроса
 
-Параметр             | Обязательный | Описание
--------------------- | ------------ | --------
-favorite[product_id] | Да           | ИД товара
+Параметр         | Обязательный | Описание
+-----------------| ------------ | --------
+item[product_id] | Да           | ИД товара
 
 ## Удаление элемента из списока избранного
 
 > Пример кода для удаления элемента из списка избранного:
 
 ```shell
-curl "<%= config[:host] %>/favorites/8" \
+curl "<%= config[:host] %>/favorites_list/items/8" \
   -X DELETE
 ```
 
@@ -129,7 +143,7 @@ curl "<%= config[:host] %>/favorites/8" \
 
 Чтобы удалить элемент из списка избранного, необходимо выполнить запрос:
 
-`DELETE <%= config[:host] %>/favorites/#{ID}`
+`DELETE <%= config[:host] %>/favorites_list/items/#{ID}`
 
 ### Параметры запроса
 
