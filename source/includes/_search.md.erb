@@ -1,5 +1,58 @@
 # Поиск
 
+## Популярные запросы
+
+> Пример запроса
+
+```shell
+curl '<%= config[:host] %>/searches/suggestions?sid=1'
+```
+> Ответ будет содержать следующие данные
+
+```json
+{
+    "suggestion": {
+        "searches": [
+            "молоко",
+            "сыр"
+        ],
+        "search_phrases": [
+            {
+                "name": "молоко",
+                "icon": {
+                    "mini_url": "http://instamart.ru/spree/products/5/mini/1.jpg?1540392543",
+                    "small_url": "http://instamart.ru/spree/products/5/small/1.jpg?1540392543",
+                    "product_url": "http://instamart.ru/spree/products/5/product/1.jpg?1540392543",
+                    "preview_url": "http://instamart.ru/spree/products/5/preview/1.jpg?1540392543",
+                    "original_url": "http://instamart.ru/spree/products/5/original/1.jpg?1540392543"
+                }
+            },
+            {
+                "name": "сыр",
+                "icon": {
+                    "mini_url": "http://instamart.ru/assets/noimage/mini.png",
+                    "small_url": "http://instamart.ru/assets/noimage/small.png",
+                    "product_url": "http://instamart.ru/assets/noimage/product.png",
+                    "preview_url": "http://instamart.ru/assets/noimage/preview.png",
+                    "original_url": "http://instamart.ru/assets/noimage/original.png"
+                }
+            }
+        ]
+    }
+}
+```
+
+Для получения списка популярных запросов поиска, выполните:
+
+`GET <%= config[:host] %>/searches/suggestions?sid=SID`
+
+### Параметры запроса
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+`sid` | Да | ID магазина, в котором происходит поиск
+
+
 ## Подсказки поиска
 
 > Пример запроса подсказок, для слова "чай"
@@ -32,7 +85,7 @@ curl '<%= config[:host] %>/searches/suggestions?sid=1&q=%D1%87%D0%B0%D0%B9'
 
 Для получения списка подсказок поиска, выполните запрос:
 
-`GET <%= config[:host] %>/searches/suggestions`
+`GET <%= config[:host] %>/searches/suggestions?sid=SID&q=QUERY`
 
 ### Параметры запроса
 
@@ -40,11 +93,6 @@ curl '<%= config[:host] %>/searches/suggestions?sid=1&q=%D1%87%D0%B0%D0%B9'
 --------- | ------- | -----------
 `sid` | Да | ID магазина, в котором происходит поиск
 `q` | Да | Поисковая фраза
-
-<aside class="notice">
-API обратно совместимо со старой версией API и поддерживает параметр rid - идентификатор ритейлера
-</aside>
-
 
 ## Результаты поиска
 
@@ -162,8 +210,4 @@ multi_select | Выбор множества значений
 `q` | Да | Поисковая фраза
 `page` | -- | Номер страницы с группами (по умолчанию 1)
 filter[#{KEY}][] | -- | Значение фильтра
-
-<aside class="notice">
-API обратно совместимо со старой версией API и поддерживает параметр rid - идентификатор ритейлера
-</aside>
 
