@@ -2503,6 +2503,73 @@ API обратно совместимо со старой версией API и 
 
           <h1 id="poisk">Поиск</h1>
 
+<h2 id="populiarnyie-zaprosy">Популярные запросы</h2>
+
+<blockquote>
+  <p>Пример запроса</p>
+</blockquote>
+
+<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v2/searches/suggestions?sid=1'</span>
+</code></pre>
+<blockquote>
+  <p>Ответ будет содержать следующие данные</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"suggestion"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"searches"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"молоко"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"сыр"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"search_phrases"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"молоко"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"icon"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"mini_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/spree/products/5/mini/1.jpg?1540392543"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"small_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/spree/products/5/small/1.jpg?1540392543"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"product_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/spree/products/5/product/1.jpg?1540392543"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"preview_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/spree/products/5/preview/1.jpg?1540392543"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"original_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/spree/products/5/original/1.jpg?1540392543"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"сыр"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"icon"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"mini_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/assets/noimage/mini.png"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"small_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/assets/noimage/small.png"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"product_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/assets/noimage/product.png"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"preview_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/assets/noimage/preview.png"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"original_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/assets/noimage/original.png"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Для получения списка популярных запросов поиска, выполните:</p>
+
+<p><code>GET http://api.instamart.ru/v2/searches/suggestions?sid=SID</code></p>
+
+<h3 id="paramietry-zaprosa">Параметры запроса</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>sid</code></td>
+      <td>Да</td>
+      <td>ID магазина, в котором происходит поиск</td>
+    </tr>
+  </tbody>
+</table>
+
 <h2 id="podskazki-poiska">Подсказки поиска</h2>
 
 <blockquote>
@@ -2537,9 +2604,9 @@ API обратно совместимо со старой версией API и 
 
 <p>Для получения списка подсказок поиска, выполните запрос:</p>
 
-<p><code>GET http://api.instamart.ru/v2/searches/suggestions</code></p>
+<p><code>GET http://api.instamart.ru/v2/searches/suggestions?sid=SID&amp;q=QUERY</code></p>
 
-<h3 id="paramietry-zaprosa">Параметры запроса</h3>
+<h3 id="paramietry-zaprosa-1">Параметры запроса</h3>
 
 <table>
   <thead>
@@ -2562,10 +2629,6 @@ API обратно совместимо со старой версией API и 
     </tr>
   </tbody>
 </table>
-
-<aside class="notice">
-API обратно совместимо со старой версией API и поддерживает параметр rid - идентификатор ритейлера
-</aside>
 
 <h2 id="riezultaty-poiska">Результаты поиска</h2>
 
@@ -2729,7 +2792,7 @@ API обратно совместимо со старой версией API и 
 
 <p>Название параметра запроса формируется по шаблону <code>filter[#{FACET_KEY}][]</code>, где <code>FACET_KEY</code> это значение поля <code>key</code> из объекта <code>Facet</code>. Например, если мы хотим ограничить поиск только продуктами бренда “Ahmad”, то в параметрах запроса надо передать следующее значение: <code>filter[brand][]=1</code>.</p>
 
-<h3 id="paramietry-zaprosa-1">Параметры запроса</h3>
+<h3 id="paramietry-zaprosa-2">Параметры запроса</h3>
 
 <table>
   <thead>
@@ -2762,10 +2825,6 @@ API обратно совместимо со старой версией API и 
     </tr>
   </tbody>
 </table>
-
-<aside class="notice">
-API обратно совместимо со старой версией API и поддерживает параметр rid - идентификатор ритейлера
-</aside>
 
 
           <h1 id="sposoby-zamien">Способы замен</h1>
