@@ -10,7 +10,6 @@ Vagrant.configure(2) do |config|
     inline: <<-SHELL
       sudo apt-get update
       sudo apt-get install -yq ruby2.0 ruby2.0-dev pkg-config build-essential nodejs git libxml2-dev libxslt-dev
-      sudo apt-get install ruby2.0=2.0.0.484-1ubuntu2 libruby2.0=2.0.0.484-1ubuntu2
       sudo apt-get autoremove -yq
       gem2.0 install --no-ri --no-rdoc bundler
     SHELL
