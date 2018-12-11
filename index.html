@@ -6727,6 +6727,210 @@ API обратно совместимо со старой версией API и 
   </tbody>
 </table>
 
+          <h1 id="cpisok-izbrannogho-izbrannyie-tovary">Cписок избранного (Избранные товары)</h1>
+
+<h2 id="poluchieniie-spiska-izbrannogho">Получение списка избранного</h2>
+
+<blockquote>
+  <p>Пример кода для получения элементов из списка избранного:</p>
+</blockquote>
+
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/favorites_list/items?sid=1"</span>
+</code></pre>
+
+<blockquote>
+  <p>Ответ будет содержать следующие данные:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product #2"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20004"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product #2"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">1236.7</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"original_price"</span><span class="p">:</span><span class="w"> </span><span class="mf">1236.7</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"human_volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100 г. x 6"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"items_per_pack"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="nt">"mini_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://im.test/spree/products/6/mini/2.jpg?1542107911"</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"small_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://im.test/spree/products/6/small/2.jpg?1542107911"</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"product_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://im.test/spree/products/6/product/2.jpg?1542107911"</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"preview_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://im.test/spree/products/6/preview/2.jpg?1542107911"</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"original_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://im.test/spree/products/6/original/2.jpg?1542107911"</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"mini_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://im.test/spree/products/6/mini/2.jpg?1542107911"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"small_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://im.test/spree/products/6/small/2.jpg?1542107911"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"product_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://im.test/spree/products/6/product/2.jpg?1542107911"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"preview_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://im.test/spree/products/6/preview/2.jpg?1542107911"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"original_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://im.test/spree/products/6/original/2.jpg?1542107911"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product #28"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"product"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"current_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"next_page"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"total_pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"per_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"total_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Перечень элементов из списка избранного можно получить, выполнив запрос:</p>
+
+<p><code>GET http://api.instamart.ru/v2/favorites_list/items</code></p>
+
+<p>Если избранный товар доступен в магазине, то поле <code>product</code> элемента списка заполнено</p>
+
+<h3 id="paramietry-zaprosa">Параметры запроса</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>sid</code></td>
+      <td>Да</td>
+      <td>ID магазина для которого будут конкретизироваться элементы списка</td>
+    </tr>
+    <tr>
+      <td><code>type</code></td>
+      <td>Нет</td>
+      <td>Фильтр на тип выводимых элементов списка. Доступные значения:<br /><code>available</code> - элементы списка с доступными товарами в магазине,<br /><code>unavailable</code> - элементы списка с недоступными товарами в магазине</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="dobavlieniie-eliemienta-v-spisok-izbrannogho">Добавление элемента в список избранного</h2>
+
+<blockquote>
+  <p>Пример кода для добавления элемента в список избранного:</p>
+</blockquote>
+
+<pre class="highlight shell"><code> curl <span class="s2">"http://api.instamart.ru/v2/favorites_list/items"</span> <span class="se">\</span>
+   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
+   -X POST <span class="se">\</span>
+   -d <span class="s2">"item[product_id]=3"</span>
+</code></pre>
+
+<blockquote>
+  <p>В случае если данные были указаны верно, сервер вернет ответ:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"item"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product #2"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20004"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product #2"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">1236.7</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"original_price"</span><span class="p">:</span><span class="w"> </span><span class="mf">1236.7</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"human_volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100 г. x 6"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"items_per_pack"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"mini_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://im.test/spree/products/6/mini/2.jpg?1542107911"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"small_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://im.test/spree/products/6/small/2.jpg?1542107911"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"product_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://im.test/spree/products/6/product/2.jpg?1542107911"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"preview_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://im.test/spree/products/6/preview/2.jpg?1542107911"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"original_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://im.test/spree/products/6/original/2.jpg?1542107911"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"mini_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://im.test/spree/products/6/mini/2.jpg?1542107911"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"small_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://im.test/spree/products/6/small/2.jpg?1542107911"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"product_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://im.test/spree/products/6/product/2.jpg?1542107911"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"preview_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://im.test/spree/products/6/preview/2.jpg?1542107911"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"original_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://im.test/spree/products/6/original/2.jpg?1542107911"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Добавить элемент в список избранного можно, выполнив запрос:</p>
+
+<p><code>POST http://api.instamart.ru/v2/favorites_list/items</code></p>
+
+<h3 id="paramietry-zaprosa-1">Параметры запроса</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>item[product_id]</td>
+      <td>Да</td>
+      <td>ИД товара</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="udalieniie-eliemienta-iz-spiska-izbrannogho">Удаление элемента из списка избранного</h2>
+
+<blockquote>
+  <p>Пример кода для удаления элемента из списка избранного:</p>
+</blockquote>
+
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/favorites_list/items/8"</span> <span class="se">\</span>
+  -X DELETE
+</code></pre>
+
+<blockquote>
+  <p>Ответ вернет результат с кодом 200</p>
+</blockquote>
+
+<p>Чтобы удалить элемент из списка избранного, необходимо выполнить запрос:</p>
+
+<p><code>DELETE http://api.instamart.ru/v2/favorites_list/items/#{ID}</code></p>
+
+<h3 id="paramietry-zaprosa-2">Параметры запроса</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ID</td>
+      <td>Да</td>
+      <td>ID элемента списка</td>
+    </tr>
+  </tbody>
+</table>
+
       </div>
       <div class="dark-box">
           <div class="lang-selector">
