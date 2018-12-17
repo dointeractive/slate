@@ -980,16 +980,6 @@ order[replacement_policy_id] | Да | id способа замены
 
 ## Отмена заказа
 
-Чтобы отменить заказ, необходимо выполнить запрос:
-
-`POST <%= config[:host] %>/orders/#{NUMBER}/cancellations`
-
-### Параметры запроса
-
-Параметр | Обязательный | Описание
---------- | ------- | -----------
-reason | Да | Причина отмены
-
 > Пример отмены заказа:
 
 ```shell
@@ -1014,6 +1004,17 @@ curl "<%= config[:host] %>/orders/#{NUMBER}/cancellations" \
 }
 ```
 
+Чтобы отменить заказ, необходимо выполнить запрос:
+
+`POST <%= config[:host] %>/orders/#{NUMBER}/cancellations`
+
+### Параметры запроса
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+reason | Да | Причина отмены
+
+
 ## Завершение заказа
 
 Чтобы завершить заказ, необходимо выполнить запрос:
@@ -1031,3 +1032,79 @@ curl "<%= config[:host] %>/orders/#{NUMBER}/cancellations" \
 Чтобы очистить подзаказ, необходимо выполнить запрос:
 
 `DELETE <%= config[:host] %>/shipments/#{NUMBER}`
+
+## Массовое редактирование позиций заказа
+
+> Пример массового редактирования заказа:
+
+```shell
+curl "<%= config[:host] %>/orders/#{NUMBER}/contents" \
+  -H "Authorization: Token token=#{TOKEN}"
+  -X POST \
+  -d products[41437]=12 \
+  -d products[39548]=10 \
+  -d products[64296]=0
+```
+
+
+> В случае корректного выполнения операции вернется обновленный заказ, как в случае [Получение заказа по номеру](#poluchieniie-zakaza-po-nomieru)
+
+> В случае невозможности обновления части товаров - вернутся необновленные товары с описанием причины (ошибки)
+
+```json
+{
+    "invalid_contents": [
+        {
+            "product": {
+                "id": 41437,
+                "sku": "10001",
+                "name": "Product #1",
+                "price": 1136.7,
+                "original_price": 1236.7,
+                "discount": 100,
+                "human_volume": "100 г. x 6",
+                "items_per_pack": 6,
+                "images": [
+                    {
+                        "mini_url": "http://im.test/spree/products/5/mini/1.jpg?1545060882",
+                        "small_url": "http://im.test/spree/products/5/small/1.jpg?1545060882",
+                        "product_url": "http://im.test/spree/products/5/product/1.jpg?1545060882",
+                        "preview_url": "http://im.test/spree/products/5/preview/1.jpg?1545060882",
+                        "original_url": "http://im.test/spree/products/5/original/1.jpg?1545060882"
+                    }
+                ]
+            },
+            "errors": {
+                "errors": {
+                    "base": [
+                        "Невозможно добавить товар – он был удален из базы"
+                    ]
+                },
+                "error_messages": [
+                    {
+                        "field": "base",
+                        "message": "Невозможно добавить товар – он был удален из базы",
+                        "human_message": "Невозможно добавить товар – он был удален из базы"
+                    }
+                ]
+            }
+        }
+    ]
+}
+```
+
+
+
+Для массового редактирования позиций заказа (вставка, удаление, редактирование) надо выполнить запрос:
+
+`PUT <%= config[:host] %>/orders/#{NUMBER}/contents`
+
+
+### Параметры запроса
+
+Параметр | Описание
+-------- | ------------
+products[#{PRODUCT_ID<sub><i>i</i></sub>}] |Количество товара. <br> Если 0, то товар удаляется из заказа
+
+где PRODUCT_ID<sub><i>i</i></sub> - ID <i>i</i>-го продукта
+
