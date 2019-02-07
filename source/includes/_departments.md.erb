@@ -49,7 +49,7 @@ taxon | отдел "нижнего уровня", не имеет дочерни
 > Пример команды
 
 ```shell
-curl '<%= config[:host] %>/v2/departments?sid=1' \
+curl '<%= config[:host] %>/departments?sid=1' \
 ```
 > Ответ будет содержать следующие данные
 
@@ -100,7 +100,7 @@ curl '<%= config[:host] %>/v2/departments?sid=1' \
 
 Получить выдачу для главной страницы можно, выполнив следующий запрос:
 
-`GET <%= config[:host] %>/v2/departments`
+`GET <%= config[:host] %>/departments`
 
 ### Параметры запроса
 
@@ -122,7 +122,7 @@ API обратно совместимо со старой версией API и 
 > Пример команды
 
 ```shell
-curl '<%= config[:host] %>/v2/departments/174?sid=1' \
+curl '<%= config[:host] %>/departments/174?sid=1' \
 ```
 > Ответ будет содержать следующие данные
 
@@ -166,7 +166,7 @@ curl '<%= config[:host] %>/v2/departments/174?sid=1' \
 
 Получить выдачу страницы каталога можно, выполнив следующий запрос:
 
-`GET <%= config[:host] %>/v2/departments/#{DEPARTMENT_ID}`
+`GET <%= config[:host] %>/departments/#{DEPARTMENT_ID}`
 
 ### Параметры запроса
 
