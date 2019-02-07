@@ -140,7 +140,7 @@
   <p>Пример кода для регистрации нового пользователя:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v2/v2/users'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v2/users'</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
   -d user[email]<span class="o">=</span><span class="c">#{EMAIL} \</span>
   -d user[first_name]<span class="o">=</span><span class="c">#{FIRSTNAME} \</span>
@@ -150,7 +150,7 @@
 
 <p>Зарегистрировать нового пользователя можно, выполнив запрос:</p>
 
-<p><code>POST http://api.instamart.ru/v2/v2/users</code></p>
+<p><code>POST http://api.instamart.ru/v2/users</code></p>
 
 <h3 id="paramietry-zaprosa">Параметры запроса</h3>
 
@@ -197,7 +197,7 @@
   <p>Пример кода для изменения, местоположения пользователя:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v2/v2/users/test@test.com'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v2/users/test@test.com'</span> <span class="se">\</span>
   -H <span class="s1">'Authorization: Token token=#{TOKEN}'</span> <span class="se">\</span>
   -X PUT <span class="se">\</span>
   -d user[location]<span class="o">=</span>Perm
@@ -215,7 +215,7 @@
 
 <p>Изменить данные пользоватeля можно, выполнив следующий запрос:</p>
 
-<p><code>PUT http://api.instamart.ru/v2/v2/users/#{EMAIL}</code></p>
+<p><code>PUT http://api.instamart.ru/v2/users/#{EMAIL}</code></p>
 
 <h3 id="paramietry-zaprosa-1">Параметры запроса</h3>
 
@@ -257,7 +257,7 @@
   <p>Пример кода, чтобы определить зарегистрирован пользователь или нет:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v2/v2/users/test@test.com'</span>
+<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v2/users/test@test.com'</span>
 </code></pre>
 <blockquote>
   <p>Если пользователь существует, ответ будет содержать следующие данные:</p>
@@ -274,7 +274,7 @@
   <p>Если пользователя не существует, сервер вернет ответ с кодом 404.<br />Если в запросе указать заголовок Authorization, то ответ будет содержать дополнительные данные:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v2/v2/users/test@test.com'</span>
+<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v2/users/test@test.com'</span>
   -H <span class="s1">'Authorization: Token token=#{TOKEN}'</span>
 </code></pre>
 
@@ -290,7 +290,7 @@
 </span></code></pre>
 
 <p>Получить данные пользователя можно, выполнив запрос:<br />
-<code>GET http://api.instamart.ru/v2/v2/users/#{EMAIL}</code></p>
+<code>GET http://api.instamart.ru/v2/users/#{EMAIL}</code></p>
 
 <p>Запрос к этому ресурсу можно выполнять как с указанием токена аутентификации так и без. Без указания токена сервер вернет ограниченное количество информации.</p>
 
@@ -458,7 +458,7 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
   <p>Пример кода c запросом на “восстановление пароля”</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v2/v2/passwords/reset'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v2/passwords/reset'</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
   -d password_reset[email]<span class="o">=</span><span class="c">#{EMAIL}</span>
 </code></pre>
@@ -468,7 +468,7 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
 </blockquote>
 
 <p>Отправить пользователю письмо с инструкцией “восстановления пароля” можно, выполнив запрос:<br />
-<code>POST http://api.instamart.ru/v2/v2/passwords/reset</code></p>
+<code>POST http://api.instamart.ru/v2/passwords/reset</code></p>
 
 <p>Письмо будет содержать ссылку на приложение с параметром <code>reset_password_token</code></p>
 
@@ -497,7 +497,7 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
   <p>Пример кода c запросом сброса пароля</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v2/v2/passwords'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v2/passwords'</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
   -d password_reset[reset_password_token]<span class="o">=</span><span class="c">#{TOKEN}</span>
   -d password_reset[password]<span class="o">=</span><span class="c">#{PASSWORD}</span>
@@ -509,7 +509,7 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
 </aside>
 
 <p>Сбросить пароль пользователя можно, выполнив запрос:<br />
-<code>POST http://api.instamart.ru/v2/v2/passwords</code></p>
+<code>POST http://api.instamart.ru/v2/passwords</code></p>
 
 <h3 id="paramietry-zaprosa-1">Параметры запроса</h3>
 
@@ -1982,7 +1982,7 @@ API обратно совместимо со старой версией API и 
   <p>Пример команды</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v2/v2/departments?sid=1'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v2/departments?sid=1'</span> <span class="se">\</span>
 </code></pre>
 <blockquote>
   <p>Ответ будет содержать следующие данные</p>
@@ -2034,7 +2034,7 @@ API обратно совместимо со старой версией API и 
 
 <p>Получить выдачу для главной страницы можно, выполнив следующий запрос:</p>
 
-<p><code>GET http://api.instamart.ru/v2/v2/departments</code></p>
+<p><code>GET http://api.instamart.ru/v2/departments</code></p>
 
 <h3 id="paramietry-zaprosa">Параметры запроса</h3>
 
@@ -2069,7 +2069,7 @@ API обратно совместимо со старой версией API и 
   <p>Пример команды</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v2/v2/departments/174?sid=1'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s1">'http://api.instamart.ru/v2/departments/174?sid=1'</span> <span class="se">\</span>
 </code></pre>
 <blockquote>
   <p>Ответ будет содержать следующие данные</p>
@@ -2114,7 +2114,7 @@ API обратно совместимо со старой версией API и 
 
 <p>Получить выдачу страницы каталога можно, выполнив следующий запрос:</p>
 
-<p><code>GET http://api.instamart.ru/v2/v2/departments/#{DEPARTMENT_ID}</code></p>
+<p><code>GET http://api.instamart.ru/v2/departments/#{DEPARTMENT_ID}</code></p>
 
 <h3 id="paramietry-zaprosa-1">Параметры запроса</h3>
 
@@ -3648,7 +3648,7 @@ API обратно совместимо со старой версией API и 
 
 <p>Чтобы удалить промокод из заказа, необходимо выполнить запрос:</p>
 
-<p><code>DELETE http://api.instamart.ru/v2/v2/orders/#{NUMBER}/promotions/#{PROMOTION_CODE}</code></p>
+<p><code>DELETE http://api.instamart.ru/v2/orders/#{NUMBER}/promotions/#{PROMOTION_CODE}</code></p>
 
 <h3 id="paramietry-zaprosa-2">Параметры запроса</h3>
 
@@ -6605,7 +6605,7 @@ API обратно совместимо со старой версией API и 
 
 <h2 id="poluchieniie-spiska-standartnykh-zhalob">Получение списка стандартных жалоб</h2>
 
-<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/v2/flags"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/flags"</span>
 </code></pre>
 <blockquote>
   <p>Эта комманда возвращает следующий JSON:</p>
@@ -6625,7 +6625,7 @@ API обратно совместимо со старой версией API и 
 
 <p>Стандартный список ошибок можно загрузить, выполнив запрос:</p>
 
-<p><code>GET http://api.instamart.ru/v2/v2/flags</code></p>
+<p><code>GET http://api.instamart.ru/v2/flags</code></p>
 
 <h2 id="otpravka-zhaloby">Отправка жалобы</h2>
 
@@ -6633,7 +6633,7 @@ API обратно совместимо со старой версией API и 
   <p>Пример отправки стандартной жалобы из списка:</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/v2/products/1/flags"</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/products/1/flags"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
   -d product_flag[flag_id]<span class="o">=</span>1
@@ -6643,7 +6643,7 @@ API обратно совместимо со старой версией API и 
   <p>Пример отправки собственной жалобы</p>
 </blockquote>
 
-<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/v2/products/#{PRODUCT_ID}/flags"</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/products/#{PRODUCT_ID}/flags"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
   -d <span class="s2">"product_flag[description]=Слишком высокая цена"</span>
@@ -6655,7 +6655,7 @@ API обратно совместимо со старой версией API и 
 
 <p>Чтобы отправить жалобу на товар, выполните следующий запрос, указав <code>id</code> жалобы:</p>
 
-<p><code>POST http://api.instamart.ru/v2/v2/products/#{PRODUCT_ID}/flags</code></p>
+<p><code>POST http://api.instamart.ru/v2/products/#{PRODUCT_ID}/flags</code></p>
 
 <p>Также, используя этот же URL, можно отправить свой текст жалобы, указав его в параметре <code>description</code></p>
 
