@@ -39,6 +39,7 @@ includes:
   - flags
   - errors
   - favorites_item
+  - assembly_items
 
 search: true
 ---
