@@ -15,51 +15,63 @@ curl "<%= config[:host] %>/shipments/H0123412/assembly_items" \
 {
     "assembly_items": [
         {
-            "sku": "10004",
-            "name": "Product #4",
-            "pcs": 1,
-            "found_pcs": 1,
-            "quantity": 0.5,
-            "found_quantity": 0.5,
+            "sku": "10006",
+            "name": "Product #6",
+            "pcs": 6,
+            "found_pcs": 6,
+            "quantity": "3 кг",
+            "found_quantity": "3 кг",
             "price": 1236.7,
             "new_price": 1236.7,
             "price_type": "per_kilo",
-            "state": "pending",
-            "human_volume": "200 г",
-            "items_per_pack": 1,
-            "image": "/spree/products/12/small/4.jpg?1549977679",
-            "replacement": null
+            "state": "assembled",
+            "human_volume": "200 г x 6",
+            "items_per_pack": 6,
+            "replacement": null,
+            "image": {
+                "mini_url": "http://im.test/spree/products/14/mini/6.jpg?1550146146",
+                "small_url": "http://im.test/spree/products/14/small/6.jpg?1550146146",
+                "product_url": "http://im.test/spree/products/14/product/6.jpg?1550146146",
+                "preview_url": "http://im.test/spree/products/14/preview/6.jpg?1550146146",
+                "original_url": "http://im.test/spree/products/14/original/6.jpg?1550146146"
+            }
         },
         {
-            "sku": "10012",
-            "name": "Product #12",
+            "sku": "10021",
+            "name": "Product #21",
             "pcs": 6,
             "found_pcs": 6,
-            "quantity": 3,
-            "found_quantity": 3,
-            "price": 1136.7,
-            "new_price": 1136.7,
+            "quantity": "3 кг",
+            "found_quantity": "3 кг",
+            "price": 1236.7,
+            "new_price": 1236.7,
             "price_type": "per_kilo",
             "state": "replaced",
             "human_volume": "200 г x 6",
             "items_per_pack": 6,
-            "image": null,
             "replacement": {
                 "sku": "10001",
                 "name": "Product #1",
                 "pcs": 6,
                 "found_pcs": 6,
-                "quantity": 3,
-                "found_quantity": 3,
+                "quantity": null,
+                "found_quantity": null,
                 "price": 1236.7,
                 "new_price": 1236.7,
-                "price_type": "per_kilo",
+                "price_type": "per_pack",
                 "state": "pending",
                 "human_volume": "200 г x 6",
                 "items_per_pack": 6,
-                "image": "/spree/products/9/small/1.jpg?1549977678",
-                "replacement": null
-            }
+                "replacement": null,
+                "image": {
+                    "mini_url": "http://im.test/spree/products/9/mini/1.jpg?1550146142",
+                    "small_url": "http://im.test/spree/products/9/small/1.jpg?1550146142",
+                    "product_url": "http://im.test/spree/products/9/product/1.jpg?1550146142",
+                    "preview_url": "http://im.test/spree/products/9/preview/1.jpg?1550146142",
+                    "original_url": "http://im.test/spree/products/9/original/1.jpg?1550146142"
+                }
+            },
+            "image": null
         }
     ],
     "meta": {
@@ -83,6 +95,11 @@ curl "<%= config[:host] %>/shipments/H0123412/assembly_items" \
 - `canceled` - позиция отменена,
 - `replaced` - позиция заменена,
 - `pending` - к сборке позиции не приступали
+
+Для штучных или упаковочных позиций (`price_type` == "per_item" или `price_type` == "per_pack") поля:
+- `quantity`
+- `found_quantity`
+имеют значения `null`
 
 ### Параметры запроса
 
