@@ -309,6 +309,13 @@ curl "<%= config[:host] %>/orders" \
   -H "Authorization: Token token=#{TOKEN}"
 ```
 
+> Пример команды для получения всех активных заказов:
+
+```shell
+curl "<%= config[:host] %>/orders?status=active" \
+  -H "Authorization: Token token=#{TOKEN}"
+```
+
 > Пример команды для получения всех отмененных заказов:
 
 ```shell
@@ -373,6 +380,7 @@ curl "<%= config[:host] %>/orders?status=canceled" \
 status | Нет | Статус заказа
 
 Параметр "status" используется для фильтрации заказов:
+- "active" - активные (принят, собирается, в пути)
 - "complete" - завершенные
 - "canceled" - отмененные
 
