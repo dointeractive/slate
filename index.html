@@ -3404,6 +3404,14 @@ API обратно совместимо со старой версией API и 
 </code></pre>
 
 <blockquote>
+  <p>Пример команды для получения всех активных заказов:</p>
+</blockquote>
+
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/orders?status=active"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
+</code></pre>
+
+<blockquote>
   <p>Пример команды для получения всех отмененных заказов:</p>
 </blockquote>
 
@@ -3482,6 +3490,7 @@ API обратно совместимо со старой версией API и 
 </table>
 
 <p>Параметр “status” используется для фильтрации заказов:<br />
+- “active” - активные (принят, собирается, в пути)<br />
 - “complete” - завершенные<br />
 - “canceled” - отмененные</p>
 
