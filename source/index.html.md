@@ -25,6 +25,7 @@ includes:
   - replacement_policies
   - promotion_codes
   - orders
+  - shipments
   - shipping_methods
   - delivery_windows
   - payment_tool_types

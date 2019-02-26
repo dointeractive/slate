@@ -1,0 +1,97 @@
+# Подзаказы
+
+## Детализация подзаказа
+
+> Пример кода для получения детализации подзаказа:
+
+```shell
+curl "<%= config[:host] %>/shipments/#{NUMBER}" \
+  -H "Authorization: Token token=#{TOKEN}"
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+{
+    "shipment": {
+        "id": 2,
+        "number": "H10314740870",
+        "cost": "490.0",
+        "item_total": "2473.4",
+        "total": "2963.4",
+        "state": "ready",
+        "initial_cost": "490.0",
+        "item_count": 1,
+        "promo_total": "0.0",
+        "displayed_state": "Заказ принят в работу",
+        "assembly": {
+            "found_item_total": 1,
+            "found_item_count": "2473.4"
+        },
+        "driver": {
+            "name": "Иванов Иван",
+            "phone": "+74956741001"
+        },
+        "delivery_window": {
+            "id": 4,
+            "starts_at": "2019-02-26T18:00:00.000+03:00",
+            "ends_at": "2019-02-26T20:00:00.000+03:00"
+        },
+        "retailer": {
+            "id": 1,
+            "name": "Метро",
+            "slug": "metro",
+            "color": "#003d7a",
+            "logo_background_color": "#003d7a",
+            "logo": "http://im.test/spree/retailer_logos/1/default/1.png?1551180690",
+            "available": true,
+            "environment": null
+        },
+        "address": {
+            "address": {
+                "id": 7,
+                "first_name": "Ivan",
+                "last_name": "Petrov",
+                "full_address": "Москва, Дмитровское шоссе, д 11",
+                "city": "Москва",
+                "street": "Дмитровское шоссе",
+                "building": "д 11",
+                "block": null,
+                "entrance": null,
+                "floor": null,
+                "apartment": null,
+                "comments": null,
+                "lat": "55.8163285",
+                "lon": "37.5744088",
+                "kind": "home",
+                "door_phone": null
+            }
+        },
+        "payment": {
+            "payment": {
+                "number": "XDTWRDPB",
+                "state": "checkout",
+                "is_finalization_needed": false,
+                "finalization_url": null,
+                "payment_method": {
+                    "id": 1,
+                    "name": "Check",
+                    "description": "Pay by check.",
+                    "type": "check"
+                }
+            }
+        },
+        "special_instructions": "Не опазывайте, пожалуйста"
+    }
+}
+```
+
+Чтобы получить детализацию подзаказа, необходимо выполнить запрос:
+
+`GET <%= config[:host] %>/shipments/#{NUMBER}`
+
+## Очистка подзаказа
+
+Чтобы очистить подзаказ, необходимо выполнить запрос:
+
+`DELETE <%= config[:host] %>/shipments/#{NUMBER}`
