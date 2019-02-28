@@ -6840,6 +6840,31 @@ API обратно совместимо со старой версией API и 
   </tbody>
 </table>
 
+<h2 id="poluchieniie-spiska-sku-tovarov-iz-izbrannogho">Получение списка SKU товаров из избранного</h2>
+
+<blockquote>
+  <p>Пример кода для получения элементов из списка избранного:</p>
+</blockquote>
+
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/favorites_list/products_sku"</span>
+</code></pre>
+
+<blockquote>
+  <p>Ответ будет содержать следующие данные:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"products_sku"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"10001"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"10002"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Перечень <code>sku</code> товаров из списка избранного можно получить, выполнив запрос:</p>
+
+<p><code>GET http://api.instamart.ru/v2/favorites_list/products_sku</code></p>
+
 <h2 id="dobavlieniie-eliemienta-v-spisok-izbrannogho">Добавление элемента в список избранного</h2>
 
 <blockquote>
