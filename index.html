@@ -3247,6 +3247,50 @@ API обратно совместимо со старой версией API и 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
+<h2 id="povtor-podzakaza">Повтор подзаказа</h2>
+
+<p>Чтобы повторить подзаказ, необходимо выполнить запрос:</p>
+
+<p><code>POST http://api.instamart.ru/v2/shipments/#{NUMBER}/clones</code></p>
+
+<p>В <code>NUMBER</code> передается номер того подзаказа, который необходимо повторить.</p>
+
+<p>Если у пользователя есть текущий заказ, то позиции повторяемого заказа скопируются в текущий заказ пользователя. Если текущего заказа нет – будет создан новый заказ, содержащий позиции повторяемого заказа.</p>
+
+<blockquote>
+  <p>Пример повтора подзаказа:</p>
+</blockquote>
+
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/shipments/#{NUMBER}/clones"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
+  -X POST
+</code></pre>
+
+<blockquote>
+  <p>В ответе вернется заказ:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"order"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"R314234460"</span><span class="p">,</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+    </span><span class="nt">"shipments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+        </span><span class="nt">"line_items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">548260</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">229.89</span><span class="w">
+            </span><span class="err">...</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
 <h2 id="poluchieniie-zakaza-po-nomieru">Получение заказа по номеру</h2>
 
 <blockquote>
