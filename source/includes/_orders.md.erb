@@ -469,6 +469,72 @@ state | состояние
 - next_deliveries
 - line_items
 
+## Оплата бонусами
+
+Получить условия оплаты бонусами для заказа можно, выполнив запрос:
+
+`GET <%= config[:host] %>/orders/#{NUMBER}/promotion_limits`
+
+> Пример запроса:
+
+```shell
+curl "<%= config[:host] %>/orders/#{NUMBER}/promotion_limits" \
+  -H "Authorization: Token token=#{TOKEN}"
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+  {
+    "promotion_limits": [
+      {
+        "type": "instacoins_value",
+        "max_value": 4500,
+        "step": 50,
+        "max_percentage_payment": 50,
+        "max_amount_payment": 5000,
+        "description_html": "<b>Оплата бонусами</b> не может превышать 50% от общей суммы заказа и не более 5000Р"
+      }
+    ]
+  }
+```
+
+## Применение бонуса
+
+Чтобы применить бонус к заказу, необходимо выполнить запрос:
+
+`POST <%= config[:host] %>/orders/#{NUMBER}/promotions`
+
+### Параметры запроса
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+bonus_amount | Да | Значение бонуса, который планируется потратить на заказ
+
+> Пример пременения бонуса:
+
+```shell
+curl "<%= config[:host] %>/orders/#{NUMBER}/promotions" \
+  -H "Authorization: Token token=#{TOKEN}"
+  -X POST \
+  -d "instacoins_value=1700"
+```
+
+> В ответе вернется обновленный заказ:
+
+```json
+{
+  "order": {
+    "number": "R314234460",
+    "total": 3249.7,
+    "item_total": 3249.7,
+    ...
+    "adjustment_total": -1700.0,
+    "promo_total": -1700.0
+  }
+}
+```
+
 ## Применение промокода
 
 Чтобы применить промокод к заказу, необходимо выполнить запрос:

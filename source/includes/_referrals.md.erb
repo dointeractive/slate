@@ -1,27 +1,98 @@
 # Реферальная программа
 
-> Пример получения реферальной программы пользователя:
+## Общая информация об реферальной программе
+
+Информацю об реферальной программе можно получить, выполнив запрос:
+
+`GET <%= config[:host ] %>/promotions/referral_program`
+
+Доступна даже не зарегистрированным пользователям
+
+> Пример получения инфо об реферальной программы:
 
 ```shell
-curl '<%= config[:host] %>/promotions/referral'
+curl '<%= config[:host] %>/promotions/referral_program'
+```
+
+```json
+{
+  "referral_program": {
+    "ambassador_instacoins": 500,
+    "referral_instacoins": 500,
+    "short_terms": [
+      {
+        "emoji": "text_emoji",
+        "icon_url": null,
+        "html": "По промокоду друг получит <b>500Р</b> на первый заказ в Instamart"
+      },
+      {
+        "emoji": null,
+        "icon_url": "http://instamart.ru/assets/icon_url.png",
+        "html": "Вы получаете <b>500Р</b> на первый заказ каждого приведенного Вами друга в качестве вознаграждения"
+      }
+    ],
+    "links": [
+      {
+        "type": "short_referral_rules",
+        "name": "Краткие сведения",
+        "url": "https://instamart.ru/mobile_pages/referrals/short-info"
+      },
+      {
+        "type": "referral_rules",
+        "name": "Полные правила реферальной программы",
+        "url": "https://instamart.ru/mobile_pages/referrals/rules"
+      }
+    ]
+  }
+}
+```
+
+## Реферальная программа для пользователя
+
+Запросить информацию о состоянии бонусного счета пользователя можно, выполнив запрос:
+
+`GET <%= config[:host ] %>/users/#{EMAIL || UUID}/referral_program`
+
+### Параметры запроса
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+EMAIL || UUID | Да | email или UUID пользователя
+
+```shell
+curl '<%= config[:host] %>/users/#{EMAIL || UUID}/referral_program'
   -H 'Authorization: Token token=#{TOKEN}'
 ```
 
 ```json
 {
-  "referral_promotion": {
-    "title": "Пригласи друга",
-    "summary": "Отправь друзьям ссылку и получи 400р.",
-    "usage_count": 1,
-    "usage_limit": 5,
-    "amount": 100,
+  "user_referral_program": {
     "code": "ABC67CD",
-    "link": "http://instamart.ru/R/ABCD67CD"
+    "share_links": [
+      {
+        "url": "instamart://promotion_code/ABC67CD",
+        "type": "deeplink"
+      },
+      {
+        "url": "https://other_link/ABC67CD",
+        "type": "other_link"
+      }
+    ]
   }
 }
 ```
 
-Реферальную программу пользователя можно получить, выполнив запрос:
+> Если пользователь пока не является участником программы:
 
-`GET <%= config[:host ] %>/promotions/referral`
+```json
+{
+  "user_referral_program": null
+}
+```
 
+## Правила реферальной программы
+
+Для отображении информации о правилах реферальной программы имеются статичные страницы
+
+* **https://instamart.ru/mobile_pages/referrals/short-info** - Краткие сведения о реферальной программе для мобильного приложения
+* **https://instamart.ru/mobile_pages/referrals/rules** - Полные правила реферальной программы

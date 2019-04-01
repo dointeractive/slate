@@ -1,0 +1,34 @@
+# Бонусный счет
+
+Проверить бонусный счет пользователя можно выполнив запрос:
+
+`GET <%= config[:host ] %>/instacoin_account`
+
+> Пример для бонусного счета:
+
+```shell
+curl "<%= config[:host] %>/instacoin_account" \
+  -H "Authorization: Token token=#{TOKEN}"
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+  {
+    "instacoin_account": {
+      "amount": 100,
+      "terms": [
+        {
+          "emoji": "text_emoji",
+          "icon_url": null,
+          "html": "Бонус начислится через 3 дня после того как приведенный друг воспользуется кодовым словом и совершит покупку на сумму от <b>1500Р</b>>"
+        },
+        {
+          "emoji": null,
+          "icon_url": "http://instamart.ru/assets/icon_url.png",
+          "html": "Бонусами можно оплатить до 50% стоимости заказа, но не более <b>5000Р</b>"
+        }
+      ]
+    }
+  }
+```
