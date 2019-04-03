@@ -563,7 +563,7 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
     </span><span class="nt">"referral_instacoins"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
     </span><span class="nt">"short_terms"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"emoji"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text_emoji"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"emoji"</span><span class="p">:</span><span class="w"> </span><span class="s2">"😉"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"icon_url"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
         </span><span class="nt">"html"</span><span class="p">:</span><span class="w"> </span><span class="s2">"По промокоду друг получит &lt;b&gt;500Р&lt;/b&gt; на первый заказ в Instamart"</span><span class="w">
       </span><span class="p">},</span><span class="w">
@@ -656,6 +656,43 @@ curl <span class="s2">"http://api.instamart.ru/v2/sessions"</span> <span class="
   <li><strong>https://instamart.ru/mobile_pages/referrals/short-info</strong> - Краткие сведения о реферальной программе для мобильного приложения</li>
   <li><strong>https://instamart.ru/mobile_pages/referrals/rules</strong> - Полные правила реферальной программы</li>
 </ul>
+
+          <h1 id="bonusnyi-schiet">Бонусный счет</h1>
+
+<p>Проверить бонусный счет пользователя можно выполнив запрос:</p>
+
+<p><code>GET http://api.instamart.ru/v2/instacoin_account</code></p>
+
+<blockquote>
+  <p>Пример для бонусного счета:</p>
+</blockquote>
+
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/instacoin_account"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Token token=#{TOKEN}"</span>
+</code></pre>
+
+<blockquote>
+  <p>Ответ будет содержать следующие данные:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"instacoin_account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"terms"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"emoji"</span><span class="p">:</span><span class="w"> </span><span class="s2">"😉"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"icon_url"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"html"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Бонус начислится через 3 дня после того как приведенный друг воспользуется кодовым словом и совершит покупку на сумму от &lt;b&gt;1500Р&lt;/b&gt;&gt;"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"emoji"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"icon_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/assets/icon_url.png"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"html"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Бонусами можно оплатить до 50% стоимости заказа, но не более &lt;b&gt;5000Р&lt;/b&gt;"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
 
           <h1 id="maghaziny">Магазины</h1>
 
