@@ -12,6 +12,7 @@ includes:
   - authentication
   - passwords
   - referrals
+  - instacoin_account
   - stores
   - retailers
   - addresses
