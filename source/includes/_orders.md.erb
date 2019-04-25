@@ -491,7 +491,7 @@ curl "<%= config[:host] %>/orders/#{NUMBER}/promotion_limits" \
         "type": "instacoins_value",
         "max_value": 4500,
         "step": 50,
-        "max_percentage_payment": 50,
+        "max_payment_percentage": 50,
         "max_payment_amount": 5000,
         "description_html": "<b>Оплата бонусами</b> не может превышать 50% от общей суммы заказа и не более 5000Р"
       }
@@ -509,7 +509,7 @@ curl "<%= config[:host] %>/orders/#{NUMBER}/promotion_limits" \
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
-bonus_amount | Да | Значение бонуса, который планируется потратить на заказ
+instacoins_value | Да | Значение бонуса, который планируется потратить на заказ
 
 > Пример пременения бонуса:
 
