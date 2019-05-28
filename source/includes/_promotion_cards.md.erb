@@ -1,0 +1,46 @@
+# IN-App Баннеры
+
+## Список in-app баннеров
+
+```shell
+curl "<%= config[:host] %>/promotion_cards"
+```
+
+> Команда выше возвращает JSON:
+
+```json
+{
+  "promotion_cards": [
+    {
+      "id": 41,
+      "title": "название",
+      "short_description": "короткое описание в одну фразу",
+      "description": "полное описание, которое <b>может</b содержать HTML>",
+      "background_color": "#000000",
+      "text_color": "#FFFFFF",
+      "image_url": "http://",
+      "type": "link",
+      "promotion_id": null,
+      "link": "instamart://retailer/15/products/2345",
+      "tag": "Скидки"
+    },
+    {
+      "id": 42,
+      "title": "название",
+      "short_description": "короткое описание в одну фразу",
+      "description": "полное описание, которое <b>может</b содержать HTML>",
+      "background_color": "#000000",
+      "text_color": "#FFFFFF",
+      "image_url": "http://",
+      "type": "promo",
+      "link": null,
+      "promotion_id": 10,
+      "tag": "Новинки"
+    }
+  ]
+}
+```
+
+Получить список in-app баннеров можно, выполнив запрос:
+
+`GET <%= config[:host] %>/promotion_cards`

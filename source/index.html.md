@@ -24,7 +24,9 @@ includes:
   - purchased_products
   - search
   - replacement_policies
+  - promotion_cards
   - promotion_codes
+  - promotions
   - orders
   - shipping_methods
   - delivery_windows
