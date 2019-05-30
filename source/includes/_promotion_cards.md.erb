@@ -1,6 +1,6 @@
-# IN-App Баннеры
+# Промо-карточки
 
-## Список in-app баннеров
+## Список промо-карт
 
 ```shell
 curl "<%= config[:host] %>/promotion_cards"
@@ -15,25 +15,31 @@ curl "<%= config[:host] %>/promotion_cards"
       "id": 41,
       "title": "название",
       "short_description": "короткое описание в одну фразу",
-      "description": "полное описание, которое <b>может</b содержать HTML>",
+      "full_description": "полное описание, которое <b>может</b содержать HTML>",
       "background_color": "#000000",
       "text_color": "#FFFFFF",
-      "image_url": "http://",
+      "background_image": {
+          "mini_url": "http://instamart.ru/spree/promotion_cards/41/mini/img1.jpg?1559189125",
+          "default_url": "http://instamart.ru/spree/promotion_cards/41/default/img1.jpg?1559189125"
+      },
       "type": "link",
       "promotion_id": null,
-      "link": "instamart://retailer/15/products/2345",
+      "mobile_link": "instamart://retailer/15/products/2345",
       "tag": "Скидки"
     },
     {
       "id": 42,
       "title": "название",
       "short_description": "короткое описание в одну фразу",
-      "description": "полное описание, которое <b>может</b содержать HTML>",
+      "full_description": "полное описание, которое <b>может</b содержать HTML>",
       "background_color": "#000000",
       "text_color": "#FFFFFF",
-      "image_url": "http://",
+      "background_image": {
+          "mini_url": "http://instamart.ru/spree/promotion_cards/42/mini/img2.jpg?1559189125",
+          "default_url": "http://instamart.ru/spree/promotion_cards/42/default/img2.jpg?1559189125"
+      },
       "type": "promo",
-      "link": null,
+      "mobile_link": null,
       "promotion_id": 10,
       "tag": "Новинки"
     }
@@ -41,6 +47,6 @@ curl "<%= config[:host] %>/promotion_cards"
 }
 ```
 
-Получить список in-app баннеров можно, выполнив запрос:
+Получить список промо-карт можно, выполнив запрос:
 
 `GET <%= config[:host] %>/promotion_cards`
