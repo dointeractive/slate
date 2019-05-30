@@ -3004,6 +3004,53 @@ API обратно совместимо со старой версией API и 
 
 <p><code>GET http://api.instamart.ru/v2/replacement_policies</code></p>
 
+          <h1 id="in-app-banniery">IN-App Баннеры</h1>
+
+<h2 id="spisok-in-app-bannierov">Список in-app баннеров</h2>
+
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/promotion_cards"</span>
+</code></pre>
+
+<blockquote>
+  <p>Команда выше возвращает JSON:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"promotion_cards"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">41</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"название"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"short_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"короткое описание в одну фразу"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"полное описание, которое &lt;b&gt;может&lt;/b содержать HTML&gt;"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"background_color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#000000"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"text_color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#FFFFFF"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"link"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"promotion_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"instamart://retailer/15/products/2345"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Скидки"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"название"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"short_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"короткое описание в одну фразу"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"полное описание, которое &lt;b&gt;может&lt;/b содержать HTML&gt;"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"background_color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#000000"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"text_color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#FFFFFF"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"promo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"link"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"promotion_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Новинки"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Получить список in-app баннеров можно, выполнив запрос:</p>
+
+<p><code>GET http://api.instamart.ru/v2/promotion_cards</code></p>
+
           <h1 id="promokody">Промокоды</h1>
 
 <h2 id="informatsiia-o-promokodie">Информация о промокоде</h2>
@@ -3026,6 +3073,91 @@ API обратно совместимо со старой версией API и 
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+
+          <h1 id="promoaktsii">Промоакции</h1>
+
+<h2 id="spisok-produktov-obiazatielnyie-dlia-aktivatsii-promoaktsii">Список продуктов обязательные для активации промоакции</h2>
+
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/promotions/42/mandatory_products?sid=1"</span>
+</code></pre>
+
+<blockquote>
+  <p>Команда выше возвращает JSON:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Бананы"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">54.79</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"original_price"</span><span class="p">:</span><span class="w"> </span><span class="mf">55.79</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"weight"</span><span class="p">:</span><span class="w"> </span><span class="mf">500.0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"human_volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"500 г."</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"items_per_pack"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"mini_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/products/1/mini/file.png"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"small_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/products/1/small/file.png"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"product_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/products/1/product/file.png"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"current_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"next_page"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total_pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+  <p>Если условия акции не зависят от списка продуктов:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Получить список продуктов, можно выполнив запрос</p>
+
+<h3 id="http-zapros">HTTP запрос</h3>
+
+<p><code>GET http://api.instamart.ru/v2/promotions/#{ID}/mandatory_products?sid=1</code></p>
+
+<h3 id="paramietry-zaprosa">Параметры запроса</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Обязательный</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ID</td>
+      <td>Да</td>
+      <td>ID промоакции</td>
+    </tr>
+    <tr>
+      <td>sid</td>
+      <td>Да</td>
+      <td>Идентификатор магазина</td>
+    </tr>
+  </tbody>
+</table>
+
+<aside class="notice">
+Список продуктов может быть получен только для промоакции, для активации которой необходимо набрать
+определенные товары
+</aside>
 
           <h1 id="zakazy">Заказы</h1>
 
