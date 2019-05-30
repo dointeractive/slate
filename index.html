@@ -3004,9 +3004,9 @@ API обратно совместимо со старой версией API и 
 
 <p><code>GET http://api.instamart.ru/v2/replacement_policies</code></p>
 
-          <h1 id="in-app-banniery">IN-App Баннеры</h1>
+          <h1 id="promo-kartochki">Промо-карточки</h1>
 
-<h2 id="spisok-in-app-bannierov">Список in-app баннеров</h2>
+<h2 id="spisok-promo-kart">Список промо-карт</h2>
 
 <pre class="highlight shell"><code>curl <span class="s2">"http://api.instamart.ru/v2/promotion_cards"</span>
 </code></pre>
@@ -3021,25 +3021,31 @@ API обратно совместимо со старой версией API и 
       </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">41</span><span class="p">,</span><span class="w">
       </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"название"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"short_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"короткое описание в одну фразу"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"полное описание, которое &lt;b&gt;может&lt;/b содержать HTML&gt;"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"full_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"полное описание, которое &lt;b&gt;может&lt;/b содержать HTML&gt;"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"background_color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#000000"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"text_color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#FFFFFF"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"background_image"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"mini_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/spree/promotion_cards/41/mini/img1.jpg?1559189125"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"default_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/spree/promotion_cards/41/default/img1.jpg?1559189125"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
       </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"link"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"promotion_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"instamart://retailer/15/products/2345"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"mobile_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"instamart://retailer/15/products/2345"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Скидки"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
       </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"название"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"short_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"короткое описание в одну фразу"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"полное описание, которое &lt;b&gt;может&lt;/b содержать HTML&gt;"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"full_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"полное описание, которое &lt;b&gt;может&lt;/b содержать HTML&gt;"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"background_color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#000000"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"text_color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#FFFFFF"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"background_image"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"mini_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/spree/promotion_cards/42/mini/img2.jpg?1559189125"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"default_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://instamart.ru/spree/promotion_cards/42/default/img2.jpg?1559189125"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
       </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"promo"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"link"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"mobile_link"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nt">"promotion_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
       </span><span class="nt">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Новинки"</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -3047,7 +3053,7 @@ API обратно совместимо со старой версией API и 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>Получить список in-app баннеров можно, выполнив запрос:</p>
+<p>Получить список промо-карт можно, выполнив запрос:</p>
 
 <p><code>GET http://api.instamart.ru/v2/promotion_cards</code></p>
 
