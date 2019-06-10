@@ -3,7 +3,7 @@
 ## Список промо-карт
 
 ```shell
-curl "<%= config[:host] %>/promotion_cards"
+curl "<%= config[:host] %>/promotion_cards/?sid=1"
 ```
 
 > Команда выше возвращает JSON:
@@ -15,6 +15,7 @@ curl "<%= config[:host] %>/promotion_cards"
       "id": 41,
       "title": "название",
       "short_description": "короткое описание в одну фразу",
+      "short_description_widt": 200,
       "full_description": "полное описание, которое <b>может</b содержать HTML>",
       "background_color": "#000000",
       "text_color": "#FFFFFF",
@@ -31,6 +32,7 @@ curl "<%= config[:host] %>/promotion_cards"
       "id": 42,
       "title": "название",
       "short_description": "короткое описание в одну фразу",
+      "short_description_widt": 200,
       "full_description": "полное описание, которое <b>может</b содержать HTML>",
       "background_color": "#000000",
       "text_color": "#FFFFFF",
@@ -47,6 +49,13 @@ curl "<%= config[:host] %>/promotion_cards"
 }
 ```
 
-Получить список промо-карт можно, выполнив запрос:
+Получить список промо-карт, которые могут быть показаны при текущем магазине, можно, выполнив запрос:
 
-`GET <%= config[:host] %>/promotion_cards`
+`GET <%= config[:host] %>/promotion_cards/?sid=1`
+
+### Параметры запроса
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+sid | Да | Идентификатор магазина
+
