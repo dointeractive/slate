@@ -3,7 +3,7 @@
 ## Список промо баннеров
 
 ```shell
-curl "<%= config[:host] %>/promotion_cards/?sid=1"
+curl "<%= config[:host] %>/stores/#{sid}/promotion_cards/"
 ```
 
 > Команда выше возвращает JSON:
@@ -51,7 +51,7 @@ curl "<%= config[:host] %>/promotion_cards/?sid=1"
 
 Получить список промо-карт, которые могут быть показаны при текущем магазине, можно, выполнив запрос:
 
-`GET <%= config[:host] %>/promotion_cards/?sid=1`
+`GET <%= config[:host] %>/stores/#{sid}/promotion_cards`
 
 ### Параметры запроса
 
