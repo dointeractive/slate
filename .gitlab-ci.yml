@@ -25,7 +25,7 @@ build_docs:
   stage: build
   image: $CI_REGISTRY_IMAGE:$CI_BUILD_REF
   before_script:
-    - prinenv
+    - prinеenv
   script:
     - pwd
     - ls
