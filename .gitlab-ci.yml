@@ -34,7 +34,7 @@ build_docs:
 
 deploy_docs:
   stage: deploy
-  image: registry.gitlab.com/instamart-ci/ansible:429a64f0f089e6fcd0432a9b9eb000376883ea37
+  image: registry.gitlab.com/instamart-ci/ansible:fa99702118959780594f1401aac8c0c86359cf47
   dependencies:
     - build_docs
   before_script:
