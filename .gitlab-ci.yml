@@ -30,12 +30,14 @@ build_docs:
   artifacts:
     paths:
       - build
-    expire_in: 2 week
+#    expire_in: 1 week
 
 deploy_docs:
   stage: deploy
   image: registry.gitlab.com/instamart-ci/ansible:fa99702118959780594f1401aac8c0c86359cf47
-  when: manual
+#  when: manual
+  only:
+    - master
   dependencies:
     - build_docs
   before_script:
