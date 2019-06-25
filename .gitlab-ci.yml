@@ -36,7 +36,7 @@ build_docs:
     expire_in: 1 week
 
 deploy_docs:
-  stage: build
+  stage: deploy
   image: ubuntu:bionic
   before_script:
     - printenv
