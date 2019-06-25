@@ -11,7 +11,6 @@ docker:image_build:
   stage: build_docker_image
   image: docker:stable
   before_script:
-    - printenv
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
 
   script:
@@ -34,7 +33,7 @@ build_docs:
 
 deploy_docs:
   stage: deploy
-  image: registry.gitlab.com/instamart-ci/ansible:fa99702118959780594f1401aac8c0c86359cf47
+  image: registry.gitlab.com/instamart-ci/ansible:latest
 #  when: manual
   only:
     - master
