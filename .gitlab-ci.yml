@@ -47,8 +47,8 @@ deploy_docs:
     - unset ANSIBLE_ansible_ssh_key
     # Посмотреть список загруженных ключей.
     - ssh-add -l
-    - printenv
+    - ls
   script:
-    - ssh -v yc-c-bigbro printenv
+    - ssh -v yc-c-bigbro ls /opt
 
 
