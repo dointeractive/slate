@@ -7,7 +7,7 @@ services:
   - docker:dind
 
 
-docker_image_build:
+docker:image_build:
   stage: build_docker_image
   image: docker:stable
   before_script:
@@ -38,6 +38,8 @@ build_docs:
 deploy_docs:
   stage: deploy
   image: ubuntu:bionic
+  dependencies:
+    - build_docs
   before_script:
     - printenv
   script:
