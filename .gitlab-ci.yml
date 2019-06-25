@@ -38,6 +38,7 @@ deploy_docs:
   dependencies:
     - build_docs
   before_script:
+    - printenv
     - eval $(ssh-agent -s)
     # Подгружаем ключ. После этого, можем подключаться ssh из оперативки.
     - ssh-add <(echo $ANSIBLE_ansible_ssh_key |base64 --decode)
