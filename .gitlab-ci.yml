@@ -1,0 +1,46 @@
+stages:
+  - build_docker_image
+  - build
+  - deploy
+
+services:
+  - docker:dind
+
+
+docker_image_build:
+  stage: build_docker_image
+  image: docker:stable
+  before_script:
+    - printenv
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  script:
+    - docker pull $CI_REGISTRY_IMAGE:latest || true
+    - docker build --cache-from $CI_REGISTRY_IMAGE:latest --tag $CI_REGISTRY_IMAGE:$CI_BUILD_REF --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG --tag $CI_REGISTRY_IMAGE:latest .
+    - docker push $CI_REGISTRY_IMAGE:$CI_BUILD_REF
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+    - docker push $CI_REGISTRY_IMAGE:latest
+
+
+build_docs:
+  stage: build
+  image: $CI_REGISTRY_IMAGE:$CI_BUILD_REF
+  before_script:
+    - prinenv
+  script:
+    - pwd
+    - ls
+    - bundle exec middleman build
+  artifacts:
+    paths:
+      - build
+    expire_in: 1 week
+
+deploy_docs:
+  stage: build
+  image: ubuntu:bionic
+  before_script:
+    - printenv
+  script:
+    - ls  -la
+
+
