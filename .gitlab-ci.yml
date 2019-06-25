@@ -35,20 +35,15 @@ build_docs:
 deploy_docs:
   stage: deploy
   image: registry.gitlab.com/instamart-ci/ansible:fa99702118959780594f1401aac8c0c86359cf47
+  when: manual
   dependencies:
     - build_docs
   before_script:
-    - printenv
     - eval $(ssh-agent -s)
-    # Подгружаем ключ. После этого, можем подключаться ssh из оперативки.
     - ssh-add <(echo $ANSIBLE_ansible_ssh_key |base64 --decode)
-    # Очищаем переменную.
-    - printenv
     - unset ANSIBLE_ansible_ssh_key
-    # Посмотреть список загруженных ключей.
     - ssh-add -l
-    - ls
   script:
-    - ssh -v yc-c-bigbro ls /opt
+    - rsync -avzx --delete build/ yc-c-statics:/var/www/docs
 
 
