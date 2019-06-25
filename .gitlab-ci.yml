@@ -5,14 +5,21 @@ stages:
 
 services:
   - docker:dind
-
+before_script:
+  - eval $(ssh-agent -s)
+  # Подгружаем ключ. После этого, можем подключаться ssh из оперативки.
+  - ssh-add <(echo $ANSIBLE_ansible_ssh_key |base64 --decode)
+  # Очищаем переменную.
+  - printenv
+  - unset ANSIBLE_ansible_ssh_key
+  # Посмотреть список загруженных ключей.
+  - ssh-add -l
+  - printenv
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
 
 docker:image_build:
   stage: build_docker_image
   image: docker:stable
-  before_script:
-    - printenv
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
     - docker pull $CI_REGISTRY_IMAGE:latest || true
     - docker build --cache-from $CI_REGISTRY_IMAGE:latest --tag $CI_REGISTRY_IMAGE:$CI_BUILD_REF --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG --tag $CI_REGISTRY_IMAGE:latest .
@@ -24,8 +31,6 @@ docker:image_build:
 build_docs:
   stage: build
   image: $CI_REGISTRY_IMAGE:$CI_BUILD_REF
-  before_script:
-    - printenv
   script:
     - pwd
     - ls
@@ -37,11 +42,9 @@ build_docs:
 
 deploy_docs:
   stage: deploy
-  image: ubuntu:bionic
+  image: registry.gitlab.com/instamart-ci/ansible:429a64f0f089e6fcd0432a9b9eb000376883ea37
   dependencies:
     - build_docs
-  before_script:
-    - printenv
   script:
     - ls  -la
 
