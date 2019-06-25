@@ -46,6 +46,6 @@ deploy_docs:
   dependencies:
     - build_docs
   script:
-    - ls  -la
+    - ssh yc-c-bigbro
 
 
