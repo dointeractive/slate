@@ -48,8 +48,7 @@ deploy_docs:
     # Посмотреть список загруженных ключей.
     - ssh-add -l
     - printenv
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
-    - ssh yc-c-bigbro
+    - ssh -v yc-c-bigbro printenv
 
 
