@@ -37,6 +37,7 @@ includes:
   - retailer_loyalty_programs
   - phones
   - order_reviews
+  - company_documents
   - app_reviews
   - credit_card
   - flags
