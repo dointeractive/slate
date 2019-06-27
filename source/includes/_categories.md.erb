@@ -3,7 +3,7 @@
 > Пример кода для получения списка всех категорий
 
 ```shell
-curl "<%= config[:host] %>/categories?rid=1"
+curl "<%= config[:host] %>/categories?sid=1"
 ```
 > Ответ будет содержать следующие данные:
 
@@ -13,13 +13,17 @@ curl "<%= config[:host] %>/categories?rid=1"
     "id": 466,
     "type": "department",
     "name": "Чай и кофе",
+    "products_count": 25,
     "children": [{
       "id": 187,
       "type": "taxon",
       "name": "Чай",
       "icon": {
-        "mini_url": "http://instamart.ru/spree/taxons/187/mini/%D1%87%D0%B0%D0%B8%CC%86-01.png?1453649106",
-        "normal_url": "http://instamart.ru/spree/taxons/187/normal/%D1%87%D0%B0%D0%B8%CC%86-01.png?1453649106"
+        "mini_url": "http://im.dev/spree/taxons/187/mini/%D1%87%D0%B0%D0%B8%CC%86-01.png?1453649106",
+        "normal_url": "http://im.dev/spree/taxons/187/normal/%D1%87%D0%B0%D0%B8%CC%86-01.png?1453649106"
+      },
+      "alt_icon": {
+        "url": "http://im.dev/spree/icons/37/original/%D1%87%D0%B0%D0%B8%CC%86-01.svg?1453649106"
       }
     }]
   }],
@@ -38,6 +42,8 @@ API возвращает полную иерархию всех категори
 id | id категории
 type | Тип категории: __department__ или __taxon__
 name | Название категори
+icon | Иконка категории
+alt_icon | Альтернатинвая иконка категории
 children | Список дочерних категорий
 
 От значения поля `type` зависит способ отображения содержимого категории.
@@ -52,4 +58,8 @@ children | Список дочерних категорий
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
-`rid` | Да | ID ритейлера для которого необходимо получить список категорий.
+`sid` | Да | ID магазина для которого необходимо получить список категорий
+
+<aside class="notice">
+API обратно совместимо со старой версией API и поддерживает параметр rid - идентификатор ритейлера
+</aside>

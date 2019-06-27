@@ -1,0 +1,193 @@
+# Банковские карты
+
+/credit_cards
+
+## Запрос на получение списка карт
+
+Получить список всех карт пользователя можно, выполнив запрос:
+
+`GET <%= config[:host] %>/credit_cards`
+
+```shell
+curl "<%= config[:host] %>/credit_cards" \
+  -H "Authorization: Token token=#{TOKEN}"
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+{
+  "credit_cards": [
+    {
+      "id": 14959,
+      "title": "Зарплатная",
+      "name": "IVAN IVANOV",
+      "year": "22",
+      "month": "12",
+      "last_digits": "1111",
+      "cc_type": "Visa",
+      "eligible": true
+    }
+  ],
+  "meta": {
+    "current_page": 1,
+    "next_page": null,
+    "total_pages": 1,
+    "per_page": 10,
+    "total_count": 1
+  }
+}
+```
+
+## Запрос на получение карты по ID
+
+```shell
+curl "<%= config[:host] %>/credit_cards/14959" \
+  -H "Authorization: Token token=#{TOKEN}"
+```
+
+> В случае если данные были указаны верно, сервер вернет ответ:
+
+```json
+{
+  "credit_card": {
+    "id": 14959,
+    "title": "Зарплатная",
+    "name": "IVAN IVANOV",
+    "year": "22",
+    "month": "12",
+    "last_digits": "1111",
+    "cc_type": "Visa",
+    "eligible": true,
+    "payment_tool": {
+      "id": 299,
+      "name": "•••• 2222",
+      "type": "cloud_payments_gateway"
+    }
+  }
+}
+```
+
+Получить карту можно, выполнив запрос:
+
+`GET <%= config[:host] %>/credit_cards/#{ID}`
+
+### Параметры запроса
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+ID | Да | ID карты
+
+### Структура объекта CreditCard
+
+Атрибут | Описание
+--------- | -----------
+payment_tool | PaymentTool используемый при оформлении заказа
+
+## Запрос на создание карты
+
+```shell
+curl "<%= config[:host] %>/credit_cards" \
+  -H "Authorization: Token token=#{TOKEN}"
+  -X POST \
+  -d "credit_card[title]=Зарплатная" \
+  -d "credit_card[name]=IVAN IVANOV" \
+  -d "credit_card[year]=22" \
+  -d "credit_card[month]=12" \
+  -d "credit_card[last_digits]=1111" \
+  -d "credit_card[cryptogram_packet]=" \
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+{
+  "credit_card": {
+    "id": 14959,
+    "title": "Зарплатная",
+    "name": "IVAN IVANOV",
+    "year": "22",
+    "month": "12",
+    "last_digits": "1111",
+    "cc_type": "Visa",
+    "eligible": true,
+    "payment_tool": {
+      "id": 299,
+      "name": "•••• 2222",
+      "type": "cloud_payments_gateway"
+    }
+  }
+}
+```
+
+Создать новую карту пользователя можно, выполнив запрос:
+
+`POST <%= config[:host] %>/credit_cards`
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+credit_card[title] | - | Название карты
+credit_card[name] | Да | Имя держателя карты
+credit_card[year] | Да | Год
+credit_card[month] | Да | Месяц
+credit_card[last_digits] | Да | Последние 4 цифры номера карты
+credit_card[cryptogram_packet] | Да | Криптограмма
+
+### Получение криптограммы(cryptogram_packet)
+Чтобы создать криптограмму, надо использовать [Cloudpayments SDK](https://cloudpayments.ru/Docs/MobileSDK)
+
+## Запрос на обновление названия карты
+
+```shell
+curl "<%= config[:host] %>/credit_cards/14959" \
+  -H "Authorization: Token token=#{TOKEN}"
+  -X PUT \
+  -d "credit_card[title]=Новое название"
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+{
+  "credit_card": {
+    "id": 14959,
+    "title": "Новое название",
+    "name": "IVAN IVANOV",
+    "year": "22",
+    "month": "12",
+    "last_digits": "1111",
+    "payment_tool": {
+      "id": 299,
+      "name": "•••• 2222",
+      "type": "cloud_payments_gateway"
+    }
+  }
+}
+```
+
+Обновить название карты пользователя можно, выполнив запрос:
+
+`PUT <%= config[:host] %>/credit_cards/#{ID}`
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+ID | Да | ID карты
+credit_card[title] | Да | Название карты
+
+## Запрос на удаление карты
+
+```shell
+curl "<%= config[:host] %>/credit_cards/14959" \
+  -H "Authorization: Token token=#{TOKEN}" \
+  -X DELETE
+```
+
+> В случае успешного удаления сервер вернет пустой ответ с кодом 200
+
+Удалить карту пользователя можно, выполнив запрос:
+
+`DELETE <%= config[:host] %>/credit_cards/#{ID}`
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+ID | Да | ID карты

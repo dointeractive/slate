@@ -12,22 +12,38 @@ includes:
   - authentication
   - passwords
   - referrals
-  - operational_zones
-  - addresses
+  - instacoin_account
+  - stores
   - retailers
+  - addresses
+  - ship_address_changes
   - categories
+  - taxons
   - departments
   - products
+  - purchased_products
   - search
+  - replacement_policies
+  - promotion_cards
+  - promotion_codes
+  - promotions
   - orders
   - shipping_methods
   - delivery_windows
+  - payment_tool_types
   - payment_tools
   - payments
+  - bonus_programs
+  - retailer_loyalty_programs
+  - phones
   - order_reviews
   - company_documents
+  - app_reviews
+  - credit_card
   - flags
   - errors
+  - favorites_item
+  - assembly_items
 
 search: true
 ---

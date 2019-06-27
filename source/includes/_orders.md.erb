@@ -41,7 +41,7 @@ curl "<%= config[:host] %>/orders" \
 curl "<%= config[:host] %>/orders" -X POST
 ```
 
-Создать новый заказ можно, выполнив следующий запрос:
+Создать новый заказ можно выполнив следующий запрос:
 
 `POST <%= config[:host] %>/orders`
 
@@ -67,6 +67,7 @@ address | адрес доставки
 shipments | данные о добавленных товаров
 payment | данные об оплате
 adjustments | корректировки стоимости заказа (скидки, цена доставки)
+promotion_codes | Список примененных промокодов
 
 ### Структура объекта Shipment
 
@@ -122,16 +123,17 @@ void | отменен администратором
 --------- | -----------
 id | id позиции
 quantity | количество товаров
-description | текстовое описание содержимого
 price | стоимость одной позиции
 total | сумма
+customer_comment | комментарий пользователя
+product_in_stock | наличие продукта в магазине
 product | информация о продукте
 
 ## Повтор заказа
 
 Чтобы повторить заказ, необходимо выполнить запрос:
 
-`POST http://api.im.dev/v2/orders/#{NUMBER}/clones`
+`POST <%= config[:host] %>/orders/#{NUMBER}/clones`
 
 В `NUMBER` передается номер того заказа, который необходимо повторить.
 
@@ -141,6 +143,49 @@ product | информация о продукте
 
 ```shell
 curl "<%= config[:host] %>/orders/#{NUMBER}/clones" \
+  -H "Authorization: Token token=#{TOKEN}"
+  -X POST
+```
+
+> В ответе вернется заказ:
+
+```json
+{
+  "order": {
+    "number": "R314234460",
+    ...
+    "shipments": [
+      {
+        ...
+        "line_items": [
+          {
+            "id": 548260,
+            "quantity": 1,
+            "price": 229.89
+            ...
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+
+## Повтор подзаказа
+
+Чтобы повторить подзаказ, необходимо выполнить запрос:
+
+`POST <%= config[:host] %>/shipments/#{NUMBER}/clones`
+
+В `NUMBER` передается номер того подзаказа, который необходимо повторить.
+
+Если у пользователя есть текущий заказ, то позиции повторяемого заказа скопируются в текущий заказ пользователя. Если текущего заказа нет – будет создан новый заказ, содержащий позиции повторяемого заказа.
+
+> Пример повтора подзаказа:
+
+```shell
+curl "<%= config[:host] %>/shipments/#{NUMBER}/clones" \
   -H "Authorization: Token token=#{TOKEN}"
   -X POST
 ```
@@ -222,6 +267,7 @@ curl "<%= config[:host] %>/orders/C27387-16"
         "price": 229.89,
         "description": "Цикорий Elza – растворимый гранулированный напиток с насыщенным кофейным вкусом и ароматом.Содержащийся в цикории инулин способствует улучшению обмена веществ и пищеварения. Оказывает успокаивающее действие на нервную систему, улучшает работу сердца. Цикорий повышает иммунитет,очищает организм. Он богат минеральными веществами, витаминами и микроэлементами.",
         "total": 229.89,
+        "product_in_stock": true,
         "product": {
           "id": 960,
           "sku": "10963",
@@ -242,12 +288,13 @@ curl "<%= config[:host] %>/orders/C27387-16"
         }
       }]
     }],
-    "payment": null
+    "payment": null,
+    "promotion_codes": []
   }
 }
 ```
 
-Получить заказ можно, выполнив запрос:
+Получить заказ можно выполнив запрос:
 `GET <%= config[:host] %>/orders/#{NUMBER}`
 
 ### Параметры запроса
@@ -255,7 +302,6 @@ curl "<%= config[:host] %>/orders/C27387-16"
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
 NUMBER | Да | Номер заказа
-
 
 ## Получение текущего заказа пользователя
 
@@ -286,22 +332,37 @@ curl "<%= config[:host] %>/orders/current" \
     "address": null,
     "shipments": [],
     "payment": null,
-    "adjustments": []
+    "adjustments": [],
+    "promotion_codes": []
   }
 }
 ```
 
-Получить текущий заказ пользователя можно, выполнив запрос:
+Получить текущий заказ пользователя можно выполнив запрос:
 `GET <%= config[:host] %>/orders/current`
 
 В случае, если у пользователя нет текущего заказа, данный запрос вернет ошибку с кодом `404`
 
 ## Получение списка всех заказов
 
-> Пример команды:
+> Пример команды для получения всех заказов:
 
 ```shell
 curl "<%= config[:host] %>/orders" \
+  -H "Authorization: Token token=#{TOKEN}"
+```
+
+> Пример команды для получения всех активных заказов:
+
+```shell
+curl "<%= config[:host] %>/orders?status=active" \
+  -H "Authorization: Token token=#{TOKEN}"
+```
+
+> Пример команды для получения всех отмененных заказов:
+
+```shell
+curl "<%= config[:host] %>/orders?status=canceled" \
   -H "Authorization: Token token=#{TOKEN}"
 ```
 
@@ -348,13 +409,23 @@ curl "<%= config[:host] %>/orders" \
     "current_page": 1,
     "next_page": null,
     "total_pages": 1,
-    "per_page": 10
+    "per_page": 10,
+    "total_count": 1
   }
 }
 ```
 
-Получить все заказы пользователя можно, выполнив запрос:
+Получить все заказы пользователя можно выполнив запрос:
 `GET <%= config[:host] %>/orders`
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+status | Нет | Статус заказа
+
+Параметр "status" используется для фильтрации заказов:
+- "active" - активные (принят, собирается, в пути)
+- "complete" - завершенные
+- "canceled" - отмененные
 
 <aside class="notice">
   Объект заказа, возвращаемый API "списка заказов", содержит меньшее количество данных по сравнению с объектом, возвращаемым API "получения заказа по номеру", для уменьшения размера запроса.
@@ -398,11 +469,77 @@ state | состояние
 - next_deliveries
 - line_items
 
+## Оплата бонусами
+
+Получить условия оплаты бонусами для заказа можно, выполнив запрос:
+
+`GET <%= config[:host] %>/orders/#{NUMBER}/promotion_limits`
+
+> Пример запроса:
+
+```shell
+curl "<%= config[:host] %>/orders/#{NUMBER}/promotion_limits" \
+  -H "Authorization: Token token=#{TOKEN}"
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+  {
+    "promotion_limits": [
+      {
+        "type": "instacoins_value",
+        "max_value": 4500,
+        "step": 50,
+        "max_payment_percentage": 50,
+        "max_payment_amount": 5000,
+        "description_html": "<b>Оплата бонусами</b> не может превышать 50% от общей суммы заказа и не более 5000Р"
+      }
+    ]
+  }
+```
+
+## Применение бонуса
+
+Чтобы применить бонус к заказу, необходимо выполнить запрос:
+
+`POST <%= config[:host] %>/orders/#{NUMBER}/promotions`
+
+### Параметры запроса
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+instacoins_value | Да | Значение бонуса, который планируется потратить на заказ
+
+> Пример пременения бонуса:
+
+```shell
+curl "<%= config[:host] %>/orders/#{NUMBER}/promotions" \
+  -H "Authorization: Token token=#{TOKEN}"
+  -X POST \
+  -d "instacoins_value=1700"
+```
+
+> В ответе вернется обновленный заказ:
+
+```json
+{
+  "order": {
+    "number": "R314234460",
+    "total": 3249.7,
+    "item_total": 3249.7,
+    ...
+    "adjustment_total": -1700.0,
+    "promo_total": -1700.0
+  }
+}
+```
+
 ## Применение промокода
 
 Чтобы применить промокод к заказу, необходимо выполнить запрос:
 
-`POST http://api.im.dev/v2/orders/#{NUMBER}/promotions`
+`POST <%= config[:host] %>/orders/#{NUMBER}/promotions`
 
 ### Параметры запроса
 
@@ -428,10 +565,244 @@ curl "<%= config[:host] %>/orders/#{NUMBER}/promotions" \
     "total": 1236.7,
     "item_total": 1236.7,
     ...
-    "promo_total": -100.0
+    "promo_total": -100.0,
+    "promotion_codes": [
+      {
+        "value": "12345",
+        "description": "Суперскидка"
+      }
+    ]
   }
 }
 ```
+
+## Удаление промокода
+
+Чтобы удалить промокод из заказа, необходимо выполнить запрос:
+
+`DELETE <%= config[:host] %>/orders/#{NUMBER}/promotions/#{PROMOTION_CODE}`
+
+### Параметры запроса
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+NUMBER | Да | Номер заказа
+PROMOTION_CODE | Да | Промокод(строка)
+
+> Пример удаления промокода:
+
+```shell
+curl "<%= config[:host] %>/orders/R314234460/promotions/12345" \
+  -H "Authorization: Token token=#{TOKEN}"
+  -X DELETE \
+```
+
+> В ответе вернется обновленный заказ:
+
+```json
+{
+  "order": {
+    "number": "R314234460",
+    "total": 1236.7,
+    "item_total": 1236.7,
+    ...
+    "promo_total": 0,
+    "promotion_codes": []
+  }
+}
+```
+
+## Получение списка позиций заказа
+
+> Пример команды:
+
+```shell
+curl "<%= config[:host] %>/orders/R314234460/line_items" \
+  -H "Authorization: Token token=#{TOKEN}"
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+{
+  "line_items": [
+    {
+      "id": 1,
+      "quantity": 1,
+      "price": 1236.7,
+      "total": 1236.7,
+      "customer_comment": null,
+      "product_in_stock": true,
+      "product": {
+        "id": 1,
+        "sku": "20002",
+        "name": "Product #0",
+        "price": 1136.7,
+        "original_price": 1236.7,
+        "discount": 100,
+        "human_volume": "100 г. x 12",
+        "items_per_pack": 12,
+        "images": [{
+          "mini_url": "http://instamart.ru/spree/products/5946/mini/10006.jpg?1473242617",
+          "small_url": "http://instamart.ru/spree/products/5946/small/10006.jpg?1473242617",
+          "product_url": "http://instamart.ru/spree/products/5946/product/10006.jpg?1473242617",
+          "preview_url": "http://instamart.ru/spree/products/5946/preview/10006.jpg?1473242617",
+          "original_url": "http://instamart.ru/spree/products/5946/original/10006.jpg?1473242617"
+        }]
+      }
+    }
+  ],
+  "meta": {
+    "current_page": 1,
+    "next_page": null,
+    "total_pages": 1,
+    "per_page": 10
+  }
+}
+```
+
+Получить все позиции заказа пользователя можно выполнив запросы:
+
+`GET <%= config[:host] %>/orders/#{ORDER_NUMBER}/line_items`
+
+`GET <%= config[:host] %>/shipments/#{SHIPMENT_NUMBER}/line_items`
+
+
+## Получение списка отмененных позиций заказа
+
+> Пример команды:
+
+```shell
+curl "<%= config[:host] %>/orders/R314234460/line_item_cancellations" \
+  -H "Authorization: Token token=#{TOKEN}"
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+{
+  "line_item_cancellations": [
+    {
+      "line_item": {
+        "id": 4,
+        "quantity": 6,
+        "price": 1136.7,
+        "total": 6820.2,
+        "customer_comment": null,
+        "product_in_stock": true,
+        "product": {
+          "id": 20,
+          "sku": "10020",
+          "name": "Product #19",
+          "price": 1136.7,
+          "original_price": 1236.7,
+          "discount": 100,
+          "human_volume": "100 г. x 6",
+          "items_per_pack": 6,
+          "images": []
+        }
+      }
+    },
+    {
+      "line_item": {
+        ...
+      }
+    }
+  ]
+}
+```
+
+Получить отмененные позиции заказа пользователя можно выполнив запросы:
+
+`GET <%= config[:host] %>/orders/#{ORDER_NUMBER}/line_item_cancellations`
+
+`GET <%= config[:host] %>/shipments/#{SHIPMENT_NUMBER}/line_item_cancellations`
+
+
+### Структура объекта LineItemCancellation
+
+Атрибут | Описание
+--------- | -----------
+line_item | Отмененная позиция из заказа
+
+## Получение списка замененных позиций заказа
+
+> Пример команды:
+
+```shell
+curl "<%= config[:host] %>/orders/R314234460/line_item_replacements" \
+  -H "Authorization: Token token=#{TOKEN}"
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+{
+  "line_item_replacements": [
+    {
+      "from_item": {
+        "id": 3,
+        "quantity": 1,
+        "price": 1136.7,
+        "total": 1136.7,
+        "customer_comment": null,
+        "product_in_stock": true,
+        "product": {
+          "id": 12,
+          "sku": "10012",
+          "name": "Product #11",
+          "price": 1136.7,
+          "original_price": 1236.7,
+          "discount": 100,
+          "human_volume": "100 г.",
+          "items_per_pack": 1,
+          "images": []
+        }
+      },
+      "to_item": {
+        "id": 35,
+        "quantity": 1,
+        "price": 1000,
+        "total": 1000,
+        "customer_comment": null,
+        "product_in_stock": true,
+        "product": {
+          "id": 20,
+          "sku": "10020",
+          "name": "Product #19",
+          "price": 1136.7,
+          "original_price": 1236.7,
+          "discount": 100,
+          "human_volume": "100 г. x 6",
+          "items_per_pack": 6,
+          "images": []
+        }
+      }
+    },
+    {
+      "from_item": {
+        ...
+      },
+      "to_item": {
+        ...
+      }
+    }
+  ]
+}
+```
+
+Получить замененные позиции заказа пользователя можно выполнив запросы:
+
+`GET <%= config[:host] %>/orders/#{ORDER_NUMBER}/line_item_replacements`
+
+`GET <%= config[:host] %>/shipments/#{SHIPMENT_NUMBER}/line_item_replacements`
+
+### Структура объекта LineItemReplacement
+
+Атрибут | Описание
+--------- | -----------
+from_item | Старая позиция заказа
+to_item | Новая позиция заказа
 
 ## Добавление позиции заказа
 
@@ -471,7 +842,7 @@ curl "<%= config[:host] %>/line_items" \
 }
 ```
 
-Добавить позицию к заказу можно, выполнив запрос:
+Добавить позицию к заказу можно выполнив запрос:
 
 `POST <%= config[:host] %>/line_items`
 
@@ -563,6 +934,47 @@ ID | Да | ID позиции заказа
 
 ## Оформление заказа
 
+> Пример команды для выбора способа замены:
+
+```shell
+curl "<%= config[:host] %>/orders/#{NUMBER}" \
+  -H "Authorization: Token token=#{TOKEN}" \
+  -X PUT \
+  -d "order[replacement_policy_id]=1"
+```
+> Если данные были указаны верно, ответ будет содержать json-документ заказа:
+
+```json
+{
+  "number": "R307128032",
+  "item_total": 0.0,
+  "total": 0.0,
+  "ship_total": 0.0,
+  "state": "cart",
+  "adjustment_total": 0.0,
+  "user_id": 1,
+  "created_at": "2014-07-06T18:52:33.724Z",
+  "updated_at": "2014-07-06T18:52:33.752Z",
+  "completed_at": null,
+  "shipment_state": null,
+  "payment_state": null,
+  "special_instructions": null,
+  "total_quantity": 0,
+  "address": {
+    "id": 1,
+    "city": "Москва",
+    "full_address": "Старая Басманная 3"
+  },
+  "shipments": [...],
+  "payment": null,
+  "replacement_policy": {
+    "id": 1,
+    "description": "Позвонить мне. Если не удастся, выбирает сборщик."
+  },
+  "adjustments": []
+}
+```
+
 > Пример команды для выбора адреса доставки и заполнения коментария доставки:
 
 ```shell
@@ -649,6 +1061,9 @@ curl "<%= config[:host] %>/orders/#{NUMBER}" \
 
 `PUT <%= config[:host] %>/orders/#{NUMBER}`
 
+### Выбор способа замен
+Получить список способов замен товаров при сборке заказа можно, [выполнив запрос](#sposoby-zamien)
+
 ### Выбор способа доставки и времени доставки
 
 Получить список способов доставки, необходимый для оформления заказа, можно выполнив запрос:
@@ -678,12 +1093,13 @@ order[shipments_attributes][][id] | Да | id shipment'а
 order[shipments_attributes][][delivery_window_id] | Да | id слота доставки
 order[shipments_attributes][][shipping_method_id] | Да | id cпособа доставки
 order[payment_attributes][payment_tool_id] | Да | id источника оплаты
+order[replacement_policy_id] | Да | id способа замены
 
 ## Отмена заказа
 
-Чтобы завершить заказ, необходимо выполнить запрос:
+Чтобы отменить заказ, необходимо выполнить запрос:
 
-`POST http://api.im.dev/v2/orders/#{NUMBER}/cancellations`
+`POST <%= config[:host] %>/orders/#{NUMBER}/cancellations`
 
 ### Параметры запроса
 
@@ -720,3 +1136,15 @@ curl "<%= config[:host] %>/orders/#{NUMBER}/cancellations" \
 Чтобы завершить заказ, необходимо выполнить запрос:
 
 `POST <%= config[:host] %>/orders/#{NUMBER}/completion`
+
+## Очистка заказа
+
+Чтобы очистить заказ, необходимо выполнить запрос:
+
+`DELETE <%= config[:host] %>/orders/#{NUMBER}/shipments`
+
+## Очистка подзаказа
+
+Чтобы очистить подзаказ, необходимо выполнить запрос:
+
+`DELETE <%= config[:host] %>/shipments/#{NUMBER}`

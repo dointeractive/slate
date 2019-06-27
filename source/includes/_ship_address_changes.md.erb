@@ -1,0 +1,183 @@
+# Адрес доставки
+
+## Получение выбранного адреса доставки
+
+```shell
+curl "<%= config[:host] %>/orders/#{NUMBER}/ship_address" 
+```
+
+Получить текущий, выбранный адрес доставки заказа можно, выполнив запрос:
+
+`GET <%= config[:host] %>/orders/#{NUMBER}/ship_address`
+Этот запрос может выполнятьтся как без токена авторизации (для нового пользователя), так и с указанием токена (для залогиненого пользователя)
+
+<aside class="notice">
+  Токен авторизации обязателен для авторизованных пользователей!
+</aside>
+
+
+## Получение списка возможных изменений в заказе
+
+```shell
+curl "<%= config[:host] %>/orders/R2104267/ship_address_change?ship_address[address_id]=1" 
+```
+
+> Команда выше возвращает JSON:
+
+```json
+{
+  "ship_address_change": {
+    "losses": [{
+      "retailer": {
+        "id": 4713,
+        "name": "Metro0",
+        "color": "#003d7a",
+        "logo": "https://www.metrogroup.de/~/assets/mag/images/teasers/metro-logo.png",
+        "available": true,
+        "environment": "production"
+      },
+      "offers": [{
+        "id": 5725,
+        "sku": "T10001",
+        "name": "Product #0",
+        "price": "1236.7",
+        "original_price": "1236.7",
+        "discount": "0.0",
+        "human_volume": "100 \u0433.",
+        "items_per_pack": 1,
+        "images": []
+      }]
+    }]
+  }
+}
+
+```
+
+> Также список изменений может быть получен для нового адреса:
+
+```shell
+curl "<%= config[:host] %>/orders/R2104267/ship_address_change?ship_address[city]=Москва&ship_address[street]=Фридриха Энгельса&ship_address[building]=56 c.3&ship_address[lat]=37&ship_address[lon]=54"
+```
+
+В результате изменения адреса доставки может измениться список доступных магазинов, некоторые товары из корзины станут при этом недоступны. Чтобы получить список возможных изменений необходимо выполнить запрос:
+
+### HTTP запрос
+
+`GET <%= config[:host] %>/orders/#{NUMBER}/ship_address_change`
+
+Этот запрос может выполнятьтся как без токена авторизации (для нового пользователя), так и с указанием токена (для залогиненого пользователя)
+
+<aside class="notice">
+  Токен авторизации обязателен для авторизованных пользователей!
+</aside>
+
+
+## Изменения адреса доставки
+
+```shell
+curl "<%= config[:host] %>/orders/R2104267/ship_address_change" \
+  -X PUT \
+  -d ship_address[address_id]=1
+```
+
+> Команда выше возвращает JSON:
+
+```json
+{
+  "ship_address_change": {
+    "order": {
+      "number": "R704735386",
+      "total": "1236.7",
+      "item_count": 0,
+      "item_total": "1236.7",
+      "ship_total": 0,
+      "adjustment_total": "0.0",
+      "promo_total": 0,
+      "shipment_state": null,
+      "payment_state": null,
+      "special_instructions": null,
+      "created_at": "2017-07-26T02:59:28.000+03:00",
+      "updated_at": "2017-07-26T02:59:29.858+03:00",
+      "completed_at": null,
+      "address": {
+        "id": 1736,
+        "first_name": "Ivan",
+        "last_name": "Fedorov",
+        "full_address": "Full address",
+        "city": "Москва",
+        "street": "Фридриха Энгельса",
+        "building": "56 c.3",
+        "block": null,
+        "apartment": null,
+        "comments": null,
+        "lat": null,
+        "lon": null
+      },
+      "payment": null,
+      "shipments": []
+    },
+    "losses": [{
+      "retailer": {
+        "id": 4714,
+        "name": "Metro3",
+        "color": "#003d7a",
+        "logo": "https://www.metrogroup.de/~/assets/mag/images/teasers/metro-logo.png",
+        "available": true,
+        "environment": "production"
+      },
+      "offers": [{
+        "id": 5726,
+        "sku": "T10002",
+        "name": "Product #1",
+        "price": "1236.7",
+        "original_price": "1236.7",
+        "discount": "0.0",
+        "human_volume": "100 \u0433.",
+        "items_per_pack": 1,
+        "images": []
+      }]
+    }]
+  }
+}
+
+```
+
+> Также в качестве адреса доставки можно передать атрибуты нового адреса:
+
+```shell
+curl "<%= config[:host] %>/orders/R2104267/ship_address_change" \
+  -X PUT \
+  -d ship_address[city]=Москва \
+  -d ship_address[street]='Фридриха Энгельса' \
+  -d ship_address[building]='56 c.3' \
+  -d ship_address[lat]=37 \
+  -d ship_address[lon]=54 
+```
+
+Изменить адрес доставки можно выполнив запрос
+
+### HTTP запрос
+
+`PUT <%= config[:host] %>/orders/#{NUMBER}/ship_address_change`
+
+Этот запрос может выполнятьтся как без токена авторизации (для нового пользователя), так и с указанием токена (для залогиненого пользователя)
+
+<aside class="notice">
+  Токен авторизации обязателен для авторизованных пользователей!
+</aside>
+
+### Параметры запроса для существующего адреса
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+ship_address[address_id] |да| id адреса 
+
+### Параметры запроса для нового адреса
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+ship_address[city]     |да| город
+ship_address[street]   |да| улица
+ship_address[building] |да| дом
+ship_address[lat]      |да| широта
+ship_address[lon]      |да| долгота

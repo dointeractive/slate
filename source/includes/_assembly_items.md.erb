@@ -1,0 +1,112 @@
+# Сборка подзаказа
+
+## Получение детализации по сборке подзаказа
+
+> Пример кода для получения детализации по сборке подзаказа
+
+```shell
+curl "<%= config[:host] %>/shipments/H0123412/assembly_items" \
+   -H "Authorization: Token token=#{TOKEN}" \
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+{
+    "assembly_items": [
+        {
+            "sku": "10006",
+            "name": "Product #6",
+            "pcs": 6,
+            "found_pcs": 6,
+            "quantity": "3 кг",
+            "found_quantity": "3 кг",
+            "price": 1236.7,
+            "new_price": 1236.7,
+            "price_type": "per_kilo",
+            "state": "assembled",
+            "human_volume": "200 г x 6",
+            "items_per_pack": 6,
+            "replacement": null,
+            "image": {
+                "mini_url": "http://im.test/spree/products/14/mini/6.jpg?1550146146",
+                "small_url": "http://im.test/spree/products/14/small/6.jpg?1550146146",
+                "product_url": "http://im.test/spree/products/14/product/6.jpg?1550146146",
+                "preview_url": "http://im.test/spree/products/14/preview/6.jpg?1550146146",
+                "original_url": "http://im.test/spree/products/14/original/6.jpg?1550146146"
+            }
+        },
+        {
+            "sku": "10021",
+            "name": "Product #21",
+            "pcs": 6,
+            "found_pcs": 6,
+            "quantity": "3 кг",
+            "found_quantity": "3 кг",
+            "price": 1236.7,
+            "new_price": 1236.7,
+            "price_type": "per_kilo",
+            "state": "replaced",
+            "human_volume": "200 г x 6",
+            "items_per_pack": 6,
+            "replacement": {
+                "sku": "10001",
+                "name": "Product #1",
+                "pcs": 6,
+                "found_pcs": 6,
+                "quantity": null,
+                "found_quantity": null,
+                "price": 1236.7,
+                "new_price": 1236.7,
+                "price_type": "per_pack",
+                "state": "pending",
+                "human_volume": "200 г x 6",
+                "items_per_pack": 6,
+                "replacement": null,
+                "image": {
+                    "mini_url": "http://im.test/spree/products/9/mini/1.jpg?1550146142",
+                    "small_url": "http://im.test/spree/products/9/small/1.jpg?1550146142",
+                    "product_url": "http://im.test/spree/products/9/product/1.jpg?1550146142",
+                    "preview_url": "http://im.test/spree/products/9/preview/1.jpg?1550146142",
+                    "original_url": "http://im.test/spree/products/9/original/1.jpg?1550146142"
+                }
+            },
+            "image": null
+        }
+    ],
+    "meta": {
+        "current_page": 1,
+        "next_page": null,
+        "total_pages": 1,
+        "per_page": 30,
+        "total_count": 2
+    }
+}
+```
+
+Детализацию по сборке подзаказа можно получить, выполнив запрос:
+
+`GET <%= config[:host] %>/shipments/{{number}}/assembly_items`
+
+Если позиция подзаказа заменена (`state == "replaced"`), то поле `replacement` содержит позицию на которую была произведена замена.
+
+Поле `state` может принимать следующие значения:
+- `assembled` - позиция собрана,
+- `canceled` - позиция отменена,
+- `replaced` - позиция заменена,
+- `pending` - к сборке позиции не приступали
+
+Для штучных или упаковочных позиций (`price_type` == "per_item" или `price_type` == "per_pack") поля:
+- `quantity`
+- `found_quantity`
+имеют значения `null`
+
+### Параметры запроса
+
+Параметр   | Обязательный | Описание
+-----------| ------------ | --------
+`number`   | Да           | Номер подзаказа
+`state`    | Нет          | Фильтр на статус возвращаемых позиций заказа. Доступные значения:`assembled`, `canceled`, `replaced`
+`page`     | Нет          | Номер страницы (по умолчанию 1)
+`per_page` | Нет          | Количество позиций заказа на странице (по умолчанию 30)
+

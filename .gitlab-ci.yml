@@ -1,0 +1,50 @@
+stages:
+  - build_docker_image
+  - build
+  - deploy
+
+services:
+  - docker:dind
+
+
+docker:image_build:
+  stage: build_docker_image
+  image: docker:stable
+  before_script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+
+  script:
+    - docker pull $CI_REGISTRY_IMAGE:latest || true
+    - docker build --cache-from $CI_REGISTRY_IMAGE:latest --tag $CI_REGISTRY_IMAGE:$CI_BUILD_REF --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG --tag $CI_REGISTRY_IMAGE:latest .
+    - docker push $CI_REGISTRY_IMAGE:$CI_BUILD_REF
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+    - docker push $CI_REGISTRY_IMAGE:latest
+
+
+build_docs:
+  stage: build
+  image: $CI_REGISTRY_IMAGE:$CI_BUILD_REF
+  script:
+    - bundle exec middleman build
+  artifacts:
+    paths:
+      - build
+#    expire_in: 1 week
+
+deploy_docs:
+  stage: deploy
+  image: registry.gitlab.com/instamart-ci/ansible:latest
+#  when: manual
+  only:
+    - master
+  dependencies:
+    - build_docs
+  before_script:
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo $ANSIBLE_ansible_ssh_key |base64 --decode)
+    - unset ANSIBLE_ansible_ssh_key
+    - ssh-add -l
+  script:
+    - rsync -avzx --delete build/ yc-c-statics:/var/www/docs
+
+

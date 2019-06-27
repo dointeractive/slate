@@ -4,13 +4,13 @@
 
 ```shell
 curl "<%= config[:host] %>/addresses" \
-  -H "Authorization: Token token=#{TOKEN}" 
+  -H "Authorization: Token token=#{TOKEN}"
 ```
 
 > Ответ будет содержать следующие данные:
 
 ```json
-{ 
+{
   "addresses": [{
     "id": 1,
     "first_name": "Иван",
@@ -20,16 +20,21 @@ curl "<%= config[:host] %>/addresses" \
     "street": "Фридриха Энгельса",
     "building": "56",
     "block": null,
+    "entrance": null,
+    "floor": null,
     "apartment": null,
     "comments": null,
     "lat": null,
-    "lon": null
+    "lon": null,
+    "kind": "home",
+    "door_phone": "123"
   }],
   "meta": {
     "current_page": 1,
     "next_page": null,
     "total_pages": 1,
-    "per_page": 10
+    "per_page": 10,
+    "total_count": 1
   }
 }
 ```
@@ -47,7 +52,7 @@ curl "<%= config[:host] %>/addresses" \
   -X POST \
   -d "address[full_address]=Фридриха Энгельса 56" \
   -d "address[street]=Фридриха Энгельса" \
-  -d "address[building]=56" 
+  -d "address[building]=56"
 ```
 
 > В случае если данные были указаны верно, сервер вернет ответ:
@@ -63,10 +68,14 @@ curl "<%= config[:host] %>/addresses" \
     "street": "Фридриха Энгельса",
     "building": "56",
     "block": null,
+    "entrance": null,
+    "floor": null,
     "apartment": null,
     "comments": null,
     "lat": null,
-    "lon": null
+    "lon": null,
+    "kind": "home",
+    "door_phone": "123"
   }
 }
 ```
@@ -84,10 +93,13 @@ address[city] | Да | Город
 address[street] | Да | Улица
 address[building] | Да | Номер дома
 address[block] | - | Строение
+address[entrance] | - | Подъезд
+address[floor] | - | Этаж
 address[apartment] | - | Номер квартиры
 address[comments] | - | Комментарий к адресу
 address[lon] | - | Долгота
 address[lat] | - | Широта
+address[door_phone] | - | Номер домофона
 
 ## Редактирование адреса
 
@@ -111,10 +123,14 @@ curl "<%= config[:host] %>/addresses/2" \
     "street": "Фридриха Энгельса",
     "building": "53",
     "block": null,
+    "entrance", null,
+    "floor": null,
     "apartment": null,
     "comments": null,
     "lat": null,
-    "lon": null
+    "lon": null,
+    "kind": "home",
+    "door_phone": "123"
   }
 }
 ```
@@ -132,11 +148,13 @@ address[city] | - | Город
 address[street] | - | Улица
 address[building] | - | Номер дома
 address[block] | - | Строение
+address[entrance] | - | Подъезд
+address[floor] | - | Этаж
 address[apartment] | - | Номер квартиры
 address[comments] | - | Комментарий к адресу
 address[lon] | - | Долгота
 address[lat] | - | Широта
-
+address[door_phone] | - | Номер домофона
 
 ## Удаление адреса
 

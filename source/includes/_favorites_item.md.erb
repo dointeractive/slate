@@ -1,0 +1,180 @@
+# Cписок избранного (Избранные товары)
+
+## Получение списка избранного
+
+> Пример кода для получения элементов из списка избранного:
+
+```shell
+curl "<%= config[:host] %>/favorites_list/items?sid=1"
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+{
+    "items": [
+        {
+            "id": 2,
+            "name": "Product #2",
+            "product": {
+                "id": 3,
+                "sku": "20004",
+                "name": "Product #2",
+                "price": 1236.7,
+                "original_price": 1236.7,
+                "discount": 0,
+                "human_volume": "100 г. x 6",
+                "items_per_pack": 6,
+                "images": [
+                    {
+                        "mini_url": "http://im.test/spree/products/6/mini/2.jpg?1542107911",
+                        "small_url": "http://im.test/spree/products/6/small/2.jpg?1542107911",
+                        "product_url": "http://im.test/spree/products/6/product/2.jpg?1542107911",
+                        "preview_url": "http://im.test/spree/products/6/preview/2.jpg?1542107911",
+                        "original_url": "http://im.test/spree/products/6/original/2.jpg?1542107911"
+                    }
+                ]
+            },
+            "image": {
+                "mini_url": "http://im.test/spree/products/6/mini/2.jpg?1542107911",
+                "small_url": "http://im.test/spree/products/6/small/2.jpg?1542107911",
+                "product_url": "http://im.test/spree/products/6/product/2.jpg?1542107911",
+                "preview_url": "http://im.test/spree/products/6/preview/2.jpg?1542107911",
+                "original_url": "http://im.test/spree/products/6/original/2.jpg?1542107911"
+            }
+        },
+        {
+            "id": 3,
+            "name": "Product #28",
+            "product": null,
+            "image": null
+        }
+    ],
+    "meta": {
+        "current_page": 1,
+        "next_page": null,
+        "total_pages": 1,
+        "per_page": 30,
+        "total_count": 2
+    }
+}
+```
+
+Перечень элементов из списка избранного можно получить, выполнив запрос:
+
+`GET <%= config[:host] %>/favorites_list/items`
+
+Если избранный товар доступен в магазине, то поле `product` элемента списка заполнено
+
+### Параметры запроса
+
+Параметр   | Обязательный | Описание
+-----------| ------------ | --------
+`sid`      | Да           | ID магазина для которого будут конкретизироваться элементы списка
+`type`     | Нет          | Фильтр на тип выводимых элементов списка. Доступные значения:<br>`available` - элементы списка с доступными товарами в магазине,<br>`unavailable` - элементы списка с недоступными товарами в магазине
+`page`     | Нет          | Номер страницы (по умолчанию 1)
+`per_page` | Нет          | Количество элементов списка на странице (по умолчанию 30, минимальное значение 30)
+
+
+## Получение списка SKU товаров из избранного
+
+> Пример кода для получения элементов из списка избранного:
+
+```shell
+curl "<%= config[:host] %>/favorites_list/products_sku"
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+{
+    "products_sku": [
+        "10001",
+        "10002"
+    ]
+}
+```
+
+Перечень `sku` товаров из списка избранного можно получить, выполнив запрос:
+
+`GET <%= config[:host] %>/favorites_list/products_sku`
+
+
+## Добавление элемента в список избранного
+
+> Пример кода для добавления элемента в список избранного:
+
+```shell
+ curl "<%= config[:host] %>/favorites_list/items" \
+   -H "Authorization: Token token=#{TOKEN}" \
+   -X POST \
+   -d "item[product_id]=3"
+```
+
+> В случае если данные были указаны верно, сервер вернет ответ:
+
+```json
+{
+    "item": {
+        "id": 2,
+        "name": "Product #2",
+        "product": {
+            "id": 3,
+            "sku": "20004",
+            "name": "Product #2",
+            "price": 1236.7,
+            "original_price": 1236.7,
+            "discount": 0,
+            "human_volume": "100 г. x 6",
+            "items_per_pack": 6,
+            "images": [
+                {
+                    "mini_url": "http://im.test/spree/products/6/mini/2.jpg?1542107911",
+                    "small_url": "http://im.test/spree/products/6/small/2.jpg?1542107911",
+                    "product_url": "http://im.test/spree/products/6/product/2.jpg?1542107911",
+                    "preview_url": "http://im.test/spree/products/6/preview/2.jpg?1542107911",
+                    "original_url": "http://im.test/spree/products/6/original/2.jpg?1542107911"
+                }
+            ]
+        },
+        "image": {
+            "mini_url": "http://im.test/spree/products/6/mini/2.jpg?1542107911",
+            "small_url": "http://im.test/spree/products/6/small/2.jpg?1542107911",
+            "product_url": "http://im.test/spree/products/6/product/2.jpg?1542107911",
+            "preview_url": "http://im.test/spree/products/6/preview/2.jpg?1542107911",
+            "original_url": "http://im.test/spree/products/6/original/2.jpg?1542107911"
+        }
+    }
+}
+```
+
+Добавить элемент в список избранного можно, выполнив запрос:
+
+`POST <%= config[:host] %>/favorites_list/items`
+
+### Параметры запроса
+
+Параметр         | Обязательный | Описание
+-----------------| ------------ | --------
+item[product_id] | Да           | ИД товара
+
+## Удаление элемента из списка избранного
+
+> Пример кода для удаления элемента из списка избранного:
+
+```shell
+curl "<%= config[:host] %>/favorites_list/items/8" \
+  -X DELETE
+```
+
+> Ответ вернет результат с кодом 200
+
+Чтобы удалить элемент из списка избранного, необходимо выполнить запрос:
+
+`DELETE <%= config[:host] %>/favorites_list/items/#{ID}`
+
+### Параметры запроса
+
+Параметр | Обязательный | Описание
+-------- | ------------ | --------
+ID       | Да           | ID элемента списка

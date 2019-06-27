@@ -1,0 +1,67 @@
+# Промоакции
+
+## Список продуктов обязательные для активации промоакции
+
+```shell
+curl "<%= config[:host] %>/promotions/42/promo_products?sid=1"
+```
+
+> Команда выше возвращает JSON:
+
+```json
+{
+  "products": [
+    {
+      "id": 1,
+      "sku": 100000,
+      "name": "Бананы",
+      "price": 54.79,
+      "original_price": 55.79,
+      "discount": 1.0,
+      "weight": 500.0,
+      "human_volume": "500 г.",
+      "items_per_pack": 1,
+      "images": [
+        {
+          "mini_url": "http://instamart.ru/products/1/mini/file.png",
+          "small_url": "http://instamart.ru/products/1/small/file.png",
+          "product_url": "http://instamart.ru/products/1/product/file.png"
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "current_page": 1,
+    "next_page": null,
+    "total_pages": 1,
+    "total_count": 1
+  }
+}
+```
+
+> Если условия акции не зависят от списка продуктов:
+
+```json
+{
+  "products": []
+}
+```
+
+Получить список продуктов, можно выполнив запрос
+
+### HTTP запрос
+
+`GET <%= config[:host] %>/promotions/#{ID}/promo_products?sid=1`
+
+
+### Параметры запроса
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+ID | Да | ID промоакции
+sid | Да | Идентификатор магазина
+
+<aside class="notice">
+Список продуктов может быть получен только для промоакции, для активации которой необходимо набрать
+определенные товары
+</aside>

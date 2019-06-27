@@ -1,0 +1,59 @@
+# Типы способов оплаты
+
+```shell
+curl "<%= config[:host] %>/payment_tool_types" \
+  -H "Authorization: Token token=#{TOKEN}"
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+{
+  "payment_tool_types": [
+    {
+      "id": 2,
+      "name": "Наличными курьеру",
+      "description": "",
+      "type": "check"
+    },
+    {
+      "id": 3,
+      "name": "Банковский перевод",
+      "description": "",
+      "type": "sber_bank_invoice"
+    },
+    {
+      "id": 4,
+      "name": "Visa/Mastercard",
+      "description": "Оплата по пластиковым картам",
+      "type": "cloud_payments_gateway"
+    },
+    {
+      "id": 5,
+      "name": "Картой курьеру",
+      "description": "",
+      "type": "lifepay"
+    }
+  ],
+  "meta": {
+    "current_page": 1,
+    "next_page": null,
+    "total_pages": 1,
+    "per_page": 20,
+    "total_count": 4
+  }
+}
+```
+
+API возвращает возможные типы способов оплаты.
+
+`GET <%= config[:host] %>/payment_tool_types`
+
+### Структура объекта PaymentToolTypes
+
+Атрибут | Описание
+--------- | -----------
+id | идентификатор
+name | название
+type | тип способа оплаты. Указывается в [Способах оплаты](#sposoby-oplaty)
+description | описание

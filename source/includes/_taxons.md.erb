@@ -1,0 +1,214 @@
+# Категории с группами
+
+## Получение списка категорий
+
+> Пример кода для получения списка всех категорий
+
+```shell
+curl "<%= config[:host] %>/taxons?sid=1"
+```
+> Ответ будет содержать следующие данные:
+
+```json
+{
+  "taxons": [
+    {
+      "id": 172,
+      "type": "department",
+      "name": "Продукты питания",
+      "products_count": 25,
+      "icon": {
+        "mini_url":
+          "http://im.dev/spree/taxons/172/mini/image1.png?1453225215",
+        "normal_url":
+          "http://im.dev/spree/taxons/172/normal/image1.png?1453225215"
+      },
+      "alt_icon": {
+        "url": "http://im.dev/spree/icons/1/original/svg1.svg?1453649106"
+      },
+      "children": [
+        {
+          "id": 466,
+          "type": "department",
+          "name": "Чай и кофе",
+          "products_count": 25,
+          "icon": {
+            "mini_url":
+              "http://im.dev/spree/taxons/466/mini/image2.png?1453225181",
+            "normal_url":
+              "http://im.dev/spree/taxons/466/normal/image2.png?1453225181"
+          },
+          "alt_icon": {
+            "url": "http://im.dev/spree/icons/2/original/svg2.svg?1453649106"
+          },
+          "children": [
+            {
+              "id": 187,
+              "type": "taxon",
+              "name": "Чай",
+              "products_count": 20,
+              "icon": {
+                "mini_url":
+                  "http://im.dev/spree/taxons/187/mini/image3.png?1453649106",
+                "normal_url":
+                  "http://im.dev/spree/taxons/187/normal/image3.png?1453649106"
+              },
+              "alt_icon": {
+                "url": "http://im.dev/spree/icons/3/original/svg3.svg?1453649106"
+              }
+            },
+            {
+              "id": 188,
+              "type": "taxon",
+              "name": "Кофе",
+              "products_count": 5,
+              "icon": {
+                "mini_url":
+                  "http://im.dev/spree/taxons/188/mini/image4.png?1453649151",
+                "normal_url":
+                  "http://im.dev/spree/taxons/188/normal/image4.png?1453649151"
+              },
+              "alt_icon": {
+                "url": "http://im.dev/spree/icons/4/original/svg4.svg?1453649106"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "promoted_taxons": [
+    {
+      "id": 663,
+      "type": "department",
+      "name": "Спецпредложения",
+      "icon": {
+        "mini_url": "http://im.dev/assets/default_taxon.png",
+        "normal_url": "http://im.dev/assets/default_taxon.png"
+      },
+      "alt_icon": {
+        "url": "http://im.dev/spree/icons/5/original/svg5.svg?1453649106"
+      },
+      "children": [
+        {
+          "id": 665,
+          "type": "department",
+          "name": "Unilever",
+          "icon": {
+            "mini_url": "http://im.dev/assets/default_taxon.png",
+            "normal_url": "http://im.dev/assets/default_taxon.png"
+          },
+          "alt_icon": {
+            "url": "http://im.dev/spree/icons/6/original/svg5.svg?1453649106"
+          },
+          "children": [
+            {
+              "id": 911,
+              "type": "taxon",
+              "name": "Бакалея",
+              "icon": {
+                "mini_url":
+                  "http://im.dev/spree/taxons/911/mini/image5.png?1453225221",
+                "normal_url":
+                  "http://im.dev/spree/taxons/911/normal/image5.png?1453225221"
+              },
+              "alt_icon": {
+                "url": "http://im.dev/spree/icons/7/original/svg5.svg?1453649106"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+API возвращает полную иерархию всех категорий(вместе с группой). Ответ содержит два объекта верхего уровня: `taxons` и `promoted_taxons`.
+`taxons` – это список всех категорий сайта. `promoted_taxons` – список маркетинговых категорий "скидки", "новогоднее предложение" и пр.
+
+`taxons` и `promoted_taxons` имеют древовидную структуру неограниченной вложенности.
+
+Все объекты категорий имеют следующую структуру:
+
+### Структура объекта Taxon
+
+Атрибут | Описание
+--------- | -----------
+id | id категории
+type | Тип категории: __department__ или __taxon__
+name | Название категори
+icon | Иконка категории
+alt_icon | Альтернатинвая иконка категории
+children | Список дочерних категорий
+
+От значения поля `type` зависит способ отображения содержимого категории.
+Если `type` содержит значение "department" – для отоброжения содержимого категории нужно использовать API `/v2/departments`. Если `type` содержит "taxon" – нужно использовать API `/v2/products`
+
+
+Получить список всех категорий можно, выполнив запрос:
+
+`GET <%= config[:host] %>/taxons?sid=SID`
+
+### Параметры запроса
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+`SID` | Да | ID магазина для которого необходимо получить список категорий.
+
+
+## Получение информации о категории
+
+> Пример запроса для получения информации о категории:
+
+```shell
+curl "<%= config[:host] %>/taxons/1?sid=1"
+```
+> Ответ будет содержать следующие данные:
+
+```json
+{
+  "taxon": {
+      "id": 172,
+      "type": "department",
+      "name": "Продукты питания",
+      "icon": {
+        "mini_url":
+          "http://im.dev/spree/taxons/172/mini/image1.png?1453225215",
+        "normal_url":
+          "http://im.dev/spree/taxons/172/normal/image1.png?1453225215"
+      },
+      "alt_icon": {
+        "url": "http://im.dev/spree/icons/1/original/svg1.svg?1453649106"
+      },
+      "children": [
+        {
+          "id": 466,
+          "type": "taxon",
+          "name": "Чай и кофе",
+          "icon": {
+            "mini_url":
+              "http://im.dev/spree/taxons/466/mini/image2.png?1453225181",
+            "normal_url":
+              "http://im.dev/spree/taxons/466/normal/image2.png?1453225181"
+          },
+          "alt_icon": {
+            "url": "http://im.dev/spree/icons/2/original/svg2.svg?1453649106"
+          }
+        }
+      ]
+  }
+}
+````
+
+Получить информацию о категории можно, выполнив запрос:
+
+`GET <%= config[:host] %>/taxons/ID?sid=SID`
+
+### Параметры запроса
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+`ID` | Да | ID категории
+`SID` | Да | ID магазина
+
+API возвращает полную иерархию всех категорий, начиная с выбранной. Анналогично списка категорий
