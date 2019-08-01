@@ -851,8 +851,10 @@ curl "<%= config[:host] %>/line_items" \
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
 line_item[order_number] | Да | Номер заказа
-line_item[product_id] | Да | ID продукта
 line_item[quantity] | Да | количество добавляемых позиций
+line_item[product_id] | Да (если не указаны retailer_sku и product_id) | ID продукта
+line_item[retailer_sku] | Да (если не указан product_id) | Артикул ритейлера
+line_item[store_id] | Да (если указан retailer_sku) | ID магазина
 
 <aside class="notice">
   После добавления новой позиции не забудьте перезагрузить заказ.
