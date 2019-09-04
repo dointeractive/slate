@@ -81,3 +81,54 @@ session[phone] | Нет | Подтвержденный телефон польз
 
 Проверить токен можно, выполнив запрос:
 `GET <%= config[:host] %>/sessions/#{ACCESS_TOKEN}`
+
+
+## Получение данных пользователя сессии
+
+> Пример кода, чтобы получить информацию о пользователе по сессии:
+
+```shell
+curl '<%= config[:host] %>/sessions/1q2w3e/user'
+```
+> Если сессия существует, ответ будет содержать следующие данные:
+
+```json
+{
+  "user": {
+    "email": "test@test.com"
+  }
+}
+```
+
+> Если пользователя не существует, сервер вернет ответ с кодом 404.<br>Если в запросе указать заголовок Authorization, то ответ будет содержать дополнительные данные:
+
+```shell
+curl '<%= config[:host] %>/sessions/1q2w3e/user'
+  -H 'Authorization: Token token=#{TOKEN}'
+```
+
+```json
+{
+  "user": {
+    "id": "1cf377fd-f6ba-4d9e-99eb-72f4179222da",
+    "email": "test@test.ru",
+    "first_name": "Ivan",
+    "last_name": "Ivanov",
+    "config": {
+      "send_emails": true,
+      "send_sms": true,
+      "send_push": true,
+      "default_bonus_card_id": null
+    }
+  }
+}
+```
+
+Получить данные пользователя можно, выполнив запрос:
+`GET <%= config[:host] %>/sessions/#{access_token}/user`
+
+### Параметры запроса
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+access_token | Да | Токен авторизации (идентификатор сессии)
