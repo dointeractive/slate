@@ -271,6 +271,7 @@ curl "<%= config[:host] %>/orders/C27387-16"
         "product": {
           "id": 960,
           "sku": "10963",
+          "retailer_sku": "12345678",
           "name": "Цикорий Elza гранулированный",
           "price": 229.89,
           "original_price": 229.89,
@@ -636,6 +637,7 @@ curl "<%= config[:host] %>/orders/R314234460/line_items" \
       "product": {
         "id": 1,
         "sku": "20002",
+        "retailer_sku": "12345678",
         "name": "Product #0",
         "price": 1136.7,
         "original_price": 1236.7,
@@ -693,6 +695,7 @@ curl "<%= config[:host] %>/orders/R314234460/line_item_cancellations" \
         "product": {
           "id": 20,
           "sku": "10020",
+          "retailer_sku": "12345678",
           "name": "Product #19",
           "price": 1136.7,
           "original_price": 1236.7,
@@ -750,6 +753,7 @@ curl "<%= config[:host] %>/orders/R314234460/line_item_replacements" \
         "product": {
           "id": 12,
           "sku": "10012",
+          "retailer_sku": "12345678",
           "name": "Product #11",
           "price": 1136.7,
           "original_price": 1236.7,
@@ -769,6 +773,7 @@ curl "<%= config[:host] %>/orders/R314234460/line_item_replacements" \
         "product": {
           "id": 20,
           "sku": "10020",
+          "retailer_sku": "12345679",
           "name": "Product #19",
           "price": 1136.7,
           "original_price": 1236.7,
@@ -825,6 +830,7 @@ curl "<%= config[:host] %>/line_items" \
     "product": {
       "id": 6,
       "sku": "10006",
+      "retailer_sku": "12345678",
       "name": "Напиток Danone Aktivia кисломолочный чернослив 2,0%",
       "price": 35.99,
       "original_price": 42.12,
@@ -880,6 +886,7 @@ curl "<%= config[:host] %>/line_items/520884" \
     "product": {
       "id": 6,
       "sku": "10006",
+      "retailer_sku": "12345678",
       "name": "Напиток Danone Aktivia кисломолочный чернослив 2,0%",
       "price": 35.99,
       "original_price": 42.12,

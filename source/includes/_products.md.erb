@@ -14,6 +14,7 @@ curl "<%= config[:host] %>/products?sid=1"
     {
       "id": 1,
       "sku": 100000,
+      "retailer_sku": "12345678",
       "name": "Бананы",
       "price": 54.79,
       "original_price": 55.79,
@@ -150,6 +151,7 @@ curl "<%= config[:host] %>/products/6"
   "product": {
     "id": 1,
     "sku": "10001",
+    "retailer_sku": "12345678",
     "name": "Бананы",
     "price": 54.79,
     "original_price": 55.79,
@@ -175,6 +177,8 @@ curl "<%= config[:host] %>/products/6"
     "related_products": [
       {
         "id": 2,
+        "sku": "16563",
+        "retailer_sku": "12345670",
         "name": "Бананы мини",
         "price": 1.79,
         "original_price": 1.99,
