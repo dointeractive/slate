@@ -7,9 +7,17 @@
 `GET <%= config[:host] %>/shipments/#{NUMBER}/shipping_rate_calculation`
 
 ```shell
-curl "<%= config[:host] %>/shipments/#{NUMBER}/shipping_rate_calculation?delivery_window_id={delivery_window.id}" \
+curl "<%= config[:host] %>/shipments/#{NUMBER}/shipping_rate_calculation?delivery_window_id={DELIVERY_WINDOW_ID}" \
   -H "Authorization: Token token=#{TOKEN}"
 ```
+
+### Параметры запроса
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+NUMBER | Да | Номер доставки
+DELIVERY_WINDOW_ID | Да | Id слота доставки
+
 
 > Ответ будет содержать следующие данные:
 
