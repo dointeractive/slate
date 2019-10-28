@@ -1,0 +1,36 @@
+# Детализация стоимости доставки
+
+## Запрос на получение детализации стоимости для доставки
+
+Получить детализацию стоимости для доставки, выполнив запрос:
+
+`GET <%= config[:host] %>/shipments/#{NUMBER}/shipping_rate_calculation`
+
+```shell
+curl "<%= config[:host] %>/shipments/#{NUMBER}/shipping_rate_calculation?delivery_window_id={delivery_window.id}" \
+  -H "Authorization: Token token=#{TOKEN}"
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+{
+  "shipping_rate_calculation": {
+    "total_cost": 590.0,
+    "surge_amount": 100.0,
+    "preferences": {
+      "base_price": 490.0,
+      "base_weight": 80.0,
+      "base_items_count": 30,
+      "extra_weight_batch": 40.0,
+      "fee_per_extra_weight_batch": 49.0,
+      "extra_items_count_batch": 5,
+      "fee_per_extra_items_count_batch": 29.0
+    },
+    "price_adjustments": {
+      "fee_per_extra_weight": 0,
+      "fee_per_extra_items_count": 0
+    }
+  }
+}
+```
