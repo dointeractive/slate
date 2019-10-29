@@ -20,6 +20,7 @@ delivery_window_id | Да | Id слота доставки
 
 > Ответ будет содержать следующие данные:
 
+> Для сложного калькулятора
 ```json
 {
   "shipping_rate_calculation": {
@@ -38,6 +39,20 @@ delivery_window_id | Да | Id слота доставки
       "fee_per_extra_weight": 0,
       "fee_per_extra_items_count": 0
     }
+  }
+}
+```
+
+> Для простого калькулятора
+```json
+{
+  "shipping_rate_calculation": {
+    "total_cost": 590.0,
+    "surge_amount": 100.0,
+    "preferences": {
+      "price": 490.0,
+    },
+    "price_adjustments": {}
   }
 }
 ```
