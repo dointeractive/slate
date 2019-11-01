@@ -29,7 +29,7 @@ includes:
   - promotions
   - orders
   - shipping_methods
-  - shipping_rate_calculation
+  - service_rate
   - delivery_windows
   - payment_tool_types
   - payment_tools
