@@ -1,0 +1,103 @@
+# Детализация стоимости доставки
+
+## Запрос на получение детализации стоимости для доставки
+
+
+```shell
+curl "<%= config[:host] %>/shipments/#{NUMBER}/service_rate?delivery_window_id=#{delivery_window_id}" \
+  -H "Authorization: Token token=#{TOKEN}"
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+{
+  "service_rate": {
+    "total": 730.0,
+    "rates": [
+      {
+        "type": "assembly_rate",
+        "title": "Сборка",
+        "description": "",
+        "price": 50,
+        "nominal_price": 50
+      },
+      {
+        "type": "shipping_rate",
+        "title": "Доставка",
+        "description": "",
+        "price": 200.0,
+        "nominal_price": 200.0
+      },
+      {
+        "type": "overweight_rate",
+        "title": "Доплата за вес",
+        "description": "более 1.0 кг",
+        "price": 196.0,
+        "nominal_price": 196.0
+      },
+      {
+        "type": "line_items_rate",
+        "title": "Доплата за позиции",
+        "description": "более 10",
+        "price": 174,
+        "nominal_price": 174
+      },
+      {
+        "type": "surge_rate",
+        "title": "Высокий спрос",
+        "description": "",
+        "price": 100.0,
+        "nominal_price": 100.0
+      },
+      {
+        "type": "bags_rate",
+        "title": "Доплата за пакеты",
+        "description": "",
+        "price": 10,
+        "nominal_price": 10
+      }
+    ]
+  }
+}
+```
+
+
+Получить детализацию стоимости для доставки, выполнив запрос:
+
+`GET <%= config[:host] %>/shipments/#{NUMBER}/service_rate`
+
+### Параметры запроса
+
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+NUMBER | Да | Номер доставки
+delivery_window_id | Да | Id слота доставки
+
+### Структура объекта service_rate
+
+Атрибут | Описание
+--------- | -----------
+total | Полная стоимость доставки
+rates | Массив объектов Rate (наценок)
+
+### Структура объекта Rate
+
+Атрибут | Описание
+--------- | -----------
+type | Тип наценки
+title | Название
+description | Дополнительное описание
+price | Размер наценки
+nominal_price | Размер наценки до применения скидки
+
+### Возможные типы наценок
+
+Тип | Описание
+--------- | -----------
+assembly_rate | Наценка за сборку
+shipping_rate | Наценка за доставку
+overweight_rate | Наценка за большой вес
+line_items_rate | Наценка за большое количество позиций
+surge_rate | Наценка слота доставки (мб отрицательной)
+bags_rate | Наценка за пакеты
