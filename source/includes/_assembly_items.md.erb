@@ -16,6 +16,7 @@ curl "<%= config[:host] %>/shipments/H0123412/assembly_items" \
     "assembly_items": [
         {
             "sku": "10006",
+            "product_id": 6,
             "name": "Product #6",
             "pcs": 6,
             "found_pcs": 6,
@@ -28,6 +29,7 @@ curl "<%= config[:host] %>/shipments/H0123412/assembly_items" \
             "human_volume": "200 г x 6",
             "items_per_pack": 6,
             "replacement": null,
+            "product_in_stock": true,
             "image": {
                 "mini_url": "http://im.test/spree/products/14/mini/6.jpg?1550146146",
                 "small_url": "http://im.test/spree/products/14/small/6.jpg?1550146146",
@@ -38,6 +40,7 @@ curl "<%= config[:host] %>/shipments/H0123412/assembly_items" \
         },
         {
             "sku": "10021",
+            "product_id": 21,
             "name": "Product #21",
             "pcs": 6,
             "found_pcs": 6,
@@ -49,8 +52,10 @@ curl "<%= config[:host] %>/shipments/H0123412/assembly_items" \
             "state": "replaced",
             "human_volume": "200 г x 6",
             "items_per_pack": 6,
+            "product_in_stock": false,
             "replacement": {
                 "sku": "10001",
+                "product_id": 1,
                 "name": "Product #1",
                 "pcs": 6,
                 "found_pcs": 6,
@@ -63,6 +68,7 @@ curl "<%= config[:host] %>/shipments/H0123412/assembly_items" \
                 "human_volume": "200 г x 6",
                 "items_per_pack": 6,
                 "replacement": null,
+                "product_in_stock": true,
                 "image": {
                     "mini_url": "http://im.test/spree/products/9/mini/1.jpg?1550146142",
                     "small_url": "http://im.test/spree/products/9/small/1.jpg?1550146142",
