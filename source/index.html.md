@@ -39,6 +39,7 @@ includes:
   - phones
   - order_reviews
   - company_documents
+  - onboarding_pages
   - app_reviews
   - credit_card
   - flags
