@@ -61,9 +61,15 @@ curl "<%= config[:host] %>/stores"
           "key": "prices",
           "description": "Цены как в магазине"
         }
-      ]
+      ],
+      "next_delivery": {
+        "price": 490.0,
+        "summary": "сегодня, 09:00-12:00",
+        "starts_at": "2020-01-21T09:00:00.000+03:00"
+      }
     }
   ]
+}
 
 ```
 
@@ -148,6 +154,18 @@ curl "<%= config[:host] %>/stores/1"
         "id": 1,
         "key": "prices",
         "description": "Цены как в магазине"
+      }
+    ],
+    "next_delivery": {
+      "price": 490.0,
+      "summary": "сегодня, 09:00-12:00",
+      "starts_at": "2020-01-21T09:00:00.000+03:00"
+    },
+    "operational_times": [
+      {
+        "week_day": "Вторник",
+        "starts_at": "2020-01-21T09:00:00+03:00",
+        "ends_at": "2020-01-21T12:00:00+03:00"
       }
     ]
   }
