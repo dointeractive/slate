@@ -55,6 +55,7 @@ curl "<%= config[:host] %>/orders" -X POST
 Атрибут | Описание
 --------- | -----------
 number | номер заказа
+email | контактный email
 total | итоговая сумма заказа
 item_total | сумма всех позиций заказа, без скидки
 ship_total | стоимость доставки
@@ -228,6 +229,7 @@ curl "<%= config[:host] %>/orders/C27387-16"
 {
   "order": {
     "number": "C27387-16",
+    "email": "test@example.com",
     "total": 229.89,
     "item_total": 229.89,
     "item_count": 0,
@@ -319,6 +321,7 @@ curl "<%= config[:host] %>/orders/current" \
 {
   "order": {
     "number": "R314234460",
+    "email": "test@example.com",
     "total": 0.0,
     "item_total": 0.0,
     "ship_total": 0,
@@ -951,11 +954,20 @@ curl "<%= config[:host] %>/orders/#{NUMBER}" \
   -X PUT \
   -d "order[replacement_policy_id]=1"
 ```
+> Пример команды для того, чтобы указать контакатный email
+
+```shell
+curl "<%= config[:host] %>/orders/#{NUMBER}" \
+  -H "Authorization: Token token=#{TOKEN}" \
+  -X PUT \
+  -d "order[email]=test@example.com"
+```
 > Если данные были указаны верно, ответ будет содержать json-документ заказа:
 
 ```json
 {
   "number": "R307128032",
+  "email": "test@example.com",
   "item_total": 0.0,
   "total": 0.0,
   "ship_total": 0.0,
@@ -1103,6 +1115,7 @@ order[shipments_attributes][][delivery_window_id] | Да | id слота дос�
 order[shipments_attributes][][shipping_method_id] | Да | id cпособа доставки
 order[payment_attributes][payment_tool_id] | Да | id источника оплаты
 order[replacement_policy_id] | Да | id способа замены
+order[email] | Нет | Контактный email
 
 ## Отмена заказа
 
