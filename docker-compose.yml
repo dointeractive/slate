@@ -1,0 +1,11 @@
+version: "3.6"
+services:
+  slate-dev-server:
+    build:
+      context: .
+    volumes:
+      - ./:/opt/src
+    ports:
+      - 4567:4567
+    working_dir: /opt/src
+    command: 'bundle exec middleman server'

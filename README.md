@@ -44,15 +44,25 @@ You're going to need:
 
 ### Getting Set Up
 
-1. Fork this repository on Github.
-2. Clone *your forked repository* (not our original one) to your hard drive with `git clone https://github.com/YOURUSERNAME/slate.git`
-3. `cd slate`
-4. Initialize and start Slate. You can either do this locally, or with Vagrant:
+1. Clone project to your hard drive with:
+```bash
+git clone https://github.com/YOURUSERNAME/slate.git
+```
+
+2. Go to the project folder:
+```bash
+cd slate
+```
+
+3. Initialize and start Slate::
 
 ```shell
 # either run this to run locally
 bundle install
 bundle exec middleman server
+
+# OR run this to run with docker
+docker-compose up --build
 
 # OR run this to run with vagrant
 vagrant up
@@ -60,9 +70,16 @@ vagrant up
 
 You can now see the docs at http://localhost:4567. Whoa! That was fast!
 
-Now that Slate is all set up your machine, you'll probably want to learn more about [editing Slate markdown](https://github.com/tripit/slate/wiki/Markdown-Syntax), or [how to publish your docs](https://github.com/tripit/slate/wiki/Deploying-Slate).
+If you want to build static documents for manual deploy, run:
 
-If you'd prefer to use Docker, instructions are available [in the wiki](https://github.com/tripit/slate/wiki/Docker).
+```bash
+bundle exec middleman build
+
+# OR run this to run with docker
+docker-compose -f docker-compose.build.yml up --build
+```
+
+Now that Slate is all set up your machine, you'll probably want to learn more about [editing Slate markdown](https://github.com/tripit/slate/wiki/Markdown-Syntax), or [how to publish your docs](https://github.com/tripit/slate/wiki/Deploying-Slate).
 
 Companies Using Slate
 ---------------------------------
