@@ -46,7 +46,7 @@ You're going to need:
 
 1. Clone project to your hard drive with:
 ```bash
-git clone https://github.com/YOURUSERNAME/slate.git
+git clone https://github.com/nstmrt/slate.git
 ```
 
 2. Go to the project folder:
