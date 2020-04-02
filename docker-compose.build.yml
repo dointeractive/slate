@@ -1,0 +1,9 @@
+version: "3.6"
+services:
+  slate-build:
+    build:
+      context: .
+    volumes:
+      - ./:/opt/src
+    working_dir: /opt/src
+    command: 'bundle exec middleman build'
