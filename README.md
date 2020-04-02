@@ -54,7 +54,7 @@ git clone https://github.com/nstmrt/slate.git
 cd slate
 ```
 
-3. Initialize and start Slate::
+3. Initialize and start Slate:
 
 ```shell
 # either run this to run locally
