@@ -1108,7 +1108,20 @@ curl "<%= config[:host] %>/orders/#{NUMBER}" \
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
 NUMBER | Да | Номер заказа
-order[address_attributes][id] | Да (для завершения) | Адрес доставки
+order[address_attributes][id] | - | Адрес доставки
+order[address_attributes][first_name] | - | Имя пользователя/контактого лица
+order[address_attributes][last_name] | - | Фамилия пользоватя/контактного лица
+order[address_attributes][city] | - | Город
+order[address_attributes][street] | - | Улица
+order[address_attributes][building] | - | Номер дома
+order[address_attributes][block] | - | Строение
+order[address_attributes][entrance] | - | Подъезд
+order[address_attributes][floor] | - | Этаж
+order[address_attributes][apartment] | - | Номер квартиры
+order[address_attributes][comments] | - | Комментарий к адресу
+order[address_attributes][lon] | - | Долгота
+order[address_attributes][lat] | - | Широта
+order[address_attributes][door_phone] | - | Номер домофона
 order[address_attributes][instructions] | - | Комментарий к заказу
 order[shipments_attributes][][id] | Да | id shipment'а
 order[shipments_attributes][][delivery_window_id] | Да | id слота доставки
