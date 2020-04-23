@@ -983,8 +983,21 @@ curl "<%= config[:host] %>/orders/#{NUMBER}" \
   "total_quantity": 0,
   "address": {
     "id": 1,
+    "first_name": "Иван",
+    "last_name": "Петров",
+    "full_address": "Фридриха Энгельса 56",
     "city": "Москва",
-    "full_address": "Старая Басманная 3"
+    "street": "Фридриха Энгельса",
+    "building": "53",
+    "block": null,
+    "entrance": null,
+    "floor": null,
+    "apartment": null,
+    "comments": null,
+    "lat": null,
+    "lon": null,
+    "kind": "home",
+    "door_phone": "123"
   },
   "shipments": [...],
   "payment": null,
@@ -1003,6 +1016,8 @@ curl "<%= config[:host] %>/orders/#{NUMBER}" \
   -H "Authorization: Token token=#{TOKEN}" \
   -X PUT \
   -d "order[address_attributes][id]=1" \
+  -d "order[address_attributes][first_name]=Иван"
+  -d "order[address_attributes][city]=Москва"
   -d "order[address_attributes][instructions]=1"
 ```
 > Если данные были указаны верно, ответ будет содержать json-документ заказа:
@@ -1025,8 +1040,21 @@ curl "<%= config[:host] %>/orders/#{NUMBER}" \
   "total_quantity": 0,
   "address": {
     "id": 1,
+    "first_name": "Иван",
+    "last_name": "Петров",
+    "full_address": "Фридриха Энгельса 56",
     "city": "Москва",
-    "full_address": "Старая Басманная 3"
+    "street": "Фридриха Энгельса",
+    "building": "53",
+    "block": null,
+    "entrance": null,
+    "floor": null,
+    "apartment": null,
+    "comments": null,
+    "lat": null,
+    "lon": null,
+    "kind": "home",
+    "door_phone": "123"
   },
   "shipments": [...],
   "payment": null,
