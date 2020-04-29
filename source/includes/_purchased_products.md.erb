@@ -4,6 +4,7 @@
 
 ```shell
 curl "<%= config[:host] %>/purchased_products?sid=1"
+  -H 'Authorization: Token token=#{TOKEN}'
 ```
 
 > Команда выше возвращает JSON:
@@ -21,6 +22,7 @@ curl "<%= config[:host] %>/purchased_products?sid=1"
       "discount": 0,
       "human_volume": "500 г.",
       "items_per_pack": 1,
+      "discount_ends_at": null,
       "images": []
     },
     {
@@ -33,6 +35,7 @@ curl "<%= config[:host] %>/purchased_products?sid=1"
       "discount": 0,
       "human_volume": "500 г.",
       "items_per_pack": 1,
+      "discount_ends_at": null,
       "images": []
     }
   ]
@@ -44,6 +47,10 @@ curl "<%= config[:host] %>/purchased_products?sid=1"
 ### HTTP запрос
 
 `GET <%= config[:host] %>/purchased_products`
+
+<aside class="notice">
+  Требуется авторизация пользователя
+</aside>
 
 ### Параметры запроса
 
