@@ -28,7 +28,6 @@ includes:
   - promotion_codes
   - promotions
   - orders
-  - shipping_methods
   - service_rate
   - delivery_windows
   - payment_tool_types

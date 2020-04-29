@@ -1082,7 +1082,6 @@ curl "<%= config[:host] %>/orders/#{NUMBER}" \
   -H "Authorization: Token token=#{TOKEN}" \
   -d "order[shipments_attributes][id]=1"
   -d "order[shipments_attributes][delivery_window_id]=1"
-  -d "order[shipments_attributes][shipping_method_id]=1"
 ```
 
 > Пример выбора метода оплаты:
@@ -1115,11 +1114,7 @@ curl "<%= config[:host] %>/orders/#{NUMBER}" \
 ### Выбор способа замен
 Получить список способов замен товаров при сборке заказа можно, [выполнив запрос](#sposoby-zamien)
 
-### Выбор способа доставки и времени доставки
-
-Получить список способов доставки, необходимый для оформления заказа, можно выполнив запрос:
-
-`GET <%= config[:host] %>/shipping_methods`
+### Выбор времени доставки
 
 Окна доставки можно получить, выполнив запрос:
 
@@ -1155,7 +1150,6 @@ order[address_attributes][door_phone] | - | Номер домофона
 order[address_attributes][instructions] | - | Комментарий к заказу
 order[shipments_attributes][][id] | Да | id shipment'а
 order[shipments_attributes][][delivery_window_id] | Да | id слота доставки
-order[shipments_attributes][][shipping_method_id] | Да | id cпособа доставки
 order[payment_attributes][payment_tool_id] | Да | id источника оплаты
 order[replacement_policy_id] | Да | id способа замены
 order[email] | Нет | Контактный email
