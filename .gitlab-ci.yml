@@ -33,7 +33,7 @@ build_docs:
 
 deploy_docs:
   stage: deploy
-  image: registry.gitlab.com/instamart-ci/ansible:latest
+  image: registry.gitlab.com/instamart-ci/ansible:0341e01bac89c87180bfb83197e6ec11d4d0d80b
 #  when: manual
   only:
     - master
