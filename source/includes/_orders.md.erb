@@ -55,19 +55,23 @@ curl "<%= config[:host] %>/orders" -X POST
 Атрибут | Описание
 --------- | -----------
 number | номер заказа
-email | контактный email
 total | итоговая сумма заказа
+item_count | общее количество товаров в заказе
 item_total | сумма всех позиций заказа, без скидки
 ship_total | стоимость доставки
 adjustment_total | сумма скидок
-item_count | общее количество товаров в заказе
+promo_total | сумма промо
 shipment_state | состояние доставки
 payment_state | состояние оплаты
 special_instructions | примечание к заказу
+created_at | дата создания заказа
+updated_at | дата обновления заказа
+completed_at | дата оформления заказа
+email | контактный email
 address | адрес доставки
-shipments | данные о добавленных товаров
 payment | данные об оплате
-adjustments | корректировки стоимости заказа (скидки, цена доставки)
+replacement_policy | способ замены товаров
+shipments | данные о доставках и товарах
 promotion_codes | Список примененных промокодов
 
 ### Структура объекта Shipment
@@ -76,17 +80,18 @@ promotion_codes | Список примененных промокодов
 
 Атрибут | Описание
 --------- | -----------
-id | id пакета
-alerts | список предупреждений об ошибках в заказе
-promotions | список предложенй о скидках и пр.
+id | id доставки
+number | Номер доставки
 cost | стоимость доставки
 item_total | стоимость всех позиций заказа
 total | суммарная стоимость всех позиций, доставки и скидок
+state | состояние
+alerts | список предупреждений об ошибках в заказе
+promotions | список предложенй о скидках и пр.
 next_deliveries | предлагаемые окна доставки
-retailer | информация о ритейлере
 line_items | список позиций
 delivery_window | окно доставки
-state | состояние
+retailer | информация о ритейлере
 driver_name | Имя водителя
 driver_phone | Номер телефона водителя
 
@@ -94,12 +99,12 @@ driver_phone | Номер телефона водителя
 
 Состояние | Описание
 --------- | --------
-pending | начальное состояние
+pending | начальное состояние, в процессе оформления
 ready | оформление заказа завершено
 canceled | доставка из данного ритейлера отменена
+ready_to_ship | заказ собран и готов к отправке
+shipping | заказ в пути
 shipped | доставка из данного ритейлера выполнена
-
-`pending` и `ready` по факту одно и тоже состояние
 
 ### Структура объекта Payment
 
@@ -222,7 +227,7 @@ curl "<%= config[:host] %>/shipments/#{NUMBER}/clones" \
 > Пример команды:
 
 ```shell
-curl "<%= config[:host] %>/orders/C27387-16"
+curl "<%= config[:host] %>/orders/R100203502"
 ```
 
 > Ответ будет содержать следующие данные:
@@ -230,71 +235,89 @@ curl "<%= config[:host] %>/orders/C27387-16"
 ```json
 {
   "order": {
-    "number": "C27387-16",
-    "email": "test@example.com",
+    "number": "R100203502",
     "total": 229.89,
-    "item_total": 229.89,
     "item_count": 0,
+    "item_total": 229.89,
     "ship_total": 0,
     "adjustment_total": 0.0,
+    "promo_total": 0.0,
     "shipment_state": null,
     "payment_state": null,
     "special_instructions": null,
     "created_at": "2016-10-11T12:28:03.000+03:00",
     "updated_at": "2016-10-11T12:28:04.000+03:00",
     "completed_at": null,
+    "email": "test@example.com",
     "address": null,
+    "payment": null,
+    "replacement_policy": null,
     "shipments": [{
       "id": 1,
+      "number": "H11110181217",
+      "cost": 0.0,
+      "item_total": 229.89,
+      "total": 229.89,
+      "state": "pending",
       "alerts": [{
         "message": "Добавьте больше товаров для заказа",
-        "full_message": "Минимальная сумма заказа 229 р. в \"Metro C&C\" не набрана"
+        "full_message": "Минимальная сумма заказа 229 р. в \"Metro C&C\" не набрана",
+        "key": "unsufficiant_total"
       }],
       "promotions": [{
         "message": "Бесплатная доставка при заказе на сумму от 2999"
       }],
-      "total": 229.89,
-      "item_total": 229.89,
       "next_deliveries": [{
         "price": 350.0,
-        "summary": "сегодня, 09:00-12:00"
+        "summary": "сегодня, 09:00-12:00",
+        "starts_at": "2020-04-29T09:00:00.000+03:00"
       }],
-      "retailer": {
-        "id": 1,
-        "name": "Metro C&C",
-        "color": "#003d7a",
-        "logo": "https://s11.postimg.org/kg57t4yrn/metro_logo_s.png"
-      },
       "line_items": [{
         "id": 548260,
         "quantity": 1,
         "price": 229.89,
-        "description": "Цикорий Elza – растворимый гранулированный напиток с насыщенным кофейным вкусом и ароматом.Содержащийся в цикории инулин способствует улучшению обмена веществ и пищеварения. Оказывает успокаивающее действие на нервную систему, улучшает работу сердца. Цикорий повышает иммунитет,очищает организм. Он богат минеральными веществами, витаминами и микроэлементами.",
         "total": 229.89,
+        "customer_comment": null,
         "product_in_stock": true,
         "product": {
-          "id": 960,
-          "sku": "10963",
+          "id": 1,
+          "sku": 100000,
           "retailer_sku": "12345678",
-          "name": "Цикорий Elza гранулированный",
+          "name": "Бананы",
           "price": 229.89,
-          "original_price": 229.89,
-          "discount": 0.0,
+          "original_price": 230.89,
+          "discount": 1.0,
+          "human_volume": "500 г.",
           "items_per_pack": 1,
-          "human_volume": "100 г.",
-          "weight": 100.0,
-          "description": "Цикорий Elza – растворимый гранулированный напиток с насыщенным кофейным вкусом и ароматом.Содержащийся в цикории инулин способствует улучшению обмена веществ и пищеварения. Оказывает успокаивающее действие на нервную систему, улучшает работу сердца. Цикорий повышает иммунитет,очищает организм. Он богат минеральными веществами, витаминами и микроэлементами.",
-          "images": [{
-            "mini_url": "<%= config[:host] %>/spree/products/3882/mini/10963.jpg?1473242393",
-            "small_url": "<%= config[:host] %>/spree/products/3882/small/10963.jpg?1473242393",
-            "product_url": "<%= config[:host] %>/spree/products/3882/product/10963.jpg?1473242393",
-            "original_url": "<%= config[:host] %>/spree/products/3882/original/10963.jpg?1473242393"
-          }]
+          "discount_ends_at": "2020-04-29T03:00:00.000+03:00",
+          "images": [
+            {
+              "mini_url": "<%= config[:host] %>/products/1/mini/file.png",
+              "small_url": "<%= config[:host] %>/products/1/small/file.png",
+              "product_url": "<%= config[:host] %>/products/1/product/file.png",
+              "preview_url": "<%= config[:host] %>/products/1/preview/file.png",
+              "original_url": "<%= config[:host] %>/products/1/original/file.png"
+            }
+          ]
         }
-      }]
+      }],
+      "retailer": {
+        "id": 1,
+        "name": "METRO",
+        "slug": "metro",
+        "color": "#003d7a",
+        "logo_background_color": "#003d7a",
+        "logo": "<%= config[:host] %>/kg57t4yrn/metro_logo_s.png",
+        "available": true,
+        "environment": "production"
+      }
     }],
-    "payment": null,
-    "promotion_codes": []
+    "promotion_codes": [
+      {
+        "value": "free",
+        "description": "Бесплатная доставка"
+      }
+    ]
   }
 }
 ```
@@ -317,29 +340,17 @@ curl "<%= config[:host] %>/orders/current" \
   -H "Authorization: Token token=#{TOKEN}"
 ```
 
-> Ответ будет содержать следующие данные:
+> Ответ будет содержать JSON данные заказа:
 
 ```json
 {
   "order": {
-    "number": "R314234460",
-    "email": "test@example.com",
-    "total": 0.0,
-    "item_total": 0.0,
-    "ship_total": 0,
-    "adjustment_total": 0.0,
+    "number": "R100203502",
+    "total": 229.89,
     "item_count": 0,
-    "shipment_state": null,
-    "payment_state": null,
-    "special_instructions": null,
-    "created_at": "2016-09-23T16:19:29.284+03:00",
-    "updated_at": "2016-09-23T16:19:29.284+03:00",
-    "completed_at": null,
-    "address": null,
-    "shipments": [],
-    "payment": null,
-    "adjustments": [],
-    "promotion_codes": []
+    "item_total": 229.89,
+    "ship_total": 0,
+    ...
   }
 }
 ```
@@ -390,27 +401,29 @@ curl "<%= config[:host] %>/orders?status=canceled" \
       "completed_at": "2017-02-08T17:37:46.000+03:00",
       "shipments": [{
         "id": 126866,
+        "number": "Н1231232131",
         "cost": 250.0,
         "item_total": 2035.48,
         "total": 2285.48,
         "state": "canceled",
-        "retailer": {
-          "id": 1,
-          "name": "Metro CC",
-          "color": "#003d7a",
-          "logo": "<%= config[:host] %>/logos/metro.png",
-          "available": true,
-          "environment": "production"
-        },
         "delivery_window": {
           "id": 1818,
           "starts_at": "2017-02-09T11:00:00.000+03:00",
           "ends_at": "2017-02-09T14:00:00.000+03:00"
+        },
+        "retailer": {
+          "id": 1,
+          "name": "METRO",
+          "slug": "metro",
+          "color": "#003d7a",
+          "logo_background_color": "#003d7a",
+          "logo": "<%= config[:host] %>/logos/metro.png",
+          "available": true,
+          "environment": "production"
         }
       }]
     }
   ],
-
   "meta":{
     "current_page": 1,
     "next_page": null,
@@ -448,7 +461,10 @@ ship_total | стоимость доставки
 item_count | общее количество товаров в заказе
 shipment_state | состояние доставки
 payment_state | состояние оплаты
-shipments | данные о добавленных товаров
+created_at | дата создания заказа
+updated_at | дата обновления заказа
+completed_at | дата оформления заказа
+shipments | данные о доставках и товарах
 
 В ответ не включаются следующие поля:
 - adjustment_total
@@ -461,13 +477,14 @@ shipments | данные о добавленных товаров
 
 Атрибут | Описание
 --------- | -----------
-id | id пакета
+id | id доставки
+number | номер доставки
 cost | стоимость доставки
 item_total | стоимость всех позиций заказа
 total | суммарная стоимость всех позиций, доставки и скидок
-retailer | информация о ритейлере
-delivery_window | окно доставки
 state | состояние
+delivery_window | окно доставки
+retailer | информация о ритейлере
 
 В ответ не включаются следующие поля:
 - alerts
@@ -650,11 +667,11 @@ curl "<%= config[:host] %>/orders/R314234460/line_items" \
         "human_volume": "100 г. x 12",
         "items_per_pack": 12,
         "images": [{
-          "mini_url": "<%= config[:host] %>/spree/products/5946/mini/10006.jpg?1473242617",
-          "small_url": "<%= config[:host] %>/spree/products/5946/small/10006.jpg?1473242617",
-          "product_url": "<%= config[:host] %>/spree/products/5946/product/10006.jpg?1473242617",
-          "preview_url": "<%= config[:host] %>/spree/products/5946/preview/10006.jpg?1473242617",
-          "original_url": "<%= config[:host] %>/spree/products/5946/original/10006.jpg?1473242617"
+          "mini_url": "<%= config[:host] %>/spree/products/1/mini/10006.jpg?1473242617",
+          "small_url": "<%= config[:host] %>/spree/products/1/small/10006.jpg?1473242617",
+          "product_url": "<%= config[:host] %>/spree/products/1/product/10006.jpg?1473242617",
+          "preview_url": "<%= config[:host] %>/spree/products/1/preview/10006.jpg?1473242617",
+          "original_url": "<%= config[:host] %>/spree/products/1/original/10006.jpg?1473242617"
         }]
       }
     }
@@ -827,26 +844,28 @@ curl "<%= config[:host] %>/line_items" \
 ```json
 {
   "line_item": {
-    "id": 520884,
-    "quantity": 2,
-    "price": 35.99,
-    "description": "Пробиотические продукты Активиа содержат уникальные бифидобактерия ActiRegularis, отобранные Данон за жизнеспособность и эффективную помощь организму. Ежедневная потребление Активиа помогает работе кишечника и способствует естественному очищению организма. Научные исследования подтвердили эффективность Активиа уже после 2-х недель ежедневного потребления. Изготовлено без добавления консервантов.",
-    "total": 71.98,
+    "id": 1,
+    "quantity": 1,
+    "price": 1236.7,
+    "total": 1236.7,
+    "customer_comment": null,
+    "product_in_stock": true,
     "product": {
-      "id": 6,
-      "sku": "10006",
+      "id": 1,
+      "sku": "20002",
       "retailer_sku": "12345678",
-      "name": "Напиток Danone Aktivia кисломолочный чернослив 2,0%",
-      "price": 35.99,
-      "original_price": 42.12,
-      "discount": -6.13,
-      "weight": 290.0,
-      "items_per_pack": 1,
-      "human_volume": "290 г.",
+      "name": "Product #0",
+      "price": 1136.7,
+      "original_price": 1236.7,
+      "discount": 100,
+      "human_volume": "100 г. x 12",
+      "items_per_pack": 12,
       "images": [{
-        "mini_url": "<%= config[:host] %>/spree/products/5946/mini/10006.jpg?1473242617",
-        "small_url": "<%= config[:host] %>/spree/products/5946/small/10006.jpg?1473242617",
-        "product_url": "<%= config[:host] %>/spree/products/5946/product/10006.jpg?1473242617"
+        "mini_url": "<%= config[:host] %>/spree/products/1/mini/10006.jpg?1473242617",
+        "small_url": "<%= config[:host] %>/spree/products/1/small/10006.jpg?1473242617",
+        "product_url": "<%= config[:host] %>/spree/products/1/product/10006.jpg?1473242617",
+        "preview_url": "<%= config[:host] %>/spree/products/1/preview/10006.jpg?1473242617",
+        "original_url": "<%= config[:host] %>/spree/products/1/original/10006.jpg?1473242617"
       }]
     }
   }
@@ -886,24 +905,11 @@ curl "<%= config[:host] %>/line_items/520884" \
     "id": 520884,
     "quantity": 10,
     "price": 35.99,
-    "description": "Пробиотические продукты Активиа содержат уникальные бифидобактерия ActiRegularis, отобранные Данон за жизнеспособность и эффективную помощь организму. Ежедневная потребление Активиа помогает работе кишечника и способствует естественному очищению организма. Научные исследования подтвердили эффективность Активиа уже после 2-х недель ежедневного потребления. Изготовлено без добавления консервантов.",
-    "total": 359.9,
+    ...
     "product": {
       "id": 6,
       "sku": "10006",
-      "retailer_sku": "12345678",
-      "name": "Напиток Danone Aktivia кисломолочный чернослив 2,0%",
-      "price": 35.99,
-      "original_price": 42.12,
-      "discount": -6.13,
-      "weight": 290.0,
-      "items_per_pack": 1,
-      "human_volume": "290 г.",
-      "images": [{
-        "mini_url": "<%= config[:host] %>/spree/products/5946/mini/10006.jpg?1473242617",
-        "small_url": "<%= config[:host] %>/spree/products/5946/small/10006.jpg?1473242617",
-        "product_url": "<%= config[:host] %>/spree/products/5946/product/10006.jpg?1473242617"
-      }]
+      ...
     }
   }
 }
@@ -970,44 +976,7 @@ curl "<%= config[:host] %>/orders/#{NUMBER}" \
 {
   "number": "R307128032",
   "email": "test@example.com",
-  "item_total": 0.0,
-  "total": 0.0,
-  "ship_total": 0.0,
-  "state": "cart",
-  "adjustment_total": 0.0,
-  "user_id": 1,
-  "created_at": "2014-07-06T18:52:33.724Z",
-  "updated_at": "2014-07-06T18:52:33.752Z",
-  "completed_at": null,
-  "shipment_state": null,
-  "payment_state": null,
-  "special_instructions": null,
-  "total_quantity": 0,
-  "address": {
-    "id": 1,
-    "first_name": "Иван",
-    "last_name": "Петров",
-    "full_address": "Фридриха Энгельса 56",
-    "city": "Москва",
-    "street": "Фридриха Энгельса",
-    "building": "53",
-    "block": null,
-    "entrance": null,
-    "floor": null,
-    "apartment": null,
-    "comments": null,
-    "lat": null,
-    "lon": null,
-    "kind": "home",
-    "door_phone": "123"
-  },
-  "shipments": [...],
-  "payment": null,
-  "replacement_policy": {
-    "id": 1,
-    "description": "Позвонить мне. Если не удастся, выбирает сборщик."
-  },
-  "adjustments": []
+  ...
 }
 ```
 
@@ -1028,18 +997,8 @@ curl "<%= config[:host] %>/orders/#{NUMBER}" \
 {
   "number": "R307128032",
   "item_total": 0.0,
-  "total": 0.0,
-  "ship_total": 0.0,
-  "state": "cart",
-  "adjustment_total": 0.0,
-  "user_id": 1,
-  "created_at": "2014-07-06T18:52:33.724Z",
-  "updated_at": "2014-07-06T18:52:33.752Z",
-  "completed_at": null,
-  "shipment_state": null,
-  "payment_state": null,
-  "special_instructions": null,
-  "total_quantity": 0,
+  ...
+  "special_instructions": "1",
   "address": {
     "id": 1,
     "first_name": "Иван",
@@ -1058,9 +1017,7 @@ curl "<%= config[:host] %>/orders/#{NUMBER}" \
     "kind": "home",
     "door_phone": "123"
   },
-  "shipments": [...],
-  "payment": null,
-  "adjustments": []
+  ...
 }
 ```
 
@@ -1075,7 +1032,7 @@ curl "<%= config[:host] %>/orders/#{NUMBER}" \
 
 > Формат телефона не имеет значения, необходимо только чтобы был код из 3х цифр и номер из 7. Также необходимо учесть текущее ограничение: для сохранения номера телефона у заказа должен быть адрес. Т.е. телефон можно сохранить либо вместе с адресом, либо если адрес уже сохранен.
 
-> Пример команды выбора интервала и способа доставки (id шипмента - 1):
+> Пример команды выбора интервала (id шипмента - 1):
 
 ```shell
 curl "<%= config[:host] %>/orders/#{NUMBER}" \
@@ -1112,6 +1069,7 @@ curl "<%= config[:host] %>/orders/#{NUMBER}" \
 `PUT <%= config[:host] %>/orders/#{NUMBER}`
 
 ### Выбор способа замен
+
 Получить список способов замен товаров при сборке заказа можно, [выполнив запрос](#sposoby-zamien)
 
 ### Выбор времени доставки
