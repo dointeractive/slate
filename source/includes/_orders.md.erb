@@ -285,10 +285,10 @@ curl "<%= config[:host] %>/orders/C27387-16"
           "weight": 100.0,
           "description": "Цикорий Elza – растворимый гранулированный напиток с насыщенным кофейным вкусом и ароматом.Содержащийся в цикории инулин способствует улучшению обмена веществ и пищеварения. Оказывает успокаивающее действие на нервную систему, улучшает работу сердца. Цикорий повышает иммунитет,очищает организм. Он богат минеральными веществами, витаминами и микроэлементами.",
           "images": [{
-            "mini_url": "http://instamart.ru/spree/products/3882/mini/10963.jpg?1473242393",
-            "small_url": "http://instamart.ru/spree/products/3882/small/10963.jpg?1473242393",
-            "product_url": "http://instamart.ru/spree/products/3882/product/10963.jpg?1473242393",
-            "original_url": "http://instamart.ru/spree/products/3882/original/10963.jpg?1473242393"
+            "mini_url": "<%= config[:host] %>/spree/products/3882/mini/10963.jpg?1473242393",
+            "small_url": "<%= config[:host] %>/spree/products/3882/small/10963.jpg?1473242393",
+            "product_url": "<%= config[:host] %>/spree/products/3882/product/10963.jpg?1473242393",
+            "original_url": "<%= config[:host] %>/spree/products/3882/original/10963.jpg?1473242393"
           }]
         }
       }]
@@ -398,7 +398,7 @@ curl "<%= config[:host] %>/orders?status=canceled" \
           "id": 1,
           "name": "Metro CC",
           "color": "#003d7a",
-          "logo": "http://instamart.ru/logos/metro.png",
+          "logo": "<%= config[:host] %>/logos/metro.png",
           "available": true,
           "environment": "production"
         },
@@ -650,11 +650,11 @@ curl "<%= config[:host] %>/orders/R314234460/line_items" \
         "human_volume": "100 г. x 12",
         "items_per_pack": 12,
         "images": [{
-          "mini_url": "http://instamart.ru/spree/products/5946/mini/10006.jpg?1473242617",
-          "small_url": "http://instamart.ru/spree/products/5946/small/10006.jpg?1473242617",
-          "product_url": "http://instamart.ru/spree/products/5946/product/10006.jpg?1473242617",
-          "preview_url": "http://instamart.ru/spree/products/5946/preview/10006.jpg?1473242617",
-          "original_url": "http://instamart.ru/spree/products/5946/original/10006.jpg?1473242617"
+          "mini_url": "<%= config[:host] %>/spree/products/5946/mini/10006.jpg?1473242617",
+          "small_url": "<%= config[:host] %>/spree/products/5946/small/10006.jpg?1473242617",
+          "product_url": "<%= config[:host] %>/spree/products/5946/product/10006.jpg?1473242617",
+          "preview_url": "<%= config[:host] %>/spree/products/5946/preview/10006.jpg?1473242617",
+          "original_url": "<%= config[:host] %>/spree/products/5946/original/10006.jpg?1473242617"
         }]
       }
     }
@@ -844,9 +844,9 @@ curl "<%= config[:host] %>/line_items" \
       "items_per_pack": 1,
       "human_volume": "290 г.",
       "images": [{
-        "mini_url": "http://instamart.ru/spree/products/5946/mini/10006.jpg?1473242617",
-        "small_url": "http://instamart.ru/spree/products/5946/small/10006.jpg?1473242617",
-        "product_url": "http://instamart.ru/spree/products/5946/product/10006.jpg?1473242617"
+        "mini_url": "<%= config[:host] %>/spree/products/5946/mini/10006.jpg?1473242617",
+        "small_url": "<%= config[:host] %>/spree/products/5946/small/10006.jpg?1473242617",
+        "product_url": "<%= config[:host] %>/spree/products/5946/product/10006.jpg?1473242617"
       }]
     }
   }
@@ -900,9 +900,9 @@ curl "<%= config[:host] %>/line_items/520884" \
       "items_per_pack": 1,
       "human_volume": "290 г.",
       "images": [{
-        "mini_url": "http://instamart.ru/spree/products/5946/mini/10006.jpg?1473242617",
-        "small_url": "http://instamart.ru/spree/products/5946/small/10006.jpg?1473242617",
-        "product_url": "http://instamart.ru/spree/products/5946/product/10006.jpg?1473242617"
+        "mini_url": "<%= config[:host] %>/spree/products/5946/mini/10006.jpg?1473242617",
+        "small_url": "<%= config[:host] %>/spree/products/5946/small/10006.jpg?1473242617",
+        "product_url": "<%= config[:host] %>/spree/products/5946/product/10006.jpg?1473242617"
       }]
     }
   }

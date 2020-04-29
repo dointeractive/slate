@@ -24,9 +24,9 @@ curl "<%= config[:host] %>/promotions/42/promo_products?sid=1"
       "items_per_pack": 1,
       "images": [
         {
-          "mini_url": "http://instamart.ru/products/1/mini/file.png",
-          "small_url": "http://instamart.ru/products/1/small/file.png",
-          "product_url": "http://instamart.ru/products/1/product/file.png"
+          "mini_url": "<%= config[:host] %>/products/1/mini/file.png",
+          "small_url": "<%= config[:host] %>/products/1/small/file.png",
+          "product_url": "<%= config[:host] %>/products/1/product/file.png"
         }
       ]
     }
