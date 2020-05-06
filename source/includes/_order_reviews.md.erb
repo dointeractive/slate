@@ -51,7 +51,7 @@ curl "<%= config[:host] %>/orders/C36324/review_issues" \
 ## Создание отзыва
 
 ```shell
-curl "<%= config[:host] %>/orders/C36324/reviews" \
+curl "<%= config[:host] %>/shipments/H53063827888/reviews" \
   -H "Authorization: Token token=#{TOKEN}" \
   -F review[rate]=2 \
   -F review[issue_ids][]=14959 \
@@ -66,7 +66,7 @@ curl "<%= config[:host] %>/orders/C36324/reviews" \
 
 ```json
 {
-    "order_review": {
+    "shipment_review": {
         "id": 7013,
         "rate": 2,
         "comment": "Тут будет комментарий пользователя при наличии",
@@ -94,9 +94,9 @@ curl "<%= config[:host] %>/orders/C36324/reviews" \
 }
 ```
 
-Добавить отзыв к заказу можно, выполнив запрос:
+Добавить отзыв к подзаказу можно, выполнив запрос:
 
-`POST <%= config[:host] %>/orders/#{ORDER_NUMBER}/reviews`
+`POST <%= config[:host] %>/shipments/#{SHIPMENT_NUMBER}/reviews`
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
