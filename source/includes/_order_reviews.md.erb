@@ -84,10 +84,10 @@ curl "<%= config[:host] %>/shipments/H53063827888/reviews" \
         ],
         "images": [
             {
-                "original_url": "https://instamart.ru/spree/order_reviews/#{ORDER_REVIEW_ID}/original_url/example.jpg?1539940260"
+                "original_url": "<%= config[:host] %>/spree/shipment_reviews/#{SHIPMENT_REVIEW_ID}/original_url/example.jpg?1539940260"
             },
             {
-                "original_url": "https://instamart.ru/spree/order_reviews/#{ORDER_REVIEW_ID}/original_url/example2.jpg?1539940260"
+                "original_url": "<%= config[:host] %>/spree/order_reviews/#{SHIPMENT_REVIEW_ID}/original_url/example2.jpg?1539940260"
             }
         ]
     }
