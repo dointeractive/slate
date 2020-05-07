@@ -5,7 +5,7 @@
 > Пример кода для получения элементов из списка избранного:
 
 ```shell
-curl "<%= config[:host] %>/favorites_list/items?sid=1"
+curl "<%= config[:api_host] %>/favorites_list/items?sid=1"
 ```
 
 > Ответ будет содержать следующие данные:
@@ -63,7 +63,7 @@ curl "<%= config[:host] %>/favorites_list/items?sid=1"
 
 Перечень элементов из списка избранного можно получить, выполнив запрос:
 
-`GET <%= config[:host] %>/favorites_list/items`
+`GET <%= config[:api_host] %>/favorites_list/items`
 
 Если избранный товар доступен в магазине, то поле `product` элемента списка заполнено
 
@@ -82,7 +82,7 @@ curl "<%= config[:host] %>/favorites_list/items?sid=1"
 > Пример кода для получения элементов из списка избранного:
 
 ```shell
-curl "<%= config[:host] %>/favorites_list/products_sku"
+curl "<%= config[:api_host] %>/favorites_list/products_sku"
 ```
 
 > Ответ будет содержать следующие данные:
@@ -98,7 +98,7 @@ curl "<%= config[:host] %>/favorites_list/products_sku"
 
 Перечень `sku` товаров из списка избранного можно получить, выполнив запрос:
 
-`GET <%= config[:host] %>/favorites_list/products_sku`
+`GET <%= config[:api_host] %>/favorites_list/products_sku`
 
 
 ## Добавление элемента в список избранного
@@ -106,7 +106,7 @@ curl "<%= config[:host] %>/favorites_list/products_sku"
 > Пример кода для добавления элемента в список избранного:
 
 ```shell
- curl "<%= config[:host] %>/favorites_list/items" \
+ curl "<%= config[:api_host] %>/favorites_list/items" \
    -H "Authorization: Token token=#{TOKEN}" \
    -X POST \
    -d "item[product_id]=3"
@@ -152,7 +152,7 @@ curl "<%= config[:host] %>/favorites_list/products_sku"
 
 Добавить элемент в список избранного можно, выполнив запрос:
 
-`POST <%= config[:host] %>/favorites_list/items`
+`POST <%= config[:api_host] %>/favorites_list/items`
 
 ### Параметры запроса
 
@@ -165,7 +165,7 @@ item[product_id] | Да           | ИД товара
 > Пример кода для удаления элемента из списка избранного:
 
 ```shell
-curl "<%= config[:host] %>/favorites_list/items/8" \
+curl "<%= config[:api_host] %>/favorites_list/items/8" \
   -X DELETE
 ```
 
@@ -173,7 +173,7 @@ curl "<%= config[:host] %>/favorites_list/items/8" \
 
 Чтобы удалить элемент из списка избранного, необходимо выполнить запрос:
 
-`DELETE <%= config[:host] %>/favorites_list/items/#{ID}`
+`DELETE <%= config[:api_host] %>/favorites_list/items/#{ID}`
 
 ### Параметры запроса
 

@@ -32,12 +32,14 @@ activate :relative_assets
 set :relative_links, true
 
 configure :development do
-  set :host, 'http://im.test/api/v2'
+  set :api_host, 'http://im.test/api/v2'
+  set :asset_host, 'http://im.test'
 end
 
 # Build Configuration
 configure :build do
-  set :host, 'https://api.sbermarket.ru/v2'
+  set :api_host, 'https://api.sbermarket.ru/v2'
+  set :asset_host, 'https://sbermarket.ru'
 
   # If you're having trouble with Middleman hanging, commenting
   # out the following two lines has been known to help

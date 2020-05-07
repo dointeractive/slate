@@ -5,7 +5,7 @@
 > Пример запроса
 
 ```shell
-curl '<%= config[:host] %>/searches/suggestions?sid=1'
+curl '<%= config[:api_host] %>/searches/suggestions?sid=1'
 ```
 > Ответ будет содержать следующие данные
 
@@ -20,21 +20,21 @@ curl '<%= config[:host] %>/searches/suggestions?sid=1'
       {
         "name": "молоко",
         "icon": {
-          "mini_url": "<%= config[:host] %>/spree/products/5/mini/1.jpg?1540392543",
-          "small_url": "<%= config[:host] %>/spree/products/5/small/1.jpg?1540392543",
-          "product_url": "<%= config[:host] %>/spree/products/5/product/1.jpg?1540392543",
-          "preview_url": "<%= config[:host] %>/spree/products/5/preview/1.jpg?1540392543",
-          "original_url": "<%= config[:host] %>/spree/products/5/original/1.jpg?1540392543"
+          "mini_url": "<%= config[:asset_host] %>/spree/products/5/mini/1.jpg?1540392543",
+          "small_url": "<%= config[:asset_host] %>/spree/products/5/small/1.jpg?1540392543",
+          "product_url": "<%= config[:asset_host] %>/spree/products/5/product/1.jpg?1540392543",
+          "preview_url": "<%= config[:asset_host] %>/spree/products/5/preview/1.jpg?1540392543",
+          "original_url": "<%= config[:asset_host] %>/spree/products/5/original/1.jpg?1540392543"
         }
       },
       {
         "name": "сыр",
         "icon": {
-          "mini_url": "<%= config[:host] %>/assets/noimage/mini.png",
-          "small_url": "<%= config[:host] %>/assets/noimage/small.png",
-          "product_url": "<%= config[:host] %>/assets/noimage/product.png",
-          "preview_url": "<%= config[:host] %>/assets/noimage/preview.png",
-          "original_url": "<%= config[:host] %>/assets/noimage/original.png"
+          "mini_url": "<%= config[:asset_host] %>/assets/noimage/mini.png",
+          "small_url": "<%= config[:asset_host] %>/assets/noimage/small.png",
+          "product_url": "<%= config[:asset_host] %>/assets/noimage/product.png",
+          "preview_url": "<%= config[:asset_host] %>/assets/noimage/preview.png",
+          "original_url": "<%= config[:asset_host] %>/assets/noimage/original.png"
         }
       }
     ]
@@ -44,7 +44,7 @@ curl '<%= config[:host] %>/searches/suggestions?sid=1'
 
 Для получения списка популярных запросов поиска, выполните:
 
-`GET <%= config[:host] %>/searches/suggestions?sid=SID`
+`GET <%= config[:api_host] %>/searches/suggestions?sid=SID`
 
 ### Параметры запроса
 
@@ -58,7 +58,7 @@ curl '<%= config[:host] %>/searches/suggestions?sid=1'
 > Пример запроса подсказок, для слова "чай"
 
 ```shell
-curl '<%= config[:host] %>/searches/suggestions?sid=1&q=%D1%87%D0%B0%D0%B9'
+curl '<%= config[:api_host] %>/searches/suggestions?sid=1&q=%D1%87%D0%B0%D0%B9'
 ```
 > Ответ будет содержать следующие данные
 
@@ -70,8 +70,8 @@ curl '<%= config[:host] %>/searches/suggestions?sid=1&q=%D1%87%D0%B0%D0%B9'
         "id": 3,
         "name": "Чай",
         "icon": {
-          "mini_url": "<%= config[:host] %>/spree/taxons/5358/mini/16010000.jpg?1546015693",
-          "normal_url": "<%= config[:host] %>/spree/taxons/5358/normal/16010000.jpg?1546015693"
+          "mini_url": "<%= config[:asset_host] %>/spree/taxons/5358/mini/16010000.jpg?1546015693",
+          "normal_url": "<%= config[:asset_host] %>/spree/taxons/5358/normal/16010000.jpg?1546015693"
         }
       }
     ],
@@ -91,7 +91,7 @@ curl '<%= config[:host] %>/searches/suggestions?sid=1&q=%D1%87%D0%B0%D0%B9'
 
 Для получения списка подсказок поиска, выполните запрос:
 
-`GET <%= config[:host] %>/searches/suggestions?sid=SID&q=QUERY`
+`GET <%= config[:api_host] %>/searches/suggestions?sid=SID&q=QUERY`
 
 ### Параметры запроса
 

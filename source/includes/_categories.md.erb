@@ -3,7 +3,7 @@
 > Пример кода для получения списка всех категорий
 
 ```shell
-curl "<%= config[:host] %>/categories?sid=1"
+curl "<%= config[:api_host] %>/categories?sid=1"
 ```
 > Ответ будет содержать следующие данные:
 
@@ -52,7 +52,7 @@ children | Список дочерних категорий
 
 Получить список всех категорий можно, выполнив запрос:
 
-`GET <%= config[:host] %>/categories`
+`GET <%= config[:api_host] %>/categories`
 
 ### Параметры запроса
 

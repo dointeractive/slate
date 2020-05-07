@@ -49,7 +49,7 @@ taxon | отдел "нижнего уровня", не имеет дочерни
 > Пример команды
 
 ```shell
-curl '<%= config[:host] %>/departments?sid=1' \
+curl '<%= config[:api_host] %>/departments?sid=1' \
 ```
 > Ответ будет содержать следующие данные
 
@@ -70,10 +70,10 @@ curl '<%= config[:host] %>/departments?sid=1' \
       "discount": "0.0",
       "human_volume": "500 г.",
       "images": [{
-        "mini_url": "<%= config[:host] %>/spree/products/5541/mini/11040.jpg?1473242574",
-        "small_url": "<%= config[:host] %>/spree/products/5541/small/11040.jpg?1473242574",
-        "product_url": "<%= config[:host] %>/spree/products/5541/product/11040.jpg?1473242574",
-        "original_url": "<%= config[:host] %>/spree/products/5541/original/11040.jpg?1473242574"
+        "mini_url": "<%= config[:asset_host] %>/spree/products/5541/mini/11040.jpg?1473242574",
+        "small_url": "<%= config[:asset_host] %>/spree/products/5541/small/11040.jpg?1473242574",
+        "product_url": "<%= config[:asset_host] %>/spree/products/5541/product/11040.jpg?1473242574",
+        "original_url": "<%= config[:asset_host] %>/spree/products/5541/original/11040.jpg?1473242574"
       }]
     }]
   }],
@@ -89,8 +89,8 @@ curl '<%= config[:host] %>/departments?sid=1' \
         "name": "Бакалея",
         "products_count": 129,
         "icon": {
-          "mini_url": "<%= config[:host] %>/spree/taxons/487/mini/Бакалея.png?1453225221",
-          "normal_url": "<%= config[:host] %>/spree/taxons/487/normal/Бакалея.png?1453225221"
+          "mini_url": "<%= config[:asset_host] %>/spree/taxons/487/mini/Бакалея.png?1453225221",
+          "normal_url": "<%= config[:asset_host] %>/spree/taxons/487/normal/Бакалея.png?1453225221"
         }
       }]
     }
@@ -101,7 +101,7 @@ curl '<%= config[:host] %>/departments?sid=1' \
 
 Получить выдачу для главной страницы можно, выполнив следующий запрос:
 
-`GET <%= config[:host] %>/departments`
+`GET <%= config[:api_host] %>/departments`
 
 ### Параметры запроса
 
@@ -123,7 +123,7 @@ API обратно совместимо со старой версией API и 
 > Пример команды
 
 ```shell
-curl '<%= config[:host] %>/departments/174?sid=1' \
+curl '<%= config[:api_host] %>/departments/174?sid=1' \
 ```
 > Ответ будет содержать следующие данные
 
@@ -169,7 +169,7 @@ curl '<%= config[:host] %>/departments/174?sid=1' \
 
 Получить выдачу страницы каталога можно, выполнив следующий запрос:
 
-`GET <%= config[:host] %>/departments/#{DEPARTMENT_ID}`
+`GET <%= config[:api_host] %>/departments/#{DEPARTMENT_ID}`
 
 ### Параметры запроса
 

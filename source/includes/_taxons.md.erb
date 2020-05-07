@@ -5,7 +5,7 @@
 > Пример кода для получения списка всех категорий
 
 ```shell
-curl "<%= config[:host] %>/taxons?sid=1"
+curl "<%= config[:api_host] %>/taxons?sid=1"
 ```
 > Ответ будет содержать следующие данные:
 
@@ -147,7 +147,7 @@ children | Список дочерних категорий
 
 Получить список всех категорий можно, выполнив запрос:
 
-`GET <%= config[:host] %>/taxons?sid=SID`
+`GET <%= config[:api_host] %>/taxons?sid=SID`
 
 ### Параметры запроса
 
@@ -161,7 +161,7 @@ children | Список дочерних категорий
 > Пример запроса для получения информации о категории:
 
 ```shell
-curl "<%= config[:host] %>/taxons/1?sid=1"
+curl "<%= config[:api_host] %>/taxons/1?sid=1"
 ```
 > Ответ будет содержать следующие данные:
 
@@ -202,7 +202,7 @@ curl "<%= config[:host] %>/taxons/1?sid=1"
 
 Получить информацию о категории можно, выполнив запрос:
 
-`GET <%= config[:host] %>/taxons/ID?sid=SID`
+`GET <%= config[:api_host] %>/taxons/ID?sid=SID`
 
 ### Параметры запроса
 

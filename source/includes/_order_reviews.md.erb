@@ -3,13 +3,13 @@
 ## Получение подзаказа без отзыва
 
 ```shell
-curl "<%= config[:host] %>/reviewable_shipment" \
+curl "<%= config[:api_host] %>/reviewable_shipment" \
   -H "Authorization: Token token=#{TOKEN}"
 ```
 
 Получить подзаказ без отзыва можно, выполнив запрос:
 
-`GET <%= config[:host] %>/reviewable_shipment`
+`GET <%= config[:api_host] %>/reviewable_shipment`
 
 Запрос вернет последний оформленный подзаказ, если он без оценки, не содержит товары из особых
 категорий (напр. алкоголь) и был доставлен в течение 7 последних дней.
@@ -17,7 +17,7 @@ curl "<%= config[:host] %>/reviewable_shipment" \
 ## Получение списка возможных проблем
 
 ```shell
-curl "<%= config[:host] %>/shipments/H53063827888/review_issues" \
+curl "<%= config[:api_host] %>/shipments/H53063827888/review_issues" \
   -H "Authorization: Token token=#{TOKEN}"
 ```
 
@@ -47,12 +47,12 @@ curl "<%= config[:host] %>/shipments/H53063827888/review_issues" \
 
 Предлагаемые отзывы собираются на основе подзаказа, напр. анализируя форму оплаты для конкретного подзаказа:
 
-`GET <%= config[:host] %>/shipments/#{SHIPMENT_NUMBER}/review_issues`
+`GET <%= config[:api_host] %>/shipments/#{SHIPMENT_NUMBER}/review_issues`
 
 ## Создание отзыва
 
 ```shell
-curl "<%= config[:host] %>/shipments/H53063827888/reviews" \
+curl "<%= config[:api_host] %>/shipments/H53063827888/reviews" \
   -H "Authorization: Token token=#{TOKEN}" \
   -F review[rate]=2 \
   -F review[issue_ids][]=14959 \
@@ -85,10 +85,10 @@ curl "<%= config[:host] %>/shipments/H53063827888/reviews" \
         ],
         "images": [
             {
-                "original_url": "<%= config[:host] %>/spree/shipment_reviews/#{SHIPMENT_REVIEW_ID}/original_url/example.jpg?1539940260"
+                "original_url": "<%= config[:asset_host] %>/spree/shipment_reviews/#{SHIPMENT_REVIEW_ID}/original_url/example.jpg?1539940260"
             },
             {
-                "original_url": "<%= config[:host] %>/spree/order_reviews/#{SHIPMENT_REVIEW_ID}/original_url/example2.jpg?1539940260"
+                "original_url": "<%= config[:asset_host] %>/spree/order_reviews/#{SHIPMENT_REVIEW_ID}/original_url/example2.jpg?1539940260"
             }
         ]
     }
@@ -97,7 +97,7 @@ curl "<%= config[:host] %>/shipments/H53063827888/reviews" \
 
 Добавить отзыв к подзаказу можно, выполнив запрос:
 
-`POST <%= config[:host] %>/shipments/#{SHIPMENT_NUMBER}/reviews`
+`POST <%= config[:api_host] %>/shipments/#{SHIPMENT_NUMBER}/reviews`
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------

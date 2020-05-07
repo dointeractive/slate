@@ -3,7 +3,7 @@
 ## Получение списка купленных ранее продуктов
 
 ```shell
-curl "<%= config[:host] %>/purchased_products?sid=1"
+curl "<%= config[:api_host] %>/purchased_products?sid=1"
   -H 'Authorization: Token token=#{TOKEN}'
 ```
 
@@ -46,7 +46,7 @@ curl "<%= config[:host] %>/purchased_products?sid=1"
 
 ### HTTP запрос
 
-`GET <%= config[:host] %>/purchased_products`
+`GET <%= config[:api_host] %>/purchased_products`
 
 <aside class="notice">
   Требуется авторизация пользователя

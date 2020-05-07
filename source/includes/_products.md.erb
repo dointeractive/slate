@@ -3,7 +3,7 @@
 ## Список продуктов
 
 ```shell
-curl "<%= config[:host] %>/products?sid=1"
+curl "<%= config[:api_host] %>/products?sid=1"
 ```
 
 > Команда выше возвращает JSON:
@@ -24,11 +24,11 @@ curl "<%= config[:host] %>/products?sid=1"
       "discount_ends_at": "2020-04-29T03:00:00.000+03:00",
       "images": [
         {
-          "mini_url": "<%= config[:host] %>/products/1/mini/file.png",
-          "small_url": "<%= config[:host] %>/products/1/small/file.png",
-          "product_url": "<%= config[:host] %>/products/1/product/file.png",
-          "preview_url": "<%= config[:host] %>/products/1/preview/file.png",
-          "original_url": "<%= config[:host] %>/products/1/original/file.png"
+          "mini_url": "<%= config[:asset_host] %>/products/1/mini/file.png",
+          "small_url": "<%= config[:asset_host] %>/products/1/small/file.png",
+          "product_url": "<%= config[:asset_host] %>/products/1/product/file.png",
+          "preview_url": "<%= config[:asset_host] %>/products/1/preview/file.png",
+          "original_url": "<%= config[:asset_host] %>/products/1/original/file.png"
         }
       ]
     }
@@ -101,20 +101,20 @@ curl "<%= config[:host] %>/products?sid=1"
 > Пример запроса с фильтрацией выборки продуктов:
 
 ```shell
-curl "<%= config[:host] %>/products?sid=1&filter[brand][]=1&filter[property][]=4&filter[property][]=7"
+curl "<%= config[:api_host] %>/products?sid=1&filter[brand][]=1&filter[property][]=4&filter[property][]=7"
 ```
 
 > Пример запроса с сортировкой выборки продуктов:
 
 ```shell
-curl "<%= config[:host] %>/products?sid=1&sort=price_desc"
+curl "<%= config[:api_host] %>/products?sid=1&sort=price_desc"
 ```
 
 Получить список продуктов доступных в текущий момент можно, выполнив запрос:
 
 ### HTTP запрос
 
-`GET <%= config[:host] %>/products`
+`GET <%= config[:api_host] %>/products`
 
 API ограничивает максимальное число возвращаемых продуктов 24 объектами. Для доступа к остальным продуктам реализован интерфейс пагинации.
 Каждый запрос к `/v2/products` помимо самих продуктов также возвращает объект `meta`, указывающий номер текущей страницы, номер следующей страницы и общее количество страниц. Получить конкретную страницу с данными можно, указав параметр `page`.
@@ -197,7 +197,7 @@ sort | - | Тип сортировки
 ## Карточка продукта
 
 ```shell
-curl "<%= config[:host] %>/products/6"
+curl "<%= config[:api_host] %>/products/6"
 ```
 
 > Команда выше возвращает JSON:
@@ -218,11 +218,11 @@ curl "<%= config[:host] %>/products/6"
     "description": "Бананы желтые из Эквадора",
     "images": [
       {
-        "mini_url": "<%= config[:host] %>/products/6/mini/file.png",
-        "small_url": "<%= config[:host] %>/products/6/small/file.png",
-        "product_url": "<%= config[:host] %>/products/6/product/file.png",
-        "preview_url": "<%= config[:host] %>/products/6/preview/file.png",
-        "original_url": "<%= config[:host] %>/products/6/original/file.png"
+        "mini_url": "<%= config[:asset_host] %>/products/6/mini/file.png",
+        "small_url": "<%= config[:asset_host] %>/products/6/small/file.png",
+        "product_url": "<%= config[:asset_host] %>/products/6/product/file.png",
+        "preview_url": "<%= config[:asset_host] %>/products/6/preview/file.png",
+        "original_url": "<%= config[:asset_host] %>/products/6/original/file.png"
       }
     ],
     "properties": [
@@ -256,7 +256,7 @@ curl "<%= config[:host] %>/products/6"
 
 ### HTTP запрос
 
-`GET <%= config[:host] %>/products/#{PRODUCT_ID}`
+`GET <%= config[:api_host] %>/products/#{PRODUCT_ID}`
 
 ### Параметры запроса
 

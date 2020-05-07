@@ -3,7 +3,7 @@
 ## Список бонусных программ
 
 ```shell
-curl "<%= config[:host] %>/bonus_programs" \
+curl "<%= config[:api_host] %>/bonus_programs" \
   -H "Authorization: Token token=#{TOKEN}"
 ```
 
@@ -15,7 +15,7 @@ curl "<%= config[:host] %>/bonus_programs" \
       "id": 1,
       "name": "«Аэрофлот Бонус»",
       "icon": {
-        "url": "https://<%= config[:host] %>/public/loyalty_cards_logos/16/mini/aero-img.png"
+        "url": "<%= config[:asset_host] %>/loyalty_cards_logos/16/mini/aero-img.png"
       }
     }]
   }
@@ -23,7 +23,7 @@ curl "<%= config[:host] %>/bonus_programs" \
 
 Получить список доступных бонусных программ можно, выполнив запрос:
 
-`GET <%= config[:host] %>/bonus_programs`
+`GET <%= config[:api_host] %>/bonus_programs`
 
 Вернется массив доступных бонусных программ следующей структуры:
 
@@ -36,7 +36,7 @@ icon|Логотип бонусной программы
 ## Список бонусных карт
 
 ```shell
-curl "<%= config[:host] %>/bonus_cards" \
+curl "<%= config[:api_host] %>/bonus_cards" \
   -H "Authorization: Token token=#{TOKEN}"
 ```
 > Ответ будет содержать следующие данные:
@@ -47,7 +47,7 @@ curl "<%= config[:host] %>/bonus_cards" \
       "id": 121,
       "number": "1234567890",
       "icon": {
-        "url": "https://<%= config[:host] %>/public/loyalty_cards_logos/16/mini/aero-img.png"
+        "url": "https://<%= config[:api_host] %>/public/loyalty_cards_logos/16/mini/aero-img.png"
       }
     }]
   }
@@ -55,7 +55,7 @@ curl "<%= config[:host] %>/bonus_cards" \
 
 Получить список доступных бонусных карт можно, выполнив запрос:
 
-`GET <%= config[:host] %>/bonus_cards`
+`GET <%= config[:api_host] %>/bonus_cards`
 
 Параметры ответа:
 
@@ -69,7 +69,7 @@ icon|Логотип бонусной программы
 ## Добавление бонусной карты
 
 ```shell
-curl "<%= config[:host] %>/bonus_cards" \
+curl "<%= config[:api_host] %>/bonus_cards" \
   -H "Authorization: Token token=#{TOKEN}"
   -X POST
   -d "bonus_card[bonus_program_id]=1"
@@ -88,7 +88,7 @@ curl "<%= config[:host] %>/bonus_cards" \
 ```
 Для добавление новой бонусной карты необходимо выполнить запрос:
 
-`POST <%= config[:host] %>/bonus_cards`
+`POST <%= config[:api_host] %>/bonus_cards`
 
 Параметры запроса:
 
@@ -100,7 +100,7 @@ bonus_card[bonus_program_id]|Да|ID бонусной программы
 ## Обновление бонусной карты
 
 ```shell
-curl "<%= config[:host] %>/bonus_cards/123" \
+curl "<%= config[:api_host] %>/bonus_cards/123" \
   -H "Authorization: Token token=#{TOKEN}"
   -X PUT
   -d "bonus_card[number]=12341234"
@@ -113,14 +113,14 @@ curl "<%= config[:host] %>/bonus_cards/123" \
       "id": 121,
       "number": "1234567890",
       "icon": {
-        "url": "https://<%= config[:host] %>/public/loyalty_cards_logos/16/mini/aero-img.png"
+        "url": "https://<%= config[:api_host] %>/public/loyalty_cards_logos/16/mini/aero-img.png"
       }
     }
   }
 ```
 Для обновления данных бонусной карты необходимо выполинть запрос:
 
-`PUT <%= config[:host] %>/bonus_cards/#{id}`
+`PUT <%= config[:api_host] %>/bonus_cards/#{id}`
 
 Параметры запроса:
 
@@ -132,7 +132,7 @@ bonus_card[number]|Да|Номер бонусной карты
 ## Удаление бонусной карты
 
 ```shell
-curl "<%= config[:host] %>/bonus_cards/123" \
+curl "<%= config[:api_host] %>/bonus_cards/123" \
   -H "Authorization: Token token=#{TOKEN}"
   -X DELETE
 ```
@@ -141,7 +141,7 @@ curl "<%= config[:host] %>/bonus_cards/123" \
 
 Чтобы удалить бонусную карту пользователя необходимо выполнить запрос:
 
-`DELETE <%= config[:host] %>/bonus_cards/#{id}`
+`DELETE <%= config[:api_host] %>/bonus_cards/#{id}`
 
 Параметры запроса:
 
@@ -152,7 +152,7 @@ id|Да|ID бонусной карты
 ## Список бонусных карт, применимых к заказу
 
 ```shell
-curl "<%= config[:host] %>/bonus_cards?order_number=R123456" \
+curl "<%= config[:api_host] %>/bonus_cards?order_number=R123456" \
   -H "Authorization: Token token=#{TOKEN}"
 ```
 > Ответ будет содержать следующие данные:
@@ -163,7 +163,7 @@ curl "<%= config[:host] %>/bonus_cards?order_number=R123456" \
       "id": 121,
       "number": "1234567890",
       "icon": {
-        "url": "https://<%= config[:host] %>/public/loyalty_cards_logos/16/mini/aero-img.png"
+        "url": "https://<%= config[:api_host] %>/public/loyalty_cards_logos/16/mini/aero-img.png"
       }
     }]
   }
@@ -175,7 +175,7 @@ curl "<%= config[:host] %>/bonus_cards?order_number=R123456" \
 
 Получить список бонусных карт, которые могут быть применены к заказу можно, выполнив запрос:
 
-`GET <%= config[:host] %>/bonus_cards?order_number=#{order_number}`
+`GET <%= config[:api_host] %>/bonus_cards?order_number=#{order_number}`
 
 Параметры запроса:
 
@@ -195,7 +195,7 @@ icon|Логотип бонусной программы
 ## Список бонусных программ, применимых к заказу
 
 ```shell
-curl "<%= config[:host] %>/bonus_programs?order_number=R1234567" \
+curl "<%= config[:api_host] %>/bonus_programs?order_number=R1234567" \
   -H "Authorization: Token token=#{TOKEN}"
 ```
 
@@ -207,7 +207,7 @@ curl "<%= config[:host] %>/bonus_programs?order_number=R1234567" \
       "id": 1,
       "name": "«Аэрофлот Бонус»",
       "icon": {
-        "url": "https://<%= config[:host] %>/public/loyalty_cards_logos/16/mini/aero-img.png"
+        "url": "https://<%= config[:api_host] %>/public/loyalty_cards_logos/16/mini/aero-img.png"
       }
     }]
   }
@@ -215,7 +215,7 @@ curl "<%= config[:host] %>/bonus_programs?order_number=R1234567" \
 
 Получить список бонусных программ, которые могут быть применены к заказу, можно, выполнив запрос:
 
-`GET <%= config[:host] %>/bonus_programs?order_number=#{order_number}`
+`GET <%= config[:api_host] %>/bonus_programs?order_number=#{order_number}`
 
 Параметры запроса:
 
@@ -226,7 +226,7 @@ order_number|Да|Номер заказа
 ## Запрос выбранной бонусной карты
 
 ```shell
-curl "<%= config[:host] %>/orders/R010203/bonus_card_action" \
+curl "<%= config[:api_host] %>/orders/R010203/bonus_card_action" \
   -H "Authorization: Token token=#{TOKEN}"
 ```
 > Ответ будет содержать следующие данные:
@@ -239,7 +239,7 @@ curl "<%= config[:host] %>/orders/R010203/bonus_card_action" \
         "id": 121,
         "number": "1234567890",
         "icon": {
-          "url": "https://<%= config[:host] %>/public/loyalty_cards_logos/16/mini/aero-img.png"
+          "url": "https://<%= config[:api_host] %>/public/loyalty_cards_logos/16/mini/aero-img.png"
         }
       }
     }
@@ -248,7 +248,7 @@ curl "<%= config[:host] %>/orders/R010203/bonus_card_action" \
 
 Получить выбранную бонусную карту, которая будет применена к заказу, можно, выполнив запрос:
 
-`GET <%= config[:host] %>/orders/#{number}/bonus_card_action`
+`GET <%= config[:api_host] %>/orders/#{number}/bonus_card_action`
 
 Параметры запроса:
 
@@ -275,7 +275,7 @@ icon|Логотип бонусной программы
 ## Выбор бонусной карты
 
 ```shell
-curl "<%= config[:host] %>/orders/R010203/bonus_card_action" \
+curl "<%= config[:api_host] %>/orders/R010203/bonus_card_action" \
   -H "Authorization: Token token=#{TOKEN}"
   -X POST
   -d "bonus_card_id=123"
@@ -298,7 +298,7 @@ curl "<%= config[:host] %>/orders/R010203/bonus_card_action" \
 Для того, чтобы выбрать бонусную карту, которая должна быть применена к заказу,
 необходимо выполнить запрос:
 
-`POST <%= config[:host] %>/orders/#{number}/bonus_card_action`
+`POST <%= config[:api_host] %>/orders/#{number}/bonus_card_action`
 
 Параметры запроса:
 
@@ -315,7 +315,7 @@ bonus_card_id|ID бонусной карты
 ## Отмена выбора бонусной карты
 
 ```shell
-curl "<%= config[:host] %>/orders/R010203/bonus_card_action" \
+curl "<%= config[:api_host] %>/orders/R010203/bonus_card_action" \
   -H "Authorization: Token token=#{TOKEN}"
   -X DELETE
 ```
@@ -324,7 +324,7 @@ curl "<%= config[:host] %>/orders/R010203/bonus_card_action" \
 
 Для отмены выбора бонусной карты необходимо выполнить запрос:
 
-`DELETE <%= config[:host] %>/orders/#{number}/bonus_card_action`
+`DELETE <%= config[:api_host] %>/orders/#{number}/bonus_card_action`
 
 Параметры запроса:
 

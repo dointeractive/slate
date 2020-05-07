@@ -4,10 +4,10 @@
 
 Получить список всех телефонов пользователя можно, выполнив запрос:
 
-`GET <%= config[:host] %>/phones`
+`GET <%= config[:api_host] %>/phones`
 
 ```shell
-curl "<%= config[:host] %>/phones" \
+curl "<%= config[:api_host] %>/phones" \
   -H "Authorization: Token token=#{TOKEN}"
 ```
 
@@ -42,7 +42,7 @@ curl "<%= config[:host] %>/phones" \
 ## Запрос на получение телефона по номеру
 
 ```shell
-curl "<%= config[:host] %>/phones/14959" \
+curl "<%= config[:api_host] %>/phones/14959" \
   -H "Authorization: Token token=#{TOKEN}"
 ```
 
@@ -60,7 +60,7 @@ curl "<%= config[:host] %>/phones/14959" \
 ```
 
 Получить телефон можно, выполнив запрос:
-`GET <%= config[:host] %>/phones/#{ID}`
+`GET <%= config[:api_host] %>/phones/#{ID}`
 
 ### Параметры запроса
 
@@ -71,7 +71,7 @@ ID | Да | ID телефона
 ## Запрос на создание нового телефона пользователя
 
 ```shell
-curl "<%= config[:host] %>/phones" \
+curl "<%= config[:api_host] %>/phones" \
   -H "Authorization: Token token=#{TOKEN}"
   -X POST \
   -d "phone[value]=9201111111"
@@ -92,7 +92,7 @@ curl "<%= config[:host] %>/phones" \
 
 Создать новый телефон пользователя можно, выполнив запрос:
 
-`POST <%= config[:host] %>/phones`
+`POST <%= config[:api_host] %>/phones`
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
@@ -101,7 +101,7 @@ phone[value] | Да | Номер телефона
 ## Запрос на обновление телефона пользователя
 
 ```shell
-curl "<%= config[:host] %>/phones/14959" \
+curl "<%= config[:api_host] %>/phones/14959" \
   -H "Authorization: Token token=#{TOKEN}" \
   -X PUT \
   -d "phone[value]=9202222222"
@@ -122,7 +122,7 @@ curl "<%= config[:host] %>/phones/14959" \
 
 Изменить телефон пользователя можно, выполнив запрос:
 
-`PUT <%= config[:host] %>/phones/#{ID}`
+`PUT <%= config[:api_host] %>/phones/#{ID}`
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
@@ -132,7 +132,7 @@ phone[value] | Да | Номер телефона
 ## Запрос на удаление телефона пользователя
 
 ```shell
-curl "<%= config[:host] %>/phones/14959" \
+curl "<%= config[:api_host] %>/phones/14959" \
   -H "Authorization: Token token=#{TOKEN}" \
   -X DELETE
 ```
@@ -141,7 +141,7 @@ curl "<%= config[:host] %>/phones/14959" \
 
 Удалить телефон пользователя можно, выполнив запрос:
 
-`DELETE <%= config[:host] %>/phones/#{ID}`
+`DELETE <%= config[:api_host] %>/phones/#{ID}`
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------

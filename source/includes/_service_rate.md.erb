@@ -4,7 +4,7 @@
 
 
 ```shell
-curl "<%= config[:host] %>/shipments/#{NUMBER}/service_rate?delivery_window_id=#{delivery_window_id}" \
+curl "<%= config[:api_host] %>/shipments/#{NUMBER}/service_rate?delivery_window_id=#{delivery_window_id}" \
   -H "Authorization: Token token=#{TOKEN}"
 ```
 
@@ -65,7 +65,7 @@ curl "<%= config[:host] %>/shipments/#{NUMBER}/service_rate?delivery_window_id=#
 
 Получить детализацию стоимости для доставки, выполнив запрос:
 
-`GET <%= config[:host] %>/shipments/#{NUMBER}/service_rate`
+`GET <%= config[:api_host] %>/shipments/#{NUMBER}/service_rate`
 
 ### Параметры запроса
 

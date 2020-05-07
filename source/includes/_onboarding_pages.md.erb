@@ -3,7 +3,7 @@
 ## Получение списка страниц
 
 ```shell
-curl "<%= config[:host] %>/onboarding_pages"
+curl "<%= config[:api_host] %>/onboarding_pages"
 ```
 
 > Ответ будет содержать следующие данные:
@@ -26,7 +26,7 @@ curl "<%= config[:host] %>/onboarding_pages"
 }
 ```
 
-`GET <%= config[:host] %>/onboarding_pages`
+`GET <%= config[:api_host] %>/onboarding_pages`
 
 Запрос вернет все страницы
 

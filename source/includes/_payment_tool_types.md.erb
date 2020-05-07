@@ -1,7 +1,7 @@
 # Типы способов оплаты
 
 ```shell
-curl "<%= config[:host] %>/payment_tool_types" \
+curl "<%= config[:api_host] %>/payment_tool_types" \
   -H "Authorization: Token token=#{TOKEN}"
 ```
 
@@ -47,7 +47,7 @@ curl "<%= config[:host] %>/payment_tool_types" \
 
 API возвращает возможные типы способов оплат для заказа.
 
-`GET <%= config[:host] %>/payment_tool_types?order_number=#{order_number}`
+`GET <%= config[:api_host] %>/payment_tool_types?order_number=#{order_number}`
 
 Параметры запроса:
 

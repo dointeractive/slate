@@ -4,10 +4,10 @@
 
 Получить список всех реквизитов юридических лиц можно, выполнив запрос:
 
-`GET <%= config[:host] %>/company_documents`
+`GET <%= config[:api_host] %>/company_documents`
 
 ```shell
-curl "<%= config[:host] %>/company_documents" \
+curl "<%= config[:api_host] %>/company_documents" \
   -H "Authorization: Token token=#{TOKEN}"
 ```
 
@@ -61,7 +61,7 @@ curl "<%= config[:host] %>/company_documents" \
 ## Запрос на получение юридических данных для автозаполнения по ИНН
 
 ```shell
-curl "<%= config[:host] %>/legal_entity?inn=123456789"
+curl "<%= config[:api_host] %>/legal_entity?inn=123456789"
 ```
 
 > В случае если данные были указаны верно, сервер вернет ответ:
@@ -78,7 +78,7 @@ curl "<%= config[:host] %>/legal_entity?inn=123456789"
 
 
 Получить реквизиты можно, выполнив запрос:
-`GET <%= config[:host] %>/legal_entity?inn=#{inn}`
+`GET <%= config[:api_host] %>/legal_entity?inn=#{inn}`
 
 ### Параметры запроса
 
@@ -89,7 +89,7 @@ inn | Да | ИНН компании
 ## Запрос на получение реквизита по номеру
 
 ```shell
-curl "<%= config[:host] %>/company_documents/680" \
+curl "<%= config[:api_host] %>/company_documents/680" \
   -H "Authorization: Token token=#{TOKEN}"
 ```
 
@@ -117,7 +117,7 @@ curl "<%= config[:host] %>/company_documents/680" \
 ```
 
 Получить реквизит можно, выполнив запрос:
-`GET <%= config[:host] %>/company_documents/#{ID}`
+`GET <%= config[:api_host] %>/company_documents/#{ID}`
 
 ### Параметры запроса
 
@@ -128,7 +128,7 @@ ID | Да | ID реквизита
 ## Запрос на создание нового реквизита юридического лица
 
 ```shell
-curl "<%= config[:host] %>/company_documents" \
+curl "<%= config[:api_host] %>/company_documents" \
   -H "Authorization: Token token=#{TOKEN}"
   -X POST \
   -d "company_document[name]=ООО Название Компании" \
@@ -165,7 +165,7 @@ curl "<%= config[:host] %>/company_documents" \
 
 Создать новый реквизит юридического лица можно, выполнив запрос:
 
-`POST <%= config[:host] %>/company_documents`
+`POST <%= config[:api_host] %>/company_documents`
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
@@ -181,7 +181,7 @@ company_document[bank] | - | Банк
 ## Запрос на обновление реквизита юридического лица
 
 ```shell
-curl "<%= config[:host] %>/company_documents/680" \
+curl "<%= config[:api_host] %>/company_documents/680" \
   -H "Authorization: Token token=#{TOKEN}" \
   -X PUT \
   -d "company_document[name]=ООО Новое Название Компании"
@@ -212,7 +212,7 @@ curl "<%= config[:host] %>/company_documents/680" \
 
 Изменить реквизит юридического лица можно, выполнив запрос:
 
-`PUT <%= config[:host] %>/company_documents/#{ID}`
+`PUT <%= config[:api_host] %>/company_documents/#{ID}`
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
@@ -231,7 +231,7 @@ company_document[bank] | - | Банк
 ## Запрос на удаление юридического лица
 
 ```shell
-curl "<%= config[:host] %>/company_documents/680" \
+curl "<%= config[:api_host] %>/company_documents/680" \
   -H "Authorization: Token token=#{TOKEN}" \
   -X DELETE
 ```
@@ -240,7 +240,7 @@ curl "<%= config[:host] %>/company_documents/680" \
 
 Удалить юридическое лицо можно, выполнив запрос:
 
-`DELETE <%= config[:host] %>/company_documents/#{ID}`
+`DELETE <%= config[:api_host] %>/company_documents/#{ID}`
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
