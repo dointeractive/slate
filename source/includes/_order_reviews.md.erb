@@ -16,7 +16,7 @@ curl "<%= config[:host] %>/orders/unrated" \
 ## Получение списка возможных проблем
 
 ```shell
-curl "<%= config[:host] %>/orders/C36324/review_issues" \
+curl "<%= config[:host] %>/shipments/H53063827888/review_issues" \
   -H "Authorization: Token token=#{TOKEN}"
 ```
 
@@ -44,9 +44,9 @@ curl "<%= config[:host] %>/orders/C36324/review_issues" \
 }
 ```
 
-Предлагаемые отзывы собираются на основе заказа, напр. анализируя форму оплаты для конкретного заказа:
+Предлагаемые отзывы собираются на основе подзаказа, напр. анализируя форму оплаты для конкретного подзаказа:
 
-`GET <%= config[:host] %>/orders/#{ORDER_NUMBER}/review_issues`
+`GET <%= config[:host] %>/shipments/#{SHIPMENT_NUMBER}/review_issues`
 
 ## Создание отзыва
 
