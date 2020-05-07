@@ -3,7 +3,7 @@
 ## Получение списка ритейлеров
 
 ```shell
-curl "<%= config[:host] %>/retailers"
+curl "<%= config[:api_host] %>/retailers"
 ```
 
 > Команда выше возвращает JSON:
@@ -15,7 +15,7 @@ curl "<%= config[:host] %>/retailers"
     "name": "Metro C&C",
     "color": "#003d7a",
     "logo_background_color": "#003d7a",
-    "logo": "<%= config[:host] %>/logos/metro.png",
+    "logo": "<%= config[:asset_host] %>/logos/metro.png",
     "available": true,
     "environment": "production"
   }]
@@ -26,7 +26,7 @@ curl "<%= config[:host] %>/retailers"
 
 ### HTTP запрос
 
-`GET <%= config[:host] %>/retailers`
+`GET <%= config[:api_host] %>/retailers`
 
 ### Структура объекта Retailer
 
@@ -38,7 +38,7 @@ logo_background_color | Цвет фона логотипа ритейлера
 ## Расширенные данные ритейлера
 
 ```shell
-curl "<%= config[:host] %>/retailers/1"
+curl "<%= config[:api_host] %>/retailers/1"
 ```
 
 > Команда выше возвращает JSON:
@@ -50,7 +50,7 @@ curl "<%= config[:host] %>/retailers/1"
     "name": "Metro C&C",
     "color": "#003d7a",
     "logo_background_color": "#003d7a",
-    "logo": "<%= config[:host] %>/logos/metro.png",
+    "logo": "<%= config[:asset_host] %>/logos/metro.png",
     "available": true,
     "environment": "production",
     "services": "Доставка",
@@ -79,7 +79,7 @@ curl "<%= config[:host] %>/retailers/1"
 
 ### HTTP запрос
 
-`GET <%= config[:host] %>/retailers/#{ID}`
+`GET <%= config[:api_host] %>/retailers/#{ID}`
 
 ### Параметры запроса
 

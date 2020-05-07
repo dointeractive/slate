@@ -1,7 +1,7 @@
 # Способы оплаты
 
 ```shell
-curl "<%= config[:host] %>/payment_tools" \
+curl "<%= config[:api_host] %>/payment_tools" \
   -H "Authorization: Token token=#{TOKEN}"
 ```
 
@@ -73,7 +73,7 @@ API способов оплаты возвращает список инстру
 
 Получить список доступных пользователю способов оплаты можно, выполнив запрос:
 
-`GET <%= config[:host] %>/payment_tools`
+`GET <%= config[:api_host] %>/payment_tools`
 
 ### Структура объекта PaymentTool
 

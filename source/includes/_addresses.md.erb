@@ -3,7 +3,7 @@
 ## Получение списка адресов
 
 ```shell
-curl "<%= config[:host] %>/addresses" \
+curl "<%= config[:api_host] %>/addresses" \
   -H "Authorization: Token token=#{TOKEN}"
 ```
 
@@ -41,13 +41,13 @@ curl "<%= config[:host] %>/addresses" \
 
 Получить список всех адресов можно, выполнив запрос:
 
-`GET <%= config[:host] %>/addresses`
+`GET <%= config[:api_host] %>/addresses`
 
 
 ## Создание нового адреса
 
 ```shell
-curl "<%= config[:host] %>/addresses" \
+curl "<%= config[:api_host] %>/addresses" \
   -H "Authorization: Token token=#{TOKEN}" \
   -X POST \
   -d "address[full_address]=Фридриха Энгельса 56" \
@@ -82,7 +82,7 @@ curl "<%= config[:host] %>/addresses" \
 
 Добавить новый адрес пользователя можно, выполнив запрос:
 
-`POST <%= config[:host] %>/addresses`
+`POST <%= config[:api_host] %>/addresses`
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
@@ -104,7 +104,7 @@ address[door_phone] | - | Номер домофона
 ## Редактирование адреса
 
 ```shell
-curl "<%= config[:host] %>/addresses/2" \
+curl "<%= config[:api_host] %>/addresses/2" \
   -H "Authorization: Token token=#{TOKEN}" \
   -X PUT \
   -d "address[building]=53"
@@ -137,7 +137,7 @@ curl "<%= config[:host] %>/addresses/2" \
 
 Изменить адрес можно, выполнив запрос:
 
-`PUT <%= config[:host] %>/addresses/#{ID}`
+`PUT <%= config[:api_host] %>/addresses/#{ID}`
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
@@ -159,7 +159,7 @@ address[door_phone] | - | Номер домофона
 ## Удаление адреса
 
 ```shell
-curl "<%= config[:host] %>/addresses/2" \
+curl "<%= config[:api_host] %>/addresses/2" \
   -H "Authorization: Token token=#{TOKEN}" \
   -X DELETE
 ```
@@ -168,7 +168,7 @@ curl "<%= config[:host] %>/addresses/2" \
 
 Удалить адрес можно, выполнив запрос:
 
-`DELETE <%= config[:host] %>/addresses/#{ID}`
+`DELETE <%= config[:api_host] %>/addresses/#{ID}`
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------

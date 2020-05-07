@@ -3,7 +3,7 @@
 ## Получение списка стандартных жалоб
 
 ```shell
-curl "<%= config[:host] %>/flags"
+curl "<%= config[:api_host] %>/flags"
 ```
 > Эта комманда возвращает следующий JSON:
 
@@ -22,14 +22,14 @@ curl "<%= config[:host] %>/flags"
 
 Стандартный список ошибок можно загрузить, выполнив запрос:
 
-`GET <%= config[:host] %>/flags`
+`GET <%= config[:api_host] %>/flags`
 
 ## Отправка жалобы
 
 > Пример отправки стандартной жалобы из списка:
 
 ```shell
-curl "<%= config[:host] %>/products/1/flags" \
+curl "<%= config[:api_host] %>/products/1/flags" \
   -H "Authorization: Token token=#{TOKEN}" \
   -X POST \
   -d product_flag[flag_id]=1
@@ -38,7 +38,7 @@ curl "<%= config[:host] %>/products/1/flags" \
 > Пример отправки собственной жалобы
 
 ```shell
-curl "<%= config[:host] %>/products/#{PRODUCT_ID}/flags" \
+curl "<%= config[:api_host] %>/products/#{PRODUCT_ID}/flags" \
   -H "Authorization: Token token=#{TOKEN}" \
   -X POST \
   -d "product_flag[description]=Слишком высокая цена"
@@ -50,7 +50,7 @@ curl "<%= config[:host] %>/products/#{PRODUCT_ID}/flags" \
 
 Чтобы отправить жалобу на товар, выполните следующий запрос, указав `id` жалобы:
 
-`POST <%= config[:host] %>/products/#{PRODUCT_ID}/flags`
+`POST <%= config[:api_host] %>/products/#{PRODUCT_ID}/flags`
 
 Также, используя этот же URL, можно отправить свой текст жалобы, указав его в параметре `description`
 

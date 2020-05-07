@@ -3,7 +3,7 @@
 ## Получение списка способов замен
 
 ```shell
-curl "<%= config[:host] %>/replacement_policies"
+curl "<%= config[:api_host] %>/replacement_policies"
 ```
 > Эта команда возвращает следующий JSON:
 
@@ -32,4 +32,4 @@ curl "<%= config[:host] %>/replacement_policies"
 
 Cписок способов замен товаров при сборке заказа можно получить, выполнив запрос:
 
-`GET <%= config[:host] %>/replacement_policies`
+`GET <%= config[:api_host] %>/replacement_policies`

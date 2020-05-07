@@ -11,7 +11,7 @@
 > Пример получения инфо об реферальной программы:
 
 ```shell
-curl '<%= config[:host] %>/promotions/referral_program'
+curl '<%= config[:api_host] %>/promotions/referral_program'
 ```
 
 ```json
@@ -27,7 +27,7 @@ curl '<%= config[:host] %>/promotions/referral_program'
       },
       {
         "emoji": null,
-        "icon_url": "<%= config[:host] %>/assets/icon_url.png",
+        "icon_url": "<%= config[:asset_host] %>/assets/icon_url.png",
         "html": "Вы получите <b>500 ₽</b> за первый заказ каждого приведенного вами друга в качестве вознаграждения"
       }
     ],
@@ -35,12 +35,12 @@ curl '<%= config[:host] %>/promotions/referral_program'
       {
         "type": "short_referral_rules",
         "name": "Краткие сведения",
-        "url": "https://instamart.ru/mobile_pages/referrals/short-info"
+        "url": "<%= config[:asset_host] %>/mobile_pages/referrals/short-info"
       },
       {
         "type": "referral_rules",
         "name": "Полные правила реферальной программы",
-        "url": "https://instamart.ru/mobile_pages/referrals/rules"
+        "url": "<%= config[:asset_host] %>/mobile_pages/referrals/rules"
       }
     ]
   }
@@ -60,7 +60,7 @@ curl '<%= config[:host] %>/promotions/referral_program'
 EMAIL || UUID | Да | email или UUID пользователя
 
 ```shell
-curl '<%= config[:host] %>/users/#{EMAIL || UUID}/referral_program'
+curl '<%= config[:api_host] %>/users/#{EMAIL || UUID}/referral_program'
   -H 'Authorization: Token token=#{TOKEN}'
 ```
 

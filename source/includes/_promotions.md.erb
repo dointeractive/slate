@@ -3,7 +3,7 @@
 ## Список продуктов обязательные для активации промоакции
 
 ```shell
-curl "<%= config[:host] %>/promotions/42/promo_products?sid=1"
+curl "<%= config[:api_host] %>/promotions/42/promo_products?sid=1"
 ```
 
 > Команда выше возвращает JSON:
@@ -24,9 +24,9 @@ curl "<%= config[:host] %>/promotions/42/promo_products?sid=1"
       "items_per_pack": 1,
       "images": [
         {
-          "mini_url": "<%= config[:host] %>/products/1/mini/file.png",
-          "small_url": "<%= config[:host] %>/products/1/small/file.png",
-          "product_url": "<%= config[:host] %>/products/1/product/file.png"
+          "mini_url": "<%= config[:asset_host] %>/products/1/mini/file.png",
+          "small_url": "<%= config[:asset_host] %>/products/1/small/file.png",
+          "product_url": "<%= config[:asset_host] %>/products/1/product/file.png"
         }
       ]
     }
@@ -52,7 +52,7 @@ curl "<%= config[:host] %>/promotions/42/promo_products?sid=1"
 
 ### HTTP запрос
 
-`GET <%= config[:host] %>/promotions/#{ID}/promo_products?sid=1`
+`GET <%= config[:api_host] %>/promotions/#{ID}/promo_products?sid=1`
 
 
 ### Параметры запроса

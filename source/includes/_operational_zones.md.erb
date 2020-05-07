@@ -3,7 +3,7 @@
 > Пример проверки доступности Instamart в Москве:
 
 ```shell
-curl "<%= config[:host] %>/operational_zones?location=Москва"
+curl "<%= config[:api_host] %>/operational_zones?location=Москва"
 ```
 
 > Команда выше возвращает JSON:
@@ -22,7 +22,7 @@ curl "<%= config[:host] %>/operational_zones?location=Москва"
 
 ### HTTP запрос
 
-`GET <%= config[:host] %>/operational_zones`
+`GET <%= config[:api_host] %>/operational_zones`
 
 В случае если Instamart не осуществляет доставку в указанный населенный пункт API вернет ошибку `404`
 

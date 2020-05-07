@@ -5,7 +5,7 @@
 > Пример вызова для авторизованного пользователя:
 
 ```shell
-curl "<%= config[:host] %>/app_reviews" \
+curl "<%= config[:api_host] %>/app_reviews" \
   -H "Authorization: Token token=#{TOKEN}" \
   -H "User-Agent: #{USER_AGENT}" \
   -d "app_review[rate]=5" \
@@ -26,7 +26,7 @@ curl "<%= config[:host] %>/app_reviews" \
 
 Добавить отзыв о приложении или перезаписать его если он уже существует можно выполнив запрос:
 
-`POST <%= config[:host] %>/app_reviews`
+`POST <%= config[:api_host] %>/app_reviews`
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------

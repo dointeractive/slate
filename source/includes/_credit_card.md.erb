@@ -6,10 +6,10 @@
 
 Получить список всех карт пользователя можно, выполнив запрос:
 
-`GET <%= config[:host] %>/credit_cards`
+`GET <%= config[:api_host] %>/credit_cards`
 
 ```shell
-curl "<%= config[:host] %>/credit_cards" \
+curl "<%= config[:api_host] %>/credit_cards" \
   -H "Authorization: Token token=#{TOKEN}"
 ```
 
@@ -42,7 +42,7 @@ curl "<%= config[:host] %>/credit_cards" \
 ## Запрос на получение карты по ID
 
 ```shell
-curl "<%= config[:host] %>/credit_cards/14959" \
+curl "<%= config[:api_host] %>/credit_cards/14959" \
   -H "Authorization: Token token=#{TOKEN}"
 ```
 
@@ -70,7 +70,7 @@ curl "<%= config[:host] %>/credit_cards/14959" \
 
 Получить карту можно, выполнив запрос:
 
-`GET <%= config[:host] %>/credit_cards/#{ID}`
+`GET <%= config[:api_host] %>/credit_cards/#{ID}`
 
 ### Параметры запроса
 
@@ -87,7 +87,7 @@ payment_tool | PaymentTool используемый при оформлении 
 ## Запрос на создание карты
 
 ```shell
-curl "<%= config[:host] %>/credit_cards" \
+curl "<%= config[:api_host] %>/credit_cards" \
   -H "Authorization: Token token=#{TOKEN}"
   -X POST \
   -d "credit_card[title]=Зарплатная" \
@@ -122,7 +122,7 @@ curl "<%= config[:host] %>/credit_cards" \
 
 Создать новую карту пользователя можно, выполнив запрос:
 
-`POST <%= config[:host] %>/credit_cards`
+`POST <%= config[:api_host] %>/credit_cards`
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
@@ -139,7 +139,7 @@ credit_card[cryptogram_packet] | Да | Криптограмма
 ## Запрос на обновление названия карты
 
 ```shell
-curl "<%= config[:host] %>/credit_cards/14959" \
+curl "<%= config[:api_host] %>/credit_cards/14959" \
   -H "Authorization: Token token=#{TOKEN}"
   -X PUT \
   -d "credit_card[title]=Новое название"
@@ -167,7 +167,7 @@ curl "<%= config[:host] %>/credit_cards/14959" \
 
 Обновить название карты пользователя можно, выполнив запрос:
 
-`PUT <%= config[:host] %>/credit_cards/#{ID}`
+`PUT <%= config[:api_host] %>/credit_cards/#{ID}`
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------
@@ -177,7 +177,7 @@ credit_card[title] | Да | Название карты
 ## Запрос на удаление карты
 
 ```shell
-curl "<%= config[:host] %>/credit_cards/14959" \
+curl "<%= config[:api_host] %>/credit_cards/14959" \
   -H "Authorization: Token token=#{TOKEN}" \
   -X DELETE
 ```
@@ -186,7 +186,7 @@ curl "<%= config[:host] %>/credit_cards/14959" \
 
 Удалить карту пользователя можно, выполнив запрос:
 
-`DELETE <%= config[:host] %>/credit_cards/#{ID}`
+`DELETE <%= config[:api_host] %>/credit_cards/#{ID}`
 
 Параметр | Обязательный | Описание
 --------- | ------- | -----------

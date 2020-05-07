@@ -5,7 +5,7 @@
 > Пример кода для получения детализации по сборке подзаказа
 
 ```shell
-curl "<%= config[:host] %>/shipments/H0123412/assembly_items" \
+curl "<%= config[:api_host] %>/shipments/H0123412/assembly_items" \
    -H "Authorization: Token token=#{TOKEN}" \
 ```
 
@@ -92,7 +92,7 @@ curl "<%= config[:host] %>/shipments/H0123412/assembly_items" \
 
 Детализацию по сборке подзаказа можно получить, выполнив запрос:
 
-`GET <%= config[:host] %>/shipments/{{number}}/assembly_items`
+`GET <%= config[:api_host] %>/shipments/{{number}}/assembly_items`
 
 Если позиция подзаказа заменена (`state == "replaced"`), то поле `replacement` содержит позицию на которую была произведена замена.
 
