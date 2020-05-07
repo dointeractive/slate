@@ -3,15 +3,16 @@
 ## Получение подзаказа без отзыва
 
 ```shell
-curl "<%= config[:host] %>/users/:user_id/reviewable_shipment" \
+curl "<%= config[:host] %>/reviewable_shipment" \
   -H "Authorization: Token token=#{TOKEN}"
 ```
 
 Получить подзаказ без отзыва можно, выполнив запрос:
 
-`GET <%= config[:host] %>/users/:user_id/reviewable_shipment`
+`GET <%= config[:host] %>/reviewable_shipment`
 
-Запрос вернет подзаказ без оценки, который был доставлен в течение 7 последних дней
+Запрос вернет последний оформленный подзаказ, если он без оценки, не содержит товары из особых
+категорий (напр. алкоголь) и был доставлен в течение 7 последних дней.
 
 ## Получение списка возможных проблем
 
