@@ -45,6 +45,7 @@ includes:
   - errors
   - favorites_item
   - assembly_items
+  - app_configurations
 
 search: true
 ---
