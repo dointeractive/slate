@@ -8,6 +8,7 @@ toc_footers:
   - <a href='#'></a>
 
 includes:
+  - app_configurations
   - users
   - authentication
   - passwords

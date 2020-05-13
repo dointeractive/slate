@@ -1,0 +1,27 @@
+# Настройки приложения
+
+## Получение настроек приложения
+
+```shell
+curl "<%= config[:api_host] %>/app_configuration \
+```
+
+> Ответ будет содержать следующие данные:
+
+```json
+{
+  "app_configuration": {
+    "acquiring": {
+      "cloudpayments": {
+       "public_key": "11111"
+      }
+    }
+  }
+}
+```
+
+Получить настройки приложения можно, выполнив запрос:
+
+`GET <%= config[:api_host] %>/app_configuration`
+
+Запрос вернет настройки приложения
