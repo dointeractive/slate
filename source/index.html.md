@@ -8,6 +8,7 @@ toc_footers:
   - <a href='#'></a>
 
 includes:
+  - app_configurations
   - users
   - authentication
   - passwords
@@ -45,7 +46,6 @@ includes:
   - errors
   - favorites_item
   - assembly_items
-  - app_configurations
 
 search: true
 ---
