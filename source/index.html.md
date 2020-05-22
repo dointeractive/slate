@@ -31,6 +31,7 @@ includes:
   - orders
   - service_rate
   - delivery_windows
+  - next_deliveries
   - payment_tool_types
   - payment_tools
   - payments
