@@ -33,14 +33,6 @@ curl "<%= config[:api_host] %>/products?sid=1"
       ]
     }
   ],
-  "meta": {
-    "current_page": 1,
-    "next_page": null,
-    "previous_page": null,
-    "total_pages": 1,
-    "per_page": 10,
-    "total_count": 1
-  },
   "facets": [
     {
       "key": "brand",
@@ -50,31 +42,48 @@ curl "<%= config[:api_host] %>/products?sid=1"
         {
           "name": "Ahmad Tea",
           "value": 1,
-          "count": 3,
           "active": false
         }
       ]
     },
     {
-      "key": "property",
+      "key": "property_10",
       "name": "Вид чая",
       "type": "multi_select",
       "options": [
         {
           "name": "Белый чай",
           "value": 2,
-          "count": 2,
           "active": false
         },
         {
           "name": "Зеленый чай",
           "value": 3,
-          "count": 1,
+          "active": false
+        }
+      ]
+    },
+    {
+      "key": "discounted",
+      "name": "Товары со скидкой",
+      "type": "toggle",
+      "options": [
+        {
+          "value": 1,
+          "count": 0,
           "active": false
         }
       ]
     }
   ],
+  "meta": {
+    "current_page": 1,
+    "next_page": null,
+    "previous_page": null,
+    "total_pages": 1,
+    "per_page": 10,
+    "total_count": 1
+  },
   "sort": [
     {
       "key": "popularity",
@@ -101,9 +110,8 @@ curl "<%= config[:api_host] %>/products?sid=1"
 > Пример запроса с фильтрацией выборки продуктов:
 
 ```shell
-curl "<%= config[:api_host] %>/products?sid=1&filter[brand][]=1&filter[property][]=4&filter[property][]=7"
+curl "<%= config[:api_host] %>/products?sid=1&filter[brand][]=1filter[property_10][]=2&filter[property_10][]=3&filter[discounted][]=1"
 ```
-
 > Пример запроса с сортировкой выборки продуктов:
 
 ```shell
@@ -145,6 +153,7 @@ options | Список значений фасета для фильтрации
 ----- | ------
 select | Выбор одного значение из множества
 multi_select | Выбор множества значений
+toggle | Выбор одного значения(checkbox)
 
 
 ### Структура объекта Sort
