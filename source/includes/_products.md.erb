@@ -33,7 +33,6 @@ curl "<%= config[:api_host] %>/products?sid=1"
       ]
     }
   ],
-
   "facets": [
     {
       "key": "brand",
@@ -68,11 +67,13 @@ curl "<%= config[:api_host] %>/products?sid=1"
       "key": "discounted",
       "name": "Товары со скидкой",
       "type": "toggle",
-      "options": [{
+      "options": [
+        {
           "value": 1,
           "count": 0,
           "active": false
-      }]
+        }
+      ]
     }
   ],
   "meta": {
