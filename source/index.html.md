@@ -23,7 +23,6 @@ includes:
   - departments
   - products
   - purchased_products
-  - external_partners_services
   - search
   - replacement_policies
   - promotion_cards
