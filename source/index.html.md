@@ -1,5 +1,5 @@
 ---
-title: Документация Instamart API
+title: Документация Sbermarket API
 
 language_tabs:
   - shell

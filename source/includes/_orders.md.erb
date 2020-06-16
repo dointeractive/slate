@@ -310,7 +310,8 @@ curl "<%= config[:api_host] %>/orders/R100203502"
         "logo": "<%= config[:api_host] %>/kg57t4yrn/metro_logo_s.png",
         "available": true,
         "environment": "production"
-      }
+      },
+      "external_partners_service": null
     }],
     "promotion_codes": [
       {
@@ -344,14 +345,177 @@ curl "<%= config[:api_host] %>/orders/current" \
 
 ```json
 {
-  "order": {
-    "number": "R100203502",
-    "total": 229.89,
-    "item_count": 0,
-    "item_total": 229.89,
-    "ship_total": 0,
-    ...
-  }
+    "order": {
+        "number": "R625525678",
+        "total": 16077.1,
+        "item_count": 13,
+        "item_total": 16077.1,
+        "ship_total": 0.0,
+        "adjustment_total": 0.0,
+        "promo_total": 0.0,
+        "shipment_state": "ready",
+        "payment_state": "not_paid",
+        "special_instructions": "",
+        "created_at": "2020-06-16T12:29:23.000+03:00",
+        "updated_at": "2020-06-16T14:49:44.000+03:00",
+        "completed_at": "2020-06-16T14:49:43.000+03:00",
+        "email": "admin@instamart.ru",
+        "address": {
+            "id": 7,
+            "first_name": "Ivan",
+            "last_name": "Petrov",
+            "full_address": "Москва, проспект Мира, 1",
+            "city": "Москва",
+            "street": "проспект Мира",
+            "building": "1",
+            "block": null,
+            "entrance": null,
+            "floor": null,
+            "apartment": null,
+            "comments": null,
+            "lat": 55.773125,
+            "lon": 37.631721,
+            "kind": "home",
+            "door_phone": null,
+            "delivery_to_door": true
+        },
+        "payment": {
+            "number": "J6CJ4DHS",
+            "state": "checkout",
+            "is_finalization_needed": false,
+            "finalization_url": null
+        },
+        "replacement_policy": {
+            "id": 2,
+            "description": "Позвонить мне. Если не удастся, убрать товар"
+        },
+        "shipments": [
+            {
+                "id": 2,
+                "number": "H20425034715",
+                "cost": 0.0,
+                "item_total": 16077.1,
+                "total": 16077.1,
+                "state": "ready",
+                "alerts": [],
+                "promotions": [],
+                "next_deliveries": [
+                    {
+                        "id": 6,
+                        "price": 0.0,
+                        "summary": "сегодня, 18:00-20:00",
+                        "starts_at": "2020-06-16T18:00:00.000+03:00"
+                    },
+                    {
+                        "id": 10,
+                        "price": 0.0,
+                        "summary": "завтра, 09:00-10:00",
+                        "starts_at": "2020-06-17T09:00:00.000+03:00"
+                    },
+                    {
+                        "id": 11,
+                        "price": 0.0,
+                        "summary": "завтра, 13:00-15:00",
+                        "starts_at": "2020-06-17T13:00:00.000+03:00"
+                    }
+                ],
+                "driver_name": null,
+                "driver_phone": null,
+                "line_items": [
+                    {
+                        "id": 2,
+                        "quantity": 1,
+                        "price": 1236.7,
+                        "total": 1236.7,
+                        "customer_comment": null,
+                        "product_in_stock": true,
+                        "product": {
+                            "id": 1,
+                            "sku": "10001",
+                            "retailer_sku": "0000000000",
+                            "name": "Product #1",
+                            "price": 1236.7,
+                            "original_price": 1236.7,
+                            "discount": 0.0,
+                            "human_volume": "200 г.",
+                            "items_per_pack": 1,
+                            "discount_ends_at": null,
+                            "images": [
+                                {
+                                    "mini_url": "http://im.test/spree/products/9/mini/1.jpg?1592294780",
+                                    "small_url": "http://im.test/spree/products/9/small/1.jpg?1592294780",
+                                    "product_url": "http://im.test/spree/products/9/product/1.jpg?1592294780",
+                                    "preview_url": "http://im.test/spree/products/9/preview/1.jpg?1592294780",
+                                    "original_url": "http://im.test/spree/products/9/original/1.jpg?1592294780"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "id": 3,
+                        "quantity": 6,
+                        "price": 1236.7,
+                        "total": 7420.2,
+                        "customer_comment": null,
+                        "product_in_stock": true,
+                        "product": {
+                            "id": 26,
+                            "sku": "10026",
+                            "retailer_sku": "0000000025",
+                            "name": "Product #26",
+                            "price": 1236.7,
+                            "original_price": 1236.7,
+                            "discount": 0.0,
+                            "human_volume": "800 г. x 6",
+                            "items_per_pack": 6,
+                            "discount_ends_at": null,
+                            "images": []
+                        }
+                    },
+                    {
+                        "id": 4,
+                        "quantity": 6,
+                        "price": 1236.7,
+                        "total": 7420.2,
+                        "customer_comment": null,
+                        "product_in_stock": true,
+                        "product": {
+                            "id": 28,
+                            "sku": "10027",
+                            "retailer_sku": "0000000027",
+                            "name": "Product #27",
+                            "price": 1236.7,
+                            "original_price": 1236.7,
+                            "discount": 0.0,
+                            "human_volume": "800 г. x 6",
+                            "items_per_pack": 6,
+                            "discount_ends_at": null,
+                            "images": []
+                        }
+                    }
+                ],
+                "delivery_window": {
+                    "id": 11,
+                    "starts_at": "2020-06-17T13:00:00.000+03:00",
+                    "ends_at": "2020-06-17T15:00:00.000+03:00",
+                    "weight_balance": 198200,
+                    "items_count_balance": 147
+                },
+                "retailer": {
+                    "id": 1,
+                    "name": "METRO",
+                    "slug": "metro",
+                    "color": "#003d7a",
+                    "logo_background_color": "#003d7a",
+                    "logo": "http://im.test/spree/retailer_logos/2/default/1.png?1592294771",
+                    "available": true,
+                    "environment": null
+                },
+                "external_partners_service": null
+            }
+        ],
+        "promotion_codes": []
+    }
 }
 ```
 
