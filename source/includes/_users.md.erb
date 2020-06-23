@@ -10,7 +10,8 @@ curl '<%= config[:api_host] %>/users' \
   -d user[email]=#{EMAIL} \
   -d user[first_name]=#{FIRSTNAME} \
   -d user[last_name]=#{LASTNAME} \
-  -d user[password]=#{PASSWORD}
+  -d user[privacy_terms]=#{PRIVACY_TERMS}
+  -d user[promo_terms_accepted]=#{PROMO_TERMS_ACCEPTED}
 ```
 
 Зарегистрировать нового пользователя можно, выполнив запрос:
@@ -26,6 +27,8 @@ user[password] | Да | Пароль
 user[first_name] | Да | Имя пользователя
 user[last_name] | Да | Фамилия пользователя
 user[location] | Нет | Местоположение пользователя
+user[privacy_terms] | Нет | Согласие на обработку персональных данных
+user[promo_terms_accepted] | Нет | Согласие на рекламную рассылку
 
 ## Изменение данных пользователя
 
@@ -44,7 +47,9 @@ curl '<%= config[:api_host] %>/users/test@test.com' \
     "email": "test@test.com",
     "first_name": "Ivan",
     "last_name": "Petrov",
-    "location": "Perm"
+    "location": "Perm",
+    "privacy_terms": true,
+    "promo_terms_accepted": true
   }
 }
 ```
@@ -61,6 +66,7 @@ email | Да | Емейл пользователя
 user[first_name] | - | Имя пользователя
 user[last_name] | - | Фамилия пользователя
 user[location] | - | Местоположение пользователя
+user[promo_terms_accepted] | - | Согласие на рекламную рассылку
 
 ## Получение данных пользователя
 
@@ -93,7 +99,9 @@ curl '<%= config[:api_host] %>/users/test@test.com'
     "email": "test@test.com",
     "first_name": "Ivan",
     "last_name": "Petrov",
-    "location": "Moscow"
+    "location": "Moscow",
+    "privacy_terms": true
+    "promo_terms_accepted": true
   }
 }
 ```
