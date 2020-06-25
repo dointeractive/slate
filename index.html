@@ -172,7 +172,9 @@
   -d user[email]<span class="o">=</span><span class="c">#{EMAIL} \</span>
   -d user[first_name]<span class="o">=</span><span class="c">#{FIRSTNAME} \</span>
   -d user[last_name]<span class="o">=</span><span class="c">#{LASTNAME} \</span>
-  -d user[password]<span class="o">=</span><span class="c">#{PASSWORD}</span>
+  -d user[password]<span class="o">=</span><span class="c">#{PASSWORD} \</span>
+  -d user[privacy_terms]<span class="o">=</span><span class="c">#{PRIVACY_TERMS} \</span>
+  -d user[promo_terms_accepted]<span class="o">=</span><span class="c">#{PROMO_TERMS_ACCEPTED}</span>
 </code></pre>
 
 <p>Зарегистрировать нового пользователя можно, выполнив запрос:</p>
@@ -215,6 +217,16 @@
       <td>Нет</td>
       <td>Местоположение пользователя</td>
     </tr>
+    <tr>
+      <td>user[privacy_terms]</td>
+      <td>Нет</td>
+      <td>Согласие на обработку персональных данных</td>
+    </tr>
+    <tr>
+      <td>user[promo_terms_accepted]</td>
+      <td>Нет</td>
+      <td>Согласие на рекламную рассылку</td>
+    </tr>
   </tbody>
 </table>
 
@@ -235,7 +247,9 @@
     </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test@test.com"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ivan"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Petrov"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Perm"</span><span class="w">
+    </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Perm"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"privacy_terms"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"promo_terms_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -275,6 +289,11 @@
       <td>-</td>
       <td>Местоположение пользователя</td>
     </tr>
+    <tr>
+      <td>user[promo_terms_accepted]</td>
+      <td>-</td>
+      <td>Согласие на рекламную рассылку</td>
+    </tr>
   </tbody>
 </table>
 
@@ -311,7 +330,9 @@
     </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test@test.com"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ivan"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Petrov"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Moscow"</span><span class="w">
+    </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Moscow"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"privacy_terms"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"promo_terms_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -515,6 +536,8 @@ curl <span class="s2">"https://api.sbermarket.ru/v2/sessions"</span> <span class
     </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test@test.ru"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ivan"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ivanov"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"privacy_terms"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"promo_terms_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="nt">"config"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"send_emails"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
       </span><span class="nt">"send_sms"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
