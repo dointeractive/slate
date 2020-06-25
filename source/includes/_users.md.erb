@@ -10,7 +10,8 @@ curl '<%= config[:api_host] %>/users' \
   -d user[email]=#{EMAIL} \
   -d user[first_name]=#{FIRSTNAME} \
   -d user[last_name]=#{LASTNAME} \
-  -d user[privacy_terms]=#{PRIVACY_TERMS}
+  -d user[password]=#{PASSWORD} \
+  -d user[privacy_terms]=#{PRIVACY_TERMS} \
   -d user[promo_terms_accepted]=#{PROMO_TERMS_ACCEPTED}
 ```
 
@@ -100,7 +101,7 @@ curl '<%= config[:api_host] %>/users/test@test.com'
     "first_name": "Ivan",
     "last_name": "Petrov",
     "location": "Moscow",
-    "privacy_terms": true
+    "privacy_terms": true,
     "promo_terms_accepted": true
   }
 }
