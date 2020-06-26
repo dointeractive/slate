@@ -20,6 +20,7 @@ curl "<%= config[:api_host] %>/external_partners/services" \
       "text": "Бесплатная доставка",
       "link": "https://sber.ru/lk",
       "logo_url": "<%= config[:asset_host] %>/external_partners/services/5/default/1.png?1540392543",
+      "discount_type": "free_delivery",
       "subscription": {
         "id": "1",
         "active": true,
@@ -33,6 +34,7 @@ curl "<%= config[:api_host] %>/external_partners/services" \
       "text": "Платная доставка",
       "link": "https://another-service.com",
       "logo_url": null,
+      "discount_type": "free_delivery",
       "subscription": {
         "active": false
       }
@@ -73,6 +75,7 @@ curl "<%= config[:api_host] %>/api/v2/orders/current" \
                     "name": "SberPrime",
                     "text": "Бесплатная доставка",
                     "link": "<%= config[:asset_host] %>/assets/logo.png",
+                    "logo_url": "<%= config[:asset_host] %>/external_partners/services/5/default/1.png?1540392543",
                     "discount_type": "free_delivery"
                 }
             }
@@ -91,4 +94,5 @@ curl "<%= config[:api_host] %>/api/v2/orders/current" \
  name             |  Сервисное имя
  text             |  Локализированный маркетинговый текст
  link             |  URL для получения логотипа
+ logo_url         |  Логотип
  discount_type    |  Тип скидки которую предоставляет сервис. На данный момемнт единственное значение = free_delivery
